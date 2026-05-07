@@ -31,6 +31,12 @@
             <div class="flex items-center gap-4">
 
                 @if (auth()->user()->isMasterAdmin())
+                    <a href="{{ route('admin.dashboard') }}"
+                        class="text-sm text-slate-600 hover:text-blue-600 transition">
+
+                        Dashboard
+
+                    </a>
                     <a href="{{ route('admin.tempat.index') }}">
                         Tempat
                     </a>
@@ -40,6 +46,17 @@
 
                     <a href="{{ route('admin.user.index') }}">
                         User
+                    </a>
+                @endif
+                @if (auth()->user()->isAdminDesa())
+                    <a href="{{ route('admin.dashboard') }}"
+                        class="text-sm text-slate-600 hover:text-blue-600 transition">
+
+                        Dashboard
+
+                    </a>
+                    <a href="{{ route('admin.tempat.index') }}">
+                        Tempat
                     </a>
                 @endif
                 <span class="text-sm text-gray-500">
@@ -68,6 +85,8 @@
 
     <!-- MARKER CLUSTER -->
     <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+
+    @stack('scripts')
 </body>
 
 </html>
