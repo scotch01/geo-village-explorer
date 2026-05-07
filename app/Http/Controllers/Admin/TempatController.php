@@ -11,23 +11,91 @@ class TempatController extends Controller
     /**
      * Display listing
      */
-    public function index()
+    public function index(Request $request)
     {
-        $query = Tempat::query();
+        $query = Tempat::query()
+            ->with([
+                'desa',
+                'creator'
+            ]);
 
+        /**
+         * RBAC
+         */
         if (auth()->user()->isAdminDesa()) {
 
+            $query->whereNotNull('id_desa')
+                ->where(
+                    'id_desa',
+                    auth()->user()->id_desa
+                );
+        }
+
+        /**
+         * SEARCH
+         */
+        if ($request->filled('search')) {
+
+            $search = $request->search;
+
+            $query->where(function ($q) use ($search) {
+
+                $q->where(
+                    'nama_tempat',
+                    'like',
+                    '%' . $search . '%'
+                )
+                ->orWhere(
+                    'alamat',
+                    'like',
+                    '%' . $search . '%'
+                )
+                ->orWhere(
+                    'nama_pemilik',
+                    'like',
+                    '%' . $search . '%'
+                );
+            });
+        }
+
+        /**
+         * FILTER SEKTOR
+         */
+        if ($request->filled('sektor')) {
+
             $query->where(
-                'id_desa',
-                auth()->user()->id_desa
+                'sektor',
+                $request->sektor
             );
         }
 
+        /**
+         * FILTER DESA
+         */
+        if (
+            auth()->user()->isMasterAdmin()
+            && $request->filled('desa')
+        ) {
+
+            $query->where(
+                'id_desa',
+                $request->desa
+            );
+        }
+
+        /**
+         * PAGINATION
+         */
         $tempats = $query
             ->latest()
-            ->get();
+            ->paginate(5)
+            ->withQueryString();
 
-        return view('admin.tempat.index', compact('tempats'));
+        return view('admin.tempat.index', [
+            'tempats' => $tempats,
+            'sektors' => Tempat::SEKTOR,
+            'desas' => \App\Models\Desa::orderBy('nama_desa')->get(),
+        ]);
     }
 
     /**
