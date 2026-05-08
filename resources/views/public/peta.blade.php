@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Peta Wilayah</title>
+    <title>SIPETA - Peta Wilayah</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -27,13 +27,52 @@
             display: none !important;
         }
 
-        .custom-scroll::-webkit-scrollbar {
-            width: 4px;
+        body {
+            background:
+                radial-gradient(circle at top left, rgba(59,130,246,.08), transparent 30%),
+                radial-gradient(circle at top right, rgba(168,85,247,.08), transparent 35%),
+                radial-gradient(circle at bottom left, rgba(16,185,129,.06), transparent 30%),
+                #f8fafc;
         }
 
-        .custom-scroll::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
+        .aurora-card {
+            background: rgba(255,255,255,.82);
+            backdrop-filter: blur(16px);
+        }
+
+        .hero-glow {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .hero-glow::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            top: -180px;
+            left: -120px;
+            background: rgba(59,130,246,.18);
+            filter: blur(120px);
             border-radius: 999px;
+        }
+
+        .hero-glow::after {
+            content: '';
+            position: absolute;
+            width: 450px;
+            height: 450px;
+            top: -120px;
+            right: -120px;
+            background: rgba(168,85,247,.14);
+            filter: blur(120px);
+            border-radius: 999px;
+        }
+
+        .leaflet-container {
+            font-family: inherit;
         }
     </style>
 
@@ -56,35 +95,57 @@
     </script>
 </head>
 
-<body class="bg-slate-50 antialiased"
+<body class="antialiased text-slate-800"
       x-data="petaExplorer()"
       @open-modal.window="show($event.detail)">
 
 <!-- NAVBAR -->
-<nav class="sticky top-0 z-[1000] bg-white/90 backdrop-blur border-b border-slate-200">
+<nav class="sticky top-0 z-[1000] border-b border-white/30 bg-white/70 backdrop-blur-xl">
 
-    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
 
-        <div>
-            <h1 class="font-bold text-slate-800 text-lg">
-                🌍 GeoSpatial Explorer
-            </h1>
+        <div class="flex items-center gap-4">
 
-            <p class="text-xs text-slate-500">
-                Sistem Informasi Pemetaan Wilayah
-            </p>
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-blue-200">
+
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     class="w-6 h-6 text-white"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke="currentColor">
+
+                    <path stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.553-.894L9 7m0 13l6-3m-6 3V7m6 10l5.447 2.724A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m-6 3l6-3"/>
+                </svg>
+
+            </div>
+
+            <div>
+
+                <h1 class="font-black text-xl tracking-tight">
+                    SIPETA
+                </h1>
+
+                <p class="text-sm text-slate-500">
+                    Sistem Informasi Pemetaan Wilayah
+                </p>
+
+            </div>
+
         </div>
 
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-4">
 
             <a href="{{ route('login') }}"
-               class="text-sm text-slate-600 hover:text-blue-600 font-medium transition">
+               class="text-sm font-semibold text-slate-600 hover:text-blue-600 transition">
                 Login
             </a>
 
-            <span class="px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-semibold">
-                Live
-            </span>
+            <div class="px-4 py-2 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold">
+                LIVE DATA
+            </div>
 
         </div>
 
@@ -93,53 +154,91 @@
 </nav>
 
 <!-- HERO -->
-<section class="max-w-7xl mx-auto px-6 pt-10 pb-6">
+<section class="relative overflow-hidden">
 
-    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+    <div class="hero-glow"></div>
 
-        <div>
+    <div class="max-w-7xl mx-auto px-6 pt-20 pb-14 relative">
 
-            <h2 class="text-4xl font-black text-slate-900 leading-tight">
-                Peta Sebaran Wilayah
+        <div class="max-w-4xl">
+
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 border border-slate-200 text-sm font-semibold text-slate-700 shadow-sm">
+
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+
+                Geographic Information System
+
+            </div>
+
+            <h2 class="mt-8 text-5xl md:text-6xl font-black tracking-tight leading-[1.05] text-slate-900">
+
+                Eksplorasi
+                <span class="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                    Data Wilayah
+                </span>
+                Secara Visual
+
             </h2>
 
-            <p class="mt-3 text-slate-500 max-w-3xl leading-relaxed">
-                Visualisasi persebaran ekonomi, pendidikan, kesehatan,
-                perumahan, dan potensi wilayah berbasis geospasial.
+            <p class="mt-6 text-lg text-slate-600 leading-relaxed max-w-3xl">
+
+                Platform pemetaan wilayah berbasis geospasial untuk menampilkan
+                persebaran ekonomi, pendidikan, kesehatan, perumahan,
+                dan potensi desa secara interaktif.
+
             </p>
 
         </div>
 
-        <div class="grid grid-cols-3 gap-4">
+        <!-- STATS -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-5 mt-14">
 
-            <div class="bg-white rounded-2xl border border-slate-200 px-5 py-4 shadow-sm">
-                <div class="text-2xl font-black text-slate-800">
+            <div class="aurora-card rounded-3xl border border-white/60 shadow-xl shadow-slate-200/40 p-6">
+
+                <div class="text-4xl font-black text-slate-900">
                     {{ $tempats->count() }}
                 </div>
 
-                <div class="text-xs text-slate-500 mt-1">
+                <div class="mt-2 text-sm text-slate-500">
                     Total Lokasi
                 </div>
+
             </div>
 
-            <div class="bg-white rounded-2xl border border-slate-200 px-5 py-4 shadow-sm">
-                <div class="text-2xl font-black text-slate-800">
+            <div class="aurora-card rounded-3xl border border-white/60 shadow-xl shadow-slate-200/40 p-6">
+
+                <div class="text-4xl font-black text-slate-900">
                     {{ $desas->count() }}
                 </div>
 
-                <div class="text-xs text-slate-500 mt-1">
-                    Desa
+                <div class="mt-2 text-sm text-slate-500">
+                    Desa Terdata
                 </div>
+
             </div>
 
-            <div class="bg-white rounded-2xl border border-slate-200 px-5 py-4 shadow-sm">
-                <div class="text-2xl font-black text-slate-800">
+            <div class="aurora-card rounded-3xl border border-white/60 shadow-xl shadow-slate-200/40 p-6">
+
+                <div class="text-4xl font-black text-slate-900">
                     {{ count($sektors) }}
                 </div>
 
-                <div class="text-xs text-slate-500 mt-1">
-                    Sektor
+                <div class="mt-2 text-sm text-slate-500">
+                    Sektor Wilayah
                 </div>
+
+            </div>
+
+            <div class="aurora-card rounded-3xl border border-white/60 shadow-xl shadow-slate-200/40 p-6">
+
+                <div class="text-4xl font-black text-slate-900">
+                    GIS
+                </div>
+
+                <div class="mt-2 text-sm text-slate-500">
+                    Interactive Explorer
+                </div>
+
             </div>
 
         </div>
@@ -149,95 +248,101 @@
 </section>
 
 <!-- FILTER -->
-<section class="max-w-7xl mx-auto px-6 pb-6">
+<section class="max-w-7xl mx-auto px-6 pb-8">
 
     <form method="GET"
-          class="bg-white rounded-3xl border border-slate-200 shadow-sm p-5">
+          class="aurora-card rounded-[2rem] border border-white/60 shadow-xl shadow-slate-200/40 p-6">
+
+        <div class="flex items-center gap-3 mb-6">
+
+            <div class="w-11 h-11 rounded-2xl bg-blue-100 flex items-center justify-center">
+
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     class="w-5 h-5 text-blue-600"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke="currentColor">
+
+                    <path stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2l-7 7v5l-4 2v-7L3 6V4z"/>
+                </svg>
+
+            </div>
+
+            <div>
+
+                <h3 class="font-bold text-slate-800">
+                    Filter Data Wilayah
+                </h3>
+
+                <p class="text-sm text-slate-500">
+                    Sesuaikan tampilan peta berdasarkan kebutuhan eksplorasi
+                </p>
+
+            </div>
+
+        </div>
 
         <div class="grid lg:grid-cols-4 gap-4">
 
-            <!-- SEARCH -->
-            <div>
-                <label class="text-xs font-semibold text-slate-500 block mb-2">
-                    Pencarian
-                </label>
+            <input
+                type="text"
+                name="search"
+                value="{{ request('search') }}"
+                placeholder="Cari tempat..."
+                class="h-14 rounded-2xl border-slate-200 bg-white/70 focus:border-blue-500 focus:ring-blue-500"
+            >
 
-                <input
-                    type="text"
-                    name="search"
-                    value="{{ request('search') }}"
-                    placeholder="Cari tempat..."
-                    class="w-full rounded-xl border-slate-200 focus:border-blue-500 focus:ring-blue-500"
-                >
-            </div>
+            <select
+                name="sektor"
+                class="h-14 rounded-2xl border-slate-200 bg-white/70 focus:border-blue-500 focus:ring-blue-500">
 
-            <!-- SEKTOR -->
-            <div>
-                <label class="text-xs font-semibold text-slate-500 block mb-2">
-                    Sektor
-                </label>
+                <option value="">
+                    Semua Sektor
+                </option>
 
-                <select
-                    name="sektor"
-                    class="w-full rounded-xl border-slate-200 focus:border-blue-500 focus:ring-blue-500">
+                @foreach($sektors as $key => $label)
 
-                    <option value="">
-                        Semua Sektor
+                    <option value="{{ $key }}"
+                        @selected(request('sektor') == $key)>
+
+                        {{ $label }}
+
                     </option>
 
-                    @foreach($sektors as $key => $label)
+                @endforeach
 
-                        <option value="{{ $key }}"
-                            @selected(request('sektor') == $key)>
+            </select>
 
-                            {{ $label }}
+            <select
+                name="desa"
+                class="h-14 rounded-2xl border-slate-200 bg-white/70 focus:border-blue-500 focus:ring-blue-500">
 
-                        </option>
+                <option value="">
+                    Semua Desa
+                </option>
 
-                    @endforeach
+                @foreach($desas as $desa)
 
-                </select>
-            </div>
+                    <option value="{{ $desa->id }}"
+                        @selected(request('desa') == $desa->id)>
 
-            <!-- DESA -->
-            <div>
-                <label class="text-xs font-semibold text-slate-500 block mb-2">
-                    Desa
-                </label>
+                        {{ $desa->nama_desa }}
 
-                <select
-                    name="desa"
-                    class="w-full rounded-xl border-slate-200 focus:border-blue-500 focus:ring-blue-500">
-
-                    <option value="">
-                        Semua Desa
                     </option>
 
-                    @foreach($desas as $desa)
+                @endforeach
 
-                        <option value="{{ $desa->id }}"
-                            @selected(request('desa') == $desa->id)>
+            </select>
 
-                            {{ $desa->nama_desa }}
+            <button
+                class="h-14 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:opacity-95 text-white font-bold shadow-lg shadow-blue-200 transition">
 
-                        </option>
+                Terapkan Filter
 
-                    @endforeach
-
-                </select>
-            </div>
-
-            <!-- BUTTON -->
-            <div class="flex items-end">
-
-                <button
-                    class="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold py-3 transition shadow-sm">
-
-                    Terapkan Filter
-
-                </button>
-
-            </div>
+            </button>
 
         </div>
 
@@ -246,13 +351,13 @@
 </section>
 
 <!-- MAP -->
-<section class="max-w-7xl mx-auto px-6 pb-16">
+<section class="max-w-7xl mx-auto px-6 pb-20">
 
-    <div class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden p-3">
+    <div class="aurora-card rounded-[2rem] border border-white/60 shadow-2xl shadow-slate-200/40 p-4 overflow-hidden">
 
         <div id="map"
-             class="rounded-2xl"
-             style="height: 700px;"></div>
+             class="rounded-[1.5rem]"
+             style="height: 760px;"></div>
 
     </div>
 
@@ -263,40 +368,46 @@
      x-cloak
      class="fixed inset-0 z-[9999] flex items-center justify-center p-4">
 
-    <!-- BACKDROP -->
-    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-md"
          @click="close()"></div>
 
-    <!-- CONTENT -->
     <div x-show="open"
          x-transition
-         class="relative z-10 w-full max-w-lg bg-white rounded-3xl shadow-2xl overflow-hidden">
+         class="relative z-10 w-full max-w-xl aurora-card rounded-[2rem] border border-white/50 shadow-2xl overflow-hidden">
 
         <!-- HEADER -->
-        <div class="px-6 py-5 border-b border-slate-100 bg-slate-50">
+        <div class="px-7 py-6 border-b border-slate-100">
 
-            <div class="flex items-start justify-between gap-4">
+            <div class="flex items-start justify-between gap-5">
 
                 <div>
 
-                    <h2 class="text-xl font-black text-slate-800"
+                    <div class="inline-flex px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-bold uppercase mb-4"
+                         x-text="data.sektor">
+                    </div>
+
+                    <h2 class="text-2xl font-black text-slate-900"
                         x-text="data.nama_tempat">
                     </h2>
-
-                    <div class="mt-2">
-
-                        <span class="inline-flex px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-bold uppercase"
-                              x-text="data.sektor">
-                        </span>
-
-                    </div>
 
                 </div>
 
                 <button
                     @click="close()"
-                    class="text-slate-400 hover:text-slate-600 text-xl">
-                    ✕
+                    class="w-10 h-10 rounded-2xl hover:bg-slate-100 flex items-center justify-center transition">
+
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="w-5 h-5 text-slate-500"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke="currentColor">
+
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+
                 </button>
 
             </div>
@@ -304,71 +415,71 @@
         </div>
 
         <!-- BODY -->
-        <div class="p-6 space-y-5">
+        <div class="p-7 space-y-6">
 
-            <div class="grid grid-cols-3 gap-3">
+            <div class="grid grid-cols-3 gap-4">
 
-                <span class="text-sm font-semibold text-slate-500">
+                <div class="text-sm font-semibold text-slate-500">
                     Pemilik
-                </span>
+                </div>
 
-                <span class="text-sm text-slate-800 col-span-2"
-                      x-text="data.nama_pemilik || '-'">
-                </span>
+                <div class="col-span-2 text-sm text-slate-800"
+                     x-text="data.nama_pemilik || '-'">
+                </div>
 
             </div>
 
-            <div class="grid grid-cols-3 gap-3">
+            <div class="grid grid-cols-3 gap-4">
 
-                <span class="text-sm font-semibold text-slate-500">
+                <div class="text-sm font-semibold text-slate-500">
                     Desa
-                </span>
+                </div>
 
-                <span class="text-sm text-slate-800 col-span-2"
-                      x-text="data.desa?.nama_desa || '-'">
-                </span>
+                <div class="col-span-2 text-sm text-slate-800"
+                     x-text="data.desa?.nama_desa || '-'">
+                </div>
 
             </div>
 
-            <div class="grid grid-cols-3 gap-3">
+            <div class="grid grid-cols-3 gap-4">
 
-                <span class="text-sm font-semibold text-slate-500">
+                <div class="text-sm font-semibold text-slate-500">
                     Kontak
-                </span>
+                </div>
 
-                <span class="text-sm text-slate-800 col-span-2"
-                      x-text="data.no_hp || '-'">
-                </span>
-
-            </div>
-
-            <div class="grid grid-cols-3 gap-3">
-
-                <span class="text-sm font-semibold text-slate-500">
-                    Deskripsi
-                </span>
-
-                <span class="text-sm text-slate-700 leading-relaxed col-span-2"
-                      x-text="data.deskripsi || '-'">
-                </span>
+                <div class="col-span-2 text-sm text-slate-800"
+                     x-text="data.no_hp || '-'">
+                </div>
 
             </div>
 
-            <div class="grid grid-cols-3 gap-3">
+            <div class="grid grid-cols-3 gap-4">
 
-                <span class="text-sm font-semibold text-slate-500">
+                <div class="text-sm font-semibold text-slate-500">
                     Alamat
-                </span>
+                </div>
 
-                <span class="text-sm text-slate-700 leading-relaxed col-span-2"
-                      x-text="data.alamat">
-                </span>
+                <div class="col-span-2 text-sm text-slate-700 leading-relaxed"
+                     x-text="data.alamat">
+                </div>
 
             </div>
 
-            <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+            <div class="grid grid-cols-3 gap-4">
 
-                <div class="text-xs text-slate-400 font-mono">
+                <div class="text-sm font-semibold text-slate-500">
+                    Deskripsi
+                </div>
+
+                <div class="col-span-2 text-sm text-slate-700 leading-relaxed"
+                     x-text="data.deskripsi || '-'">
+                </div>
+
+            </div>
+
+            <div class="pt-5 border-t border-slate-100">
+
+                <div class="text-xs font-mono text-slate-400">
 
                     <span x-text="data.latitude"></span>,
                     <span x-text="data.longitude"></span>
@@ -380,11 +491,11 @@
         </div>
 
         <!-- FOOTER -->
-        <div class="px-6 py-5 bg-slate-50 border-t border-slate-100">
+        <div class="p-7 border-t border-slate-100 bg-slate-50/60">
 
             <a :href="'https://www.google.com/maps?q=' + data.latitude + ',' + data.longitude"
                target="_blank"
-               class="w-full inline-flex items-center justify-center rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 transition">
+               class="h-14 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:opacity-95 text-white font-bold flex items-center justify-center transition shadow-lg shadow-blue-200">
 
                 Buka di Google Maps
 
@@ -402,6 +513,7 @@
 <!-- CLUSTER -->
 <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 
+<!-- LOGIC TETAP SAMA -->
 <script>
 document.addEventListener('DOMContentLoaded', () => {
 

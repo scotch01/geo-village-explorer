@@ -19,8 +19,7 @@ class DashboardController extends Controller
         $tempatQuery = Tempat::query();
 
         /**
-         * ADMIN DESA:
-         * hanya data desanya sendiri
+         * RBAC
          */
         if ($user->isAdminDesa()) {
 
@@ -57,7 +56,7 @@ class DashboardController extends Controller
             ->count('sektor');
 
         /**
-         * CHART SEKTOR
+         * CHART DISTRIBUSI SEKTOR
          */
         $chartSektor = (clone $tempatQuery)
             ->selectRaw('sektor, COUNT(*) as total')
@@ -68,8 +67,20 @@ class DashboardController extends Controller
         /**
          * TOP DESA
          */
-        $topDesa = Tempat::query()
-            ->with('desa')
+        $topDesaQuery = Tempat::query();
+
+        if ($user->isAdminDesa()) {
+
+            $topDesaQuery->where(
+                'id_desa',
+                $user->id_desa
+            );
+        }
+
+        $topDesa = $topDesaQuery
+            ->with([
+                'desa:id,nama_desa'
+            ])
             ->selectRaw('id_desa, COUNT(*) as total')
             ->groupBy('id_desa')
             ->orderByDesc('total')
@@ -77,16 +88,27 @@ class DashboardController extends Controller
             ->get();
 
         /**
-         * RECENT TEMPAT
+         * RECENT ACTIVITY
          */
         $recentTempats = (clone $tempatQuery)
-            ->with(['desa', 'creator'])
+            ->select([
+                'id',
+                'nama_tempat',
+                'sektor',
+                'id_desa',
+                'created_by',
+                'created_at'
+            ])
+            ->with([
+                'desa:id,nama_desa',
+                'creator:id,name'
+            ])
             ->latest()
             ->limit(5)
             ->get();
 
         /**
-         * MAP DATA
+         * MAP PREVIEW
          */
         $mapData = (clone $tempatQuery)
             ->select([
