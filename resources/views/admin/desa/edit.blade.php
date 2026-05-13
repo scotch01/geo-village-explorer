@@ -93,7 +93,7 @@
                 <div>
 
                     <label class="text-sm font-semibold text-slate-700">
-                        Kabupaten
+                        Kabupaten/Kota
                     </label>
 
                     <input type="text"
