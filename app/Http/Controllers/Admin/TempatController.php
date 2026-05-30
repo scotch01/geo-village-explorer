@@ -87,13 +87,17 @@ class TempatController extends Controller
          * PAGINATION
          */
         $tempats = $query
+            ->with([
+                'keluarga',
+                'usaha',
+            ])
             ->latest()
-            ->paginate(5)
+            ->paginate(10)
             ->withQueryString();
 
         return view('admin.tempat.index', [
             'tempats' => $tempats,
-            'sektors' => Tempat::SEKTOR,
+            // 'sektors' => Tempat::SEKTOR,
             'desas' => \App\Models\Desa::orderBy('nama_desa')->get(),
         ]);
     }
@@ -113,37 +117,32 @@ class TempatController extends Controller
     {
         $validated = $request->validate([
             'nama_tempat' => 'required|string|max:255',
-            'sektor' => 'required|string|max:100',
 
-            'nama_pemilik' => 'nullable|string|max:255',
+            'jenis_bangunan' => 'required|in:btt,bku,bc',
+
             'alamat' => 'required|string',
 
-            'no_hp' => 'nullable|string|max:20',
-            'deskripsi' => 'nullable|string',
+            'latitude' => 'nullable|numeric|between:-90,90',
+            'longitude' => 'nullable|numeric|between:-180,180',
 
-            'latitude' => 'required|numeric|between:-90,90',
-            'longitude' => 'required|numeric|between:-180,180',
+            'foto_bangunan' => 'nullable|image|max:2048',
+
+            'catatan' => 'nullable|string',
         ]);
-
-        /**
-         * Dynamic metadata
-         */
-        $metadata = [];
-
-        // contoh sektor ekonomi
-        if ($request->sektor === 'ekonomi') {
-
-            $metadata['skala_usaha'] = $request->skala_usaha;
-            $metadata['jumlah_karyawan'] = $request->jumlah_karyawan;
-        }
-
-        $validated['metadata'] = $metadata;
 
         $validated['id_desa'] =
             auth()->user()->id_desa;
 
         $validated['created_by'] =
             auth()->id();
+
+        if ($request->hasFile('foto_bangunan')) {
+
+            $validated['foto_bangunan'] =
+                $request
+                    ->file('foto_bangunan')
+                    ->store('tempat', 'public');
+        }
 
         Tempat::create($validated);
 
@@ -181,27 +180,26 @@ class TempatController extends Controller
 
         $validated = $request->validate([
             'nama_tempat' => 'required|string|max:255',
-            'sektor' => 'required|string|max:100',
 
-            'nama_pemilik' => 'nullable|string|max:255',
+            'jenis_bangunan' => 'required|in:btt,bku,bc',
+
             'alamat' => 'required|string',
 
-            'no_hp' => 'nullable|string|max:20',
-            'deskripsi' => 'nullable|string',
+            'latitude' => 'nullable|numeric|between:-90,90',
+            'longitude' => 'nullable|numeric|between:-180,180',
 
-            'latitude' => 'required|numeric|between:-90,90',
-            'longitude' => 'required|numeric|between:-180,180',
+            'foto_bangunan' => 'nullable|image|max:2048',
+
+            'catatan' => 'nullable|string',
         ]);
 
-        $metadata = [];
+        if ($request->hasFile('foto_bangunan')) {
 
-        if ($request->sektor === 'ekonomi') {
-
-            $metadata['skala_usaha'] = $request->skala_usaha;
-            $metadata['jumlah_karyawan'] = $request->jumlah_karyawan;
+            $validated['foto_bangunan'] =
+                $request
+                    ->file('foto_bangunan')
+                    ->store('tempat', 'public');
         }
-
-        $validated['metadata'] = $metadata;
 
         $tempat->update($validated);
 
@@ -235,5 +233,20 @@ class TempatController extends Controller
         if ($tempat->id_desa !== $user->id_desa) {
             abort(403, 'Unauthorized');
         }
+    }
+
+    public function survey(Tempat $tempat)
+    {
+        $this->authorizeTempatAccess($tempat);
+
+        $tempat->load([
+            'keluarga',
+            'usaha',
+        ]);
+
+        return view(
+            'admin.tempat.survey',
+            compact('tempat')
+        );
     }
 }

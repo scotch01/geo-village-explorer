@@ -62,7 +62,7 @@ class PublicMapController extends Controller
         return view('public.peta', [
             'tempats' => $tempats,
             'desas' => Desa::orderBy('nama_desa')->get(),
-            'sektors' => Tempat::SEKTOR,
+            // 'sektors' => Tempat::SEKTOR,
         ]);
     }
 }

@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\PublicMapController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MasterProfesiController;
+use App\Http\Controllers\Admin\KeluargaController;
 
 Route::get('/', function () {
     return redirect('/peta');
@@ -42,6 +43,12 @@ Route::middleware(['auth', 'role:master_admin,admin_desa'])
     ->group(function () {
 
     Route::resource('tempat', TempatController::class);
+
+    Route::get('/tempat/{tempat}/survey', [TempatController::class, 'survey'])
+        ->name('tempat.survey');
+
+    Route::get('/tempat/{tempat}/keluarga/create', [KeluargaController::class, 'create'])
+        ->name('keluarga.create');
 
     Route::get('/dashboard', [DashboardController::class, 'index'])
         ->name('dashboard');

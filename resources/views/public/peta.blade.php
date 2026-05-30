@@ -222,7 +222,7 @@
             <div class="aurora-card rounded-3xl border border-white/60 shadow-xl shadow-slate-200/40 p-6">
 
                 <div class="text-4xl font-black text-slate-900">
-                    {{ count($sektors) }}
+                    {{-- {{ count($sektors) }} --}}
                 </div>
 
                 <div class="mt-2 text-sm text-slate-500">
@@ -305,7 +305,7 @@
                     Semua Sektor
                 </option>
 
-                @foreach($sektors as $key => $label)
+                {{-- @foreach($sektors as $key => $label)
 
                     <option value="{{ $key }}"
                         @selected(request('sektor') == $key)>
@@ -314,7 +314,7 @@
 
                     </option>
 
-                @endforeach
+                @endforeach --}}
 
             </select>
 
