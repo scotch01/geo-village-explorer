@@ -107,7 +107,7 @@
                                     -- Pilih Jenis Bangunan --
                                 </option>
 
-                                @foreach (\App\Models\Tempat::JENIS_BANGUNAN as $value => $label)
+                                @foreach (\App\Constants\Tempat\JenisBangunan::OPTIONS as $value => $label)
                                     <option value="{{ $value }}"
                                         {{ old('jenis_bangunan', $tempat->jenis_bangunan) == $value ? 'selected' : '' }}>
 

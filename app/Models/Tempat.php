@@ -25,22 +25,6 @@ class Tempat extends Model
     ];
 
     /**
-     * Jenis Bangunan
-     */
-
-    public const JENIS_BTT = 'btt';
-
-    public const JENIS_BKU = 'bku';
-
-    public const JENIS_BC = 'bc';
-
-    public const JENIS_BANGUNAN = [
-        self::JENIS_BTT => 'Bangunan Tempat Tinggal',
-        self::JENIS_BKU => 'Bangunan Khusus Usaha',
-        self::JENIS_BC  => 'Bangunan Campuran',
-    ];
-
-    /**
      * Relations
      */
 
@@ -62,6 +46,14 @@ class Tempat extends Model
     public function usaha()
     {
         return $this->hasOne(Usaha::class);
+    }
+
+    public function anggotaKeluargas()
+    {
+        return $this->hasManyThrough(
+            AnggotaKeluarga::class,
+            Keluarga::class
+        );
     }
 
     public function getStatusPendataanAttribute()
@@ -90,5 +82,21 @@ class Tempat extends Model
         }
 
         return 'belum';
+    }
+
+    public function getKeluargaCompletedAttribute()
+    {
+        return $this->keluarga !== null;
+    }
+
+    public function getAnggotaCompletedAttribute()
+    {
+        return $this->anggotaKeluargas()
+            ->exists();
+    }
+
+    public function getUsahaCompletedAttribute()
+    {
+        return $this->usaha !== null;
     }
 }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Tempat;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use App\Constants\Tempat\JenisBangunan;
 
 class TempatController extends Controller
 {
@@ -118,7 +120,14 @@ class TempatController extends Controller
         $validated = $request->validate([
             'nama_tempat' => 'required|string|max:255',
 
-            'jenis_bangunan' => 'required|in:btt,bku,bc',
+            'jenis_bangunan' => [
+                'required',
+                Rule::in(
+                    array_keys(
+                        JenisBangunan::OPTIONS
+                    )
+                )
+            ],
 
             'alamat' => 'required|string',
 
@@ -181,7 +190,14 @@ class TempatController extends Controller
         $validated = $request->validate([
             'nama_tempat' => 'required|string|max:255',
 
-            'jenis_bangunan' => 'required|in:btt,bku,bc',
+            'jenis_bangunan' => [
+                'required',
+                Rule::in(
+                    array_keys(
+                        JenisBangunan::OPTIONS
+                    )
+                )
+            ],
 
             'alamat' => 'required|string',
 
@@ -242,6 +258,7 @@ class TempatController extends Controller
         $tempat->load([
             'keluarga',
             'usaha',
+            'anggotaKeluargas',
         ]);
 
         return view(
