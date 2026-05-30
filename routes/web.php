@@ -7,9 +7,10 @@ use App\Http\Controllers\Admin\DesaController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\PublicMapController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\MasterProfesiController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/peta');
 });
 
 Route::get('/peta', [PublicMapController::class, 'index'])
@@ -44,6 +45,11 @@ Route::middleware(['auth', 'role:master_admin,admin_desa'])
 
     Route::get('/dashboard', [DashboardController::class, 'index'])
         ->name('dashboard');
+
+    Route::get(
+        '/admin/master-profesi/search',
+        [MasterProfesiController::class, 'search']
+    );
 
 });
 

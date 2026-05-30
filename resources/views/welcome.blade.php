@@ -8,8 +8,8 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
-    <h1 class="text-3xl font-bold text-red-500">
-    Tailwind OK
+    <h1 class="text-3xl font-bold text-center mt-auto text-red-500">
+    Page OK
 </h1>
 </body>
 </html>

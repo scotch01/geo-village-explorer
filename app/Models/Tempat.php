@@ -6,46 +6,43 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tempat extends Model
 {
-    /**
-     * SEKTOR
-     */
-    const SEKTOR = [
-        'ekonomi' => 'Ekonomi',
-        'pendidikan' => 'Pendidikan',
-        'kesehatan' => 'Kesehatan',
-        'perumahan' => 'Perumahan',
-        'pemerintahan' => 'Pemerintahan',
-    ];
-
     protected $fillable = [
         'nama_tempat',
-        'sektor',
-        'metadata',
-        'nama_pemilik',
+        'jenis_bangunan',
+
         'alamat',
-        'no_hp',
-        'deskripsi',
+
         'latitude',
         'longitude',
+
+        'foto_bangunan',
+        'catatan',
+
         'id_desa',
         'created_by',
+
         'is_active',
     ];
 
-    protected $casts = [
-        'latitude' => 'float',
-        'longitude' => 'float',
-        'is_active' => 'boolean',
-        'metadata' => 'array',
+    /**
+     * Jenis Bangunan
+     */
+
+    public const JENIS_BTT = 'btt';
+
+    public const JENIS_BKU = 'bku';
+
+    public const JENIS_BC = 'bc';
+
+    public const JENIS_BANGUNAN = [
+        self::JENIS_BTT => 'Bangunan Tempat Tinggal',
+        self::JENIS_BKU => 'Bangunan Khusus Usaha',
+        self::JENIS_BC  => 'Bangunan Campuran',
     ];
 
     /**
-     * Label sektor
+     * Relations
      */
-    public static function sektorLabel($value)
-    {
-        return self::SEKTOR[$value] ?? $value;
-    }
 
     public function desa()
     {
@@ -55,5 +52,43 @@ class Tempat extends Model
     public function creator()
     {
         return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function keluarga()
+    {
+        return $this->hasOne(Keluarga::class);
+    }
+
+    public function usaha()
+    {
+        return $this->hasOne(Usaha::class);
+    }
+
+    public function getStatusPendataanAttribute()
+    {
+        if ($this->jenis_bangunan === 'btt') {
+
+            return $this->keluarga
+                ? 'selesai'
+                : 'belum';
+        }
+
+        if ($this->jenis_bangunan === 'bku') {
+
+            return $this->usaha
+                ? 'selesai'
+                : 'belum';
+        }
+
+        if ($this->jenis_bangunan === 'bc') {
+
+            if ($this->keluarga && $this->usaha) {
+                return 'selesai';
+            }
+
+            return 'parsial';
+        }
+
+        return 'belum';
     }
 }

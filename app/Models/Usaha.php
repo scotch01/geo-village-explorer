@@ -6,21 +6,29 @@ use Illuminate\Database\Eloquent\Model;
 
 class Usaha extends Model
 {
-    protected $fillable = [
-        'nama_usaha',
-        'kategori_usaha',
-        'nama_pemilik',
-        'alamat',
-        'no_hp',
-        'deskripsi',
-        'latitude',
-        'longitude',
-        'is_active',
-    ];
+    protected $guarded = [];
 
     protected $casts = [
-        'latitude'  => 'float',
-        'longitude' => 'float',
-        'is_active' => 'boolean',
+
+        'izin_usaha' => 'array',
+
+        'penggunaan_internet' => 'array',
+
+        'media_internet' => 'array',
+
+        'alasan_tidak_internet' => 'array',
+
+        'sumber_pinjaman' => 'array',
+
+        'tujuan_pinjaman' => 'array',
+
+        'kendala_usaha' => 'array',
     ];
+
+    public function tempat()
+    {
+        return $this->belongsTo(
+            Tempat::class
+        );
+    }
 }
