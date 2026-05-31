@@ -13,7 +13,7 @@ class BahanDinding
     public const LAINNYA = 7;
 
     public const OPTIONS = [
-        self::TEMbOK => 'Tembok',
+        self::TEMBOK => 'Tembok',
         self::KAWAT => 'Plesteran Anyaman Bambu/Kawat',
         self::PAPAN => 'Kayu/Papan/Gipsum/GRC/Calciboard',
         self::ANYAMAN_BAMBU => 'Anyaman Bambu',

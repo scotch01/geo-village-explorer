@@ -51,18 +51,18 @@ class DashboardController extends Controller
         /**
          * TOTAL SEKTOR
          */
-        $totalSektor = (clone $tempatQuery)
-            ->distinct('sektor')
-            ->count('sektor');
+        // $totalSektor = (clone $tempatQuery)
+        //     ->distinct('sektor')
+        //     ->count('sektor');
 
         /**
          * CHART DISTRIBUSI SEKTOR
          */
-        $chartSektor = (clone $tempatQuery)
-            ->selectRaw('sektor, COUNT(*) as total')
-            ->groupBy('sektor')
-            ->orderByDesc('total')
-            ->get();
+        // $chartSektor = (clone $tempatQuery)
+        //     ->selectRaw('sektor, COUNT(*) as total')
+        //     ->groupBy('sektor')
+        //     ->orderByDesc('total')
+        //     ->get();
 
         /**
          * TOP DESA
@@ -94,7 +94,7 @@ class DashboardController extends Controller
             ->select([
                 'id',
                 'nama_tempat',
-                'sektor',
+                // 'sektor',
                 'id_desa',
                 'created_by',
                 'created_at'
@@ -114,7 +114,7 @@ class DashboardController extends Controller
             ->select([
                 'id',
                 'nama_tempat',
-                'sektor',
+                // 'sektor',
                 'latitude',
                 'longitude'
             ])
@@ -124,8 +124,8 @@ class DashboardController extends Controller
             'totalTempat',
             'totalDesa',
             'totalUser',
-            'totalSektor',
-            'chartSektor',
+            // 'totalSektor',
+            // 'chartSektor',
             'topDesa',
             'recentTempats',
             'mapData'

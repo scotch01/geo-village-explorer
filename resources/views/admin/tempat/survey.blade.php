@@ -113,7 +113,7 @@
 
                         </a>
                     @else
-                        <a href="{{ route('admin.keluarga.edit', $tempat->keluarga) }}"
+                        <a href="{{ route('admin.keluarga.edit', $tempat) }}"
                             class="inline-flex mt-4 px-4 py-2 rounded-xl bg-amber-500 text-white text-sm">
 
                             Edit Data Keluarga
@@ -185,7 +185,7 @@
                         </span>
                     @endif
 
-                    <a href="{{ route('admin.usaha.create', $tempat) }}"
+                    <a href="#"
                         class="inline-flex mt-4 px-4 py-2 rounded-xl bg-green-600 text-white text-sm">
                         Isi Data Usaha
                     </a>

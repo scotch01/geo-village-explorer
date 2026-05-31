@@ -50,6 +50,18 @@ Route::middleware(['auth', 'role:master_admin,admin_desa'])
     Route::get('/tempat/{tempat}/keluarga/create', [KeluargaController::class, 'create'])
         ->name('keluarga.create');
 
+    Route::post('/tempat/{tempat}/keluarga', [KeluargaController::class, 'store'])
+        ->name('keluarga.store');
+
+    Route::get('/tempat/{tempat}/keluarga/edit', [KeluargaController::class, 'edit'])
+        ->name('keluarga.edit');
+
+    Route::put('/tempat/{tempat}/keluarga', [KeluargaController::class, 'update'])
+        ->name('keluarga.update');
+
+    Route::delete('/tempat/{tempat}/keluarga', [KeluargaController::class, 'destroy'])
+        ->name('keluarga.destroy');
+
     Route::get('/dashboard', [DashboardController::class, 'index'])
         ->name('dashboard');
 

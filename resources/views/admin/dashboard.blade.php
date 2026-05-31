@@ -42,7 +42,7 @@
                 ['label' => 'Total Tempat', 'value' => $totalTempat, 'svg' => 'M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z', 'color' => 'blue'],
                 ['label' => 'Total Desa', 'value' => $totalDesa, 'svg' => 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6', 'color' => 'indigo'],
                 ['label' => 'Total User', 'value' => $totalUser, 'svg' => 'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z', 'color' => 'violet'],
-                ['label' => 'Total Sektor', 'value' => $totalSektor, 'svg' => 'M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z', 'color' => 'sky'],
+                // ['label' => 'Total Sektor', 'value' => $totalSektor, 'svg' => 'M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z', 'color' => 'sky'],
             ];
         @endphp
 
@@ -184,7 +184,7 @@
 @endsection
 
 @push('scripts')
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+{{-- <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script>
     const sektorData = @json($chartSektor);
     const options = {
@@ -210,5 +210,5 @@
         tooltip: { theme: 'dark' }
     };
     new ApexCharts(document.querySelector("#chart-sektor"), options).render();
-</script>
+</script> --}}
 @endpush
