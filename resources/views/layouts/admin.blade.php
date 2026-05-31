@@ -139,6 +139,84 @@
     <!-- SCRIPTS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+    <script>
+        document.addEventListener(
+            'DOMContentLoaded',
+            () => {
+
+                document
+                    .querySelectorAll(
+                        '.exclusive-checkbox'
+                    )
+                    .forEach(
+                        checkbox => {
+
+                            checkbox.addEventListener(
+                                'change',
+                                () => {
+
+                                    const group =
+                                        checkbox.dataset.group;
+
+                                    const all =
+                                        document.querySelectorAll(
+                                            `[data-group="${group}"]`
+                                        );
+
+                                    const exclusive = [...all].find(
+                                        item =>
+                                        item.dataset.exclusive === '1'
+                                    );
+
+                                    if (
+                                        exclusive.checked
+                                    ) {
+
+                                        all.forEach(item => {
+
+                                            if (item !== exclusive) {
+
+                                                item.checked = false;
+                                                item.disabled = true;
+                                            }
+
+                                        });
+
+                                    } else {
+
+                                        all.forEach(item => {
+                                            item.disabled = false;
+                                        });
+
+                                        const othersChecked = [...all]
+                                            .filter(
+                                                item =>
+                                                item !== exclusive
+                                            )
+                                            .some(
+                                                item =>
+                                                item.checked
+                                            );
+
+                                        if (othersChecked) {
+
+                                            exclusive.disabled = true;
+
+                                        } else {
+
+                                            exclusive.disabled = false;
+                                        }
+                                    }
+
+                                }
+                            );
+
+                        }
+                    );
+
+            }
+        );
+    </script>
     @stack('scripts')
 </body>
 

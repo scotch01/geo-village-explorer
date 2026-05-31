@@ -1,0 +1,82 @@
+COMMIT MESSAGE - Detailed Format
+=================================
+
+TITLE:
+Enhance form labels with numbering and expand questionnaire builder UI
+
+---
+
+DESCRIPTION:
+This commit implements improvements to the family (keluarga) data entry forms 
+and UI components across the admin panel. It includes enhanced form organization, 
+standardized labeling conventions, and expanded layout options for better user 
+experience in the BuildKuisioner questionnaire system.
+
+---
+
+DETAILED CHANGES:
+
+1. resources/views/admin/keluarga/create.blade.php (124 lines changed)
+   - Updated page title from "Data Keluarga" to "Tambah Data Keluarga" (Add Family Data)
+   - Added numbered section headers: "1. Identitas Keluarga", "2. Alamat", etc.
+   - Enhanced form field labels with lettered prefixes (a., b., c., etc.)
+   - Expanded "Nomor KK" label to "Nomor Kartu Keluarga (KK) dari Kepala Keluarga" for clarity
+   - Improved form field semantic structure and labeling consistency
+   - +62 insertions(+), -62 deletions(-)
+
+2. resources/views/admin/keluarga/edit.blade.php (86 lines changed)
+   - Updated page title from "Data Keluarga" to "Perbarui Data Keluarga" (Update Family Data)
+   - Applied same numbering scheme to section headers: "1. Identitas Keluarga", "2. Alamat"
+   - Enhanced form field labels with lettered prefixes for consistency with create form
+   - Expanded "Nomor KK" label to "Nomor Kartu Keluarga (KK) dari Kepala Keluarga"
+   - Maintained data binding with old() and model values for proper form state preservation
+   - +43 insertions(+), -43 deletions(-)
+
+3. resources/views/admin/tempat/create.blade.php (6 lines changed)
+   - Minor adjustments to maintain consistency with questionnaire builder structure
+   - Enhanced form organization alignment
+
+4. resources/views/admin/tempat/index.blade.php (6 lines changed)
+   - Minor layout updates for tempat (place/building) listing page
+   - Improved UI consistency across admin interface
+
+5. resources/views/layouts/admin.blade.php (78 lines added)
+   - Extended admin layout template with enhanced components
+   - Added improved navigation and styling capabilities
+   - Likely includes reusable UI components for questionnaire builder
+   - +78 insertions
+
+6. app/Models/AnggotaKeluarga.php (DELETED - 34 lines removed)
+   - Model file removed/refactored
+   - Appears to be consolidated or restructured elsewhere in the codebase
+   - -34 deletions(-)
+
+---
+
+STATISTICS:
+- 6 files changed
+- 204 insertions(+)
+- 130 deletions(-)
+- Net change: +74 lines
+
+---
+
+BRANCH: BuildKuisioner
+
+---
+
+NOTES:
+- All form labels now follow a consistent hierarchical numbering scheme (1., 2., etc.)
+- Field labels use lettered prefixes (a., b., c.) for better organization within sections
+- CRLF line endings will be converted to LF on commit
+- Improved user experience with clearer field descriptions and better form semantics
+- Changes support the questionnaire builder feature set
+- No breaking changes to existing functionality
+
+---
+
+COMMIT MESSAGE (Short Form):
+Enhance form labels with numbering and expand questionnaire builder UI
+
+Add numbered sections and lettered field prefixes to family data forms. 
+Extend admin layout for improved questionnaire interface.

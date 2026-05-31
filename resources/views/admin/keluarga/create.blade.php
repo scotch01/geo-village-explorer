@@ -6,7 +6,7 @@
         <div>
 
             <h1 class="text-2xl font-bold text-gray-900">
-                Data Keluarga
+                Tambah Data Keluarga
             </h1>
 
             <p class="text-gray-500 mt-1">
@@ -24,7 +24,7 @@
                 <div class="bg-white rounded-2xl border p-6">
 
                     <h2 class="font-semibold text-lg mb-5">
-                        Identitas Keluarga
+                        1. Identitas Keluarga
                     </h2>
 
                     <div class="grid md:grid-cols-2 gap-5">
@@ -32,7 +32,7 @@
                         <div>
 
                             <label class="block text-sm font-medium mb-2">
-                                Nama Kepala Keluarga
+                                a. Nama Kepala Keluarga
                             </label>
 
                             <input type="text" name="nama_kepala_keluarga" value="{{ old('nama_kepala_keluarga') }}"
@@ -43,7 +43,7 @@
                         <div>
 
                             <label class="block text-sm font-medium mb-2">
-                                NIK Kepala Keluarga
+                                b. NIK Kepala Keluarga
                             </label>
 
                             <input type="text" name="nik_kepala_keluarga" value="{{ old('nik_kepala_keluarga') }}"
@@ -54,7 +54,7 @@
                         <div>
 
                             <label class="block text-sm font-medium mb-2">
-                                Nomor KK
+                                c. Nomor Kartu Keluarga (KK) dari Kepala Keluarga
                             </label>
 
                             <input type="text" name="nomor_kk" value="{{ old('nomor_kk') }}" maxlength="16"
@@ -68,7 +68,7 @@
                 <div class="bg-white rounded-2xl border p-6">
 
                     <h2 class="font-semibold text-lg mb-5">
-                        Alamat
+                        2. Alamat
                     </h2>
 
                     <div class="grid md:grid-cols-2 gap-5">
@@ -76,7 +76,7 @@
                         <div>
 
                             <label class="block text-sm font-medium mb-2">
-                                Provinsi
+                                a. Provinsi
                             </label>
 
                             <input type="text" name="provinsi" value="{{ old('provinsi') }}"
@@ -87,7 +87,7 @@
                         <div>
 
                             <label class="block text-sm font-medium mb-2">
-                                Kabupaten/Kota
+                                b. Kabupaten/Kota
                             </label>
 
                             <input type="text" name="kabupaten" value="{{ old('kabupaten') }}"
@@ -98,7 +98,7 @@
                         <div>
 
                             <label class="block text-sm font-medium mb-2">
-                                Kecamatan
+                                c. Kecamatan
                             </label>
 
                             <input type="text" name="kecamatan" value="{{ old('kecamatan') }}"
@@ -109,7 +109,7 @@
                         <div>
 
                             <label class="block text-sm font-medium mb-2">
-                                Desa/Kelurahan
+                                d. Desa/Kelurahan
                             </label>
 
                             <input type="text" name="desa" value="{{ old('desa') }}"
@@ -120,7 +120,7 @@
                         <div>
 
                             <label class="block text-sm font-medium mb-2">
-                                Dusun
+                                e. Dusun
                             </label>
 
                             <input type="text" name="dusun" value="{{ old('dusun') }}"
@@ -131,10 +131,33 @@
                         <div class="md:col-span-2">
 
                             <label class="block text-sm font-medium mb-2">
-                                Alamat Lengkap
+                                f. Alamat Lengkap
                             </label>
 
                             <textarea name="alamat_detail" rows="4" class="w-full rounded-xl border-gray-300">{{ old('alamat_detail') }}</textarea>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="block text-sm font-medium mb-2">
+                                g. Apakah alamat tersebut sesuai dengan alamat pada Kartu Keluarga (KK)?
+                            </label>
+
+                            <div class="space-y-2">
+
+                                @foreach ($yaTidak as $key => $label)
+                                    <label class="flex items-center gap-2">
+
+                                        <input type="radio" name="alamat_sesuai_kk" value="{{ $key }}"
+                                            @checked(old('alamat_sesuai_kk', $keluarga->alamat_sesuai_kk ?? null) == $key)>
+
+                                        {{ $label }}
+
+                                    </label>
+                                @endforeach
+
+                            </div>
 
                         </div>
 
@@ -144,36 +167,13 @@
                 <div class="bg-white rounded-2xl border p-6">
 
                     <h2 class="font-semibold text-lg mb-5">
-                        Kondisi Perumahan
+                        3. Kondisi Perumahan
                     </h2>
 
                     <div class="mb-3">
 
                         <label class="block text-sm font-medium mb-2">
-                            Alamat sesuai KK?
-                        </label>
-
-                        <div class="space-y-2">
-
-                            @foreach ($yaTidak as $key => $label)
-                                <label class="flex items-center gap-2">
-
-                                    <input type="radio" name="alamat_sesuai_kk" value="{{ $key }}"
-                                        @checked(old('alamat_sesuai_kk', $keluarga->alamat_sesuai_kk ?? null) == $key)>
-
-                                    {{ $label }}
-
-                                </label>
-                            @endforeach
-
-                        </div>
-
-                    </div>
-
-                    <div class="mb-3">
-
-                        <label class="block text-sm font-medium mb-2">
-                            Jumlah Keluarga Dalam Rumah
+                            a. Berapa jumlah keluarga yang tinggal dalam 1 rumah/tempat tinggal?
                         </label>
 
                         <input type="number" min="1" name="jumlah_keluarga_dalam_rumah"
@@ -185,7 +185,7 @@
                     <div class="mb-3">
 
                         <label class="block text-sm font-medium mb-2">
-                            Status Kepemilikan Rumah
+                            b. Apa status kepemilikan bangunan tempat tinggal yang ditempati?
                         </label>
 
                         <select name="status_kepemilikan_rumah" class="w-full rounded-xl border-gray-300">
@@ -207,7 +207,7 @@
 
                     <div class="mb-3">
                         <label class="block text-sm font-medium mb-2">
-                            Luas Lantai (m2)
+                            c. Berapa luas lantai bangunan tempat tinggal yang ditempati? (m2)
                         </label>
 
                         <input type="number" min="1" name="luas_lantai"
@@ -218,10 +218,14 @@
 
                     <div class="mb-3">
                         <label class="block text-sm font-medium mb-2">
-                            Bahan Lantai
+                            d. Apa bahan bangunan utama lantai rumah terluas?
                         </label>
 
                         <select name="bahan_lantai" class="w-full rounded-xl border-gray-300">
+
+                            <option value="">
+                                Pilih Jawaban
+                            </option>
 
                             @foreach ($bahanLantai as $key => $label)
                                 <option value="{{ $key }}" @selected(old('bahan_lantai', $keluarga->bahan_lantai ?? null) == $key)>
@@ -236,10 +240,14 @@
 
                     <div class="mb-3">
                         <label class="block text-sm font-medium mb-2">
-                            Bahan Dinding
+                            e. Apa bahan bangunan utama dinding rumah terluas?
                         </label>
 
                         <select name="bahan_dinding" class="w-full rounded-xl border-gray-300">
+
+                            <option value="">
+                                Pilih Jawaban
+                            </option>
 
                             @foreach ($bahanDinding as $key => $label)
                                 <option value="{{ $key }}" @selected(old('bahan_dinding', $keluarga->bahan_dinding ?? null) == $key)>
@@ -254,10 +262,14 @@
 
                     <div class="mb-3">
                         <label class="block text-sm font-medium mb-2">
-                            Bahan Atap
+                            f. Apa bahan bangunan utama atap rumah terluas?
                         </label>
 
                         <select name="bahan_atap" class="w-full rounded-xl border-gray-300">
+
+                            <option value="">
+                                Pilih Jawaban
+                            </option>
 
                             @foreach ($bahanAtap as $key => $label)
                                 <option value="{{ $key }}" @selected(old('bahan_atap', $keluarga->bahan_atap ?? null) == $key)>
@@ -275,12 +287,12 @@
                 <div class="bg-white rounded-2xl border p-6">
 
                     <h2 class="font-semibold text-lg mb-5">
-                        Sanitasi & Utilitas
+                        4. Sanitasi & Utilitas
                     </h2>
 
                     <div class="mb-3">
                         <label class="block text-sm font-medium mb-2">
-                            Fasilitas BAB
+                            a. Apakah memiliki fasilitas tempat buang air besar dan siapa saja yang menggunakan?
                         </label>
 
                         <select name="fasilitas_bab" class="w-full rounded-xl border-gray-300">
@@ -302,7 +314,7 @@
 
                     <div class="mb-3">
                         <label class="block text-sm font-medium mb-2">
-                            Jenis Kloset
+                            b. Apa jenis kloset yang digunakan?
                         </label>
 
                         <select name="jenis_kloset" class="w-full rounded-xl border-gray-300">
@@ -324,7 +336,7 @@
 
                     <div class="mb-3">
                         <label class="block text-sm font-medium mb-2">
-                            Pembuangan Tinja
+                            c. Di manakah tempat pembuangan akhir tinja?
                         </label>
 
                         <select name="pembuangan_tinja" class="w-full rounded-xl border-gray-300">
@@ -346,7 +358,7 @@
 
                     <div class="mb-3">
                         <label class="block text-sm font-medium mb-2">
-                            Sumber Air Minum
+                            d. Apa sumber air utama yang digunakan keluarga untuk minum?
                         </label>
 
                         <select name="sumber_air_minum" class="w-full rounded-xl border-gray-300">
@@ -368,7 +380,7 @@
 
                     <div class="mb-3">
                         <label class="block text-sm font-medium mb-2">
-                            Sumber Penerangan
+                            e. Apa sumber penerangan utama rumah ini?
                         </label>
 
                         <select name="sumber_penerangan" x-model="sumberPenerangan"
@@ -399,7 +411,8 @@
                             <div>
 
                                 <h3 class="font-semibold text-blue-900">
-                                    Data Meteran Listrik
+                                    f. Jika listrik PLN dengan meteran, berapa jumlah meteran listrik yang terpasang di
+                                    rumah ini?
                                 </h3>
 
                                 <p class="text-sm text-blue-700 mt-1">
@@ -444,7 +457,7 @@
 
                                     <label class="block text-sm font-medium mb-2">
 
-                                        Daya Listrik
+                                        g. Berapa daya listrik yang terpasang di rumah ini?
 
                                     </label>
 
@@ -482,14 +495,15 @@
                 <div class="bg-white border rounded-2xl p-6">
 
                     <h2 class="font-semibold text-lg mb-5">
-                        Kredit dan Pinjaman
+                        5. Kredit dan Pinjaman
                     </h2>
 
-                    <div>
+                    <div class="mb-3">
 
                         <label class="block text-sm font-medium mb-2">
 
-                            Sumber Kredit / Pinjaman
+                            a. Apakah ada minimal salah satu anggota keluarga ini yang menerima kredit dari lembaga keuangan
+                            berikut dalam setahun terakhir?
 
                         </label>
 
@@ -498,8 +512,9 @@
                             @foreach ($kreditSumber as $key => $label)
                                 <label class="flex items-center gap-3">
 
-                                    <input type="checkbox" name="kredit_sumber[]" value="{{ $key }}"
-                                        @checked(in_array($key, old('kredit_sumber', $keluarga->kredit_sumber ?? [])))>
+                                    <input type="checkbox" class="exclusive-checkbox" data-group="kredit_sumber"
+                                        data-exclusive="{{ $key === 'X' ? '1' : '0' }}" name="kredit_sumber[]"
+                                        value="{{ $key }}" @checked(in_array($key, old('kredit_sumber', $keluarga->kredit_sumber ?? [])))>
 
                                     <span>
                                         {{ $label }}
@@ -516,7 +531,7 @@
 
                         <label class="block text-sm font-medium mb-2">
 
-                            Tujuan Kredit / Pinjaman
+                            b. Apakah dalam setahun terakhir keluarga ini pernah menerima kredit dari lembaga keuangan?
 
                         </label>
 
@@ -525,8 +540,9 @@
                             @foreach ($kreditTujuan as $key => $label)
                                 <label class="flex items-center gap-3">
 
-                                    <input type="checkbox" name="kredit_tujuan[]" value="{{ $key }}"
-                                        @checked(in_array($key, old('kredit_tujuan', $keluarga->kredit_tujuan ?? [])))>
+                                    <input type="checkbox" class="exclusive-checkbox" data-group="kredit_tujuan"
+                                        data-exclusive="{{ $key === 'X' ? '1' : '0' }}" name="kredit_tujuan[]"
+                                        value="{{ $key }}" @checked(in_array($key, old('kredit_tujuan', $keluarga->kredit_tujuan ?? [])))>
 
                                     <span>
                                         {{ $label }}

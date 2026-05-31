@@ -8,10 +8,10 @@
         <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
             <div>
                 <h1 class="text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
-                    Data <span class="text-blue-600">Tempat</span>
+                    Data <span class="text-blue-600">Bangunan</span>
                 </h1>
                 <p class="text-slate-500 mt-2 font-medium">
-                    Kelola data lokasi, sektor, dan pemetaan wilayah berbasis GIS secara realtime.
+                    Kelola data lokasi, bangunan, usaha dan pemetaan wilayah berbasis GIS.
                 </p>
             </div>
 
@@ -22,7 +22,7 @@
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4" />
                     </svg>
-                    Tambah Tempat
+                    Tambah Data
                 </a>
             </div>
         </div>

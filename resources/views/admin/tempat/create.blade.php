@@ -9,7 +9,7 @@
 
             <div>
                 <h1 class="text-3xl font-black tracking-tight text-slate-900">
-                    Tambah Tempat
+                    Tambah Data Bangunan
                 </h1>
 
                 <p class="text-slate-500 mt-2">
@@ -86,7 +86,7 @@
                         <!-- NAMA -->
                         <div>
                             <label class="text-sm font-semibold text-slate-700">
-                                Nama Tempat
+                                Nama Tempat atau Pemilik
                             </label>
 
                             <input type="text" name="nama_tempat" value="{{ old('nama_tempat') }}"
@@ -137,7 +137,7 @@
                     <div>
 
                         <label class="text-sm font-semibold text-slate-700">
-                            Foto Bangunan
+                            Foto bangunan tampak depan 
                         </label>
 
                         <input type="file" name="foto_bangunan" accept="image/*" class="w-full mt-2">
