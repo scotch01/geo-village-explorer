@@ -256,9 +256,8 @@ class TempatController extends Controller
         $this->authorizeTempatAccess($tempat);
 
         $tempat->load([
-            'keluarga',
+            'keluarga.anggotaKeluargas',
             'usaha',
-            'anggotaKeluargas',
         ]);
 
         return view(

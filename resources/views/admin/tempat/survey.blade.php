@@ -149,12 +149,32 @@
 
                         </div>
 
-                        <button type="button" disabled
-                            class="inline-flex mt-4 px-4 py-2 rounded-xl bg-gray-300 text-gray-600 text-sm cursor-not-allowed">
+                        @if ($tempat->keluarga)
+                            <div class="flex gap-2 mt-4">
 
-                            Menunggu Modul Anggota
+                                <a href="{{ route('admin.anggota.create', $tempat->keluarga) }}"
+                                    class="inline-flex px-4 py-2 rounded-xl bg-blue-600 text-white text-sm">
 
-                        </button>
+                                    Tambah Anggota
+
+                                </a>
+
+                                <a href="{{ route('admin.anggota.index', $tempat->keluarga) }}"
+                                    class="inline-flex px-4 py-2 rounded-xl bg-slate-600 text-white text-sm">
+
+                                    Kelola Anggota
+
+                                </a>
+
+                            </div>
+                        @else
+                            <button type="button" disabled
+                                class="inline-flex mt-4 px-4 py-2 rounded-xl bg-gray-300 text-gray-600 text-sm cursor-not-allowed">
+
+                                Isi Data Keluarga Dulu
+
+                            </button>
+                        @endif
 
                     </div>
                 @endif
@@ -185,8 +205,7 @@
                         </span>
                     @endif
 
-                    <a href="#"
-                        class="inline-flex mt-4 px-4 py-2 rounded-xl bg-green-600 text-white text-sm">
+                    <a href="#" class="inline-flex mt-4 px-4 py-2 rounded-xl bg-green-600 text-white text-sm">
                         Isi Data Usaha
                     </a>
 

@@ -9,6 +9,7 @@ use App\Http\Controllers\PublicMapController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MasterProfesiController;
 use App\Http\Controllers\Admin\KeluargaController;
+use App\Http\Controllers\Admin\AnggotaKeluargaController;
 
 Route::get('/', function () {
     return redirect('/peta');
@@ -47,6 +48,7 @@ Route::middleware(['auth', 'role:master_admin,admin_desa'])
     Route::get('/tempat/{tempat}/survey', [TempatController::class, 'survey'])
         ->name('tempat.survey');
 
+    // Data Keluarga
     Route::get('/tempat/{tempat}/keluarga/create', [KeluargaController::class, 'create'])
         ->name('keluarga.create');
 
@@ -62,13 +64,29 @@ Route::middleware(['auth', 'role:master_admin,admin_desa'])
     Route::delete('/tempat/{tempat}/keluarga', [KeluargaController::class, 'destroy'])
         ->name('keluarga.destroy');
 
+    // Data Anggota Keluarga
+    Route::get('/keluarga/{keluarga}/anggota', [AnggotaKeluargaController::class, 'index'])
+        ->name('anggota.index');
+        
+    Route::get('/keluarga/{keluarga}/anggota/create', [AnggotaKeluargaController::class, 'create'])
+        ->name('anggota.create');
+
+    Route::post('/keluarga/{keluarga}/anggota', [AnggotaKeluargaController::class, 'store'])
+        ->name('anggota.store');
+
+    Route::get('/anggota/{anggota}/edit', [AnggotaKeluargaController::class, 'edit'])
+        ->name('anggota.edit');
+
+    Route::put('/anggota/{anggota}', [AnggotaKeluargaController::class, 'update'])
+        ->name('anggota.update');
+
+    Route::delete('/anggota/{anggota}', [AnggotaKeluargaController::class, 'destroy'])
+        ->name('anggota.destroy');
+
     Route::get('/dashboard', [DashboardController::class, 'index'])
         ->name('dashboard');
 
-    Route::get(
-        '/admin/master-profesi/search',
-        [MasterProfesiController::class, 'search']
-    );
+    Route::get('/master-profesi/search', [MasterProfesiController::class, 'search']);
 
 });
 

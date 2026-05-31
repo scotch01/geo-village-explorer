@@ -10,6 +10,7 @@ class Disabilitas
     public const SENSORIK_NETRA = 'D';
     public const SENSORIK_RUNGU = 'E';
     public const SENSORIK_WICARA = 'F';
+    public const TIDAK_ADA = 'X';
 
     public const OPTIONS = [
         self::FISIK => 'Disabilitas Fisik',
@@ -18,5 +19,6 @@ class Disabilitas
         self::SENSORIK_NETRA => 'Disabilitas Sensorik - Netra',
         self::SENSORIK_RUNGU => 'Disabilitas Sensorik - Rungu',
         self::SENSORIK_WICARA => 'Disabilitas Sensorik - Wicara',
+        self::TIDAK_ADA => 'Tidak Ada',
     ];
 }

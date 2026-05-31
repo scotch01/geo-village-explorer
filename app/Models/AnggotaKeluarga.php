@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
+use App\Constants\AnggotaKeluarga\HubunganKeluarga;
 
 class AnggotaKeluarga extends Model
 {
@@ -27,5 +29,20 @@ class AnggotaKeluarga extends Model
             MasterProfesi::class,
             'master_profesi_id'
         );
+    }
+
+    public function getUmurAttribute()
+    {
+        return Carbon::parse(
+            $this->tanggal_lahir
+        )->age;
+    }
+
+    public function getHubunganLabelAttribute()
+    {
+        return
+            HubunganKeluarga::OPTIONS[
+                $this->hubungan_keluarga
+            ] ?? '-';
     }
 }

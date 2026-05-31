@@ -166,3 +166,191 @@ Alasan:
 Tindakan:
 
 * Standarisasi seluruh halaman admin dan public.
+
+## Anggota Keluarga
+
+Daftar perbaikan yang sengaja ditunda agar fokus pada penyelesaian fitur inti dan persiapan presentasi.
+
+---
+
+## 12. Rule Kepala Keluarga Tunggal
+
+### Status
+
+Belum diimplementasikan.
+
+### Tujuan
+
+Dalam satu keluarga hanya boleh terdapat satu anggota dengan hubungan:
+
+* Kepala Keluarga
+
+### Implementasi
+
+Saat create atau update anggota:
+
+* Jika sudah ada anggota dengan hubungan "Kepala Keluarga", opsi tersebut tidak boleh dipilih kembali.
+* Validasi dilakukan di backend.
+
+### Prioritas
+
+Tinggi
+
+---
+
+## 13. Nomor Urut Otomatis
+
+### Status
+
+Masih diinput manual.
+
+### Tujuan
+
+Mengurangi kesalahan input dan menjaga urutan anggota keluarga.
+
+### Implementasi
+
+Saat menambah anggota baru:
+
+```php
+$nomorUrut =
+    $keluarga
+        ->anggotaKeluargas()
+        ->max('nomor_urut') + 1;
+```
+
+Field nomor urut menjadi readonly atau dihilangkan dari form.
+
+### Prioritas
+
+Tinggi
+
+---
+
+## 14. Disable Field Berdasarkan Umur
+
+### Status
+
+Belum diimplementasikan.
+
+### Tujuan
+
+Menyesuaikan form dengan aturan kuesioner.
+
+### Aturan
+
+#### Usia ≥ 5 Tahun
+
+Aktifkan:
+
+* Partisipasi Sekolah
+* Ijazah Tertinggi
+* Rekening Digital
+
+#### Usia ≥ 15 Tahun
+
+Aktifkan:
+
+* Profesi Utama
+* Status/Kedudukan Pekerjaan
+
+Jika umur belum memenuhi syarat:
+
+* Field disabled
+* Nilai tidak dikirim ke server
+
+### Prioritas
+
+Sedang
+
+---
+
+## 15. Validasi Umur
+
+### Status
+
+Belum diimplementasikan.
+
+### Tujuan
+
+Mencegah tanggal lahir tidak valid.
+
+### Implementasi
+
+```php
+'tanggal_lahir' => [
+    'required',
+    'date',
+    'before_or_equal:today',
+]
+```
+
+Tambahan:
+
+* Tidak boleh tanggal masa depan.
+* Umur hasil perhitungan tidak boleh negatif.
+
+### Prioritas
+
+Sedang
+
+---
+
+## 16. Validasi NIK Unik
+
+### Status
+
+Belum diimplementasikan.
+
+### Tujuan
+
+Mencegah duplikasi data anggota.
+
+### Implementasi
+
+* NIK tidak boleh duplikat dalam keluarga yang sama.
+* Panjang NIK harus sesuai standar.
+
+Contoh:
+
+```php
+Rule::unique(
+    'anggota_keluargas',
+    'nik'
+)
+```
+
+### Prioritas
+
+Sedang
+
+---
+
+## 17. Polishing Tampilan Daftar Anggota
+
+### Status
+
+Belum diimplementasikan.
+
+### Tujuan
+
+Mempermudah identifikasi anggota keluarga.
+
+### Improvement
+
+* Badge khusus "Kepala Keluarga".
+* Sorting berdasarkan nomor urut.
+* Highlight visual untuk kepala keluarga.
+
+Contoh:
+
+```text
+1 | Sukijan Lagi | [Kepala Keluarga]
+2 | Siti Aminah | Istri
+3 | Ahmad | Anak
+```
+
+### Prioritas
+
+Rendah
+

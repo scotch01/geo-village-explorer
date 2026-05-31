@@ -2,7 +2,7 @@
 
 namespace App\Constants\AnggotaKeluarga;
 
-class KesehatanKronis
+class PenyakitKronis
 {
     public const HIPERTENSI = 'A';
     public const REMATIK = 'B';
@@ -21,6 +21,7 @@ class KesehatanKronis
     public const LEUKIMIA = 'O';
     public const ALZHEIMER = 'P';
     public const LAINNYA = 'Q';
+    public const TIDAK_ADA = 'X';
 
     public const OPTIONS = [
         self::HIPERTENSI => 'Hipertensi',
@@ -40,5 +41,6 @@ class KesehatanKronis
         self::LEUKIMIA => 'Leukimia',
         self::ALZHEIMER => 'Alzheimer',
         self::LAINNYA => 'Lainnya',
+        self::TIDAK_ADA => 'Tidak Memiliki Keterbatasan',
     ];
 }

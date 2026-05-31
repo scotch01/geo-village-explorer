@@ -52,7 +52,9 @@ class Tempat extends Model
     {
         return $this->hasManyThrough(
             AnggotaKeluarga::class,
-            Keluarga::class
+            Keluarga::class,
+            'tempat_id',
+            'keluarga_id'
         );
     }
 
