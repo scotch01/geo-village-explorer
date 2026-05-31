@@ -10,9 +10,9 @@ class SumberPenerangan
     public const BUKAN_LISTRIK = 4;
 
     public const OPTIONS = [
-        self::PLN_METERAN => 'Listrik PLN dengan meteran',
-        self::PLN_NON_METERAN => 'Listrik PLN tanpa meteran',
-        self::NON_PLN => 'Listrik non-PLN',
-        self::BUKAN_LISTRIK => 'Bukan listrik',
+        self::PLN_METERAN => '1. Listrik PLN dengan meteran',
+        self::PLN_NON_METERAN => '2. Listrik PLN tanpa meteran',
+        self::NON_PLN => '3. Listrik non-PLN',
+        self::BUKAN_LISTRIK => '4. Bukan listrik',
     ];
 }

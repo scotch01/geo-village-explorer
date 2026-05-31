@@ -12,11 +12,11 @@ class FasilitasBAB
     public const TIDAK_ADA = 6;
 
     public const OPTIONS = [
-        self::SATU_RUMAH => 'Ada, digunakan oleh anggota keluarga dalam satu rumah',
-        self::BANYAK_RUMAH => 'Ada, digunakan bersama oleh anggota keluarga dari beberapa rumah',
-        self::KOMUNAL => 'Ada, di MCK komunal',
-        self::UMUM => 'Ada, di MCK umum/siapapun menggunakan',
-        self::TIDAK_MENGGUNAKAN => 'Ada, anggota keluarga tidak menggunakan',
-        self::TIDAK_ADA => 'Tidak Ada',
+        self::SATU_RUMAH => '1. Ada, digunakan oleh anggota keluarga dalam satu rumah',
+        self::BANYAK_RUMAH => '2. Ada, digunakan bersama oleh anggota keluarga dari beberapa rumah',
+        self::KOMUNAL => '3. Ada, di MCK komunal',
+        self::UMUM => '4. Ada, di MCK umum/siapapun menggunakan',
+        self::TIDAK_MENGGUNAKAN => '5. Ada, anggota keluarga tidak menggunakan',
+        self::TIDAK_ADA => '6. Tidak Ada',
     ];
 }

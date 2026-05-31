@@ -8,7 +8,7 @@ class JumlahMeteran
     public const DUA_METERAN = 'B';
 
     public const OPTIONS = [
-        self::SATU_METERAN => '1 Meteran',
-        self::DUA_METERAN => '2 Meteran',
+        self::SATU_METERAN => 'A. 1 Meteran',
+        self::DUA_METERAN => 'B. 2 Meteran',
     ];
 }

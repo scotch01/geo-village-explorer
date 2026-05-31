@@ -10,9 +10,9 @@ class JenisKloset
     public const CEMPLUNG = 4;
 
     public const OPTIONS = [
-        self::ANGSA => 'Leher Angsa',
-        self::TUTUP => 'Plengsengan dengan tutup',
-        self::TANPA_TUTUP => 'Plengsengan tanpa tutup',
-        self::CEMPLUNG => 'Cemplung/cubluk',
+        self::ANGSA => '1. Leher Angsa',
+        self::TUTUP => '2. Plengsengan dengan tutup',
+        self::TANPA_TUTUP => '3. Plengsengan tanpa tutup',
+        self::CEMPLUNG => '4. Cemplung/cubluk',
     ];
 }

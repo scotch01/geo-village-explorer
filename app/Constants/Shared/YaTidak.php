@@ -8,7 +8,7 @@ class YaTidak
     public const TIDAK = '2';
 
     public const OPTIONS = [
-        self::YA => 'Ya',
-        self::TIDAK => 'Tidak',
+        self::YA => '1. Ya',
+        self::TIDAK => '2. Tidak',
     ];
 }

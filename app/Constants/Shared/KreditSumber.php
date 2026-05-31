@@ -14,12 +14,12 @@ class KreditSumber
 
     public const OPTIONS = [
 
-        self::BANK => 'Bank',
-        self::KOPERASI => 'Koperasi',
-        self::PINJAMAN_ONLINE => 'Pinjaman Online',
-        self::PERORANGAN_KELUARGA => 'Perorangan/Keluarga',
-        self::PNM_MEKAAR => 'PNM Mekaar',
-        self::LAINNYA => 'Lainnya',
-        self::TIDAK_ADA => 'Tidak Menerima Pinjaman',
+        self::BANK => 'A. Bank',
+        self::KOPERASI => 'B. Koperasi',
+        self::PINJAMAN_ONLINE => 'C. Pinjaman Online',
+        self::PERORANGAN_KELUARGA => 'D. Perorangan/Keluarga',
+        self::PNM_MEKAAR => 'E. PNM Mekaar',
+        self::LAINNYA => 'F. Lainnya',
+        self::TIDAK_ADA => 'X. Tidak Menerima Pinjaman',
     ];
 }

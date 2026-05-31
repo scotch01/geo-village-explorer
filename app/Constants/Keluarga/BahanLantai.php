@@ -15,14 +15,14 @@ class BahanLantai
     public const LAINNYA = 9;
 
     public const OPTIONS = [
-        self::MARMER => 'Marmer/Granit',
-        self::KERAMIK => 'Keramik',
-        self::PARKET => 'Parket/Vinyl/Karpet',
-        self::UBIN => 'Ubin/Tegel/Teraso',
-        self::KAYU => 'Kayu/Papan',
-        self::SEMEN => 'Semen/Bata Merah',
-        self::BAMBU => 'Bambu',
-        self::TANAH => 'Tanah',
-        self::LAINNYA => 'Lainnya',
+        self::MARMER => '1. Marmer/Granit',
+        self::KERAMIK => '2. Keramik',
+        self::PARKET => '3. Parket/Vinyl/Karpet',
+        self::UBIN => '4. Ubin/Tegel/Teraso',
+        self::KAYU => '5. Kayu/Papan',
+        self::SEMEN => '6. Semen/Bata Merah',
+        self::BAMBU => '7. Bambu',
+        self::TANAH => '8. Tanah',
+        self::LAINNYA => '9. Lainnya',
     ];
 }

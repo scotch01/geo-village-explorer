@@ -10,9 +10,9 @@ class StatusKepemilikanBangunanUsaha
     public const LAINNYA = 4;
 
     public const OPTIONS = [
-        self::SENDIRI => 'Milik Sendiri',
-        self::KONTRAK => 'Kontrak/Sewa',
-        self::BEBAS_SEWA => 'Bebas Sewa',
-        self::LAINNYA => 'Lainnya',
+        self::SENDIRI => '1. Milik Sendiri',
+        self::KONTRAK => '2. Kontrak/Sewa',
+        self::BEBAS_SEWA => '3. Bebas Sewa',
+        self::LAINNYA => '4. Lainnya',
     ];
 }

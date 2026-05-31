@@ -9,8 +9,8 @@ class JenisBangunan
     public const BC  = 'bc';
 
     public const OPTIONS = [
-        self::BTT => 'Bangunan Tempat Tinggal',
-        self::BKU => 'Bangunan Khusus Usaha',
-        self::BC  => 'Bangunan Campuran',
+        self::BTT => '1. Bangunan Tempat Tinggal',
+        self::BKU => '2. Bangunan Khusus Usaha',
+        self::BC  => '3. Bangunan Campuran',
     ];
 }

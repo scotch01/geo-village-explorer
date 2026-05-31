@@ -14,13 +14,13 @@ class Kendala
     public const TIDAK_MENGALAMI = 'X';
 
     public const OPTIONS = [
-        self::BAHAN_BAKU_SULIT => 'Bahan baku sulit didapat',
-        self::HARGA => 'Kenaikan harga bahan baku',
-        self::MODAL => 'Kurangnya modal usaha',
-        self::KESULITAN_PEMASARAN => 'Kesulitan pemasaran/penjualan produk',
-        self::KESULITAN_IZIN => 'Kesulitan dalam perizinan usaha',
-        self::KURANG_PENGETAHUAN => 'Kurangnya pengetahuan atau keterampilan untuk pengembangan usaha',
-        self::LAINNYA => 'Lainnya',
-        self::TIDAK_MENGALAMI => 'Tidak Mengalami Kesulitan',
+        self::BAHAN_BAKU_SULIT => 'A. Bahan baku sulit didapat',
+        self::HARGA => 'B. Kenaikan harga bahan baku',
+        self::MODAL => 'C. Kurangnya modal usaha',
+        self::KESULITAN_PEMASARAN => 'D. Kesulitan pemasaran/penjualan produk',
+        self::KESULITAN_IZIN => 'E. Kesulitan dalam perizinan usaha',
+        self::KURANG_PENGETAHUAN => 'F. Kurangnya pengetahuan atau keterampilan untuk pengembangan usaha',
+        self::LAINNYA => 'G. Lainnya',
+        self::TIDAK_MENGALAMI => 'X. Tidak Mengalami Kesulitan',
     ];
 }

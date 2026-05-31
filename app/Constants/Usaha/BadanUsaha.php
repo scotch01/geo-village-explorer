@@ -11,10 +11,10 @@ class BadanUsaha
     public const TIDAK = 5;
 
     public const OPTIONS = [
-        self::PT => 'PT/perseroan/perum ',
-        self::CV => 'Commanditaire Vennootschap (CV)',
-        self::YAYASAN => 'Yayasan',
-        self::LAINNYA => 'Lainnya',
-        self::TIDAK => 'Tidak Berbadan Hukum',
+        self::PT => '1. PT/perseroan/perum ',
+        self::CV => '2. Commanditaire Vennootschap (CV)',
+        self::YAYASAN => '3. Yayasan',
+        self::LAINNYA => '4. Lainnya',
+        self::TIDAK => '5. Tidak Berbadan Hukum',
     ];
 }

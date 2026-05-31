@@ -14,12 +14,12 @@ class KreditTujuan
 
     public const OPTIONS = [
 
-        self::PENDIDIKAN => 'Biaya Pendidikan',
-        self::KESEHATAN => 'Biaya Kesehatan',
-        self::KONSUMSI => 'Konsumsi Sehari-hari',
-        self::BARANG_SEKUNDER => 'Membeli Barang Sekunder/Tersier',
-        self::MEMBELI_ASET => 'Membeli Aset',
-        self::LAINNYA => 'Lainnya',
-        self::TIDAK_MEMINJAM => 'Tidak Melakukan Pinjaman/Kredit',
+        self::PENDIDIKAN => 'A. Biaya Pendidikan',
+        self::KESEHATAN => 'B. Biaya Kesehatan',
+        self::KONSUMSI => 'C. Konsumsi Sehari-hari',
+        self::BARANG_SEKUNDER => 'D. Membeli Barang Sekunder/Tersier',
+        self::MEMBELI_ASET => 'E. Membeli Aset',
+        self::LAINNYA => 'F. Lainnya',
+        self::TIDAK_MEMINJAM => 'X. Tidak Melakukan Pinjaman/Kredit',
     ];
 }

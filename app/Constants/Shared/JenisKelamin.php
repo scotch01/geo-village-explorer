@@ -8,7 +8,7 @@ class JenisKelamin
     public const PEREMPUAN = 2;
 
     public const OPTIONS = [
-        self::LAKI_LAKI => 'Laki-Laki',
-        self::PEREMPUAN => 'Perempuan',
+        self::LAKI_LAKI => '1. Laki-Laki',
+        self::PEREMPUAN => '2. Perempuan',
     ];
 }

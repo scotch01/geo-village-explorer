@@ -13,12 +13,12 @@ class MediaInternet
     public const TIDAK = 'X';
 
     public const OPTIONS = [
-        self::WEBSITE => 'Website',
-        self::EMAIL => 'Email',
-        self::PESAN_INSTAN => 'Pesan Instan (whatsapp, telegram dll)',
-        self::MEDIA_SOSIAL => 'Media sosial (instagram, facebook, dll)',
-        self::MARKETPLACE => 'Marketplace/platform digital (gojek, tokopedia, shopee, dll)',
-        self::LAINNYA => 'Lainnya',
-        self::TIDAK => 'Tidak Menggunakan Internet',
+        self::WEBSITE => 'A. Website',
+        self::EMAIL => 'B. Email',
+        self::PESAN_INSTAN => 'C. Pesan Instan (whatsapp, telegram dll)',
+        self::MEDIA_SOSIAL => 'D. Media sosial (instagram, facebook, dll)',
+        self::MARKETPLACE => 'E. Marketplace/platform digital (gojek, tokopedia, shopee, dll)',
+        self::LAINNYA => 'F. Lainnya',
+        self::TIDAK => 'X. Tidak Menggunakan Internet',
     ];
 }

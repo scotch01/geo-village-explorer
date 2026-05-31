@@ -12,11 +12,11 @@ class IzinUsaha
     public const TIDAK_MEMILIKI = 'X';
 
     public const OPTIONS = [
-        self::NIB => 'Nomor Induk Berusaha (NIB)',
-        self::IUMK => 'Izin Usaha Mikro dan Kecil (IUMK)',
-        self::BPOM => 'Badan Pengawas Obat dan Makanan',
-        self::HALAL => 'Sertifikat Halal (MUI/Badan Penyelenggara Jaminan Produk Halal)',
-        self::LAINNYA => 'Lainnya',
-        self::TIDAK_MEMILIKI => 'Tidak Memiliki',
+        self::NIB => 'A. Nomor Induk Berusaha (NIB)',
+        self::IUMK => 'B. Izin Usaha Mikro dan Kecil (IUMK)',
+        self::BPOM => 'C. Badan Pengawas Obat dan Makanan',
+        self::HALAL => 'D. Sertifikat Halal (MUI/Badan Penyelenggara Jaminan Produk Halal)',
+        self::LAINNYA => 'E. Lainnya',
+        self::TIDAK_MEMILIKI => 'X. Tidak Memiliki',
     ];
 }

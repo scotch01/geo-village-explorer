@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Constants\Keluarga;
+namespace App\Constants\Usaha;
 
 class TujuanKreditUsaha
 {
@@ -13,16 +13,16 @@ class TujuanKreditUsaha
     public const PELUNASAN = 'G';
     public const LAINNYA = 'H';
     public const TIDAK_MEMINJAM = 'X';
-    public const OPTIONS = [
 
-        self::BAHAN_BAKU => 'Ya, untuk membeli bahan baku',
-        self::GAJI_PEKERJA => 'Ya, untuk pembayaran upah/gaji pekerja',
-        self::OPERASIONAL_HARIAN => 'Ya, untuk operasional harian',
-        self::ASET => 'Ya, untuk membeli peralatan atau aset usaha',
-        self::RENOVASI => 'Ya, untuk pembangunan atau renovasi tempat usaha',
-        self::PRODUK => 'Ya, untuk pengembangan produk',
-        self::PELUNASAN => 'Ya, melunasi pinjaman usaha sebelumnya',
-        self::LAINNYA => 'Lainnya',
-        self::TIDAK_MEMINJAM => 'Tidak Menerima Pinjaman',
+    public const OPTIONS = [
+        self::BAHAN_BAKU => 'A. Ya, untuk membeli bahan baku',
+        self::GAJI_PEKERJA => 'B. Ya, untuk pembayaran upah/gaji pekerja',
+        self::OPERASIONAL_HARIAN => 'C. Ya, untuk operasional harian',
+        self::ASET => 'D. Ya, untuk membeli peralatan atau aset usaha',
+        self::RENOVASI => 'E. Ya, untuk pembangunan atau renovasi tempat usaha',
+        self::PRODUK => 'F. Ya, untuk pengembangan produk',
+        self::PELUNASAN => 'G. Ya, melunasi pinjaman usaha sebelumnya',
+        self::LAINNYA => 'H. Lainnya',
+        self::TIDAK_MEMINJAM => 'X. Tidak Menerima Pinjaman',
     ];
 }

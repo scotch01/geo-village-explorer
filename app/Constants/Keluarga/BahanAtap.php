@@ -14,13 +14,13 @@ class BahanAtap
     public const LAINNYA = 8;
 
     public const OPTIONS = [
-        self::BETON => 'Beton',
-        self::GENTENG => 'Genteng',
-        self::SENG => 'Seng',
-        self::ASBES => 'Asbes',
-        self::BAMBU => 'Bambu',
-        self::KAYU => 'Kayu/Sirap',
-        self::JERAMI => 'Jerami/Ijuk/Daun-daunan/Rumbia',
-        self::LAINNYA => 'Lainnya',
+        self::BETON => '1. Beton',
+        self::GENTENG => '2. Genteng',
+        self::SENG => '3. Seng',
+        self::ASBES => '4. Asbes',
+        self::BAMBU => '5. Bambu',
+        self::KAYU => '6. Kayu/Sirap',
+        self::JERAMI => '7. Jerami/Ijuk/Daun-daunan/Rumbia',
+        self::LAINNYA => '8. Lainnya',
     ];
 }

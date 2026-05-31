@@ -16,6 +16,10 @@ use App\Constants\Keluarga\JenisKloset;
 use App\Constants\Keluarga\PembuanganTinja;
 use App\Constants\Keluarga\SumberAirMinum;
 use App\Constants\Keluarga\SumberPenerangan;
+use App\Constants\Keluarga\DayaListrik;
+use App\Constants\Shared\KreditSumber;
+use App\Constants\Keluarga\KreditTujuan;
+use App\Constants\Shared\YaTidak;
 
 class KeluargaController extends Controller
 {
@@ -25,6 +29,8 @@ class KeluargaController extends Controller
             'admin.keluarga.create',
             [
                 'tempat' => $tempat,
+
+                'yaTidak' => YaTidak::OPTIONS,
 
                 'statusKepemilikanRumah'
                     => StatusKepemilikanRumah::OPTIONS,
@@ -38,7 +44,7 @@ class KeluargaController extends Controller
                 'bahanAtap'
                     => BahanAtap::OPTIONS,
 
-                'fasilitasBAB'
+                'fasilitasBab'
                     => FasilitasBAB::OPTIONS,
 
                 'jenisKloset'
@@ -52,6 +58,16 @@ class KeluargaController extends Controller
 
                 'sumberPenerangan'
                     => SumberPenerangan::OPTIONS,
+
+                'dayaListrik'
+                    => DayaListrik::OPTIONS,
+
+                'kreditSumber'
+                    => KreditSumber::OPTIONS,
+
+                'kreditTujuan'
+                    => KreditTujuan::OPTIONS,
+
             ]
         );
     }
@@ -74,13 +90,29 @@ class KeluargaController extends Controller
                 );
         }
 
-        $validated =
-            $this->validateData($request);
+        $validated = $this->validateData($request);
+
+        $meterans = $validated['meterans'] ?? [];
+
+        unset($validated['meterans']);
 
         $validated['tempat_id']
             = $tempat->id;
 
-        Keluarga::create($validated);
+        $keluarga = Keluarga::create($validated);
+
+        if ($request->filled('meterans')) {
+
+            foreach ($request->meterans as $meteran) {
+
+                $keluarga
+                    ->meterans()
+                    ->create([
+                        'daya_listrik'
+                            => $meteran['daya_listrik'],
+                    ]);
+            }
+        }
 
         return redirect()
             ->route(
@@ -97,8 +129,10 @@ class KeluargaController extends Controller
         Tempat $tempat
     )
     {
-        $keluarga =
-            $tempat->keluarga;
+        $keluarga = $tempat
+            ->keluarga()
+            ->with('meterans')
+            ->first();
 
         if (!$keluarga) {
             abort(404);
@@ -106,10 +140,48 @@ class KeluargaController extends Controller
 
         return view(
             'admin.keluarga.edit',
-            compact(
-                'tempat',
-                'keluarga'
-            )
+            [
+                'tempat' => $tempat,
+                'keluarga' => $keluarga,
+
+                'yaTidak' => YaTidak::OPTIONS,
+
+                'statusKepemilikanRumah'
+                    => StatusKepemilikanRumah::OPTIONS,
+
+                'bahanLantai'
+                    => BahanLantai::OPTIONS,
+
+                'bahanDinding'
+                    => BahanDinding::OPTIONS,
+
+                'bahanAtap'
+                    => BahanAtap::OPTIONS,
+
+                'fasilitasBab'
+                    => FasilitasBAB::OPTIONS,
+
+                'jenisKloset'
+                    => JenisKloset::OPTIONS,
+
+                'pembuanganTinja'
+                    => PembuanganTinja::OPTIONS,
+
+                'sumberAirMinum'
+                    => SumberAirMinum::OPTIONS,
+
+                'sumberPenerangan'
+                    => SumberPenerangan::OPTIONS,
+
+                'dayaListrik'
+                    => DayaListrik::OPTIONS,
+
+                'kreditSumber'
+                    => KreditSumber::OPTIONS,
+
+                'kreditTujuan'
+                    => KreditTujuan::OPTIONS,
+            ]
         );
     }
 
@@ -128,9 +200,44 @@ class KeluargaController extends Controller
         $validated =
             $this->validateData($request);
 
+        /**
+         * Simpan data meteran terpisah
+         */
+
+        $meterans =
+            $validated['meterans'] ?? [];
+
+        unset($validated['meterans']);
+
+        /**
+         * Update data keluarga
+         */
+
         $keluarga->update(
             $validated
         );
+
+        /**
+         * Reset meteran lama
+         */
+
+        $keluarga
+            ->meterans()
+            ->delete();
+
+        /**
+         * Simpan meteran baru
+         */
+
+        foreach ($meterans as $meteran) {
+
+            $keluarga
+                ->meterans()
+                ->create([
+                    'daya_listrik'
+                        => $meteran['daya_listrik'],
+                ]);
+        }
 
         return redirect()
             ->route(
@@ -197,6 +304,60 @@ class KeluargaController extends Controller
 
             'alamat_detail'
                 => 'required|string',
+
+            'alamat_sesuai_kk'
+                => 'required|integer|in:1,2',
+
+            'jumlah_keluarga_dalam_rumah'
+                => 'required|integer|min:1|max:99',
+
+            'status_kepemilikan_rumah'
+                => 'required|integer',
+
+            'luas_lantai'
+                => 'required|integer|min:1',
+
+            'bahan_lantai'
+                => 'required|integer',
+
+            'bahan_dinding'
+                => 'required|integer',
+
+            'bahan_atap'
+                => 'required|integer',
+
+            'fasilitas_bab'
+                => 'required|integer',
+
+            'jenis_kloset'
+                => 'required|integer',
+
+            'pembuangan_tinja'
+                => 'required|integer',
+
+            'sumber_air_minum'
+                => 'required|integer',
+
+            'sumber_penerangan'
+                => 'required|integer',
+
+            'meterans'
+                => 'nullable|array',
+
+            'meterans.*.daya_listrik'
+                => 'required_with:meterans|integer',
+
+            'kredit_sumber'
+                => 'nullable|array',
+
+            'kredit_sumber.*'
+                => 'string',
+
+            'kredit_tujuan'
+                => 'nullable|array',
+
+            'kredit_tujuan.*'
+                => 'string',
         ]);
     }
 }

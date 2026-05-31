@@ -17,16 +17,16 @@ class SumberAirMinum
     public const LAINNYA = 11;
 
     public const OPTIONS = [
-        self::KEMASAN => 'Air Kemasan bermerk',
-        self::ISI_ULANG => 'Air Isi Ulang',
-        self::LEDING => 'Leding',
-        self::SUMUR_BOR => 'Sumur bor/pompa',
-        self::SUMUR_TERLINDUNG => 'Sumur Terlindung',
-        self::SUMUR__TAK_TERLINDUNG => 'Sumur Tak Terlindung',
-        self::MATA_AIR_TERLINDUNG => 'Mata Air Terlindung',
-        self::MATA_AIR_TAK_TERLINDUNG => 'Mata Air Tak Terlindung',
-        self::AIR_PERMUKAAN => 'Air Permukaan (sungai/danau/waduk/kolam/irigasi)',
-        self::AIR_HUJAN => 'Air Hujan',
-        self::LAINNYA => 'Lainnya',
+        self::KEMASAN => '1. Air Kemasan bermerk',
+        self::ISI_ULANG => '2. Air Isi Ulang',
+        self::LEDING => '3. Leding',
+        self::SUMUR_BOR => '4. Sumur bor/pompa',
+        self::SUMUR_TERLINDUNG => '5. Sumur Terlindung',
+        self::SUMUR__TAK_TERLINDUNG => '6. Sumur Tak Terlindung',
+        self::MATA_AIR_TERLINDUNG => '7. Mata Air Terlindung',
+        self::MATA_AIR_TAK_TERLINDUNG => '8. Mata Air Tak Terlindung',
+        self::AIR_PERMUKAAN => '9. Air Permukaan (sungai/danau/waduk/kolam/irigasi)',
+        self::AIR_HUJAN => '10. Air Hujan',
+        self::LAINNYA => '11. Lainnya',
     ];
 }

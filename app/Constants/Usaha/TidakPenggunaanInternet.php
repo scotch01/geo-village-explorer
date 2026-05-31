@@ -12,11 +12,11 @@ class TidakPenggunaanInternet
     public const TIDAK = 'X';
 
     public const OPTIONS = [
-        self::PERANGKAT => 'Tidak memiliki perangkat (HP, laptop, dll)',
-        self::KEMAMPUAN => 'Tidak memiliki kemampuan untuk memanfaatkan internet',
-        self::AKSES => 'Tidak ada akses internet',
-        self::KHAWATIR => 'Khawatir mengenai penggunaan internet',
-        self::LAINNYA => 'Lainnya',
-        self::TIDAK => 'Tidak Menggunakan Internet',
+        self::PERANGKAT => 'A. Tidak memiliki perangkat (HP, laptop, dll)',
+        self::KEMAMPUAN => 'B. Tidak memiliki kemampuan untuk memanfaatkan internet',
+        self::AKSES => 'C. Tidak ada akses internet',
+        self::KHAWATIR => 'D. Khawatir mengenai penggunaan internet',
+        self::LAINNYA => 'E. Lainnya',
+        self::TIDAK => 'X. Tidak Menggunakan Internet',
     ];
 }

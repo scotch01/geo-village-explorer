@@ -9,6 +9,15 @@
 
     <link rel="icon" href="{{ asset('bps.ico') }}" sizes="any">
 
+    {{-- ALPINEJS --}}
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+    </style>
+
     <!-- Font: Inter untuk kesan modern & clean -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -21,15 +30,20 @@
     <title>Admin Panel - SIPETA</title>
 
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
         /* Subtle Aurora Background Effect */
         .aurora-bg {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: -1;
             background: radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
-                        radial-gradient(circle at 100% 100%, rgba(147, 51, 234, 0.05) 0%, transparent 50%);
+                radial-gradient(circle at 100% 100%, rgba(147, 51, 234, 0.05) 0%, transparent 50%);
             background-color: #f8fafc;
         }
 
@@ -43,7 +57,7 @@
 </head>
 
 <body class="min-h-screen text-slate-900 antialiased">
-    
+
     <div class="aurora-bg"></div>
 
     <!-- NAVBAR -->
@@ -52,10 +66,14 @@
 
             <!-- Logo Section -->
             <div class="flex items-center gap-2 group">
-                <div class="bg-blue-600 p-2 rounded-xl shadow-lg shadow-blue-200 transition-transform group-hover:scale-105">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                <div
+                    class="bg-blue-600 p-2 rounded-xl shadow-lg shadow-blue-200 transition-transform group-hover:scale-105">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
                 </div>
                 <span class="font-bold text-xl tracking-tight text-slate-800">
@@ -70,7 +88,7 @@
                         class="px-4 py-2 rounded-xl text-sm font-medium transition-all {{ request()->routeIs('admin.dashboard') ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-600 hover:text-slate-900' }}">
                         Dashboard
                     </a>
-                    
+
                     <a href="{{ route('admin.tempat.index') }}"
                         class="px-4 py-2 rounded-xl text-sm font-medium transition-all {{ request()->routeIs('admin.tempat.*') ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-600 hover:text-slate-900' }}">
                         Tempat
@@ -98,9 +116,12 @@
 
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button class="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-red-500 hover:bg-red-50 transition-colors border border-transparent hover:border-red-100">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                    <button
+                        class="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-red-500 hover:bg-red-50 transition-colors border border-transparent hover:border-red-100">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                         </svg>
                         Logout
                     </button>

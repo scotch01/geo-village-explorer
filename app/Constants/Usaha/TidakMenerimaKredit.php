@@ -13,12 +13,12 @@ class TidakMenerimaKredit
 
     public const OPTIONS = [
 
-        self::PROSEDUR_SULIT => 'Prosedur sulit ',
-        self::JAMINAN => 'Tidak ada jaminan',
-        self::TIDAK_TAHU_PROSEDUR => 'Tidak tahu prosedur pinjaman',
-        self::TIDAK_PERLU => 'Tidak memerlukan pinjaman',
-        self::LAINNYA => 'Lainnya',
-        self::TIDAK_RELEVAN => 'Tidak relevan',
+        self::PROSEDUR_SULIT => '1. Prosedur sulit ',
+        self::JAMINAN => '2. Tidak ada jaminan',
+        self::TIDAK_TAHU_PROSEDUR => '3. Tidak tahu prosedur pinjaman',
+        self::TIDAK_PERLU => '4. Tidak memerlukan pinjaman',
+        self::LAINNYA => '5. Lainnya',
+        self::TIDAK_RELEVAN => '0. Tidak relevan',
 
     ];
 }

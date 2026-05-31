@@ -10,9 +10,9 @@ class LokasiUsaha
     public const KELILING = 4;
 
     public const OPTIONS = [
-        self::DALAM_BTT => 'Di dalam bangunan tempat tinggal',
-        self::DALAM_BKU => 'Di dalam bangunan khusus usaha',
-        self::KAKI_LIMA => 'Di luar bangunan dengan lokasi tetap dan perlengkapan usaha dipindah/dibongkar pasang (kaki lima)',
-        self::KELILING => 'Usaha keliling',
+        self::DALAM_BTT => '1. Di dalam bangunan tempat tinggal',
+        self::DALAM_BKU => '2. Di dalam bangunan khusus usaha',
+        self::KAKI_LIMA => '3. Di luar bangunan dengan lokasi tetap dan perlengkapan usaha dipindah/dibongkar pasang (kaki lima)',
+        self::KELILING => '4. Usaha keliling',
     ];
 }

@@ -12,11 +12,11 @@ class PenggunaanInternet
     public const TIDAK = 'X';
 
     public const OPTIONS = [
-        self::PESANAN => 'Menerima pesanan',
-        self::BAHAN_BAKU => 'Membeli bahan baku',
-        self::PROMOSI => 'Promosi atau pemasaran',
-        self::TRANSAKSI => 'Pembayaran transaksi penjualan dan/atau pembelian',
-        self::LAINNYA => 'Lainnya  (misal mencari informasi pengembangan usaha, pengembangan produk, dll)',
-        self::TIDAK => 'Tidak Menggunakan Internet',
+        self::PESANAN => 'A. Menerima pesanan',
+        self::BAHAN_BAKU => 'B. Membeli bahan baku',
+        self::PROMOSI => 'C. Promosi atau pemasaran',
+        self::TRANSAKSI => 'D. Pembayaran transaksi penjualan dan/atau pembelian',
+        self::LAINNYA => 'E. Lainnya  (misal mencari informasi pengembangan usaha, pengembangan produk, dll)',
+        self::TIDAK => 'X. Tidak Menggunakan Internet',
     ];
 }
