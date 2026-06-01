@@ -27,8 +27,18 @@
                         Jenis Bangunan
                     </div>
 
-                    <div class="font-semibold mt-1">
-                        {{ \App\Constants\Tempat\JenisBangunan::OPTIONS[$tempat->jenis_bangunan] ?? '-' }}
+                    <div class="mt-2">
+
+                        <span
+                            class="px-3 py-1 rounded-full
+               bg-indigo-100
+               text-indigo-700
+               text-sm font-medium">
+
+                            {{ \App\Constants\Tempat\JenisBangunan::OPTIONS[$tempat->jenis_bangunan] ?? '-' }}
+
+                        </span>
+
                     </div>
 
                 </div>
@@ -58,10 +68,97 @@
                         Status
                     </div>
 
-                    <div class="font-semibold mt-1">
-                        {{ ucfirst($tempat->status_pendataan) }}
+                    <div class="mt-2">
+
+                        @if ($tempat->status_pendataan === 'selesai')
+                            <span class="px-3 py-1 rounded-full bg-green-100 text-green-700 text-sm font-medium">
+
+                                ✓ Selesai
+
+                            </span>
+                        @elseif ($tempat->status_pendataan === 'parsial')
+                            <span class="px-3 py-1 rounded-full bg-amber-100 text-amber-700 text-sm font-medium">
+
+                                ◐ Parsial
+
+                            </span>
+                        @else
+                            <span class="px-3 py-1 rounded-full bg-gray-100 text-gray-700 text-sm font-medium">
+
+                                ○ Belum
+
+                            </span>
+                        @endif
+
                     </div>
 
+                </div>
+
+            </div>
+
+        </div>
+
+        @php
+
+            $total = 0;
+            $done = 0;
+
+            if (in_array($tempat->jenis_bangunan, ['btt', 'bc'])) {
+                $total += 2;
+
+                if ($tempat->keluarga_completed) {
+                    $done++;
+                }
+
+                if ($tempat->anggota_completed) {
+                    $done++;
+                }
+            }
+
+            if (in_array($tempat->jenis_bangunan, ['bku', 'bc'])) {
+                $total += 1;
+
+                if ($tempat->usaha_completed) {
+                    $done++;
+                }
+            }
+
+            $percent = $total > 0 ? round(($done / $total) * 100) : 0;
+
+        @endphp
+
+        <div class="bg-white border rounded-2xl p-6">
+
+            <div class="flex items-center justify-between">
+
+                <div>
+
+                    <p class="text-sm text-gray-500">
+                        Progress Pendataan
+                    </p>
+
+                    <h2 class="text-2xl font-bold mt-1">
+                        {{ $percent }}%
+                    </h2>
+
+                </div>
+
+                <div class="text-right">
+
+                    <div class="text-sm text-gray-500">
+
+                        {{ $done }}/{{ $total }}
+                        Modul Selesai
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="mt-4 h-3 bg-gray-100 rounded-full">
+
+                <div class="h-3 bg-green-500 rounded-full transition-all" style="width: {{ $percent }}%">
                 </div>
 
             </div>
@@ -73,7 +170,7 @@
         <div class="grid md:grid-cols-2 gap-4">
 
             @if (in_array($tempat->jenis_bangunan, ['btt', 'bc']))
-                <div class="bg-white border rounded-2xl p-6">
+                <div class="bg-white border rounded-2xl p-6 hover:shadow-md transition">
 
                     <div class="flex items-start justify-between">
 
@@ -143,7 +240,7 @@
                             <span class="px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-semibold">
 
                                 {{ $tempat->anggotaKeluargas->count() }}
-                                Orang
+                                Anggota
 
                             </span>
 
@@ -191,7 +288,7 @@
                         Informasi usaha dan ekonomi
                     </p>
 
-                    @if ($tempat->usaha_completed)
+                    @if ($tempat->usahaCompleted)
                         <span class="px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-semibold">
 
                             Selesai
@@ -205,9 +302,21 @@
                         </span>
                     @endif
 
-                    <a href="#" class="inline-flex mt-4 px-4 py-2 rounded-xl bg-green-600 text-white text-sm">
-                        Isi Data Usaha
-                    </a>
+                    @if ($tempat->usahaCompleted)
+                        <a href="{{ route('admin.usaha.edit', $tempat) }}"
+                            class="inline-flex mt-4 px-4 py-2 rounded-xl bg-amber-500 text-white text-sm">
+
+                            Edit Data Usaha
+
+                        </a>
+                    @else
+                        <a href="{{ route('admin.usaha.create', $tempat) }}"
+                            class="inline-flex mt-4 px-4 py-2 rounded-xl bg-green-600 text-white text-sm">
+
+                            Isi Data Usaha
+
+                        </a>
+                    @endif
 
                 </div>
             @endif

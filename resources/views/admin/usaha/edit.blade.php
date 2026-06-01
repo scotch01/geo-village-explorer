@@ -4,7 +4,7 @@
     <div class="max-w-5xl mx-auto">
 
         <h1 class="text-2xl font-bold">
-            Data Usaha
+            Edit Data Usaha
         </h1>
 
         <p class="text-gray-500 mt-1">
@@ -25,9 +25,10 @@
                 alamat: @js($keluarga?->alamat_detail),
         
             }
-        }" action="{{ route('admin.usaha.store', $tempat) }}" method="POST" class="mt-6 space-y-6">
+        }" action="{{ route('admin.usaha.update', $tempat) }}" method="POST" class="mt-6 space-y-6">
 
             @csrf
+            @method('PUT')
 
             <div class="bg-white rounded-2xl border p-6">
 
@@ -52,7 +53,7 @@
                     <div>
 
                         <label class="block text-sm mb-2">
-                            1. Provinsi
+                            Provinsi
                         </label>
 
                         <input type="text" name="provinsi"
@@ -66,7 +67,7 @@
                     <div>
 
                         <label class="block text-sm mb-2">
-                            2. Kabupaten
+                            Kabupaten
                         </label>
 
                         <input type="text" name="kabupaten"
@@ -153,7 +154,7 @@
                             Telepon / HP
                         </label>
 
-                        <input type="text" name="telepon" value="{{ old('telepon') }}"
+                        <input type="text" name="telepon" value="{{ old('telepon', $usaha->telepon) }}"
                             class="w-full rounded-xl border-gray-300">
 
                     </div>
@@ -164,7 +165,7 @@
                             E-mail
                         </label>
 
-                        <input type="email" name="email" value="{{ old('email') }}"
+                        <input type="email" name="email" value="{{ old('email', $usaha->email) }}"
                             class="w-full rounded-xl border-gray-300">
 
                     </div>
@@ -177,7 +178,7 @@
                         Website / Akun Media Sosial
                     </label>
 
-                    <input type="text" name="website" value="{{ old('website') }}"
+                    <input type="text" name="website" value="{{ old('website', $usaha->website) }}"
                         class="w-full rounded-xl border-gray-300">
 
                 </div>
@@ -196,7 +197,7 @@
                         Nama Usaha
                     </label>
 
-                    <input type="text" name="nama_usaha" value="{{ old('nama_usaha') }}"
+                    <input type="text" name="nama_usaha" value="{{ old('nama_usaha', $usaha->nama_usaha) }}"
                         class="w-full rounded-xl border-gray-300">
                 </div>
 
@@ -212,7 +213,7 @@
                         </option>
 
                         @foreach ($lokasiUsaha as $value => $label)
-                            <option value="{{ $value }}" @selected(old('lokasi_usaha') == $value)>
+                            <option value="{{ $value }}" @selected(old('lokasi_usaha', $usaha->lokasi_usaha) == $value)>
 
                                 {{ $label }}
 
@@ -234,7 +235,7 @@
                         </option>
 
                         @foreach ($statusBangunan as $value => $label)
-                            <option value="{{ $value }}" @selected(old('status_bangunan') == $value)>
+                            <option value="{{ $value }}" @selected(old('status_bangunan', $usaha->status_bangunan) == $value)>
 
                                 {{ $label }}
 
@@ -249,7 +250,7 @@
                         Nama Pemilik Usaha
                     </label>
 
-                    <input type="text" name="nama_pemilik" value="{{ old('nama_pemilik') }}"
+                    <input type="text" name="nama_pemilik" value="{{ old('nama_pemilik', $usaha->nama_pemilik) }}"
                         class="w-full rounded-xl border-gray-300">
                 </div>
 
@@ -258,8 +259,8 @@
                         NIK Pemilik Usaha
                     </label>
 
-                    <input type="text" name="nik_pemilik" maxlength="16" value="{{ old('nik_pemilik') }}"
-                        class="w-full rounded-xl border-gray-300">
+                    <input type="text" name="nik_pemilik" maxlength="16"
+                        value="{{ old('nik_pemilik', $usaha->nik_pemilik) }}" class="w-full rounded-xl border-gray-300">
                 </div>
 
                 <div>
@@ -276,7 +277,7 @@
                         </option>
 
                         @foreach ($jenisKelamin as $key => $label)
-                            <option value="{{ $key }}" @selected(old('jenis_kelamin_pemilik') == $key)>
+                            <option value="{{ $key }}" @selected(old('jenis_kelamin_pemilik', $usaha->jenis_kelamin_pemilik) == $key)>
 
                                 {{ $label }}
 
@@ -291,7 +292,8 @@
                         Tanggal Lahir Pemilik
                     </label>
 
-                    <input type="date" name="tanggal_lahir_pemilik" value="{{ old('tanggal_lahir_pemilik') }}"
+                    <input type="date" name="tanggal_lahir_pemilik"
+                        value="{{ old('tanggal_lahir_pemilik', $usaha->tanggal_lahir_pemilik) }}"
                         class="w-full rounded-xl border-gray-300">
                 </div>
 
@@ -308,7 +310,7 @@
                         </option>
 
                         @foreach ($pendidikan as $key => $label)
-                            <option value="{{ $key }}" @selected(old('ijazah_pemilik') == $key)>
+                            <option value="{{ $key }}" @selected(old('ijazah_pemilik', $usaha->ijazah_pemilik) == $key)>
 
                                 {{ $label }}
 
@@ -324,7 +326,7 @@
                         Kegiatan Utama Usaha
                     </label>
 
-                    <textarea name="kegiatan_utama" rows="4" class="w-full rounded-xl border-gray-300">{{ old('kegiatan_utama') }}</textarea>
+                    <textarea name="kegiatan_utama" rows="4" class="w-full rounded-xl border-gray-300">{{ old('kegiatan_utama', $usaha->kegiatan_utama) }}</textarea>
                 </div>
 
                 <div>
@@ -332,7 +334,7 @@
                         Produk Utama Usaha
                     </label>
 
-                    <textarea name="produk_utama" rows="4" class="w-full rounded-xl border-gray-300">{{ old('produk_utama') }}</textarea>
+                    <textarea name="produk_utama" rows="4" class="w-full rounded-xl border-gray-300">{{ old('produk_utama', $usaha->produk_utama) }}</textarea>
                 </div>
 
                 <div>
@@ -341,8 +343,9 @@
                         Kategori Lapangan Usaha
                     </label>
 
-                    <input type="text" name="kategori_lapangan_usaha" value="{{ old('kategori_lapangan_usaha') }}"
-                        readonly placeholder="Diisi oleh pengawas BPS"
+                    <input type="text" name="kategori_lapangan_usaha"
+                        value="{{ old('kategori_lapangan_usaha', $usaha->kategori_lapangan_usaha) }}" readonly
+                        placeholder="Diisi oleh pengawas BPS"
                         class="w-full rounded-xl border-gray-300 bg-gray-100 text-gray-500">
 
                 </div>
@@ -353,7 +356,7 @@
                         Kode KBLI
                     </label>
 
-                    <input type="text" name="kbli" value="{{ old('kbli') }}" readonly
+                    <input type="text" name="kbli" value="{{ old('kbli', $usaha->kbli) }}" readonly
                         placeholder="Diisi oleh pengawas BPS"
                         class="w-full rounded-xl border-gray-300 bg-gray-100 text-gray-500">
 
@@ -366,7 +369,7 @@
                     </label>
 
                     <input type="number" name="tahun_mulai" min="1900" max="{{ now()->year }}"
-                        value="{{ old('tahun_mulai') }}" class="w-full rounded-xl border-gray-300">
+                        value="{{ old('tahun_mulai', $usaha->tahun_mulai) }}" class="w-full rounded-xl border-gray-300">
 
                 </div>
 
@@ -383,8 +386,7 @@
 
                                 <input type="checkbox" class="exclusive-checkbox" data-group="izin_usaha"
                                     data-exclusive="{{ $value === 'X' ? '1' : '0' }}" name="izin_usaha[]"
-                                    value="{{ $value }}"
-                                    {{ in_array($value, old('izin_usaha', [])) ? 'checked' : '' }}>
+                                    value="{{ $value }}" @checked(in_array($value, old('izin_usaha', $usaha->izin_usaha ?? [])))>
 
                                 <span>
                                     {{ $label }}
@@ -410,7 +412,7 @@
                         </option>
 
                         @foreach ($badanUsaha as $value => $label)
-                            <option value="{{ $value }}" @selected(old('bentuk_badan_usaha') == $value)>
+                            <option value="{{ $value }}" @selected(old('bentuk_badan_usaha', $usaha->bentuk_badan_usaha) == $value)>
 
                                 {{ $label }}
 
@@ -428,7 +430,8 @@
                     </label>
 
                     <input type="number" min="0" name="jumlah_pekerja_dibayar"
-                        value="{{ old('jumlah_pekerja_dibayar', 0) }}" class="w-full rounded-xl border-gray-300">
+                        value="{{ old('jumlah_pekerja_dibayar', $usaha->jumlah_pekerja_dibayar ?? 0) }}"
+                        class="w-full rounded-xl border-gray-300">
 
                 </div>
 
@@ -439,7 +442,8 @@
                     </label>
 
                     <input type="number" min="0" step="1" name="total_upah_bulanan"
-                        value="{{ old('total_upah_bulanan', 0) }}" class="w-full rounded-xl border-gray-300">
+                        value="{{ old('total_upah_bulanan', $usaha->total_upah_bulanan ?? 0) }}"
+                        class="w-full rounded-xl border-gray-300">
 
                 </div>
 
@@ -450,7 +454,8 @@
                     </label>
 
                     <input type="number" min="0" name="jumlah_pekerja_tidak_dibayar"
-                        value="{{ old('jumlah_pekerja_tidak_dibayar', 0) }}" class="w-full rounded-xl border-gray-300">
+                        value="{{ old('jumlah_pekerja_tidak_dibayar', $usaha->jumlah_pekerja_tidak_dibayar ?? 0) }}"
+                        class="w-full rounded-xl border-gray-300">
 
                 </div>
 
@@ -461,7 +466,8 @@
                     </label>
 
                     <input type="number" min="0" step="1" name="pendapatan_bulanan"
-                        value="{{ old('pendapatan_bulanan', 0) }}" class="w-full rounded-xl border-gray-300">
+                        value="{{ old('pendapatan_bulanan', $usaha->pendapatan_bulanan ?? 0) }}"
+                        class="w-full rounded-xl border-gray-300">
 
                 </div>
 
@@ -472,7 +478,8 @@
                     </label>
 
                     <input type="number" min="0" step="1" name="pendapatan_tahunan"
-                        value="{{ old('pendapatan_tahunan', 0) }}" class="w-full rounded-xl border-gray-300">
+                        value="{{ old('pendapatan_tahunan', $usaha->pendapatan_tahunan ?? 0) }}"
+                        class="w-full rounded-xl border-gray-300">
 
                 </div>
 
@@ -489,8 +496,7 @@
 
                                 <input type="checkbox" class="exclusive-checkbox" data-group="penggunaan_internet"
                                     data-exclusive="{{ $value == 'X' ? '1' : '0' }}" name="penggunaan_internet[]"
-                                    value="{{ $value }}"
-                                    {{ in_array($value, old('penggunaan_internet', [])) ? 'checked' : '' }}>
+                                    value="{{ $value }}" @checked(in_array($value, old('penggunaan_internet', $usaha->penggunaan_internet ?? [])))>
 
                                 <span>{{ $label }}</span>
 
@@ -514,8 +520,7 @@
 
                                 <input type="checkbox" class="exclusive-checkbox" data-group="media_internet"
                                     data-exclusive="{{ $value == 'X' ? '1' : '0' }}" name="media_internet[]"
-                                    value="{{ $value }}"
-                                    {{ in_array($value, old('media_internet', [])) ? 'checked' : '' }}>
+                                    value="{{ $value }}" @checked(in_array($value, old('media_internet', $usaha->media_internet ?? [])))>
 
                                 <span>{{ $label }}</span>
 
@@ -539,8 +544,7 @@
 
                                 <input type="checkbox" class="exclusive-checkbox" data-group="alasan_tidak_internet"
                                     data-exclusive="{{ $value == 'X' ? '1' : '0' }}" name="alasan_tidak_internet[]"
-                                    value="{{ $value }}"
-                                    {{ in_array($value, old('alasan_tidak_internet', [])) ? 'checked' : '' }}>
+                                    value="{{ $value }}" @checked(in_array($value, old('alasan_tidak_internet', $usaha->alasan_tidak_internet ?? [])))>
 
                                 <span>{{ $label }}</span>
 
@@ -564,8 +568,7 @@
 
                                 <input type="checkbox" class="exclusive-checkbox" data-group="sumber_pinjaman"
                                     data-exclusive="{{ $value == 'X' ? '1' : '0' }}" name="sumber_pinjaman[]"
-                                    value="{{ $value }}"
-                                    {{ in_array($value, old('sumber_pinjaman', [])) ? 'checked' : '' }}>
+                                    value="{{ $value }}" @checked(in_array($value, old('sumber_pinjaman', $usaha->sumber_pinjaman ?? [])))>
 
                                 <span>{{ $label }}</span>
 
@@ -589,8 +592,7 @@
 
                                 <input type="checkbox" class="exclusive-checkbox" data-group="tujuan_pinjaman"
                                     data-exclusive="{{ $value == 'X' ? '1' : '0' }}" name="tujuan_pinjaman[]"
-                                    value="{{ $value }}"
-                                    {{ in_array($value, old('tujuan_pinjaman', [])) ? 'checked' : '' }}>
+                                    value="{{ $value }}" @checked(in_array($value, old('tujuan_pinjaman', $usaha->tujuan_pinjaman ?? [])))>
 
                                 <span>{{ $label }}</span>
 
@@ -614,7 +616,7 @@
                         </option>
 
                         @foreach ($tidakMenerimaKredit as $value => $label)
-                            <option value="{{ $value }}" @selected(old('tidak_menerima_kredit') == $value)>
+                            <option value="{{ $value }}" @selected(old('tidak_menerima_kredit', $usaha->tidak_menerima_kredit ?? '') == $value)>
 
                                 {{ $label }}
 
@@ -638,8 +640,7 @@
 
                                 <input type="checkbox" class="exclusive-checkbox" data-group="kendala_usaha"
                                     data-exclusive="{{ $value == 'X' ? '1' : '0' }}" name="kendala_usaha[]"
-                                    value="{{ $value }}"
-                                    {{ in_array($value, old('kendala_usaha', [])) ? 'checked' : '' }}>
+                                    value="{{ $value }}" @checked(in_array($value, old('kendala_usaha', $usaha->kendala_usaha ?? [])))>
 
                                 <span>{{ $label }}</span>
 
@@ -662,7 +663,21 @@
 
             </div>
 
-            </>
+        </form>
+
+        <form action="{{ route('admin.usaha.destroy', $tempat) }}" method="POST"
+            onsubmit="return confirm('Hapus data usaha?')">
+
+            @csrf
+            @method('DELETE')
+
+            <button type="submit" class="px-5 py-3 rounded-xl bg-red-600 text-white">
+
+                Hapus Data Usaha
+
+            </button>
+
+        </form>
 
     </div>
 @endsection

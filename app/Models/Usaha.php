@@ -22,6 +22,8 @@ class Usaha extends Model
 
         'tujuan_pinjaman' => 'array',
 
+        'tidak_menerima_kredit' => 'integer',
+
         'kendala_usaha' => 'array',
     ];
 

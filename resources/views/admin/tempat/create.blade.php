@@ -4,7 +4,7 @@
 
     <div class="max-w-5xl mx-auto space-y-8">
 
-        <!-- HEADER -->
+        {{-- <!-- HEADER -->
         <div class="flex items-start justify-between flex-wrap gap-4">
 
             <div>
@@ -33,7 +33,7 @@
                 </div>
             </div>
 
-        </div>
+        </div> --}}
 
         <!-- VALIDATION -->
         @if ($errors->any())

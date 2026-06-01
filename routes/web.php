@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MasterProfesiController;
 use App\Http\Controllers\Admin\KeluargaController;
 use App\Http\Controllers\Admin\AnggotaKeluargaController;
+use App\Http\Controllers\Admin\UsahaController;
 
 Route::get('/', function () {
     return redirect('/peta');
@@ -47,6 +48,22 @@ Route::middleware(['auth', 'role:master_admin,admin_desa'])
 
     Route::get('/tempat/{tempat}/survey', [TempatController::class, 'survey'])
         ->name('tempat.survey');
+
+    // Data Usaha
+    Route::get('/tempat/{tempat}/usaha/create', [UsahaController::class, 'create'])
+        ->name('usaha.create');
+
+    Route::post('/tempat/{tempat}/usaha', [UsahaController::class, 'store'])
+        ->name('usaha.store');
+
+    Route::get('/tempat/{tempat}/usaha/edit', [UsahaController::class, 'edit'])
+        ->name('usaha.edit');
+
+    Route::put('/tempat/{tempat}/usaha', [UsahaController::class, 'update'])
+        ->name('usaha.update');
+
+    Route::delete('/tempat/{tempat}/usaha', [UsahaController::class, 'destroy'])
+        ->name('usaha.destroy');
 
     // Data Keluarga
     Route::get('/tempat/{tempat}/keluarga/create', [KeluargaController::class, 'create'])
