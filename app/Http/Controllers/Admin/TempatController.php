@@ -24,7 +24,7 @@ class TempatController extends Controller
         /**
          * RBAC
          */
-        if (auth()->user()->isAdminDesa()) {
+        if (auth()->user()->isAdminDesa() || auth()->user()->isPengawas()) {
 
             $query->whereNotNull('id_desa')
                 ->where(

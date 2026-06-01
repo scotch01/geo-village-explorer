@@ -30,58 +30,57 @@ class DashboardController extends Controller
         }
 
         /**
-         * TOTAL TEMPAT
+         * DISTRIBUSI JENIS BANGUNAN
          */
-        $totalTempat = (clone $tempatQuery)->count();
+        $chartJenisBangunan = (clone $tempatQuery)
+            ->selectRaw(
+                'jenis_bangunan,
+                COUNT(*) as total'
+            )
+            ->groupBy('jenis_bangunan')
+            ->get()
+            ->map(function ($item) {
 
-        /**
-         * TOTAL DESA
-         */
-        $totalDesa = $user->isMasterAdmin()
-            ? Desa::count()
-            : 1;
+                return [
 
-        /**
-         * TOTAL USER
-         */
-        $totalUser = $user->isMasterAdmin()
-            ? User::count()
-            : 1;
+                    'short' => match ($item->jenis_bangunan) {
 
-        /**
-         * TOTAL SEKTOR
-         */
-        // $totalSektor = (clone $tempatQuery)
-        //     ->distinct('sektor')
-        //     ->count('sektor');
+                        'btt' => 'BTT',
+                        'bku' => 'BKU',
+                        'bc'  => 'BC',
 
-        /**
-         * CHART DISTRIBUSI SEKTOR
-         */
-        // $chartSektor = (clone $tempatQuery)
-        //     ->selectRaw('sektor, COUNT(*) as total')
-        //     ->groupBy('sektor')
-        //     ->orderByDesc('total')
-        //     ->get();
+                        default => '-',
+                    },
+
+                    'label' => match ($item->jenis_bangunan) {
+
+                        'btt'
+                            => 'Bangunan Tempat Tinggal',
+
+                        'bku'
+                            => 'Bangunan Khusus Usaha',
+
+                        'bc'
+                            => 'Bangunan Campuran',
+
+                        default => '-',
+                    },
+
+                    'total' => $item->total,
+                ];
+            });
 
         /**
          * TOP DESA
          */
-        $topDesaQuery = Tempat::query();
-
-        if ($user->isAdminDesa()) {
-
-            $topDesaQuery->where(
-                'id_desa',
-                $user->id_desa
-            );
-        }
-
-        $topDesa = $topDesaQuery
+        $topDesa = Tempat::query()
             ->with([
                 'desa:id,nama_desa'
             ])
-            ->selectRaw('id_desa, COUNT(*) as total')
+            ->selectRaw(
+                'id_desa,
+                COUNT(*) as total'
+            )
             ->groupBy('id_desa')
             ->orderByDesc('total')
             ->limit(5)
@@ -93,8 +92,7 @@ class DashboardController extends Controller
         $recentTempats = (clone $tempatQuery)
             ->select([
                 'id',
-                'nama_tempat',
-                // 'sektor',
+                'jenis_bangunan',
                 'id_desa',
                 'created_by',
                 'created_at'
@@ -114,18 +112,13 @@ class DashboardController extends Controller
             ->select([
                 'id',
                 'nama_tempat',
-                // 'sektor',
                 'latitude',
                 'longitude'
             ])
             ->get();
 
         return view('admin.dashboard', compact(
-            'totalTempat',
-            'totalDesa',
-            'totalUser',
-            // 'totalSektor',
-            // 'chartSektor',
+            'chartJenisBangunan',
             'topDesa',
             'recentTempats',
             'mapData'
