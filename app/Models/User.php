@@ -56,11 +56,17 @@ class User extends Authenticatable
     }
 
     const ROLE_MASTER_ADMIN = 'master_admin';
+    const ROLE_PENGAWAS = 'pengawas';
     const ROLE_ADMIN_DESA = 'admin_desa';
 
     public function isMasterAdmin()
     {
         return $this->role === self::ROLE_MASTER_ADMIN;
+    }
+
+    public function isPengawas()
+    {
+        return $this->role === self::ROLE_PENGAWAS;
     }
 
     public function isAdminDesa()

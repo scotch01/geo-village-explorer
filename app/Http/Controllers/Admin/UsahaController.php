@@ -202,6 +202,11 @@ class UsahaController extends Controller
         Tempat $tempat
     )
     {
+        if (!auth()->user()->isMasterAdmin()) {
+
+            abort(403);
+        }
+
         $usaha =
             $tempat->usaha;
 

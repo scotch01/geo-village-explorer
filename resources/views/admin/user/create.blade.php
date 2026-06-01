@@ -103,6 +103,10 @@
                         Master Admin
                     </option>
 
+                    <option value="pengawas">
+                        Pengawas
+                    </option>
+
                     <option value="admin_desa">
                         Admin Desa
                     </option>

@@ -39,7 +39,7 @@ Route::middleware(['auth', 'role:master_admin'])
     Route::resource('user', UserController::class);
 });
 
-Route::middleware(['auth', 'role:master_admin,admin_desa'])
+Route::middleware(['auth', 'role:master_admin,admin_desa,pengawas'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {

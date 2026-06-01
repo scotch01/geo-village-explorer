@@ -83,7 +83,7 @@
 
             <!-- Navigation Links -->
             <div class="hidden md:flex items-center bg-slate-100/50 p-1.5 rounded-2xl border border-slate-200/50">
-                @if (auth()->user()->isMasterAdmin() || auth()->user()->isAdminDesa())
+                @if (auth()->user()->isMasterAdmin() || auth()->user()->isAdminDesa() || auth()->user()->isPengawas())
                     <a href="{{ route('admin.dashboard') }}"
                         class="px-4 py-2 rounded-xl text-sm font-medium transition-all {{ request()->routeIs('admin.dashboard') ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-600 hover:text-slate-900' }}">
                         Dashboard

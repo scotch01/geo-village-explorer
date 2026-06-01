@@ -35,7 +35,7 @@ class UserController extends Controller
 
             'password' => 'required|min:6',
 
-            'role' => 'required|in:master_admin,admin_desa',
+            'role' => 'required|in:master_admin,pengawas,admin_desa',
 
             'id_desa' => 'nullable|exists:desas,id',
         ]);
@@ -67,7 +67,7 @@ class UserController extends Controller
 
             'email' => 'required|email|unique:users,email,' . $user->id,
 
-            'role' => 'required|in:master_admin,admin_desa',
+            'role' => 'required|in:master_admin,pengawas,admin_desa',
 
             'id_desa' => 'nullable|exists:desas,id',
         ]);

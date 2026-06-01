@@ -218,6 +218,11 @@ class TempatController extends Controller
      */
     public function destroy(Tempat $tempat)
     {
+        if (!auth()->user()->isMasterAdmin()) {
+
+            abort(403);
+        }
+
         $this->authorizeTempatAccess($tempat);
 
         $tempat->delete();

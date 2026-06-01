@@ -83,6 +83,12 @@
                                             Master Admin
                                         </span>
 
+                                    @elseif($user->role === 'pengawas')
+
+                                        <span class="px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-bold">
+                                            Pengawas
+                                        </span>
+
                                     @else
 
                                         <span class="px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-bold">

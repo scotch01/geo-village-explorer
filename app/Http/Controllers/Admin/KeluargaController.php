@@ -275,6 +275,11 @@ class KeluargaController extends Controller
         Tempat $tempat
     )
     {
+        if (!auth()->user()->isMasterAdmin()) {
+
+            abort(403);
+        }
+
         $keluarga =
             $tempat->keluarga;
 
