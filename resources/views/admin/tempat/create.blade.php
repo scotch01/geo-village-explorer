@@ -71,11 +71,11 @@
 
                         <div>
                             <h2 class="font-bold text-slate-800">
-                                Informasi Umum
+                                BLOK I
                             </h2>
 
                             <p class="text-sm text-slate-500">
-                                Data dasar lokasi atau entitas
+                                IDENTIFIKASI BANGUNAN
                             </p>
                         </div>
 
@@ -96,7 +96,7 @@
 
                         <div>
                             <label class="text-sm font-semibold text-slate-700">
-                                Jenis Bangunan
+                                1. Kode Penggunaan Bangunan
                             </label>
 
                             <select name="jenis_bangunan" required

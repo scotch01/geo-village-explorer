@@ -80,7 +80,7 @@
                     <div>
 
                         <label class="block text-sm mb-2">
-                            Kecamatan
+                            3. Kecamatan
                         </label>
 
                         <input type="text" name="kecamatan"
@@ -94,7 +94,7 @@
                     <div>
 
                         <label class="block text-sm mb-2">
-                            Desa
+                            4. Desa
                         </label>
 
                         <input type="text" name="desa"
@@ -108,7 +108,7 @@
                     <div>
 
                         <label class="block text-sm mb-2">
-                            Dusun
+                            5. Dusun
                         </label>
 
                         <input type="text" name="dusun"
@@ -124,7 +124,7 @@
                 <div class="mt-4">
 
                     <label class="block text-sm mb-2">
-                        Alamat
+                        6. Alamat
                     </label>
 
                     <textarea name="alamat"
@@ -137,20 +137,30 @@
 
                 </div>
 
+                <div>
+
+                    <label class="block text-sm font-medium mb-2">
+                        7. Nama Usaha
+                    </label>
+
+                    <input type="text" name="nama_usaha" value="{{ old('nama_usaha') }}"
+                        class="w-full rounded-xl border-gray-300">
+                </div>
+
             </div>
 
             <div class="bg-white rounded-2xl border p-6">
 
-                <h2 class="font-semibold text-lg mb-4">
+                {{-- <h2 class="font-semibold text-lg mb-4">
                     Kontak Usaha
-                </h2>
+                </h2> --}}
 
                 <div class="grid md:grid-cols-2 gap-4">
 
                     <div>
 
                         <label class="block text-sm mb-2">
-                            Telepon / HP
+                            8.Telepon / HP
                         </label>
 
                         <input type="text" name="telepon" value="{{ old('telepon') }}"
@@ -161,7 +171,7 @@
                     <div>
 
                         <label class="block text-sm mb-2">
-                            E-mail
+                            9. E-mail
                         </label>
 
                         <input type="email" name="email" value="{{ old('email') }}"
@@ -174,11 +184,21 @@
                 <div class="mt-4">
 
                     <label class="block text-sm mb-2">
-                        Website / Akun Media Sosial
+                        10. Website / Akun Media Sosial
                     </label>
 
                     <input type="text" name="website" value="{{ old('website') }}"
                         class="w-full rounded-xl border-gray-300">
+
+                </div>
+
+                <div class="mt-4">
+
+                    <label class="block text-sm mb-2">
+                        11. Tagging Lokasi
+                    </label>
+
+                    <input type="text" class="w-full rounded-xl border-gray-300">
 
                 </div>
 
@@ -191,18 +211,8 @@
                 </h2>
 
                 <div>
-
                     <label class="block text-sm font-medium mb-2">
-                        Nama Usaha
-                    </label>
-
-                    <input type="text" name="nama_usaha" value="{{ old('nama_usaha') }}"
-                        class="w-full rounded-xl border-gray-300">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium mb-2">
-                        Lokasi Usaha
+                        12. Dimana lokasi tepat usaha/perusahaan
                     </label>
 
                     <select name="lokasi_usaha" class="w-full rounded-xl border-gray-300">
@@ -224,7 +234,7 @@
 
                 <div>
                     <label class="block text-sm font-medium mb-2">
-                        Status Kepemilikan Bangunan
+                        13. Status Kepemilikan Bangunan
                     </label>
 
                     <select name="status_bangunan" class="w-full rounded-xl border-gray-300">
@@ -244,9 +254,14 @@
                     </select>
                 </div>
 
+            </div>
+            <div class="bg-white rounded-2xl border p-6">
+                <label class="block text-sm font-medium mb-2">
+                    14. Identitas pemilik usaha/perusahaan
+                </label>
                 <div>
                     <label class="block text-sm font-medium mb-2">
-                        Nama Pemilik Usaha
+                        a. Nama
                     </label>
 
                     <input type="text" name="nama_pemilik" value="{{ old('nama_pemilik') }}"
@@ -255,7 +270,7 @@
 
                 <div>
                     <label class="block text-sm font-medium mb-2">
-                        NIK Pemilik Usaha
+                        b. NIK
                     </label>
 
                     <input type="text" name="nik_pemilik" maxlength="16" value="{{ old('nik_pemilik') }}"
@@ -265,7 +280,7 @@
                 <div>
                     <label class="block text-sm font-medium mb-2">
 
-                        Jenis Kelamin
+                        c. Jenis Kelamin
 
                     </label>
 
@@ -288,7 +303,7 @@
 
                 <div>
                     <label class="block text-sm font-medium mb-2">
-                        Tanggal Lahir Pemilik
+                        d. Tanggal Lahir
                     </label>
 
                     <input type="date" name="tanggal_lahir_pemilik" value="{{ old('tanggal_lahir_pemilik') }}"
@@ -298,7 +313,7 @@
                 <div>
 
                     <label class="block text-sm font-medium mb-2">
-                        Pendidikan
+                        f. Ijazah tertinggi yang dimiliki
                     </label>
 
                     <select name="ijazah_pemilik" class="w-full rounded-xl border-gray-300">
@@ -319,9 +334,11 @@
 
                 </div>
 
+            </div>
+            <div class="bg-white rounded-2xl border p-6">
                 <div>
                     <label class="block text-sm font-medium mb-2">
-                        Kegiatan Utama Usaha
+                        15. Apa Kegiatan Utama dari usaha ini?, <span class="italic">(Tuliskan selengkapnya)</span>
                     </label>
 
                     <textarea name="kegiatan_utama" rows="4" class="w-full rounded-xl border-gray-300">{{ old('kegiatan_utama') }}</textarea>
@@ -329,7 +346,7 @@
 
                 <div>
                     <label class="block text-sm font-medium mb-2">
-                        Produk Utama Usaha
+                        16. Apa produk utama yang dihasilkan <span class="italic">(Tuliskan selengkapnya)</span>
                     </label>
 
                     <textarea name="produk_utama" rows="4" class="w-full rounded-xl border-gray-300">{{ old('produk_utama') }}</textarea>
@@ -338,7 +355,7 @@
                 <div>
 
                     <label class="block text-sm font-medium mb-2">
-                        Kategori Lapangan Usaha
+                        17. Kategori Lapangan Usaha
                     </label>
 
                     <input type="text" name="kategori_lapangan_usaha" value="{{ old('kategori_lapangan_usaha') }}"
@@ -350,7 +367,7 @@
                 <div>
 
                     <label class="block text-sm font-medium mb-2">
-                        Kode KBLI
+                        18. Kode KBLI 2020
                     </label>
 
                     <input type="text" name="kbli" value="{{ old('kbli') }}" readonly
@@ -362,7 +379,7 @@
                 <div>
 
                     <label class="block text-sm font-medium mb-2">
-                        Tahun Mulai Beroperasi
+                        19. Tahun Mulai Beroperasi
                     </label>
 
                     <input type="number" name="tahun_mulai" min="1900" max="{{ now()->year }}"
@@ -373,7 +390,7 @@
                 <div>
 
                     <label class="block text-sm font-medium mb-3">
-                        Izin Usaha
+                        20. Apa saja ijin usaha/sertifikat usaha yang dimiliki usaha/perusahaan?
                     </label>
 
                     <div class="space-y-2">
@@ -400,7 +417,7 @@
                 <div>
 
                     <label class="block text-sm font-medium mb-2">
-                        Bentuk Badan Usaha / Badan Hukum
+                        21. Bentuk Badan Usaha / Badan Hukum
                     </label>
 
                     <select name="bentuk_badan_usaha" class="w-full rounded-xl border-gray-300">
@@ -421,10 +438,14 @@
 
                 </div>
 
+            </div>
+
+            <div class="bg-white rounded-2xl border p-6">
+
                 <div>
 
                     <label class="block text-sm font-medium mb-2">
-                        Jumlah Pekerja Dibayar
+                        22a. Berapa jumlah pekerja dibayar?, (orang)
                     </label>
 
                     <input type="number" min="0" name="jumlah_pekerja_dibayar"
@@ -435,7 +456,7 @@
                 <div>
 
                     <label class="block text-sm font-medium mb-2">
-                        Total Upah / Gaji Bulanan (Rp)
+                        22b. Berapa total upah/gaji yang dibayarkan sebulan terakhir?, (Rp 000)
                     </label>
 
                     <input type="number" min="0" step="1" name="total_upah_bulanan"
@@ -446,7 +467,7 @@
                 <div>
 
                     <label class="block text-sm font-medium mb-2">
-                        Jumlah Pekerja Tidak Dibayar
+                        22c. Berapa jumlah pekerja tidak dibayar/pekerja keluarga (termasuk pemilik)?, (orang)
                     </label>
 
                     <input type="number" min="0" name="jumlah_pekerja_tidak_dibayar"
@@ -457,7 +478,8 @@
                 <div>
 
                     <label class="block text-sm font-medium mb-2">
-                        Pendapatan Bulanan (Rp)
+                        23a. Berapa nilai produksi/pendapatan/penjualan sebulan terakhir atau bulan terakhir beroperasi?,
+                        (Rp 000)
                     </label>
 
                     <input type="number" min="0" step="1" name="pendapatan_bulanan"
@@ -468,7 +490,7 @@
                 <div>
 
                     <label class="block text-sm font-medium mb-2">
-                        Pendapatan Tahunan (Rp)
+                        23b. Berapa nilai produksi/pendapatan/penjualan selama tahun 2025?, (Rp 000)
                     </label>
 
                     <input type="number" min="0" step="1" name="pendapatan_tahunan"
@@ -476,10 +498,14 @@
 
                 </div>
 
+            </div>
+
+            <div class="bg-white rounded-2xl border p-6">
+
                 <div>
 
                     <label class="block text-sm font-medium mb-3">
-                        Penggunaan Internet
+                        24. Apakah menggunakan internet dalam menjalankan usaha selama setahun terakhir?
                     </label>
 
                     <div class="space-y-2">
@@ -504,7 +530,7 @@
                 <div>
 
                     <label class="block text-sm font-medium mb-3">
-                        Media Internet
+                        25. Media internet apa saja yang digunakan untuk usaha selama setahun terakhir?
                     </label>
 
                     <div class="space-y-2">
@@ -529,7 +555,7 @@
                 <div>
 
                     <label class="block text-sm font-medium mb-3">
-                        Alasan Tidak Menggunakan Internet
+                        26. Jika tidak menggunakan internet, apa alasannya?
                     </label>
 
                     <div class="space-y-2">
@@ -551,10 +577,14 @@
 
                 </div>
 
+            </div>
+
+            <div class="bg-white rounded-2xl border p-6">
+
                 <div>
 
                     <label class="block text-sm font-medium mb-3">
-                        Sumber Kredit/Pinjaman
+                        27. Apakah usaha/perusahaan ini menerima kredit atau pinjaman dari lembaga berikut?
                     </label>
 
                     <div class="space-y-2">
@@ -579,7 +609,7 @@
                 <div>
 
                     <label class="block text-sm font-medium mb-3">
-                        Tujuan Kredit/Pinjaman
+                       28. Jika menerima kredit/pinjaman, untuk apa pinjaman tersebut digunakan?
                     </label>
 
                     <div class="space-y-2">
@@ -604,7 +634,7 @@
                 <div>
 
                     <label class="block text-sm font-medium mb-3">
-                        Tidak Menerima Kredit/Pinjaman
+                        29. Jika tidak menerima kredit atau pinjaman, apa alasan utamanya?,
                     </label>
 
                     <select name="tidak_menerima_kredit" class="w-full rounded-xl border-gray-300">
@@ -628,7 +658,7 @@
                 <div>
 
                     <label class="block text-sm font-medium mb-3">
-                        Kendala Usaha
+                        30. Kendala/kesulitan yang dialami oleh usaha/perusahaan selama setahun yang lalu:
                     </label>
 
                     <div class="space-y-2">

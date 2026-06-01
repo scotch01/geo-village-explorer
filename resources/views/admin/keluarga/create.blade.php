@@ -23,16 +23,28 @@
 
                 <div class="bg-white rounded-2xl border p-6">
 
-                    <h2 class="font-semibold text-lg mb-5">
-                        1. Identitas Keluarga
-                    </h2>
+                    <div class="flex items-center gap-3 mb-5">
+
+                        <div class="w-1.5 h-6 rounded-full bg-blue-600"></div>
+
+                        <div>
+                            <h2 class="font-bold text-slate-800">
+                                BLOK II
+                            </h2>
+
+                            <p class="text-sm text-slate-500">
+                                KETERANGAN UMUM KELUARGA
+                            </p>
+                        </div>
+
+                    </div>
 
                     <div class="grid md:grid-cols-2 gap-5">
 
                         <div>
 
                             <label class="block text-sm font-medium mb-2">
-                                a. Nama Kepala Keluarga
+                                2a. Nama Kepala Keluarga
                             </label>
 
                             <input type="text" name="nama_kepala_keluarga" value="{{ old('nama_kepala_keluarga') }}"
@@ -43,7 +55,7 @@
                         <div>
 
                             <label class="block text-sm font-medium mb-2">
-                                b. NIK Kepala Keluarga
+                                2b. NIK Kepala Keluarga
                             </label>
 
                             <input type="text" name="nik_kepala_keluarga" value="{{ old('nik_kepala_keluarga') }}"
@@ -54,7 +66,7 @@
                         <div>
 
                             <label class="block text-sm font-medium mb-2">
-                                c. Nomor Kartu Keluarga (KK) dari Kepala Keluarga
+                                2c. Nomor Kartu Keluarga (KK) dari Kepala Keluarga
                             </label>
 
                             <input type="text" name="nomor_kk" value="{{ old('nomor_kk') }}" maxlength="16"
@@ -67,8 +79,8 @@
 
                 <div class="bg-white rounded-2xl border p-6">
 
-                    <h2 class="font-semibold text-lg mb-5">
-                        2. Alamat
+                    <h2 class="block text-sm font-medium mb-2">
+                        3. Alamat
                     </h2>
 
                     <div class="grid md:grid-cols-2 gap-5">
@@ -131,7 +143,7 @@
                         <div class="md:col-span-2">
 
                             <label class="block text-sm font-medium mb-2">
-                                f. Alamat Lengkap
+                                f. Alamat (Jalan/Nomor Rumah)
                             </label>
 
                             <textarea name="alamat_detail" rows="4" class="w-full rounded-xl border-gray-300">{{ old('alamat_detail') }}</textarea>
@@ -141,7 +153,7 @@
                         <div class="mb-3">
 
                             <label class="block text-sm font-medium mb-2">
-                                g. Apakah alamat tersebut sesuai dengan alamat pada Kartu Keluarga (KK)?
+                                4. Apakah alamat tersebut sesuai dengan alamat pada Kartu Keluarga (KK)?
                             </label>
 
                             <div class="space-y-2">
@@ -166,14 +178,26 @@
 
                 <div class="bg-white rounded-2xl border p-6">
 
-                    <h2 class="font-semibold text-lg mb-5">
-                        3. Kondisi Perumahan
-                    </h2>
+                    <div class="flex items-center gap-3 mb-5">
+
+                        <div class="w-1.5 h-6 rounded-full bg-blue-600"></div>
+
+                        <div>
+                            <h2 class="font-bold text-slate-800">
+                                BLOK II
+                            </h2>
+
+                            <p class="text-sm text-slate-500">
+                                KETERANGAN PERUMAHAN
+                            </p>
+                        </div>
+
+                    </div>
 
                     <div class="mb-3">
 
                         <label class="block text-sm font-medium mb-2">
-                            a. Berapa jumlah keluarga yang tinggal dalam 1 rumah/tempat tinggal?
+                            20. Berapa jumlah keluarga yang tinggal dalam 1 rumah/tempat tinggal?
                         </label>
 
                         <input type="number" min="1" name="jumlah_keluarga_dalam_rumah"
@@ -185,7 +209,7 @@
                     <div class="mb-3">
 
                         <label class="block text-sm font-medium mb-2">
-                            b. Apa status kepemilikan bangunan tempat tinggal yang ditempati?
+                            21. Apa status kepemilikan bangunan tempat tinggal yang ditempati?
                         </label>
 
                         <select name="status_kepemilikan_rumah" class="w-full rounded-xl border-gray-300">
@@ -207,7 +231,7 @@
 
                     <div class="mb-3">
                         <label class="block text-sm font-medium mb-2">
-                            c. Berapa luas lantai bangunan tempat tinggal yang ditempati? (m2)
+                            22. Berapa luas lantai bangunan tempat tinggal yang ditempati? (m2)
                         </label>
 
                         <input type="number" min="1" name="luas_lantai"
@@ -218,7 +242,7 @@
 
                     <div class="mb-3">
                         <label class="block text-sm font-medium mb-2">
-                            d. Apa bahan bangunan utama lantai rumah terluas?
+                            23. Apa bahan bangunan utama lantai rumah terluas?
                         </label>
 
                         <select name="bahan_lantai" class="w-full rounded-xl border-gray-300">
@@ -240,7 +264,7 @@
 
                     <div class="mb-3">
                         <label class="block text-sm font-medium mb-2">
-                            e. Apa bahan bangunan utama dinding rumah terluas?
+                            24. Apa bahan bangunan utama dinding rumah terluas?
                         </label>
 
                         <select name="bahan_dinding" class="w-full rounded-xl border-gray-300">
@@ -262,7 +286,7 @@
 
                     <div class="mb-3">
                         <label class="block text-sm font-medium mb-2">
-                            f. Apa bahan bangunan utama atap rumah terluas?
+                            25. Apa bahan bangunan utama atap rumah terluas?
                         </label>
 
                         <select name="bahan_atap" class="w-full rounded-xl border-gray-300">
@@ -286,13 +310,13 @@
 
                 <div class="bg-white rounded-2xl border p-6">
 
-                    <h2 class="font-semibold text-lg mb-5">
+                    {{-- <h2 class="font-semibold text-lg mb-5">
                         4. Sanitasi & Utilitas
-                    </h2>
+                    </h2> --}}
 
                     <div class="mb-3">
                         <label class="block text-sm font-medium mb-2">
-                            a. Apakah memiliki fasilitas tempat buang air besar dan siapa saja yang menggunakan?
+                            26. Apakah memiliki fasilitas tempat buang air besar dan siapa saja yang menggunakan?
                         </label>
 
                         <select name="fasilitas_bab" class="w-full rounded-xl border-gray-300">
@@ -314,7 +338,7 @@
 
                     <div class="mb-3">
                         <label class="block text-sm font-medium mb-2">
-                            b. Apa jenis kloset yang digunakan?
+                            27. Apa jenis kloset yang digunakan?
                         </label>
 
                         <select name="jenis_kloset" class="w-full rounded-xl border-gray-300">
@@ -336,7 +360,7 @@
 
                     <div class="mb-3">
                         <label class="block text-sm font-medium mb-2">
-                            c. Di manakah tempat pembuangan akhir tinja?
+                            28. Di manakah tempat pembuangan akhir tinja?
                         </label>
 
                         <select name="pembuangan_tinja" class="w-full rounded-xl border-gray-300">
@@ -358,7 +382,7 @@
 
                     <div class="mb-3">
                         <label class="block text-sm font-medium mb-2">
-                            d. Apa sumber air utama yang digunakan keluarga untuk minum?
+                            29. Apa sumber air utama yang digunakan keluarga untuk minum?
                         </label>
 
                         <select name="sumber_air_minum" class="w-full rounded-xl border-gray-300">
@@ -380,7 +404,7 @@
 
                     <div class="mb-3">
                         <label class="block text-sm font-medium mb-2">
-                            e. Apa sumber penerangan utama rumah ini?
+                            30. Apa sumber penerangan utama rumah ini?
                         </label>
 
                         <select name="sumber_penerangan" x-model="sumberPenerangan"
@@ -411,7 +435,7 @@
                             <div>
 
                                 <h3 class="font-semibold text-blue-900">
-                                    f. Jika listrik PLN dengan meteran, berapa jumlah meteran listrik yang terpasang di
+                                    31a. Jika listrik PLN dengan meteran, berapa jumlah meteran listrik yang terpasang di
                                     rumah ini?
                                 </h3>
 
@@ -457,7 +481,7 @@
 
                                     <label class="block text-sm font-medium mb-2">
 
-                                        g. Berapa daya listrik yang terpasang di rumah ini?
+                                        31b. Berapa daya listrik yang terpasang di rumah ini?
 
                                     </label>
 
@@ -494,15 +518,16 @@
 
                 <div class="bg-white border rounded-2xl p-6">
 
-                    <h2 class="font-semibold text-lg mb-5">
+                    {{-- <h2 class="font-semibold text-lg mb-5">
                         5. Kredit dan Pinjaman
-                    </h2>
+                    </h2> --}}
 
                     <div class="mb-3">
 
                         <label class="block text-sm font-medium mb-2">
 
-                            a. Apakah ada minimal salah satu anggota keluarga ini yang menerima kredit dari lembaga keuangan
+                            32. Apakah ada minimal salah satu anggota keluarga ini yang menerima kredit dari lembaga
+                            keuangan
                             berikut dalam setahun terakhir?
 
                         </label>
@@ -531,7 +556,7 @@
 
                         <label class="block text-sm font-medium mb-2">
 
-                            b. Apakah dalam setahun terakhir keluarga ini pernah menerima kredit dari lembaga keuangan?
+                            33. Apakah dalam setahun terakhir keluarga ini pernah menerima kredit dari lembaga keuangan?
 
                         </label>
 

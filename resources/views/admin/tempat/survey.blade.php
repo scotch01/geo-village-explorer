@@ -177,11 +177,11 @@
                         <div>
 
                             <h3 class="font-semibold text-lg">
-                                Data Keluarga
+                                BLOK II
                             </h3>
 
                             <p class="text-sm text-gray-500 mt-1">
-                                Informasi keluarga dan kondisi perumahan
+                                KETERANGAN UMUM KELUARGA DAN PERUMAHAN
                             </p>
 
                         </div>
@@ -228,11 +228,11 @@
                             <div>
 
                                 <h3 class="font-semibold text-lg">
-                                    Anggota Keluarga
+                                    BLOK II
                                 </h3>
 
                                 <p class="text-sm text-gray-500 mt-1">
-                                    Data individu setiap anggota keluarga
+                                    KETERANGAN ANGGOTA KELUARGA
                                 </p>
 
                             </div>
@@ -281,11 +281,11 @@
                 <div class="bg-white border rounded-2xl p-6">
 
                     <h3 class="font-semibold">
-                        Data Usaha
+                        BLOK III
                     </h3>
 
                     <p class="text-sm text-gray-500 mt-1">
-                        Informasi usaha dan ekonomi
+                        KETERANGAN USAHA/PERUSAHAAN
                     </p>
 
                     @if ($tempat->usahaCompleted)
