@@ -24,6 +24,13 @@
 
             </a>
 
+            <a href="{{ route('admin.keluarga.edit', $keluarga->tempat) }}"
+                class="inline-flex px-4 py-2 rounded-xl bg-green-600 text-white">
+
+                Lanjutkan Keterangan Perumahan
+
+            </a>
+
         </div>
 
         <div class="bg-white border rounded-2xl overflow-hidden">
@@ -88,9 +95,8 @@
 
                                     </a>
 
-                                    <form
-                                        action="{{ route('admin.anggota.destroy', $anggota) }}"
-                                        method="POST" onsubmit="return confirm('Hapus anggota ini?')">
+                                    <form action="{{ route('admin.anggota.destroy', $anggota) }}" method="POST"
+                                        onsubmit="return confirm('Hapus anggota ini?')">
 
                                         @csrf
                                         @method('DELETE')

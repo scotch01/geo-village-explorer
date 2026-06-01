@@ -25,6 +25,8 @@ class KeluargaController extends Controller
 {
     public function create(Tempat $tempat)
     {
+        $desa = auth()->user()->desa;
+
         return view(
             'admin.keluarga.create',
             [
@@ -68,6 +70,12 @@ class KeluargaController extends Controller
                 'kreditTujuan'
                     => KreditTujuan::OPTIONS,
 
+            ],
+            [
+
+                'tempat' => $tempat,
+                'desa'   => $desa,
+
             ]
         );
     }
@@ -100,6 +108,19 @@ class KeluargaController extends Controller
             = $tempat->id;
 
         $keluarga = Keluarga::create($validated);
+
+        if ($request->redirect_to === 'anggota') {
+
+            return redirect()
+                ->route(
+                    'admin.anggota.create',
+                    $keluarga
+                )
+                ->with(
+                    'success',
+                    'Data keluarga berhasil disimpan.'
+                );
+        }
 
         if ($request->filled('meterans')) {
 
@@ -285,7 +306,7 @@ class KeluargaController extends Controller
                 => 'required|string|max:16',
 
             'nomor_kk'
-                => 'required|string|max:20',
+                => 'required|string|max:16',
 
             'provinsi'
                 => 'required|string|max:255',
@@ -300,46 +321,46 @@ class KeluargaController extends Controller
                 => 'required|string|max:255',
             
             'dusun'
-                => 'required|string|max:255',
+                => 'nullable|string|max:255',
 
             'alamat_detail'
                 => 'required|string',
 
             'alamat_sesuai_kk'
-                => 'required|integer|in:1,2',
+                => 'nullable|integer|in:1,2',
 
             'jumlah_keluarga_dalam_rumah'
-                => 'required|integer|min:1|max:99',
+                => 'nullable|integer|min:1|max:99',
 
             'status_kepemilikan_rumah'
-                => 'required|integer',
+                => 'nullable|integer',
 
             'luas_lantai'
-                => 'required|integer|min:1',
+                => 'nullable|integer|min:1',
 
             'bahan_lantai'
-                => 'required|integer',
+                => 'nullable|integer',
 
             'bahan_dinding'
-                => 'required|integer',
+                => 'nullable|integer',
 
             'bahan_atap'
-                => 'required|integer',
+                => 'nullable|integer',
 
             'fasilitas_bab'
-                => 'required|integer',
+                => 'nullable|integer',
 
             'jenis_kloset'
-                => 'required|integer',
+                => 'nullable|integer',
 
             'pembuangan_tinja'
-                => 'required|integer',
+                => 'nullable|integer',
 
             'sumber_air_minum'
-                => 'required|integer',
+                => 'nullable|integer',
 
             'sumber_penerangan'
-                => 'required|integer',
+                => 'nullable|integer',
 
             'meterans'
                 => 'nullable|array',

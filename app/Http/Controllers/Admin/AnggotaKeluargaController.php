@@ -98,14 +98,14 @@ class AnggotaKeluargaController extends Controller
 
         return redirect()
             ->route(
-                'admin.tempat.survey',
-                $keluarga->tempat
+                'admin.anggota.index',
+                $keluarga
             )
             ->with(
                 'success',
-                'Anggota keluarga berhasil ditambahkan'
+                'Anggota keluarga berhasil ditambahkan.'
             );
-    }
+            }
 
     public function edit(
         AnggotaKeluarga $anggota

@@ -101,4 +101,34 @@ class Tempat extends Model
     {
         return $this->usaha !== null;
     }
+
+    public function getDisplayNameAttribute()
+    {
+        return match ($this->jenis_bangunan) {
+
+            'btt'
+                => $this->keluarga?->nama_kepala_keluarga,
+
+            'bku'
+                => $this->usaha?->nama_usaha,
+
+            'bc'
+                => $this->keluarga?->nama_kepala_keluarga,
+
+            default
+                => '-',
+        };
+    }
+
+    public function getDisplaySubtitleAttribute()
+    {
+        if (
+            $this->jenis_bangunan === 'bc'
+            && $this->usaha
+        ) {
+            return $this->usaha->nama_usaha;
+        }
+
+        return null;
+    }
 }

@@ -11,6 +11,7 @@ class Desa extends Model
         'kode_desa',
         'kecamatan',
         'kabupaten',
+        'provinsi',
     ];
 
     /**

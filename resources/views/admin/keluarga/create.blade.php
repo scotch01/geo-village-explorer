@@ -6,7 +6,7 @@
         <div>
 
             <h1 class="text-2xl font-bold text-gray-900">
-                Tambah Data Keluarga
+                Tambah Data
             </h1>
 
             <p class="text-gray-500 mt-1">
@@ -17,9 +17,11 @@
 
         <div x-data="keluargaForm()">
 
-            <form method="POST" action="{{ route('admin.keluarga.store', $tempat) }}" class="space-y-6">
+            <form method="POST" x-ref="keluargaForm" action="{{ route('admin.keluarga.store', $tempat) }}" class="space-y-6">
 
                 @csrf
+
+                <input type="hidden" name="redirect_to" x-model="redirectTo">
 
                 <div class="bg-white rounded-2xl border p-6">
 
@@ -91,7 +93,7 @@
                                 a. Provinsi
                             </label>
 
-                            <input type="text" name="provinsi" value="{{ old('provinsi') }}"
+                            <input type="text" name="provinsi" value="{{ old('provinsi', $desa->provinsi) }}" readonly
                                 class="w-full rounded-xl border-gray-300">
 
                         </div>
@@ -102,7 +104,7 @@
                                 b. Kabupaten/Kota
                             </label>
 
-                            <input type="text" name="kabupaten" value="{{ old('kabupaten') }}"
+                            <input type="text" name="kabupaten" value="{{ old('kabupaten', $desa->kabupaten) }}" readonly
                                 class="w-full rounded-xl border-gray-300">
 
                         </div>
@@ -113,7 +115,7 @@
                                 c. Kecamatan
                             </label>
 
-                            <input type="text" name="kecamatan" value="{{ old('kecamatan') }}"
+                            <input type="text" name="kecamatan" value="{{ old('kecamatan', $desa->kecamatan) }}" readonly
                                 class="w-full rounded-xl border-gray-300">
 
                         </div>
@@ -124,7 +126,7 @@
                                 d. Desa/Kelurahan
                             </label>
 
-                            <input type="text" name="desa" value="{{ old('desa') }}"
+                            <input type="text" name="desa" value="{{ old('desa', $desa->nama_desa) }}" readonly
                                 class="w-full rounded-xl border-gray-300">
 
                         </div>
@@ -174,6 +176,35 @@
                         </div>
 
                     </div>
+                </div>
+
+                <div class="bg-blue-50 border border-blue-200 rounded-2xl p-6">
+
+                    <div class="flex items-center gap-3 mb-3">
+
+                        <div class="w-1.5 h-6 rounded-full bg-blue-600"></div>
+
+                        <div>
+
+                            <h2 class="font-bold text-blue-900">
+                                KETERANGAN ANGGOTA KELUARGA
+                            </h2>
+
+                            <p class="text-sm text-blue-700">
+                                Pertanyaan 5–18 diisi melalui modul anggota keluarga
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <button type="button" @click="showAnggotaModal = true"
+                        class="px-4 py-2 bg-blue-600 text-white rounded-xl">
+
+                        Simpan & Tambah Anggota Keluarga
+
+                    </button>
+
                 </div>
 
                 <div class="bg-white rounded-2xl border p-6">
@@ -584,7 +615,8 @@
 
                 <div class="flex justify-end">
 
-                    <button type="submit" class="px-6 py-3 bg-blue-600 text-white rounded-xl font-medium">
+                    <button type="submit" @click="redirectTo = 'survey'"
+                        class="px-6 py-3 bg-blue-600 text-white rounded-xl font-medium">
 
                         Simpan Data Keluarga
 
@@ -593,6 +625,51 @@
                 </div>
 
             </form>
+
+            <div x-show="showAnggotaModal" x-cloak
+                class="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+
+                <div @click.away="showAnggotaModal = false" class="bg-white rounded-2xl p-6 w-full max-w-md">
+
+                    <h3 class="text-lg font-semibold">
+                        Simpan Data Keluarga?
+                    </h3>
+
+                    <p class="text-sm text-gray-600 mt-2">
+
+                        Data keluarga akan disimpan terlebih dahulu,
+                        kemudian Anda akan diarahkan ke halaman
+                        tambah anggota keluarga.
+
+                    </p>
+
+                    <div class="flex justify-end gap-3 mt-6">
+
+                        <button type="button" @click="showAnggotaModal = false" class="px-4 py-2 border rounded-xl">
+
+                            Batal
+
+                        </button>
+
+                        <button type="button"
+                            @click="
+        redirectTo = 'anggota';
+
+        $nextTick(() => {
+            $refs.keluargaForm.submit();
+        });
+    "
+                            class="px-4 py-2 bg-blue-600 text-white rounded-xl">
+
+                            Simpan & Lanjut
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
 
@@ -606,6 +683,10 @@
                     sumberPenerangan: '{{ old('sumber_penerangan') }}',
 
                     meterans: [],
+
+                    redirectTo: 'survey',
+
+                    showAnggotaModal: false,
 
                 };
             }

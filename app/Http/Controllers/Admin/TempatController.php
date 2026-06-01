@@ -42,32 +42,34 @@ class TempatController extends Controller
 
             $query->where(function ($q) use ($search) {
 
-                $q->where(
-                    'nama_tempat',
-                    'like',
-                    '%' . $search . '%'
-                )
-                ->orWhere(
-                    'alamat',
-                    'like',
-                    '%' . $search . '%'
-                )
-                ->orWhere(
-                    'nama_pemilik',
-                    'like',
-                    '%' . $search . '%'
-                );
+                $q->whereHas('keluarga', function ($query) use ($search) {
+
+                    $query->where(
+                        'nama_kepala_keluarga',
+                        'like',
+                        "%{$search}%"
+                    );
+                })
+
+                ->orWhereHas('usaha', function ($query) use ($search) {
+
+                    $query->where(
+                        'nama_usaha',
+                        'like',
+                        "%{$search}%"
+                    );
+                });
             });
         }
 
         /**
-         * FILTER SEKTOR
+         * FILTER JENIS BANGUNAN
          */
-        if ($request->filled('sektor')) {
+        if ($request->filled('jenis_bangunan')) {
 
             $query->where(
-                'sektor',
-                $request->sektor
+                'jenis_bangunan',
+                $request->jenis_bangunan
             );
         }
 
@@ -99,8 +101,8 @@ class TempatController extends Controller
 
         return view('admin.tempat.index', [
             'tempats' => $tempats,
-            // 'sektors' => Tempat::SEKTOR,
             'desas' => \App\Models\Desa::orderBy('nama_desa')->get(),
+            'jenisBangunan' => \App\Constants\Tempat\JenisBangunan::OPTIONS,
         ]);
     }
 
@@ -118,7 +120,6 @@ class TempatController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nama_tempat' => 'required|string|max:255',
 
             'jenis_bangunan' => [
                 'required',
@@ -129,10 +130,6 @@ class TempatController extends Controller
                 )
             ],
 
-            'alamat' => 'required|string',
-
-            'latitude' => 'nullable|numeric|between:-90,90',
-            'longitude' => 'nullable|numeric|between:-180,180',
         ]);
 
         $validated['id_desa'] =

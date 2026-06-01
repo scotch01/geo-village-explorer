@@ -169,6 +169,47 @@
 
         <div class="grid md:grid-cols-2 gap-4">
 
+            <div class="bg-white border rounded-2xl p-6">
+
+                <div class="flex items-start justify-between">
+
+                    <div>
+
+                        <h3 class="font-semibold text-lg">
+                            BLOK I
+                        </h3>
+
+                        <p class="text-sm text-gray-500 mt-1">
+                            IDENTIFIKASI BANGUNAN
+                        </p>
+
+                    </div>
+
+                    <a href="{{ route('admin.tempat.edit', $tempat) }}"
+                        class="px-4 py-2 rounded-xl bg-amber-500 text-white text-sm">
+
+                        Edit
+
+                    </a>
+
+                </div>
+
+                <div class="mt-4">
+
+                    <div class="text-xs text-gray-500">
+                        Jenis Bangunan
+                    </div>
+
+                    <div class="font-semibold mt-1">
+
+                        {{ \App\Constants\Tempat\JenisBangunan::OPTIONS[$tempat->jenis_bangunan] ?? '-' }}
+
+                    </div>
+
+                </div>
+
+            </div>
+
             @if (in_array($tempat->jenis_bangunan, ['btt', 'bc']))
                 <div class="bg-white border rounded-2xl p-6 hover:shadow-md transition">
 
@@ -219,62 +260,6 @@
                     @endif
 
                 </div>
-
-                @if (in_array($tempat->jenis_bangunan, ['btt', 'bc']))
-                    <div class="bg-white border rounded-2xl p-6">
-
-                        <div class="flex items-start justify-between">
-
-                            <div>
-
-                                <h3 class="font-semibold text-lg">
-                                    BLOK II
-                                </h3>
-
-                                <p class="text-sm text-gray-500 mt-1">
-                                    KETERANGAN ANGGOTA KELUARGA
-                                </p>
-
-                            </div>
-
-                            <span class="px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-semibold">
-
-                                {{ $tempat->anggotaKeluargas->count() }}
-                                Anggota
-
-                            </span>
-
-                        </div>
-
-                        @if ($tempat->keluarga)
-                            <div class="flex gap-2 mt-4">
-
-                                <a href="{{ route('admin.anggota.create', $tempat->keluarga) }}"
-                                    class="inline-flex px-4 py-2 rounded-xl bg-blue-600 text-white text-sm">
-
-                                    Tambah Anggota
-
-                                </a>
-
-                                <a href="{{ route('admin.anggota.index', $tempat->keluarga) }}"
-                                    class="inline-flex px-4 py-2 rounded-xl bg-slate-600 text-white text-sm">
-
-                                    Kelola Anggota
-
-                                </a>
-
-                            </div>
-                        @else
-                            <button type="button" disabled
-                                class="inline-flex mt-4 px-4 py-2 rounded-xl bg-gray-300 text-gray-600 text-sm cursor-not-allowed">
-
-                                Isi Data Keluarga Dulu
-
-                            </button>
-                        @endif
-
-                    </div>
-                @endif
             @endif
 
             @if (in_array($tempat->jenis_bangunan, ['bku', 'bc']))

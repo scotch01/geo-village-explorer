@@ -27,6 +27,7 @@ class DesaController extends Controller
             'kode_desa' => 'nullable|string|max:100',
             'kecamatan' => 'nullable|string|max:255',
             'kabupaten' => 'nullable|string|max:255',
+            'provinsi'  => 'nullable|string|max:255',
         ]);
 
         Desa::create($validated);
@@ -48,6 +49,7 @@ class DesaController extends Controller
             'kode_desa' => 'nullable|string|max:100',
             'kecamatan' => 'nullable|string|max:255',
             'kabupaten' => 'nullable|string|max:255',
+            'provinsi'  => 'nullable|string|max:255'
         ]);
 
         $desa->update($validated);

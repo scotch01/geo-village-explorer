@@ -200,7 +200,7 @@
 
                     <input type="hidden" name="kode_profesi" id="kode_profesi" value="{{ old('kode_profesi') }}">
 
-                    <input type="text" id="profesi_search" autocomplete="off"
+                    <input type="text" id="profesi_search" autocomplete="off" value="{{ old('profesi_nama') }}"
                         placeholder="Ketik kode atau nama profesi..." class="w-full rounded-xl border-gray-300">
 
                     <div id="profesi_results"
@@ -261,7 +261,8 @@
 
                     <label class="block mb-2">
 
-                        17. Apakah memiliki keterbatasan dalam jangka waktu lama sehingga mengalami kesulitan dalam menjalankan aktivitas sehari-hari?
+                        17. Apakah memiliki keterbatasan dalam jangka waktu lama sehingga mengalami kesulitan dalam
+                        menjalankan aktivitas sehari-hari?
 
                     </label>
 
