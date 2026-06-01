@@ -133,10 +133,6 @@ class TempatController extends Controller
 
             'latitude' => 'nullable|numeric|between:-90,90',
             'longitude' => 'nullable|numeric|between:-180,180',
-
-            'foto_bangunan' => 'nullable|image|max:2048',
-
-            'catatan' => 'nullable|string',
         ]);
 
         $validated['id_desa'] =
@@ -203,10 +199,6 @@ class TempatController extends Controller
 
             'latitude' => 'nullable|numeric|between:-90,90',
             'longitude' => 'nullable|numeric|between:-180,180',
-
-            'foto_bangunan' => 'nullable|image|max:2048',
-
-            'catatan' => 'nullable|string',
         ]);
 
         if ($request->hasFile('foto_bangunan')) {
@@ -263,6 +255,38 @@ class TempatController extends Controller
         return view(
             'admin.tempat.survey',
             compact('tempat')
+        );
+    }
+
+    public function updateSurvey(
+        Request $request,
+        Tempat $tempat
+    )
+    {
+        $data = [];
+
+        if ($request->hasFile('foto_bangunan')) {
+
+            $data['foto_bangunan']
+                = $request
+                    ->file('foto_bangunan')
+                    ->store(
+                        'bangunan',
+                        'public'
+                    );
+        }
+
+        if ($request->has('catatan')) {
+
+            $data['catatan']
+                = $request->catatan;
+        }
+
+        $tempat->update($data);
+
+        return back()->with(
+            'success',
+            'Data berhasil disimpan'
         );
     }
 }

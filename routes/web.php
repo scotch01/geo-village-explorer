@@ -49,6 +49,9 @@ Route::middleware(['auth', 'role:master_admin,admin_desa'])
     Route::get('/tempat/{tempat}/survey', [TempatController::class, 'survey'])
         ->name('tempat.survey');
 
+    Route::put('/tempat/{tempat}/survey', [TempatController::class, 'updateSurvey'])
+        ->name('tempat.updateSurvey');
+
     // Data Usaha
     Route::get('/tempat/{tempat}/usaha/create', [UsahaController::class, 'create'])
         ->name('usaha.create');

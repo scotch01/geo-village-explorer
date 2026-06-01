@@ -321,6 +321,99 @@
                 </div>
             @endif
 
+            {{-- BLOK IV FOTO BANGUNAN --}}
+
+            <div class="bg-white border rounded-2xl p-6">
+
+                <div class="flex items-start justify-between">
+
+                    <div>
+
+                        <h3 class="font-semibold text-lg">
+                            BLOK IV
+                        </h3>
+
+                        <p class="text-sm text-gray-500 mt-1">
+                            FOTO BANGUNAN
+                        </p>
+
+                    </div>
+
+                    @if ($tempat->foto_bangunan)
+                        <span
+                            class="px-3 py-1 rounded-full
+                       bg-green-100
+                       text-green-700
+                       text-xs font-semibold">
+
+                            Tersedia
+
+                        </span>
+                    @else
+                        <span
+                            class="px-3 py-1 rounded-full
+                       bg-gray-100
+                       text-gray-600
+                       text-xs font-semibold">
+
+                            Belum Ada
+
+                        </span>
+                    @endif
+
+                </div>
+
+                <form action="{{ route('admin.tempat.updateSurvey', $tempat) }}" method="POST"
+                    enctype="multipart/form-data" class="mt-4">
+
+                    @csrf
+                    @method('PUT')
+
+                    <input type="file" name="foto_bangunan" accept="image/*" class="block w-full">
+
+                    @if ($tempat->foto_bangunan)
+                        <img src="{{ Storage::url($tempat->foto_bangunan) }}" class="mt-4 rounded-xl border max-h-72">
+                    @endif
+
+                    <button class="mt-4 px-4 py-2 rounded-xl bg-blue-600 text-white">
+
+                        Simpan Foto
+
+                    </button>
+
+                </form>
+
+            </div>
+
+            {{-- BLOK V CATATAN --}}
+
+            <div class="bg-white border rounded-2xl p-6">
+
+                <h3 class="font-semibold text-lg">
+                    BLOK V
+                </h3>
+
+                <p class="text-sm text-gray-500 mt-1">
+                    CATATAN
+                </p>
+
+                <form action="{{ route('admin.tempat.updateSurvey', $tempat) }}" method="POST" class="mt-4">
+
+                    @csrf
+                    @method('PUT')
+
+                    <textarea name="catatan" rows="5" class="w-full rounded-xl border-gray-300">{{ old('catatan', $tempat->catatan) }}</textarea>
+
+                    <button class="mt-4 px-4 py-2 rounded-xl bg-blue-600 text-white">
+
+                        Simpan Catatan
+
+                    </button>
+
+                </form>
+
+            </div>
+
         </div>
 
     </div>

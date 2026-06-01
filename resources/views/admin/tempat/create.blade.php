@@ -134,26 +134,6 @@
                         <textarea name="alamat" rows="4" class="w-full mt-2 rounded-2xl border-slate-200 bg-slate-50" required>{{ old('alamat') }}</textarea>
                     </div>
 
-                    <div>
-
-                        <label class="text-sm font-semibold text-slate-700">
-                            Foto bangunan tampak depan 
-                        </label>
-
-                        <input type="file" name="foto_bangunan" accept="image/*" class="w-full mt-2">
-
-                    </div>
-
-                    <div>
-
-                        <label class="text-sm font-semibold text-slate-700">
-                            Catatan
-                        </label>
-
-                        <textarea name="catatan" rows="4" class="w-full mt-2 rounded-2xl border-slate-200 bg-slate-50">{{ old('catatan') }}</textarea>
-
-                    </div>
-
                 </section>
 
                 <!-- KOORDINAT -->
