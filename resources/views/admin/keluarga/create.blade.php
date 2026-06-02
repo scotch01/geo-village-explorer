@@ -93,7 +93,7 @@
                                 a. Provinsi
                             </label>
 
-                            <input type="text" name="provinsi" value="{{ old('provinsi', $desa->provinsi) }}" readonly
+                            <input type="text" name="provinsi" value="{{ old('provinsi', $desa->provinsi) }}"
                                 class="w-full rounded-xl border-gray-300">
 
                         </div>
@@ -104,7 +104,7 @@
                                 b. Kabupaten/Kota
                             </label>
 
-                            <input type="text" name="kabupaten" value="{{ old('kabupaten', $desa->kabupaten) }}" readonly
+                            <input type="text" name="kabupaten" value="{{ old('kabupaten', $desa->kabupaten) }}"
                                 class="w-full rounded-xl border-gray-300">
 
                         </div>
@@ -115,7 +115,7 @@
                                 c. Kecamatan
                             </label>
 
-                            <input type="text" name="kecamatan" value="{{ old('kecamatan', $desa->kecamatan) }}" readonly
+                            <input type="text" name="kecamatan" value="{{ old('kecamatan', $desa->kecamatan) }}"
                                 class="w-full rounded-xl border-gray-300">
 
                         </div>
@@ -126,7 +126,7 @@
                                 d. Desa/Kelurahan
                             </label>
 
-                            <input type="text" name="desa" value="{{ old('desa', $desa->nama_desa) }}" readonly
+                            <input type="text" name="desa" value="{{ old('desa', $desa->nama_desa) }}"
                                 class="w-full rounded-xl border-gray-300">
 
                         </div>
@@ -350,7 +350,7 @@
                             26. Apakah memiliki fasilitas tempat buang air besar dan siapa saja yang menggunakan?
                         </label>
 
-                        <select name="fasilitas_bab" class="w-full rounded-xl border-gray-300">
+                        <select name="fasilitas_bab" x-model="fasilitasBab" class="w-full rounded-xl border-gray-300">
 
                             <option value="">
                                 Pilih Jawaban
@@ -358,9 +358,7 @@
 
                             @foreach ($fasilitasBab as $key => $label)
                                 <option value="{{ $key }}" @selected(old('fasilitas_bab', $keluarga->fasilitas_bab ?? null) == $key)>
-
                                     {{ $label }}
-
                                 </option>
                             @endforeach
 
@@ -372,7 +370,11 @@
                             27. Apa jenis kloset yang digunakan?
                         </label>
 
-                        <select name="jenis_kloset" class="w-full rounded-xl border-gray-300">
+                        <select name="jenis_kloset" x-ref="jenisKloset" :disabled="fasilitasBab == 6"
+                            :class="{
+                                'bg-gray-100 text-gray-500': fasilitasBab == 6
+                            }"
+                            class="w-full rounded-xl border-gray-300">
 
                             <option value="">
                                 Pilih Jawaban
@@ -394,7 +396,11 @@
                             28. Di manakah tempat pembuangan akhir tinja?
                         </label>
 
-                        <select name="pembuangan_tinja" class="w-full rounded-xl border-gray-300">
+                        <select name="pembuangan_tinja" x-ref="pembuanganTinja" :disabled="fasilitasBab == 6"
+                            :class="{
+                                'bg-gray-100 text-gray-500': fasilitasBab == 6
+                            }"
+                            class="w-full rounded-xl border-gray-300">
 
                             <option value="">
                                 Pilih Jawaban
@@ -680,14 +686,40 @@
             function keluargaForm() {
                 return {
 
-                    sumberPenerangan: '{{ old('sumber_penerangan') }}',
-
-                    meterans: [],
+                    /**
+                     * FLOW ANGGOTA KELUARGA
+                     */
 
                     redirectTo: 'survey',
 
                     showAnggotaModal: false,
 
+                    /**
+                     * METERAN LISTRIK
+                     */
+
+                    meterans: [],
+
+                    /**
+                     * VALIDASI DINAMIS
+                     */
+
+                    fasilitasBab: '{{ old('fasilitas_bab', $keluarga->fasilitas_bab ?? '') }}',
+
+                    init() {
+                        this.$watch(
+                            'fasilitasBab',
+                            value => {
+
+                                if (value == 6) {
+
+                                    this.$refs.jenisKloset.value = '';
+
+                                    this.$refs.pembuanganTinja.value = '';
+                                }
+                            }
+                        );
+                    }
                 };
             }
         </script>

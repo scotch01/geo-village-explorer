@@ -12,7 +12,7 @@
 
             <div class="bg-white rounded-2xl border p-6">
                 <h2 class="font-semibold text-lg mb-5">
-                    KETERANGAN PERUMAHAN
+                    KETERANGAN ANGGOTA KELUARGA
                 </h2>
                 <div>
 

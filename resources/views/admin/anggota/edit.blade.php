@@ -3,19 +3,22 @@
 @section('content')
     <div class="max-w-5xl mx-auto space-y-6">
 
-        <h1 class="text-2xl font-bold">
+        {{-- <h1 class="text-2xl font-bold">
             Edit Data Anggota Keluarga
-        </h1>
+        </h1> --}}
 
         <form method="POST" action="{{ route('admin.anggota.update', $anggota) }}" class="space-y-6">
             @csrf
             @method('PUT')
             <div class="bg-white rounded-2xl border p-6">
+                <h2 class="font-semibold text-lg mb-5">
+                    KETERANGAN ANGGOTA KELUARGA
+                </h2>
                 <div>
 
                     <label class="block mb-2">
 
-                        Nomor Urut
+                        5. Nomor Urut Anggota Keluarga
 
                     </label>
 
@@ -28,7 +31,7 @@
 
                     <label class="block mb-2">
 
-                        Nama
+                        6.Nama Anggota Keluarga
 
                     </label>
 
@@ -41,7 +44,7 @@
 
                     <label class="block mb-2">
 
-                        NIK
+                        7. Nomor Induk Kependudukan (NIK)
 
                     </label>
 
@@ -54,7 +57,7 @@
 
                     <label class="block mb-2">
 
-                        Hubungan Keluarga
+                        8 Hubungan dengan Kepala Keluarga
 
                     </label>
 
@@ -80,7 +83,7 @@
                 <div>
                     <label class="block mb-2">
 
-                        Status Perkawinan
+                        9. Status Perkawinan
 
                     </label>
 
@@ -106,7 +109,7 @@
 
                     <label class="block mb-2">
 
-                        Tanggal Lahir
+                        10. Tanggal Lahir
 
                     </label>
 
@@ -117,7 +120,7 @@
                 <div>
                     <label class="block mb-2">
 
-                        Jenis Kelamin
+                        11. Jenis Kelamin
 
                     </label>
 
@@ -141,7 +144,7 @@
                 <div>
 
                     <label class="block mb-2">
-                        Partisipasi Sekolah
+                        12. Partisipasi Sekolah
                     </label>
 
                     <select name="partisipasi_sekolah" class="w-full rounded-xl border-gray-300">
@@ -165,7 +168,7 @@
                 <div>
 
                     <label class="block mb-2">
-                        Pendidikan
+                        13. Ijazah/STTB tertinggi yang dimiliki
                     </label>
 
                     <select name="ijazah_tertinggi" class="w-full rounded-xl border-gray-300">
@@ -189,7 +192,7 @@
                 <div>
 
                     <label class="block mb-2">
-                        Profesi Utama
+                        14. Profesi Pekerjaan Utama
                     </label>
 
                     <input type="hidden" name="master_profesi_id" id="master_profesi_id"
@@ -198,9 +201,9 @@
                     <input type="hidden" name="kode_profesi" id="kode_profesi"
                         value="{{ old('kode_profesi', $anggota->kode_profesi) }}">
 
-                    <input type="text" id="profesi_search" value="{{ old('profesi_nama', $anggota->profesi?->nama) }}"
-                        autocomplete="off" placeholder="Ketik kode atau nama profesi..."
-                        class="w-full rounded-xl border-gray-300">
+                    <input type="text" id="profesi_search" autocomplete="off"
+                        value="{{ old('profesi_nama', $anggota->profesi?->nama) }}"
+                        placeholder="Ketik kode atau nama profesi..." class="w-full rounded-xl border-gray-300">
 
                     <div id="profesi_results"
                         class="hidden mt-2 bg-white border rounded-xl shadow-sm max-h-60 overflow-y-auto">
@@ -211,7 +214,7 @@
                 <div>
 
                     <label class="block mb-2">
-                        Status/Kedudukan Pekerjaan
+                        15. Status kedudukan dalam pekerjaan utama
                     </label>
 
                     <select name="status_pekerjaan" class="w-full rounded-xl border-gray-300">
@@ -235,7 +238,7 @@
                 <div>
 
                     <label class="block mb-2">
-                        Rekening Aktif
+                        16. Apakah memiliki rekening aktif atau dompet digital?
                     </label>
 
                     <select name="rekening_digital" class="w-full rounded-xl border-gray-300">
@@ -260,7 +263,8 @@
 
                     <label class="block mb-2">
 
-                        Disabilitas
+                        17. Apakah memiliki keterbatasan dalam jangka waktu lama sehingga mengalami kesulitan dalam
+                        menjalankan aktivitas sehari-hari?
 
                     </label>
 
@@ -284,7 +288,7 @@
 
                     <label class="block mb-2">
 
-                        Penyakt Kronis
+                        18. Apakah memiliki keluhan kesehatan kronis/menahun?
 
                     </label>
 
@@ -294,7 +298,7 @@
 
                                 <input type="checkbox" class="exclusive-checkbox" data-group="penyakit_kronis"
                                     data-exclusive="{{ $key === 'X' ? '1' : '0' }}" name="penyakit_kronis[]"
-                                    value="{{ $key }}" @checked(in_array($key, old('penyakit_kronis', $anggota->penyakit_kronis ?? [])))>
+                                    value="{{ $key }}" @checked(in_array($key, old('disabilitas', $anggota->penyakit_kronis ?? [])))>
 
                                 <span>{{ $label }}</span>
 
@@ -308,7 +312,7 @@
 
                     <label class="block mb-2">
 
-                        Jaminan Kesehatan
+                        19. Apakah memiliki jaminan kesehatan?
 
                     </label>
 
@@ -318,7 +322,7 @@
 
                                 <input type="checkbox" class="exclusive-checkbox" data-group="jaminan_kesehatan"
                                     data-exclusive="{{ $key === 'X' ? '1' : '0' }}" name="jaminan_kesehatan[]"
-                                    value="{{ $key }}" @checked(in_array($key, old('jaminan_kesehatan', $anggota->jaminan_kesehatan ?? [])))>
+                                    value="{{ $key }}" @checked(in_array($key, old('disabilitas', $anggota->jaminan_kesehatan ?? [])))>
 
                                 <span>{{ $label }}</span>
 

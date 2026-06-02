@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
 
-    <title>Admin Panel - SIPETA</title>
+    <title>Admin Panel - Desa Cantik</title>
 
     <style>
         body {
@@ -77,7 +77,7 @@
                     </svg>
                 </div>
                 <span class="font-bold text-xl tracking-tight text-slate-800">
-                    SI<span class="text-blue-600">PETA</span>
+                    Desa<span class="text-blue-600"> Cantik</span>
                 </span>
             </div>
 
@@ -91,7 +91,7 @@
 
                     <a href="{{ route('admin.tempat.index') }}"
                         class="px-4 py-2 rounded-xl text-sm font-medium transition-all {{ request()->routeIs('admin.tempat.*') ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-600 hover:text-slate-900' }}">
-                        Tempat
+                        Bangunan
                     </a>
 
                     @if (auth()->user()->isMasterAdmin())

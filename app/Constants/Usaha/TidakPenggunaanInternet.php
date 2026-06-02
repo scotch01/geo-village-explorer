@@ -17,6 +17,6 @@ class TidakPenggunaanInternet
         self::AKSES => 'C. Tidak ada akses internet',
         self::KHAWATIR => 'D. Khawatir mengenai penggunaan internet',
         self::LAINNYA => 'E. Lainnya',
-        self::TIDAK => 'X. Tidak Menggunakan Internet',
+        self::TIDAK => 'X. Menggunakan Internet',
     ];
 }

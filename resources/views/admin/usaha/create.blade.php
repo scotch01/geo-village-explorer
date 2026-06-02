@@ -15,6 +15,8 @@
         
             sameAddress: {{ $tempat->jenis_bangunan === 'bc' ? 'true' : 'false' }},
         
+            internetTidakDigunakan: false,
+        
             keluarga: {
         
                 provinsi: @js($keluarga?->provinsi),
@@ -24,8 +26,30 @@
                 dusun: @js($keluarga?->dusun),
                 alamat: @js($keluarga?->alamat_detail),
         
+            },
+        
+            checkInternet() {
+        
+                const checkboxX = document.querySelector(
+                    'input[name=&quot;penggunaan_internet[]&quot;][value=&quot;X&quot;]'
+                );
+        
+                this.internetTidakDigunakan =
+                    checkboxX?.checked ?? false;
+        
+                if (!this.internetTidakDigunakan) {
+        
+                    document
+                        .querySelectorAll(
+                            'input[name=&quot;alasan_tidak_internet[]&quot;]'
+                        )
+                        .forEach(el => {
+                            el.checked = false;
+                        });
+                }
             }
-        }" action="{{ route('admin.usaha.store', $tempat) }}" method="POST" class="mt-6 space-y-6">
+        }" x-init="checkInternet()" action="{{ route('admin.usaha.store', $tempat) }}" method="POST"
+            class="mt-6 space-y-6">
 
             @csrf
 
@@ -192,7 +216,7 @@
 
                 </div>
 
-                <div class="mt-4">
+                {{-- <div class="mt-4">
 
                     <label class="block text-sm mb-2">
                         11. Tagging Lokasi
@@ -200,7 +224,7 @@
 
                     <input type="text" class="w-full rounded-xl border-gray-300">
 
-                </div>
+                </div> --}}
 
             </div>
 
@@ -513,9 +537,9 @@
                         @foreach ($penggunaanInternet as $value => $label)
                             <label class="flex items-center gap-2">
 
-                                <input type="checkbox" class="exclusive-checkbox" data-group="penggunaan_internet"
-                                    data-exclusive="{{ $value == 'X' ? '1' : '0' }}" name="penggunaan_internet[]"
-                                    value="{{ $value }}"
+                                <input type="checkbox" class="exclusive-checkbox" @change="checkInternet()"
+                                    data-group="penggunaan_internet" data-exclusive="{{ $value == 'X' ? '1' : '0' }}"
+                                    name="penggunaan_internet[]" value="{{ $value }}"
                                     {{ in_array($value, old('penggunaan_internet', [])) ? 'checked' : '' }}>
 
                                 <span>{{ $label }}</span>
@@ -558,14 +582,17 @@
                         26. Jika tidak menggunakan internet, apa alasannya?
                     </label>
 
-                    <div class="space-y-2">
+                    <div class="space-y-2"
+                        :class="{
+                            'opacity-50 pointer-events-none': !internetTidakDigunakan
+                        }">
 
                         @foreach ($tidakPenggunaanInternet as $value => $label)
                             <label class="flex items-center gap-2">
 
-                                <input type="checkbox" class="exclusive-checkbox" data-group="alasan_tidak_internet"
-                                    data-exclusive="{{ $value == 'X' ? '1' : '0' }}" name="alasan_tidak_internet[]"
-                                    value="{{ $value }}"
+                                <input type="checkbox" :disabled="!internetTidakDigunakan" class="exclusive-checkbox"
+                                    data-group="alasan_tidak_internet" data-exclusive="{{ $value == 'X' ? '1' : '0' }}"
+                                    name="alasan_tidak_internet[]" value="{{ $value }}"
                                     {{ in_array($value, old('alasan_tidak_internet', [])) ? 'checked' : '' }}>
 
                                 <span>{{ $label }}</span>
@@ -609,7 +636,7 @@
                 <div>
 
                     <label class="block text-sm font-medium mb-3">
-                       28. Jika menerima kredit/pinjaman, untuk apa pinjaman tersebut digunakan?
+                        28. Jika menerima kredit/pinjaman, untuk apa pinjaman tersebut digunakan?
                     </label>
 
                     <div class="space-y-2">
@@ -692,7 +719,7 @@
 
             </div>
 
-            </>
+        </form>
 
     </div>
 @endsection

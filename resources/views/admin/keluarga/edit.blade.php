@@ -375,7 +375,7 @@
                             26. Apakah memiliki fasilitas tempat buang air besar dan siapa saja yang menggunakan?
                         </label>
 
-                        <select name="fasilitas_bab" class="w-full rounded-xl border-gray-300">
+                        <select name="fasilitas_bab" x-model="fasilitasBab" class="w-full rounded-xl border-gray-300">
 
                             <option value="">
                                 Pilih Jawaban
@@ -397,7 +397,11 @@
                             27. Apa jenis kloset yang digunakan?
                         </label>
 
-                        <select name="jenis_kloset" class="w-full rounded-xl border-gray-300">
+                        <select name="jenis_kloset" x-ref="jenisKloset" :disabled="fasilitasBab == 6"
+                            :class="{
+                                'bg-gray-100 text-gray-500': fasilitasBab == 6
+                            }"
+                            class="w-full rounded-xl border-gray-300">
 
                             <option value="">
                                 Pilih Jawaban
@@ -419,7 +423,11 @@
                             28. Di manakah tempat pembuangan akhir tinja?
                         </label>
 
-                        <select name="pembuangan_tinja" class="w-full rounded-xl border-gray-300">
+                        <select name="pembuangan_tinja" x-ref="pembuanganTinja" :disabled="fasilitasBab == 6"
+                            :class="{
+                                'bg-gray-100 text-gray-500': fasilitasBab == 6
+                            }"
+                            class="w-full rounded-xl border-gray-300">
 
                             <option value="">
                                 Pilih Jawaban
@@ -661,15 +669,30 @@
 
                     sumberPenerangan: '{{ old('sumber_penerangan', $keluarga->sumber_penerangan) }}',
 
+                    fasilitasBab: '{{ old('fasilitas_bab', $keluarga->fasilitas_bab) }}',
+
                     meterans:
 
                         @json(old(
                                 'meterans',
-                        
                                 $keluarga->meterans->map(fn($m) => [
                                             'daya_listrik' => $m->daya_listrik,
                                         ])->values())),
 
+                    init() {
+                        this.$watch(
+                            'fasilitasBab',
+                            value => {
+
+                                if (value == 6) {
+
+                                    this.$refs.jenisKloset.value = '';
+
+                                    this.$refs.pembuanganTinja.value = '';
+                                }
+                            }
+                        );
+                    }
                 };
             }
         </script>

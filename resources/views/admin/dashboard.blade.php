@@ -66,7 +66,7 @@
                                 </div>
                                 <div>
                                     <div class="font-bold text-slate-100">{{ $item->desa->nama_desa ?? '-' }}</div>
-                                    <div class="text-xs text-slate-400">{{ $item->total }} Titik</div>
+                                    <div class="text-xs text-slate-400">{{ $item->total }} Data</div>
                                 </div>
                             </div>
                             <svg xmlns="http://www.w3.org/2000/svg"

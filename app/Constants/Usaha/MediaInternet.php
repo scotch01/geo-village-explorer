@@ -19,6 +19,6 @@ class MediaInternet
         self::MEDIA_SOSIAL => 'D. Media sosial (instagram, facebook, dll)',
         self::MARKETPLACE => 'E. Marketplace/platform digital (gojek, tokopedia, shopee, dll)',
         self::LAINNYA => 'F. Lainnya',
-        self::TIDAK => 'X. Tidak Menggunakan Internet',
+        self::TIDAK => 'X. Tidak Menggunakan Media Internet',
     ];
 }

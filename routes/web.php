@@ -59,6 +59,9 @@ Route::middleware(['auth', 'role:master_admin,admin_desa,pengawas'])
     Route::post('/tempat/{tempat}/usaha', [UsahaController::class, 'store'])
         ->name('usaha.store');
 
+    Route::get('/tempat/{tempat}/usaha', [UsahaController::class, 'show'])
+        ->name('usaha.show');
+
     Route::get('/tempat/{tempat}/usaha/edit', [UsahaController::class, 'edit'])
         ->name('usaha.edit');
 
@@ -74,6 +77,9 @@ Route::middleware(['auth', 'role:master_admin,admin_desa,pengawas'])
 
     Route::post('/tempat/{tempat}/keluarga', [KeluargaController::class, 'store'])
         ->name('keluarga.store');
+
+    Route::get('/tempat/{tempat}/keluarga', [KeluargaController::class, 'show'])
+        ->name('keluarga.show');
 
     Route::get('/tempat/{tempat}/keluarga/edit', [KeluargaController::class, 'edit'])
         ->name('keluarga.edit');

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIPETA - Peta Wilayah</title>
+    <title>DESA CANTIK 2026</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -127,11 +127,11 @@
             <div>
 
                 <h1 class="font-black text-xl tracking-tight">
-                    SIPETA
+                    DESCAN
                 </h1>
 
                 <p class="text-sm text-slate-500">
-                    Sistem Informasi Pemetaan Wilayah
+                    Desa Cantik BPS Kota Pariaman
                 </p>
 
             </div>
@@ -145,9 +145,9 @@
                 Login
             </a>
 
-            <div class="px-4 py-2 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold">
+            {{-- <div class="px-4 py-2 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold">
                 LIVE DATA
-            </div>
+            </div> --}}
 
         </div>
 
@@ -185,8 +185,7 @@
             <p class="mt-6 text-lg text-slate-600 leading-relaxed max-w-3xl">
 
                 Platform pemetaan wilayah berbasis geospasial untuk menampilkan
-                persebaran ekonomi, pendidikan, kesehatan, perumahan,
-                dan potensi desa secara interaktif.
+                persebaran bangunan tempat tinggal, usaha dan campuran.
 
             </p>
 
@@ -219,17 +218,17 @@
 
             </div>
 
-            <div class="aurora-card rounded-3xl border border-white/60 shadow-xl shadow-slate-200/40 p-6">
+            {{-- <div class="aurora-card rounded-3xl border border-white/60 shadow-xl shadow-slate-200/40 p-6">
 
                 <div class="text-4xl font-black text-slate-900">
-                    {{-- {{ count($sektors) }} --}}
+                    {{ count($sektors) }}
                 </div>
 
                 <div class="mt-2 text-sm text-slate-500">
                     Sektor Wilayah
                 </div>
 
-            </div>
+            </div> --}}
 
             <div class="aurora-card rounded-3xl border border-white/60 shadow-xl shadow-slate-200/40 p-6">
 
@@ -297,7 +296,7 @@
                 class="h-14 rounded-2xl border-slate-200 bg-white/70 focus:border-blue-500 focus:ring-blue-500"
             >
 
-            <select
+            {{-- <select
                 name="sektor"
                 class="h-14 rounded-2xl border-slate-200 bg-white/70 focus:border-blue-500 focus:ring-blue-500">
 
@@ -316,7 +315,7 @@
 
                 @endforeach --}}
 
-            </select>
+            {{-- </select> - --}}
 
             <select
                 name="desa"

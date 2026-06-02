@@ -53,7 +53,7 @@
                     <div>
 
                         <label class="block text-sm mb-2">
-                            Provinsi
+                            1. Provinsi
                         </label>
 
                         <input type="text" name="provinsi"
@@ -67,7 +67,7 @@
                     <div>
 
                         <label class="block text-sm mb-2">
-                            Kabupaten
+                            2. Kabupaten
                         </label>
 
                         <input type="text" name="kabupaten"
@@ -81,7 +81,7 @@
                     <div>
 
                         <label class="block text-sm mb-2">
-                            Kecamatan
+                            3. Kecamatan
                         </label>
 
                         <input type="text" name="kecamatan"
@@ -95,7 +95,7 @@
                     <div>
 
                         <label class="block text-sm mb-2">
-                            Desa
+                            4. Desa
                         </label>
 
                         <input type="text" name="desa"
@@ -109,7 +109,7 @@
                     <div>
 
                         <label class="block text-sm mb-2">
-                            Dusun
+                            5. Dusun
                         </label>
 
                         <input type="text" name="dusun"
@@ -125,7 +125,7 @@
                 <div class="mt-4">
 
                     <label class="block text-sm mb-2">
-                        Alamat
+                        6. Alamat
                     </label>
 
                     <textarea name="alamat"
@@ -138,20 +138,30 @@
 
                 </div>
 
+                <div>
+
+                    <label class="block text-sm font-medium mb-2">
+                        7. Nama Usaha
+                    </label>
+
+                    <input type="text" name="nama_usaha" value="{{ old('nama_usaha', $usaha->nama_usaha) }}"
+                        class="w-full rounded-xl border-gray-300">
+                </div>
+
             </div>
 
             <div class="bg-white rounded-2xl border p-6">
 
-                <h2 class="font-semibold text-lg mb-4">
+                {{-- <h2 class="font-semibold text-lg mb-4">
                     Kontak Usaha
-                </h2>
+                </h2> --}}
 
                 <div class="grid md:grid-cols-2 gap-4">
 
                     <div>
 
                         <label class="block text-sm mb-2">
-                            Telepon / HP
+                            8.Telepon / HP
                         </label>
 
                         <input type="text" name="telepon" value="{{ old('telepon', $usaha->telepon) }}"
@@ -162,7 +172,7 @@
                     <div>
 
                         <label class="block text-sm mb-2">
-                            E-mail
+                            9. E-mail
                         </label>
 
                         <input type="email" name="email" value="{{ old('email', $usaha->email) }}"
@@ -175,11 +185,21 @@
                 <div class="mt-4">
 
                     <label class="block text-sm mb-2">
-                        Website / Akun Media Sosial
+                        10. Website / Akun Media Sosial
                     </label>
 
                     <input type="text" name="website" value="{{ old('website', $usaha->website) }}"
                         class="w-full rounded-xl border-gray-300">
+
+                </div>
+
+                <div class="mt-4">
+
+                    <label class="block text-sm mb-2">
+                        11. Tagging Lokasi
+                    </label>
+
+                    <input type="text" class="w-full rounded-xl border-gray-300">
 
                 </div>
 
@@ -192,18 +212,8 @@
                 </h2>
 
                 <div>
-
                     <label class="block text-sm font-medium mb-2">
-                        Nama Usaha
-                    </label>
-
-                    <input type="text" name="nama_usaha" value="{{ old('nama_usaha', $usaha->nama_usaha) }}"
-                        class="w-full rounded-xl border-gray-300">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium mb-2">
-                        Lokasi Usaha
+                        12. Dimana lokasi tepat usaha/perusahaan
                     </label>
 
                     <select name="lokasi_usaha" class="w-full rounded-xl border-gray-300">
@@ -225,7 +235,7 @@
 
                 <div>
                     <label class="block text-sm font-medium mb-2">
-                        Status Kepemilikan Bangunan
+                        13. Status Kepemilikan Bangunan
                     </label>
 
                     <select name="status_bangunan" class="w-full rounded-xl border-gray-300">
@@ -245,9 +255,14 @@
                     </select>
                 </div>
 
+            </div>
+            <div class="bg-white rounded-2xl border p-6">
+                <label class="block text-sm font-medium mb-2">
+                    14. Identitas pemilik usaha/perusahaan
+                </label>
                 <div>
                     <label class="block text-sm font-medium mb-2">
-                        Nama Pemilik Usaha
+                        a. Nama
                     </label>
 
                     <input type="text" name="nama_pemilik" value="{{ old('nama_pemilik', $usaha->nama_pemilik) }}"
@@ -256,7 +271,7 @@
 
                 <div>
                     <label class="block text-sm font-medium mb-2">
-                        NIK Pemilik Usaha
+                        b. NIK
                     </label>
 
                     <input type="text" name="nik_pemilik" maxlength="16"
@@ -266,7 +281,7 @@
                 <div>
                     <label class="block text-sm font-medium mb-2">
 
-                        Jenis Kelamin
+                        c. Jenis Kelamin
 
                     </label>
 
@@ -289,7 +304,7 @@
 
                 <div>
                     <label class="block text-sm font-medium mb-2">
-                        Tanggal Lahir Pemilik
+                        d. Tanggal Lahir
                     </label>
 
                     <input type="date" name="tanggal_lahir_pemilik"
@@ -300,7 +315,7 @@
                 <div>
 
                     <label class="block text-sm font-medium mb-2">
-                        Pendidikan
+                        f. Ijazah tertinggi yang dimiliki
                     </label>
 
                     <select name="ijazah_pemilik" class="w-full rounded-xl border-gray-300">
@@ -321,9 +336,11 @@
 
                 </div>
 
+            </div>
+            <div class="bg-white rounded-2xl border p-6">
                 <div>
                     <label class="block text-sm font-medium mb-2">
-                        Kegiatan Utama Usaha
+                        15. Apa Kegiatan Utama dari usaha ini?, <span class="italic">(Tuliskan selengkapnya)</span>
                     </label>
 
                     <textarea name="kegiatan_utama" rows="4" class="w-full rounded-xl border-gray-300">{{ old('kegiatan_utama', $usaha->kegiatan_utama) }}</textarea>
@@ -331,7 +348,7 @@
 
                 <div>
                     <label class="block text-sm font-medium mb-2">
-                        Produk Utama Usaha
+                        16. Apa produk utama yang dihasilkan <span class="italic">(Tuliskan selengkapnya)</span>
                     </label>
 
                     <textarea name="produk_utama" rows="4" class="w-full rounded-xl border-gray-300">{{ old('produk_utama', $usaha->produk_utama) }}</textarea>
@@ -340,32 +357,44 @@
                 <div>
 
                     <label class="block text-sm font-medium mb-2">
-                        Kategori Lapangan Usaha
+                        17. Kategori Lapangan Usaha
                     </label>
 
-                    <input type="text" name="kategori_lapangan_usaha"
-                        value="{{ old('kategori_lapangan_usaha', $usaha->kategori_lapangan_usaha) }}" readonly
-                        placeholder="Diisi oleh pengawas BPS"
-                        class="w-full rounded-xl border-gray-300 bg-gray-100 text-gray-500">
+                    @if (auth()->user()->isMasterAdmin() || auth()->user()->isPengawas())
+                        <input type="text" name="kategori_lapangan_usaha"
+                            value="{{ old('kategori_lapangan_usaha', $usaha->kategori_lapangan_usaha) }}"
+                            placeholder="Diisi oleh pengawas BPS"
+                            class="w-full rounded-xl border-gray-300">
+                    @else
+                        <input type="text" name="kategori_lapangan_usaha"
+                            value="{{ old('kategori_lapangan_usaha', $usaha->kategori_lapangan_usaha) }}" readonly
+                            placeholder="Diisi oleh pengawas BPS"
+                            class="w-full rounded-xl border-gray-300 bg-gray-100 text-gray-500">
+                    @endif
 
                 </div>
 
                 <div>
 
                     <label class="block text-sm font-medium mb-2">
-                        Kode KBLI
+                        18. Kode KBLI 2020
                     </label>
 
-                    <input type="text" name="kbli" value="{{ old('kbli', $usaha->kbli) }}" readonly
-                        placeholder="Diisi oleh pengawas BPS"
-                        class="w-full rounded-xl border-gray-300 bg-gray-100 text-gray-500">
+                    @if (auth()->user()->isMasterAdmin() || auth()->user()->isPengawas())
+                        <input type="text" name="kbli" value="{{ old('kbli'), $usaha->kbli }}"
+                            placeholder="Diisi oleh pengawas BPS" class="w-full rounded-xl border-gray-300">
+                    @else
+                        <input type="text" name="kbli" value="{{ old('kbli'), $usaha->kbli }}" readonly
+                            placeholder="Diisi oleh pengawas BPS"
+                            class="w-full rounded-xl border-gray-300 bg-gray-100 text-gray-500">
+                    @endif
 
                 </div>
 
                 <div>
 
                     <label class="block text-sm font-medium mb-2">
-                        Tahun Mulai Beroperasi
+                        19. Tahun Mulai Beroperasi
                     </label>
 
                     <input type="number" name="tahun_mulai" min="1900" max="{{ now()->year }}"
@@ -376,7 +405,7 @@
                 <div>
 
                     <label class="block text-sm font-medium mb-3">
-                        Izin Usaha
+                        20. Apa saja ijin usaha/sertifikat usaha yang dimiliki usaha/perusahaan?
                     </label>
 
                     <div class="space-y-2">
@@ -402,7 +431,7 @@
                 <div>
 
                     <label class="block text-sm font-medium mb-2">
-                        Bentuk Badan Usaha / Badan Hukum
+                        21. Bentuk Badan Usaha / Badan Hukum
                     </label>
 
                     <select name="bentuk_badan_usaha" class="w-full rounded-xl border-gray-300">
@@ -423,14 +452,18 @@
 
                 </div>
 
+            </div>
+
+            <div class="bg-white rounded-2xl border p-6">
+
                 <div>
 
                     <label class="block text-sm font-medium mb-2">
-                        Jumlah Pekerja Dibayar
+                        22a. Berapa jumlah pekerja dibayar?, (orang)
                     </label>
 
                     <input type="number" min="0" name="jumlah_pekerja_dibayar"
-                        value="{{ old('jumlah_pekerja_dibayar', $usaha->jumlah_pekerja_dibayar ?? 0) }}"
+                        value="{{ old('jumlah_pekerja_dibayar', $usaha->jumlah_pekerja_dibayar, 0) }}"
                         class="w-full rounded-xl border-gray-300">
 
                 </div>
@@ -438,11 +471,11 @@
                 <div>
 
                     <label class="block text-sm font-medium mb-2">
-                        Total Upah / Gaji Bulanan (Rp)
+                        22b. Berapa total upah/gaji yang dibayarkan sebulan terakhir?, (Rp 000)
                     </label>
 
                     <input type="number" min="0" step="1" name="total_upah_bulanan"
-                        value="{{ old('total_upah_bulanan', $usaha->total_upah_bulanan ?? 0) }}"
+                        value="{{ old('total_upah_bulanan', $usaha->total_upah_bulanan, 0) }}"
                         class="w-full rounded-xl border-gray-300">
 
                 </div>
@@ -450,11 +483,11 @@
                 <div>
 
                     <label class="block text-sm font-medium mb-2">
-                        Jumlah Pekerja Tidak Dibayar
+                        22c. Berapa jumlah pekerja tidak dibayar/pekerja keluarga (termasuk pemilik)?, (orang)
                     </label>
 
                     <input type="number" min="0" name="jumlah_pekerja_tidak_dibayar"
-                        value="{{ old('jumlah_pekerja_tidak_dibayar', $usaha->jumlah_pekerja_tidak_dibayar ?? 0) }}"
+                        value="{{ old('jumlah_pekerja_tidak_dibayar', $usaha->jumlah_pekerja_tidak_dibayar, 0) }}"
                         class="w-full rounded-xl border-gray-300">
 
                 </div>
@@ -462,11 +495,12 @@
                 <div>
 
                     <label class="block text-sm font-medium mb-2">
-                        Pendapatan Bulanan (Rp)
+                        23a. Berapa nilai produksi/pendapatan/penjualan sebulan terakhir atau bulan terakhir beroperasi?,
+                        (Rp 000)
                     </label>
 
                     <input type="number" min="0" step="1" name="pendapatan_bulanan"
-                        value="{{ old('pendapatan_bulanan', $usaha->pendapatan_bulanan ?? 0) }}"
+                        value="{{ old('pendapatan_bulanan', $usaha->pendapatan_bulanan, 0) }}"
                         class="w-full rounded-xl border-gray-300">
 
                 </div>
@@ -474,19 +508,23 @@
                 <div>
 
                     <label class="block text-sm font-medium mb-2">
-                        Pendapatan Tahunan (Rp)
+                        23b. Berapa nilai produksi/pendapatan/penjualan selama tahun 2025?, (Rp 000)
                     </label>
 
                     <input type="number" min="0" step="1" name="pendapatan_tahunan"
-                        value="{{ old('pendapatan_tahunan', $usaha->pendapatan_tahunan ?? 0) }}"
+                        value="{{ old('pendapatan_tahunan', $usaha->pendapatan_tahunan, 0) }}"
                         class="w-full rounded-xl border-gray-300">
 
                 </div>
+
+            </div>
+
+            <div class="bg-white rounded-2xl border p-6">
 
                 <div>
 
                     <label class="block text-sm font-medium mb-3">
-                        Penggunaan Internet
+                        24. Apakah menggunakan internet dalam menjalankan usaha selama setahun terakhir?
                     </label>
 
                     <div class="space-y-2">
@@ -496,7 +534,7 @@
 
                                 <input type="checkbox" class="exclusive-checkbox" data-group="penggunaan_internet"
                                     data-exclusive="{{ $value == 'X' ? '1' : '0' }}" name="penggunaan_internet[]"
-                                    value="{{ $value }}" @checked(in_array($value, old('penggunaan_internet', $usaha->penggunaan_internet ?? [])))>
+                                    value="{{ $value }}" @checked(in_array($value, old('izin_usaha', $usaha->penggunaan_internet ?? [])))>
 
                                 <span>{{ $label }}</span>
 
@@ -510,7 +548,7 @@
                 <div>
 
                     <label class="block text-sm font-medium mb-3">
-                        Media Internet
+                        25. Media internet apa saja yang digunakan untuk usaha selama setahun terakhir?
                     </label>
 
                     <div class="space-y-2">
@@ -520,7 +558,7 @@
 
                                 <input type="checkbox" class="exclusive-checkbox" data-group="media_internet"
                                     data-exclusive="{{ $value == 'X' ? '1' : '0' }}" name="media_internet[]"
-                                    value="{{ $value }}" @checked(in_array($value, old('media_internet', $usaha->media_internet ?? [])))>
+                                    value="{{ $value }}" @checked(in_array($value, old('izin_usaha', $usaha->media_internet ?? [])))>
 
                                 <span>{{ $label }}</span>
 
@@ -534,7 +572,7 @@
                 <div>
 
                     <label class="block text-sm font-medium mb-3">
-                        Alasan Tidak Menggunakan Internet
+                        26. Jika tidak menggunakan internet, apa alasannya?
                     </label>
 
                     <div class="space-y-2">
@@ -544,7 +582,7 @@
 
                                 <input type="checkbox" class="exclusive-checkbox" data-group="alasan_tidak_internet"
                                     data-exclusive="{{ $value == 'X' ? '1' : '0' }}" name="alasan_tidak_internet[]"
-                                    value="{{ $value }}" @checked(in_array($value, old('alasan_tidak_internet', $usaha->alasan_tidak_internet ?? [])))>
+                                    value="{{ $value }}" @checked(in_array($value, old('izin_usaha', $usaha->alasan_tidak_internet ?? [])))>
 
                                 <span>{{ $label }}</span>
 
@@ -555,10 +593,14 @@
 
                 </div>
 
+            </div>
+
+            <div class="bg-white rounded-2xl border p-6">
+
                 <div>
 
                     <label class="block text-sm font-medium mb-3">
-                        Sumber Kredit/Pinjaman
+                        27. Apakah usaha/perusahaan ini menerima kredit atau pinjaman dari lembaga berikut?
                     </label>
 
                     <div class="space-y-2">
@@ -568,7 +610,7 @@
 
                                 <input type="checkbox" class="exclusive-checkbox" data-group="sumber_pinjaman"
                                     data-exclusive="{{ $value == 'X' ? '1' : '0' }}" name="sumber_pinjaman[]"
-                                    value="{{ $value }}" @checked(in_array($value, old('sumber_pinjaman', $usaha->sumber_pinjaman ?? [])))>
+                                    value="{{ $value }}" @checked(in_array($value, old('izin_usaha', $usaha->sumber_pinjaman ?? [])))>
 
                                 <span>{{ $label }}</span>
 
@@ -582,7 +624,7 @@
                 <div>
 
                     <label class="block text-sm font-medium mb-3">
-                        Tujuan Kredit/Pinjaman
+                        28. Jika menerima kredit/pinjaman, untuk apa pinjaman tersebut digunakan?
                     </label>
 
                     <div class="space-y-2">
@@ -592,7 +634,7 @@
 
                                 <input type="checkbox" class="exclusive-checkbox" data-group="tujuan_pinjaman"
                                     data-exclusive="{{ $value == 'X' ? '1' : '0' }}" name="tujuan_pinjaman[]"
-                                    value="{{ $value }}" @checked(in_array($value, old('tujuan_pinjaman', $usaha->tujuan_pinjaman ?? [])))>
+                                    value="{{ $value }}" @checked(in_array($value, old('izin_usaha', $usaha->tujuan_pinjaman ?? [])))>
 
                                 <span>{{ $label }}</span>
 
@@ -606,7 +648,7 @@
                 <div>
 
                     <label class="block text-sm font-medium mb-3">
-                        Tidak Menerima Kredit/Pinjaman
+                        29. Jika tidak menerima kredit atau pinjaman, apa alasan utamanya?,
                     </label>
 
                     <select name="tidak_menerima_kredit" class="w-full rounded-xl border-gray-300">
@@ -616,7 +658,7 @@
                         </option>
 
                         @foreach ($tidakMenerimaKredit as $value => $label)
-                            <option value="{{ $value }}" @selected(old('tidak_menerima_kredit', $usaha->tidak_menerima_kredit ?? '') == $value)>
+                            <option value="{{ $value }}" @selected(old('tidak_menerima_kredit', $usaha->tidak_menerima_kredit) == $value)>
 
                                 {{ $label }}
 
@@ -630,7 +672,7 @@
                 <div>
 
                     <label class="block text-sm font-medium mb-3">
-                        Kendala Usaha
+                        30. Kendala/kesulitan yang dialami oleh usaha/perusahaan selama setahun yang lalu:
                     </label>
 
                     <div class="space-y-2">
@@ -640,7 +682,7 @@
 
                                 <input type="checkbox" class="exclusive-checkbox" data-group="kendala_usaha"
                                     data-exclusive="{{ $value == 'X' ? '1' : '0' }}" name="kendala_usaha[]"
-                                    value="{{ $value }}" @checked(in_array($value, old('kendala_usaha', $usaha->kendala_usaha ?? [])))>
+                                    value="{{ $value }}" @checked(in_array($value, old('izin_usaha', $usaha->kendala_usaha ?? [])))>
 
                                 <span>{{ $label }}</span>
 
@@ -657,7 +699,7 @@
 
                 <button type="submit" class="px-5 py-3 rounded-xl bg-green-600 text-white">
 
-                    Simpan
+                    Simpan Perubahan
 
                 </button>
 
@@ -665,19 +707,21 @@
 
         </form>
 
-        <form action="{{ route('admin.usaha.destroy', $tempat) }}" method="POST"
-            onsubmit="return confirm('Hapus data usaha?')">
+        @if (auth()->user()->isMasterAdmin())
+            <form action="{{ route('admin.usaha.destroy', $tempat) }}" method="POST"
+                onsubmit="return confirm('Hapus data usaha?')">
 
-            @csrf
-            @method('DELETE')
+                @csrf
+                @method('DELETE')
 
-            <button type="submit" class="px-5 py-3 rounded-xl bg-red-600 text-white">
+                <button type="submit" class="px-5 py-3 rounded-xl bg-red-600 text-white">
 
-                Hapus Data Usaha
+                    Hapus Data Usaha
 
-            </button>
+                </button>
 
-        </form>
+            </form>
+        @endif
 
     </div>
 @endsection

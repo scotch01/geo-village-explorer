@@ -88,14 +88,13 @@
 
                         </a>
                     @else
-                        <a href="{{ route('admin.keluarga.edit', $tempat) }}"
-                            class="inline-flex mt-4 px-4 py-2 rounded-xl bg-amber-500 text-white text-sm">
+                        <a href="{{ route('admin.keluarga.show', $tempat) }}"
+                            class="inline-flex mt-4 px-4 py-2 rounded-xl bg-blue-600 text-white text-sm">
 
-                            Edit Data Keluarga
+                            Lihat Data Keluarga
 
                         </a>
                     @endif
-
                 </div>
             @endif
 
@@ -113,8 +112,7 @@
                         </p>
 
                     </div>
-
-                    @if ($tempat->usahaCompleted)
+                    @if ($tempat->usaha)
                         <a href="{{ route('admin.usaha.edit', $tempat) }}"
                             class="inline-flex mt-4 px-4 py-2 rounded-xl bg-amber-500 text-white text-sm">
 
@@ -129,7 +127,6 @@
 
                         </a>
                     @endif
-
                 </div>
             @endif
 

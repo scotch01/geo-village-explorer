@@ -146,6 +146,63 @@ class KeluargaController extends Controller
             );
     }
 
+    public function show(Tempat $tempat)
+    {
+        $tempat->load([
+            'keluarga',
+            'keluarga.anggotaKeluargas',
+            'keluarga.meterans',
+        ]);
+
+        abort_if(!$tempat->keluarga, 404);
+
+        return view(
+            'admin.keluarga.show',
+            [
+                'tempat'   => $tempat,
+                'keluarga' => $tempat->keluarga,
+
+                'yaTidak' => YaTidak::OPTIONS,
+
+                'statusKepemilikanRumah'
+                    => StatusKepemilikanRumah::OPTIONS,
+
+                'bahanLantai'
+                    => BahanLantai::OPTIONS,
+
+                'bahanDinding'
+                    => BahanDinding::OPTIONS,
+
+                'bahanAtap'
+                    => BahanAtap::OPTIONS,
+
+                'fasilitasBab'
+                    => FasilitasBAB::OPTIONS,
+
+                'jenisKloset'
+                    => JenisKloset::OPTIONS,
+
+                'pembuanganTinja'
+                    => PembuanganTinja::OPTIONS,
+
+                'sumberAirMinum'
+                    => SumberAirMinum::OPTIONS,
+
+                'sumberPenerangan'
+                    => SumberPenerangan::OPTIONS,
+
+                'dayaListrik'
+                    => DayaListrik::OPTIONS,
+
+                'kreditSumber'
+                    => KreditSumber::OPTIONS,
+
+                'kreditTujuan'
+                    => KreditTujuan::OPTIONS,
+            ]
+        );
+    }
+
     public function edit(
         Tempat $tempat
     )
