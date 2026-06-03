@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use App\Models\MasterProfesi;
+use Illuminate\Validation\ValidationException;
 use App\Models\Keluarga;
 use App\Models\AnggotaKeluarga;
 use App\Constants\AnggotaKeluarga\HubunganKeluarga;
@@ -105,7 +108,7 @@ class AnggotaKeluargaController extends Controller
                 'success',
                 'Anggota keluarga berhasil ditambahkan.'
             );
-            }
+    }
 
     public function edit(
         AnggotaKeluarga $anggota
@@ -259,5 +262,77 @@ class AnggotaKeluargaController extends Controller
                 => 'string',
 
         ]);
+
+        $umur = Carbon::parse(
+            $request->tanggal_lahir
+        )->age;
+
+        /*
+        |--------------------------------------------------------------------------
+        | Validasi Pendidikan
+        |--------------------------------------------------------------------------
+        */
+
+        if (
+            $umur < 5 &&
+            (
+                $request->filled('partisipasi_sekolah') ||
+                $request->filled('ijazah_tertinggi')
+            )
+        ) {
+
+            throw ValidationException::withMessages([
+                'tanggal_lahir' =>
+                    'Data pendidikan hanya berlaku untuk usia 5 tahun ke atas.'
+            ]);
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Validasi Pekerjaan
+        |--------------------------------------------------------------------------
+        */
+
+        if (
+            $umur < 10 &&
+            (
+                $request->filled('master_profesi_id') ||
+                $request->filled('status_pekerjaan')
+            )
+        ) {
+
+            throw ValidationException::withMessages([
+                'tanggal_lahir' =>
+                    'Data pekerjaan hanya berlaku untuk usia 10 tahun ke atas.'
+            ]);
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Profesi Tidak Bekerja (000)
+        |--------------------------------------------------------------------------
+        */
+
+        if ($request->filled('master_profesi_id')) {
+
+            $profesi = MasterProfesi::find(
+                $request->master_profesi_id
+            );
+
+            if (
+                $profesi &&
+                $profesi->kode === '000' &&
+                $request->filled('status_pekerjaan')
+            ) {
+
+                throw ValidationException::withMessages([
+                    'status_pekerjaan' =>
+                        'Status kedudukan pekerjaan tidak boleh diisi jika profesi adalah Tidak Bekerja.'
+                ]);
+            }
+        }
+
+        return $validated;
+
     }
 }

@@ -11,7 +11,8 @@
                 keluarga di bawah ini secara teliti.</p>
         </div>
 
-        <form method="POST" action="{{ route('admin.anggota.store', $keluarga) }}" class="space-y-6">
+        <form x-data="anggotaForm()" x-init="init()" @profesi-selected.window="checkProfesi($event.detail.kode)"
+            method="POST" action="{{ route('admin.anggota.store', $keluarga) }}" class="space-y-6">
             @csrf
 
             <div class="bg-white rounded-2xl border p-6 space-y-5 shadow-sm">
@@ -44,7 +45,7 @@
                     <label class="block mb-2 font-medium text-gray-700">
                         6. Nama Anggota Keluarga
                     </label>
-                    <input type="text" name="nama" value="{{ old('nama') }}"
+                    <input type="text" x-model="nama" name="nama" value="{{ old('nama') }}"
                         class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500">
                     @error('nama')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -66,7 +67,8 @@
                 {{-- 8. Hubungan Keluarga --}}
                 <div>
                     <label class="block mb-2 font-medium text-gray-700">
-                        8. Hubungan dengan Kepala Keluarga
+                        8. Hubungan <span class="font-bold" x-text="nama || 'anggota keluarga ini'">
+                        </span> dengan Kepala Keluarga
                     </label>
                     <select name="hubungan_keluarga"
                         class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500">
@@ -85,7 +87,8 @@
                 {{-- 9. Status Perkawinan --}}
                 <div>
                     <label class="block mb-2 font-medium text-gray-700">
-                        9. Status Perkawinan
+                        9. Status Perkawinan <span class="font-bold" x-text="nama || 'anggota keluarga ini'">
+                        </span>
                     </label>
                     <select name="status_perkawinan"
                         class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500">
@@ -104,19 +107,33 @@
                 {{-- 10. Tanggal Lahir --}}
                 <div>
                     <label class="block mb-2 font-medium text-gray-700">
-                        10. Tanggal Lahir
+                        10. Tanggal Lahir <span class="font-bold" x-text="nama || 'anggota keluarga ini'">
+                        </span>
                     </label>
-                    <input type="date" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}"
-                        class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500">
+                    <input type="date" x-model="tanggalLahir" @change="hitungUmur()" name="tanggal_lahir"
+                        value="{{ old('tanggal_lahir') }}"
+                        class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500 cursor-pointer"
+                        onclick="this.showPicker()">
                     @error('tanggal_lahir')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
                 </div>
 
+                <div>
+                    <label class="block mb-2 font-medium text-gray-700">
+                        Umur <span class="font-bold" x-text="nama || 'anggota keluarga ini'">
+                        </span>
+                    </label>
+
+                    <input type="text" x-model="umur" readonly
+                        class="w-full rounded-xl border-gray-300 bg-gray-100 text-gray-500">
+                </div>
+
                 {{-- 11. Jenis Kelamin --}}
                 <div>
                     <label class="block mb-2 font-medium text-gray-700">
-                        11. Jenis Kelamin
+                        11. Jenis Kelamin <span class="font-bold" x-text="nama || 'anggota keluarga ini'">
+                        </span>
                     </label>
                     <select name="jenis_kelamin"
                         class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500">
@@ -138,10 +155,15 @@
                 {{-- 12. Partisipasi Sekolah --}}
                 <div>
                     <label class="block mb-2 font-medium text-gray-700">
-                        12. Partisipasi Sekolah
+                        12. Partisipasi Sekolah <span class="font-bold" x-text="nama || 'anggota keluarga ini'">
+                        </span>
                     </label>
                     <select name="partisipasi_sekolah"
-                        class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500">
+                        class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                        :disabled="umur < 5"
+                        :class="{
+                            'bg-gray-100 text-gray-500': umur < 5
+                        }">
                         <option value="">Pilih</option>
                         @foreach ($partisipasiSekolah as $key => $label)
                             <option value="{{ $key }}" @selected(old('partisipasi_sekolah') == $key)>
@@ -157,10 +179,15 @@
                 {{-- 13. Ijazah Tertinggi --}}
                 <div>
                     <label class="block mb-2 font-medium text-gray-700">
-                        13. Ijazah/STTB tertinggi yang dimiliki
+                        13. Ijazah/STTB tertinggi yang dimiliki <span class="font-bold" x-text="nama || 'anggota keluarga ini'">
+                        </span>
                     </label>
                     <select name="ijazah_tertinggi"
-                        class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500">
+                        class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                        :disabled="umur < 5"
+                        :class="{
+                            'bg-gray-100 text-gray-500': umur < 5
+                        }">
                         <option value="">Pilih</option>
                         @foreach ($pendidikan as $key => $label)
                             <option value="{{ $key }}" @selected(old('ijazah_tertinggi') == $key)>
@@ -174,9 +201,13 @@
                 </div>
 
                 {{-- 14. Profesi Pekerjaan Utama (Autocomplete) --}}
-                <div class="relative">
+                <div class="relative"
+                    :class="{
+                        'opacity-50 pointer-events-none': umur < 10
+                    }">
                     <label class="block mb-2 font-medium text-gray-700">
-                        14. Profesi Pekerjaan Utama
+                        14. Profesi Pekerjaan Utama <span class="font-bold" x-text="nama || 'anggota keluarga ini'">
+                        </span>
                     </label>
                     <input type="hidden" name="master_profesi_id" id="master_profesi_id"
                         value="{{ old('master_profesi_id') }}">
@@ -198,10 +229,17 @@
                 {{-- 15. Status Kedudukan Pekerjaan --}}
                 <div>
                     <label class="block mb-2 font-medium text-gray-700">
-                        15. Status kedudukan dalam pekerjaan utama
+                        15. Status kedudukan <span class="font-bold" x-text="nama || 'anggota keluarga ini'">
+                        </span> dalam pekerjaan utama
                     </label>
                     <select name="status_pekerjaan"
-                        class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500">
+                        class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                        :disabled="umur < 10 ||
+                            profesiTidakBekerja"
+                        :class="{
+                            'bg-gray-100 text-gray-500': umur < 10 ||
+                                profesiTidakBekerja
+                        }">
                         <option value="">Pilih</option>
                         @foreach ($kedudukanPekerjaan as $key => $label)
                             <option value="{{ $key }}" @selected(old('status_pekerjaan') == $key)>
@@ -217,7 +255,8 @@
                 {{-- 16. Rekening/Dompet Digital --}}
                 <div>
                     <label class="block mb-2 font-medium text-gray-700">
-                        16. Apakah memiliki rekening aktif atau dompet digital?
+                        16. Apakah <span class="font-bold" x-text="nama || 'anggota keluarga ini'">
+                        </span> memiliki rekening aktif atau dompet digital?
                     </label>
                     <select name="rekening_digital"
                         class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500">
@@ -239,7 +278,8 @@
                 {{-- 17. Disabilitas (Checkbox Group) --}}
                 <div>
                     <label class="block mb-2 font-medium text-gray-700">
-                        17. Apakah memiliki keterbatasan dalam jangka waktu lama sehingga mengalami kesulitan dalam
+                        17. Apakah <span class="font-bold" x-text="nama || 'anggota keluarga ini'">
+                        </span> memiliki keterbatasan dalam jangka waktu lama sehingga mengalami kesulitan dalam
                         menjalankan aktivitas sehari-hari?
                     </label>
                     <div class="space-y-2 bg-slate-50 p-4 rounded-xl border border-dashed">
@@ -261,7 +301,8 @@
                 {{-- 18. Penyakit Kronis (Checkbox Group) --}}
                 <div>
                     <label class="block mb-2 font-medium text-gray-700">
-                        18. Apakah memiliki keluhan kesehatan kronis/menahun?
+                        18. Apakah <span class="font-bold" x-text="nama || 'anggota keluarga ini'">
+                        </span> memiliki keluhan kesehatan kronis/menahun?
                     </label>
                     <div class="space-y-2 bg-slate-50 p-4 rounded-xl border border-dashed">
                         @foreach ($penyakitKronis as $key => $label)
@@ -282,7 +323,8 @@
                 {{-- 19. Jaminan Kesehatan (Checkbox Group) --}}
                 <div>
                     <label class="block mb-2 font-medium text-gray-700">
-                        19. Apakah memiliki jaminan kesehatan?
+                        19. Apakah <span class="font-bold" x-text="nama || 'anggota keluarga ini'">
+                        </span> memiliki jaminan kesehatan?
                     </label>
                     <div class="space-y-2 bg-slate-50 p-4 rounded-xl border border-dashed">
                         @foreach ($jaminanKesehatan as $key => $label)
@@ -317,6 +359,160 @@
 
     @push('scripts')
         <script>
+            function anggotaForm() {
+
+                return {
+
+                    nama: '',
+
+                    tanggalLahir: @js(old('tanggal_lahir')),
+
+                    umur: 0,
+
+                    profesiTidakBekerja: false,
+
+                    init() {
+
+                        this.hitungUmur();
+
+                    },
+
+                    hitungUmur() {
+
+                        if (!this.tanggalLahir) {
+
+                            this.umur = 0;
+
+                            return;
+                        }
+
+                        const lahir =
+                            new Date(this.tanggalLahir);
+
+                        const sekarang =
+                            new Date();
+
+                        let umur =
+                            sekarang.getFullYear() -
+                            lahir.getFullYear();
+
+                        const bulan =
+                            sekarang.getMonth() -
+                            lahir.getMonth();
+
+                        if (
+                            bulan < 0 ||
+                            (
+                                bulan === 0 &&
+                                sekarang.getDate() <
+                                lahir.getDate()
+                            )
+                        ) {
+
+                            umur--;
+
+                        }
+
+                        this.umur = umur;
+
+                        this.applyRules();
+
+                    },
+
+                    applyRules() {
+
+                        if (this.umur < 5) {
+
+                            const partisipasiSekolah =
+                                document.querySelector(
+                                    '[name="partisipasi_sekolah"]'
+                                );
+
+                            const ijazahTertinggi =
+                                document.querySelector(
+                                    '[name="ijazah_tertinggi"]'
+                                );
+
+                            if (partisipasiSekolah) {
+                                partisipasiSekolah.value = '';
+                            }
+
+                            if (ijazahTertinggi) {
+                                ijazahTertinggi.value = '';
+                            }
+                        }
+
+                        if (this.umur < 10) {
+
+                            const masterProfesi =
+                                document.querySelector(
+                                    '#master_profesi_id'
+                                );
+
+                            const kodeProfesi =
+                                document.querySelector(
+                                    '#kode_profesi'
+                                );
+
+                            const profesiNama =
+                                document.querySelector(
+                                    '#profesi_nama'
+                                );
+
+                            const profesiSearch =
+                                document.querySelector(
+                                    '#profesi_search'
+                                );
+
+                            const statusPekerjaan =
+                                document.querySelector(
+                                    '[name="status_pekerjaan"]'
+                                );
+
+                            if (masterProfesi) {
+                                masterProfesi.value = '';
+                            }
+
+                            if (kodeProfesi) {
+                                kodeProfesi.value = '';
+                            }
+
+                            if (profesiNama) {
+                                profesiNama.value = '';
+                            }
+
+                            if (profesiSearch) {
+                                profesiSearch.value = '';
+                            }
+
+                            if (statusPekerjaan) {
+                                statusPekerjaan.value = '';
+                            }
+
+                            this.profesiTidakBekerja = false;
+                        }
+                    },
+
+                    checkProfesi(kode) {
+
+                        this.profesiTidakBekerja =
+                            kode === '000';
+
+                        if (this.profesiTidakBekerja) {
+
+                            const statusPekerjaan =
+                                document.querySelector(
+                                    '[name="status_pekerjaan"]'
+                                );
+
+                            if (statusPekerjaan) {
+                                statusPekerjaan.value = '';
+                            }
+                        }
+                    }
+                }
+            }
+
             document.addEventListener('DOMContentLoaded', () => {
                 // --- 1. Logika Autocomplete Profesi ---
                 const input = document.getElementById('profesi_search');
@@ -364,6 +560,15 @@
                                     input.value = item.nama;
                                     profesiId.value = item.id;
                                     kodeProfesi.value = item.kode;
+                                    window.dispatchEvent(
+                                        new CustomEvent(
+                                            'profesi-selected', {
+                                                detail: {
+                                                    kode: item.kode
+                                                }
+                                            }
+                                        )
+                                    );
                                     namaProfesiHidden.value = item
                                         .nama; // Simpan untuk old value handling
                                     results.classList.add('hidden');
