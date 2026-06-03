@@ -9,7 +9,6 @@ class TidakPenggunaanInternet
     public const AKSES = 'C';
     public const KHAWATIR = 'D';
     public const LAINNYA = 'E';
-    public const TIDAK = 'X';
 
     public const OPTIONS = [
         self::PERANGKAT => 'A. Tidak memiliki perangkat (HP, laptop, dll)',
@@ -17,6 +16,5 @@ class TidakPenggunaanInternet
         self::AKSES => 'C. Tidak ada akses internet',
         self::KHAWATIR => 'D. Khawatir mengenai penggunaan internet',
         self::LAINNYA => 'E. Lainnya',
-        self::TIDAK => 'X. Menggunakan Internet',
     ];
 }

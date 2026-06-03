@@ -83,7 +83,7 @@ Tindakan:
 
 ### 6. Preview Foto Bangunan pada Halaman Detail
 
-Status: Ditunda
+Status: Sudah
 
 Alasan:
 

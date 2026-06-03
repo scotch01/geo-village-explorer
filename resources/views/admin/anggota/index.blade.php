@@ -3,135 +3,117 @@
 @section('content')
     <div class="max-w-6xl mx-auto space-y-6">
 
-        <div>
+        {{-- Flash Message Notifikasi --}}
+        @if (session('success'))
+            <div class="p-4 bg-green-50 border border-green-200 text-green-700 rounded-xl flex items-center gap-2 shadow-sm">
+                <svg class="w-5 h-5 text-green-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span class="text-sm font-medium">{{ session('success') }}</span>
+            </div>
+        @endif
 
-            <h1 class="text-2xl font-bold">
-                Kelola Anggota Keluarga
-            </h1>
+        {{-- Header Section --}}
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b pb-4">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-900">
+                    Kelola Anggota Keluarga
+                </h1>
+                <p class="text-gray-500 mt-1 flex items-center gap-1.5 text-sm">
+                    <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                    </svg>
+                    Kepala Keluarga: <span class="font-semibold text-gray-700">{{ $keluarga->nama_kepala_keluarga }}</span>
+                </p>
+            </div>
 
-            <p class="text-gray-500 mt-1">
-                {{ $keluarga->nama_kepala_keluarga }}
-            </p>
+            <div class="flex flex-wrap items-center gap-3">
+                <a href="{{ route('admin.anggota.create', $keluarga) }}"
+                    class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold transition-all active:scale-95 shadow-md shadow-blue-600/20 text-sm lg:text-base text-center">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                    Tambah Anggota
+                </a>
 
+                <a href="{{ route('admin.keluarga.edit', $keluarga->tempat) }}"
+                    class="inline-flex items-center gap-2 px-4 py-2.5 bg-green-600 hover:bg-green-700 text-white rounded-xl font-bold transition-all active:scale-95 shadow-md shadow-green-600/20 text-sm lg:text-base text-center">
+                    Lanjutkan Keterangan Perumahan
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+            </div>
         </div>
 
-        <div>
-
-            <a href="{{ route('admin.anggota.create', $keluarga) }}"
-                class="inline-flex px-4 py-2 rounded-xl bg-blue-600 text-white">
-
-                Tambah Anggota
-
-            </a>
-
-            <a href="{{ route('admin.keluarga.edit', $keluarga->tempat) }}"
-                class="inline-flex px-4 py-2 rounded-xl bg-green-600 text-white">
-
-                Lanjutkan Keterangan Perumahan
-
-            </a>
-
-        </div>
-
-        <div class="bg-white border rounded-2xl overflow-hidden">
-
-            <table class="w-full">
-
-                <thead>
-
-                    <tr class="bg-slate-50">
-
-                        <th class="px-6 py-4 text-left">
-                            No
-                        </th>
-
-                        <th class="px-6 py-4 text-left">
-                            Nama
-                        </th>
-
-                        <th class="px-6 py-4 text-left">
-                            Hubungan
-                        </th>
-
-                        <th class="px-6 py-4 text-center">
-                            Aksi
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody>
-
-                    @forelse($anggotas as $anggota)
-                        <tr class="border-t">
-
-                            <td class="px-6 py-4">
-
-                                {{ $anggota->nomor_urut }}
-
-                            </td>
-
-                            <td class="px-6 py-4 font-medium">
-
-                                {{ $anggota->nama }}
-
-                            </td>
-
-                            <td class="px-6 py-4">
-
-                                {{ $anggota->hubungan_label }}
-
-                            </td>
-
-                            <td class="px-6 py-4">
-
-                                <div class="flex gap-2">
-
-                                    <a href="{{ route('admin.anggota.edit', $anggota) }}"
-                                        class="px-3 py-1 bg-amber-500 text-white rounded-lg text-sm">
-
-                                        Edit
-
-                                    </a>
-
-                                    <form action="{{ route('admin.anggota.destroy', $anggota) }}" method="POST"
-                                        onsubmit="return confirm('Hapus anggota ini?')">
-
-                                        @csrf
-                                        @method('DELETE')
-
-                                        <button type="submit" class="px-3 py-1 bg-red-600 text-white rounded-lg text-sm">
-
-                                            Hapus
-
-                                        </button>
-
-                                    </form>
-
-                                </div>
-
-                            </td>
-
+        {{-- Table Card --}}
+        <div class="bg-white border rounded-2xl overflow-hidden shadow-sm">
+            <div class="overflow-x-auto">
+                <table class="w-full whitespace-nowrap">
+                    <thead>
+                        <tr class="bg-slate-50 border-b border-gray-100">
+                            <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-16">
+                                No Urut
+                            </th>
+                            <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                Nama Lengkap
+                            </th>
+                            <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                Hubungan Keluarga
+                            </th>
+                            <th class="px-6 py-4 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider w-40">
+                                Aksi
+                            </th>
                         </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                        @forelse($anggotas as $anggota)
+                            <tr class="hover:bg-slate-50/70 transition">
+                                <td class="px-6 py-4 text-sm text-center text-gray-600 font-medium">
+                                    {{ $anggota->nomor_urut }}
+                                </td>
+                                <td class="px-6 py-4 text-sm font-semibold text-gray-900">
+                                    {{ $anggota->nama }}
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-600">
+                                    <span class="inline-flex px-2.5 py-1 rounded-md text-xs font-medium bg-slate-100 text-slate-700">
+                                        {{ $anggota->hubungan_label }}
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center justify-center gap-2">
+                                        <a href="{{ route('admin.anggota.edit', $anggota) }}"
+                                            class="inline-flex items-center px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-white rounded-lg text-xs font-medium shadow-sm transition">
+                                            Edit
+                                        </a>
 
-                    @empty
-
-                        <tr>
-
-                            <td colspan="4" class="px-6 py-8 text-center text-gray-500">
-
-                                Belum ada anggota keluarga
-
-                            </td>
-
-                        </tr>
-                    @endforelse
-
-                </tbody>
-
-            </table>
-
+                                        <form action="{{ route('admin.anggota.destroy', $anggota) }}" method="POST"
+                                            onsubmit="return confirm('Apakah Anda yakin ingin menghapus anggota keluarga ini?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" 
+                                                class="inline-flex items-center px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-lg text-xs font-medium shadow-sm transition">
+                                                Hapus
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="4" class="px-6 py-12 text-center text-gray-400">
+                                    <div class="flex flex-col items-center justify-center space-y-2">
+                                        <svg class="w-8 h-8 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                                        </svg>
+                                        <span class="text-sm font-medium">Belum ada data anggota keluarga</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
         </div>
 
     </div>

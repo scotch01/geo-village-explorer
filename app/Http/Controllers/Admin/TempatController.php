@@ -138,6 +138,10 @@ class TempatController extends Controller
         $validated['created_by'] =
             auth()->id();
 
+        $validated['nama_tempat'] = '-';
+
+        $validated['alamat'] = '-';
+
         if ($request->hasFile('foto_bangunan')) {
 
             $validated['foto_bangunan'] =
@@ -146,10 +150,10 @@ class TempatController extends Controller
                     ->store('tempat', 'public');
         }
 
-        Tempat::create($validated);
+        $tempat = Tempat::create($validated);
 
         return redirect()
-            ->route('admin.tempat.index')
+            ->route('admin.tempat.survey', $tempat)
             ->with('success', 'Data berhasil ditambahkan');
     }
 
