@@ -6,9 +6,9 @@
         {{-- Header --}}
         <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 lg:p-8">
             <h1 class="text-2xl lg:text-3xl font-black text-slate-900 tracking-tight">
-                Tambah Data BLOK III
+                Perbarui Data BLOK III
             </h1>
-            <p class="text-sm lg:text-base font-medium text-slate-700 mt-1">Silakan lengkapi kuisioner usaha/perusahaan di
+            <p class="text-sm lg:text-base font-medium text-slate-700 mt-1">Silakan perbarui data kuisioner usaha/perusahaan di
                 bawah ini secara teliti.</p>
         </div>
 
@@ -85,7 +85,7 @@
                 }
             }
         }" x-init="checkInternet();
-        checkPinjaman();" action="{{ route('admin.usaha.update', $tempat) }}" method="POST"
+        checkPinjaman();" action="{{ route('admin.usaha.update', $usaha) }}" method="POST"
             class="space-y-6">
 
             @csrf
@@ -93,10 +93,12 @@
 
             {{-- BLOK I: Alamat & Nama Usaha --}}
             <div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm space-y-6">
-                <div>
-                    <h2 class="font-bold text-gray-900 text-lg border-b border-gray-100 pb-2">I. Alamat & Nama Usaha</h2>
+                <div class="flex items-center gap-4 border-b border-slate-100 pb-4">
+                    <div class="w-1.5 h-6 rounded-full bg-blue-600"></div>
+                    <h2 class="font-black text-lg text-slate-900">
+                        I. Alamat & Nama Usaha
+                    </h2>
                 </div>
-
                 @if ($tempat->jenis_bangunan === 'bc')
                     <label
                         class="inline-flex items-center gap-2.5 px-4 py-3 bg-blue-50/50 border border-blue-100 rounded-xl cursor-pointer select-none w-full md:w-auto transition hover:bg-blue-50">
@@ -160,7 +162,12 @@
 
             {{-- BLOK II: Kontak Usaha --}}
             <div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm space-y-4">
-                <h2 class="font-bold text-gray-900 text-lg border-b border-gray-100 pb-2">II. Kontak Usaha</h2>
+                <div class="flex items-center gap-4 border-b border-slate-100 pb-4">
+                    <div class="w-1.5 h-6 rounded-full bg-blue-600"></div>
+                    <h2 class="font-black text-lg text-slate-900">
+                        II. Kontak Usaha
+                    </h2>
+                </div>
 
                 <div class="grid md:grid-cols-2 gap-4">
                     <div>
@@ -186,8 +193,13 @@
 
             {{-- BLOK III: Identitas Bangunan & Pemilik --}}
             <div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm space-y-6">
-                <h2 class="font-bold text-gray-900 text-lg border-b border-gray-100 pb-2">III. Karakteristik & Identitas
-                    Pemilik</h2>
+                <div class="flex items-center gap-4 border-b border-slate-100 pb-4">
+                    <div class="w-1.5 h-6 rounded-full bg-blue-600"></div>
+                    <h2 class="font-black text-lg text-slate-900">
+                        III. Karakteristik & Identitas
+                        Pemilik
+                    </h2>
+                </div>
 
                 <div class="grid md:grid-cols-2 gap-4">
                     <div>
@@ -284,8 +296,13 @@
 
             {{-- BLOK IV: Aktivitas Operasional & KBLI --}}
             <div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm space-y-4">
-                <h2 class="font-bold text-gray-900 text-lg border-b border-gray-100 pb-2">IV. Aktivitas Operasional &
-                    Legalitas</h2>
+                <div class="flex items-center gap-4 border-b border-slate-100 pb-4">
+                    <div class="w-1.5 h-6 rounded-full bg-blue-600"></div>
+                    <h2 class="font-black text-lg text-slate-900">
+                        IV. Aktivitas Operasional &
+                        Legalitas
+                    </h2>
+                </div>
 
                 <div class="grid md:grid-cols-2 gap-4">
                     <div>
@@ -369,7 +386,7 @@
                     <div>
                         <label class="block text-sm font-semibold text-gray-800 mb-3">21. Bentuk Badan Usaha / Badan
                             Hukum</label>
-                        <select name="shapes_badan_usaha"
+                        <select name="bentuk_badan_usaha"
                             class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500 text-sm">
                             <option value="">Pilih Bentuk Hukum</option>
                             @foreach ($badanUsaha as $value => $label)
@@ -386,8 +403,13 @@
 
             {{-- BLOK V: Ketenagakerjaan & Keuangan --}}
             <div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm space-y-4">
-                <h2 class="font-bold text-gray-900 text-lg border-b border-gray-100 pb-2">V. Ketenagakerjaan, Upah, dan
-                    Pendapatan</h2>
+                <div class="flex items-center gap-4 border-b border-slate-100 pb-4">
+                    <div class="w-1.5 h-6 rounded-full bg-blue-600"></div>
+                    <h2 class="font-black text-lg text-slate-900">
+                        V. Ketenagakerjaan, Upah, dan
+                        Pendapatan
+                    </h2>
+                </div>
 
                 <div class="grid md:grid-cols-3 gap-4">
                     <div>
@@ -452,8 +474,13 @@
 
             {{-- BLOK VI: Pemanfaatan Internet --}}
             <div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm space-y-6">
-                <h2 class="font-bold text-gray-900 text-lg border-b border-gray-100 pb-2">VI. Pemanfaatan Internet Usaha
-                </h2>
+                <div class="flex items-center gap-4 border-b border-slate-100 pb-4">
+                    <div class="w-1.5 h-6 rounded-full bg-blue-600"></div>
+                    <h2 class="font-black text-lg text-slate-900">
+                        VII. Akses Permodalan & Kendala
+                        Usaha
+                    </h2>
+                </div>
 
                 <div class="grid md:grid-cols-2 gap-6">
                     <div>
@@ -597,7 +624,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 {{-- Action Submit --}}
                 <div class="flex items-center justify-end gap-3 border-t-2 border-gray-300 pt-4">
                     <button type="submit"

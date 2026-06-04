@@ -210,7 +210,7 @@
 
                                         <span class="text-slate-600 font-medium">
 
-                                            {{ $tempat->keluarga?->dusun ?? ($tempat->usaha?->dusun ?? '-') }}
+                                            {{ $tempat->keluarga?->dusun ?? ($tempat->usahas->first()?->dusun ?? '-') }}
 
                                         </span>
 

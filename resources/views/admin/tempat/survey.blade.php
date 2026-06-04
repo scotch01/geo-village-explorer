@@ -20,7 +20,8 @@
 
         <div class="grid grid-cols-1 {{ $topGridCols }} gap-8 w-full">
 
-            <div class="bg-white rounded-3xl lg:rounded-[2.5rem] border border-slate-200 p-6 lg:p-8 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between min-w-0">
+            <div
+                class="bg-white rounded-3xl lg:rounded-[2.5rem] border border-slate-200 p-6 lg:p-8 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between min-w-0">
                 <div>
                     <div class="flex items-start justify-between gap-4">
                         <div>
@@ -42,7 +43,8 @@
                         <div class="text-xs uppercase tracking-wider font-black text-slate-400">
                             Jenis Bangunan
                         </div>
-                        <div class="mt-2 inline-flex px-3 py-1.5 rounded-lg bg-blue-50 text-blue-700 text-xs font-black uppercase tracking-wider border border-blue-100">
+                        <div
+                            class="mt-2 inline-flex px-3 py-1.5 rounded-lg bg-blue-50 text-blue-700 text-xs font-black uppercase tracking-wider border border-blue-100">
                             {{ \App\Constants\Tempat\JenisBangunan::OPTIONS[$tempat->jenis_bangunan] ?? '-' }}
                         </div>
                     </div>
@@ -50,7 +52,8 @@
             </div>
 
             @if (in_array($tempat->jenis_bangunan, ['btt', 'bc']))
-                <div class="bg-white rounded-3xl lg:rounded-[2.5rem] border border-slate-200 p-6 lg:p-8 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between min-w-0">
+                <div
+                    class="bg-white rounded-3xl lg:rounded-[2.5rem] border border-slate-200 p-6 lg:p-8 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between min-w-0">
                     <div>
                         <h3 class="font-black text-2xl text-slate-900 tracking-tight">
                             BLOK II
@@ -77,7 +80,8 @@
             @endif
 
             @if (in_array($tempat->jenis_bangunan, ['bku', 'bc']))
-                <div class="bg-white rounded-3xl lg:rounded-[2.5rem] border border-slate-200 p-6 lg:p-8 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between min-w-0">
+                <div
+                    class="bg-white rounded-3xl lg:rounded-[2.5rem] border border-slate-200 p-6 lg:p-8 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between min-w-0">
                     <div>
                         <h3 class="font-black text-2xl text-slate-900 tracking-tight">
                             BLOK III
@@ -88,17 +92,14 @@
                     </div>
 
                     <div class="mt-8 pt-6 border-t border-slate-100">
-                        @if ($tempat->usaha)
-                            <a href="{{ route('admin.usaha.edit', $tempat) }}"
-                                class="w-full sm:w-auto text-center inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-amber-500 hover:bg-amber-600 font-bold text-white text-sm transition-all active:scale-95 shadow-sm shadow-amber-500/10">
-                                Edit Data Usaha
-                            </a>
-                        @else
-                            <a href="{{ route('admin.usaha.create', $tempat) }}"
-                                class="w-full sm:w-auto text-center inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 font-bold text-white text-sm transition-all active:scale-95 shadow-sm shadow-emerald-600/10">
-                                Isi Data Usaha
-                            </a>
-                        @endif
+
+                        <a href="{{ route('admin.usaha.index', $tempat) }}"
+                            class="w-full sm:w-auto text-center inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 font-bold text-white text-sm transition-all active:scale-95 shadow-sm">
+
+                            Kelola Data Usaha
+
+                        </a>
+
                     </div>
                 </div>
             @endif
@@ -125,7 +126,7 @@
                     @method('PUT')
 
                     <div class="relative group">
-                        <input type="file" id="foto_bangunan" name="foto_bangunan" accept="image/*" 
+                        <input type="file" id="foto_bangunan" name="foto_bangunan" accept="image/*"
                             class="block w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-bold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 file:transition-colors cursor-pointer border border-slate-200 rounded-xl p-2 bg-slate-50/50">
                     </div>
 
@@ -137,10 +138,12 @@
                     @endif
 
                     <div class="relative rounded-2xl overflow-hidden border border-slate-200 shadow-inner group">
-                        <img id="preview-foto" class="hidden max-h-72 w-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <img id="preview-foto"
+                            class="hidden max-h-72 w-full object-cover group-hover:scale-105 transition-transform duration-500">
                     </div>
 
-                    <button class="w-full sm:w-auto flex items-center justify-center px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 font-bold text-white text-sm transition-all active:scale-95 shadow-sm shadow-blue-600/20">
+                    <button
+                        class="w-full sm:w-auto flex items-center justify-center px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 font-bold text-white text-sm transition-all active:scale-95 shadow-sm shadow-blue-600/20">
                         Simpan Foto
                     </button>
                 </form>
@@ -162,12 +165,13 @@
                     @method('PUT')
 
                     <div>
-                        <textarea name="catatan" rows="5" 
+                        <textarea name="catatan" rows="5"
                             class="w-full rounded-2xl border-slate-200 bg-slate-50/50 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 p-4 font-medium text-slate-700 transition-all placeholder:text-slate-400 text-sm lg:text-base"
                             placeholder="Tambahkan catatan observasi lapangan di sini...">{{ old('catatan', $tempat->catatan) }}</textarea>
                     </div>
 
-                    <button class="w-full sm:w-auto flex items-center justify-center px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 font-bold text-white text-sm transition-all active:scale-95 shadow-sm shadow-blue-600/20">
+                    <button
+                        class="w-full sm:w-auto flex items-center justify-center px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 font-bold text-white text-sm transition-all active:scale-95 shadow-sm shadow-blue-600/20">
                         Simpan Catatan
                     </button>
                 </form>

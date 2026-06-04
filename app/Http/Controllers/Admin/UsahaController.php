@@ -23,6 +23,24 @@ use App\Constants\Usaha\Kendala;
 
 class UsahaController extends Controller
 {
+    public function index(
+        Tempat $tempat
+    )
+    {
+        $usahas = $tempat
+            ->usahas()
+            ->latest()
+            ->get();
+
+        return view(
+            'admin.usaha.index',
+            compact(
+                'tempat',
+                'usahas'
+            )
+        );
+    }
+
     public function create(
         Tempat $tempat
     )
@@ -95,7 +113,7 @@ class UsahaController extends Controller
 
         return redirect()
             ->route(
-                'admin.tempat.survey',
+                'admin.usaha.index',
                 $tempat
             )
             ->with(
@@ -104,12 +122,64 @@ class UsahaController extends Controller
             );
     }
 
-    public function edit(
-        Tempat $tempat
+    public function show(
+        Usaha $usaha
     )
     {
-        $usaha =
-            $tempat->usaha;
+        return view(
+            'admin.usaha.show',
+            [
+                'usaha' => $usaha,
+                'tempat' => $usaha->tempat,
+
+                'lokasiUsaha'
+                    => LokasiUsaha::OPTIONS,
+
+                'statusBangunan'
+                    => StatusKepemilikanBangunanUsaha::OPTIONS,
+
+                'jenisKelamin'
+                    => JenisKelamin::OPTIONS,
+
+                'pendidikan'
+                    => Pendidikan::OPTIONS,
+
+                'izinUsaha'
+                    => IzinUsaha::OPTIONS,
+
+                'badanUsaha'
+                    => BadanUsaha::OPTIONS,
+
+                'penggunaanInternet'
+                    => PenggunaanInternet::OPTIONS,
+
+                'mediaInternet'
+                    => MediaInternet::OPTIONS,
+
+                'tidakPenggunaanInternet'
+                    => TidakPenggunaanInternet::OPTIONS,
+
+                'sumberPinjaman'
+                    => KreditSumber::OPTIONS,
+
+                'tujuanPinjaman'
+                    => TujuanKreditUsaha::OPTIONS,
+
+                'tidakMenerimaKredit'
+                    => TidakMenerimaKredit::OPTIONS,
+
+                'kendalaUsaha'
+                    => Kendala::OPTIONS,
+            ]
+        );
+    }
+
+    public function edit(
+        Usaha $usaha
+    )
+    {
+        $tempat =
+            $usaha->tempat;
 
         if (!$usaha) {
             abort(404);
@@ -170,11 +240,11 @@ class UsahaController extends Controller
 
     public function update(
         Request $request,
-        Tempat $tempat
+        Usaha $usaha
     )
     {
-        $usaha =
-            $tempat->usaha;
+        $tempat =
+            $usaha->tempat;
 
         if (!$usaha) {
             abort(404);
@@ -189,7 +259,7 @@ class UsahaController extends Controller
 
         return redirect()
             ->route(
-                'admin.tempat.survey',
+                'admin.usaha.index',
                 $tempat
             )
             ->with(
@@ -199,7 +269,7 @@ class UsahaController extends Controller
     }
 
     public function destroy(
-        Tempat $tempat
+        Usaha $usaha
     )
     {
         if (!auth()->user()->isMasterAdmin()) {
@@ -207,8 +277,8 @@ class UsahaController extends Controller
             abort(403);
         }
 
-        $usaha =
-            $tempat->usaha;
+        $tempat =
+            $usaha->tempat;
 
         if (!$usaha) {
             abort(404);
@@ -218,7 +288,7 @@ class UsahaController extends Controller
 
         return redirect()
             ->route(
-                'admin.tempat.survey',
+                'admin.index.usaha',
                 $tempat
             )
             ->with(

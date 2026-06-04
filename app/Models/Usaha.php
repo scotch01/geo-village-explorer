@@ -33,4 +33,15 @@ class Usaha extends Model
             Tempat::class
         );
     }
+
+    public function getUmurPemilikAttribute()
+    {
+        if (!$this->tanggal_lahir_pemilik) {
+            return null;
+        }
+
+        return \Carbon\Carbon::parse(
+            $this->tanggal_lahir_pemilik
+        )->age;
+    }
 }

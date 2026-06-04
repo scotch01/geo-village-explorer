@@ -53,23 +53,26 @@ Route::middleware(['auth', 'role:master_admin,admin_desa,pengawas'])
         ->name('tempat.updateSurvey');
 
     // Data Usaha
+    Route::get('/tempat/{tempat}/usaha', [UsahaController::class, 'index'])
+        ->name('usaha.index');
+
     Route::get('/tempat/{tempat}/usaha/create', [UsahaController::class, 'create'])
         ->name('usaha.create');
 
     Route::post('/tempat/{tempat}/usaha', [UsahaController::class, 'store'])
         ->name('usaha.store');
 
-    Route::get('/tempat/{tempat}/usaha', [UsahaController::class, 'show'])
+    Route::get('/tempat/usaha/{usaha}', [UsahaController::class, 'show'])
         ->name('usaha.show');
 
-    Route::get('/tempat/{tempat}/usaha/edit', [UsahaController::class, 'edit'])
-        ->name('usaha.edit');
+    Route::get('/usaha/{usaha}/edit', [UsahaController::class, 'edit'])
+    ->name('usaha.edit');
 
-    Route::put('/tempat/{tempat}/usaha', [UsahaController::class, 'update'])
-        ->name('usaha.update');
+    Route::put('/usaha/{usaha}', [UsahaController::class, 'update'])
+    ->name('usaha.update');
 
-    Route::delete('/tempat/{tempat}/usaha', [UsahaController::class, 'destroy'])
-        ->name('usaha.destroy');
+    Route::delete('/usaha/{usaha}', [UsahaController::class, 'destroy'])
+    ->name('usaha.destroy');
 
     // Data Keluarga
     Route::get('/tempat/{tempat}/keluarga/create', [KeluargaController::class, 'create'])

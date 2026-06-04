@@ -51,7 +51,7 @@ class TempatController extends Controller
                     );
                 })
 
-                ->orWhereHas('usaha', function ($query) use ($search) {
+                ->orWhereHas('usahas', function ($query) use ($search) {
 
                     $query->where(
                         'nama_usaha',
@@ -93,7 +93,7 @@ class TempatController extends Controller
         $tempats = $query
             ->with([
                 'keluarga',
-                'usaha',
+                'usahas',
             ])
             ->latest()
             ->paginate(10)
@@ -255,7 +255,7 @@ class TempatController extends Controller
 
         $tempat->load([
             'keluarga.anggotaKeluargas',
-            'usaha',
+            'usahas',
         ]);
 
         return view(

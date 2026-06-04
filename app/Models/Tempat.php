@@ -43,9 +43,9 @@ class Tempat extends Model
         return $this->hasOne(Keluarga::class);
     }
 
-    public function usaha()
+    public function usahas()
     {
-        return $this->hasOne(Usaha::class);
+        return $this->hasMany(Usaha::class);
     }
 
     public function anggotaKeluargas()
@@ -58,34 +58,6 @@ class Tempat extends Model
         );
     }
 
-    public function getStatusPendataanAttribute()
-    {
-        if ($this->jenis_bangunan === 'btt') {
-
-            return $this->keluarga
-                ? 'selesai'
-                : 'belum';
-        }
-
-        if ($this->jenis_bangunan === 'bku') {
-
-            return $this->usaha
-                ? 'selesai'
-                : 'belum';
-        }
-
-        if ($this->jenis_bangunan === 'bc') {
-
-            if ($this->keluarga && $this->usaha) {
-                return 'selesai';
-            }
-
-            return 'parsial';
-        }
-
-        return 'belum';
-    }
-
     public function getKeluargaCompletedAttribute()
     {
         return $this->keluarga !== null;
@@ -95,11 +67,6 @@ class Tempat extends Model
     {
         return $this->anggotaKeluargas()
             ->exists();
-    }
-
-    public function getUsahaCompletedAttribute()
-    {
-        return $this->usaha !== null;
     }
 
     public function getDisplayNameAttribute()
@@ -120,15 +87,15 @@ class Tempat extends Model
         };
     }
 
-    public function getDisplaySubtitleAttribute()
-    {
-        if (
-            $this->jenis_bangunan === 'bc'
-            && $this->usaha
-        ) {
-            return $this->usaha->nama_usaha;
-        }
+    // public function getDisplaySubtitleAttribute()
+    // {
+    //     if (
+    //         $this->jenis_bangunan === 'bc'
+    //         && $this->usaha
+    //     ) {
+    //         return $this->usaha->nama_usaha;
+    //     }
 
-        return null;
-    }
+    //     return null;
+    // }
 }
