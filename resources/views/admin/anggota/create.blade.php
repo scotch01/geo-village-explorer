@@ -33,7 +33,7 @@
                     <label class="block mb-2 font-medium text-gray-700">
                         5. Nomor Urut Anggota Keluarga
                     </label>
-                    <input type="number" name="nomor_urut" min="1" value="{{ old('nomor_urut') }}"
+                    <input type="number" name="nomor_urut" min="1" value="{{ $nextNomorUrut }}" readonly"
                         class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500">
                     @error('nomor_urut')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -74,6 +74,9 @@
                         class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500">
                         <option value="">Pilih</option>
                         @foreach ($hubunganKeluarga as $key => $label)
+                            @if ($key == 1 && $sudahAdaKepalaKeluarga)
+                                @continue
+                            @endif
                             <option value="{{ $key }}" @selected(old('hubungan_keluarga') == $key)>
                                 {{ $label }}
                             </option>
@@ -179,7 +182,8 @@
                 {{-- 13. Ijazah Tertinggi --}}
                 <div>
                     <label class="block mb-2 font-medium text-gray-700">
-                        13. Ijazah/STTB tertinggi yang dimiliki <span class="font-bold" x-text="nama || 'anggota keluarga ini'">
+                        13. Ijazah/STTB tertinggi yang dimiliki <span class="font-bold"
+                            x-text="nama || 'anggota keluarga ini'">
                         </span>
                     </label>
                     <select name="ijazah_tertinggi"

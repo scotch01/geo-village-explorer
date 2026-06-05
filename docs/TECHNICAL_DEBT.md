@@ -177,7 +177,7 @@ Daftar perbaikan yang sengaja ditunda agar fokus pada penyelesaian fitur inti da
 
 ### Status
 
-Belum diimplementasikan.
+Sudah
 
 ### Tujuan
 
@@ -202,7 +202,7 @@ Tinggi
 
 ### Status
 
-Masih diinput manual.
+Sudah
 
 ### Tujuan
 
@@ -231,7 +231,7 @@ Tinggi
 
 ### Status
 
-Belum diimplementasikan.
+Sudah
 
 ### Tujuan
 

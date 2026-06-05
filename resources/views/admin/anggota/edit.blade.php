@@ -74,6 +74,9 @@
                         class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500">
                         <option value="">Pilih</option>
                         @foreach ($hubunganKeluarga as $key => $label)
+                            @if ($key == 1 && $sudahAdaKepalaKeluarga)
+                                @continue
+                            @endif
                             <option value="{{ $key }}" @selected(old('hubungan_keluarga', $anggota->hubungan_keluarga) == $key)>
 
                                 {{ $label }}
@@ -250,7 +253,7 @@
                     @enderror
                 </div>
             </div>
-            
+
             <div class="bg-white rounded-2xl border p-6 space-y-5 shadow-sm">
 
                 {{-- 17. Disabilitas (Checkbox Group) --}}

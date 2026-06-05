@@ -44,11 +44,30 @@ class AnggotaKeluargaController extends Controller
         Keluarga $keluarga
     )
     {
+        $nextNomorUrut = 
+            $keluarga
+                ->anggotaKeluargas()
+                ->count() + 1;
+                
+        $sudahAdaKepalaKeluarga =
+            $keluarga
+                ->anggotaKeluargas()
+                ->where(
+                    'hubungan_keluarga',
+                    1
+                )
+                ->exists();
         return view(
             'admin.anggota.create',
             [
 
                 'keluarga' => $keluarga,
+
+                'nextNomorUrut'
+                    => $nextNomorUrut,
+
+                'sudahAdaKepalaKeluarga'
+                    => $sudahAdaKepalaKeluarga,
 
                 'hubunganKeluarga'
                     => HubunganKeluarga::OPTIONS,
@@ -95,6 +114,35 @@ class AnggotaKeluargaController extends Controller
         $validated['keluarga_id']
             = $keluarga->id;
 
+        $validated['nomor_urut'] =
+            $keluarga
+                ->anggotaKeluargas()
+                ->count() + 1;
+
+        if (
+            $validated['hubungan_keluarga'] == 1
+        ) {
+
+            $exists =
+                $keluarga
+                    ->anggotaKeluargas()
+                    ->where(
+                        'hubungan_keluarga',
+                        1
+                    )
+                    ->exists();
+
+            if ($exists) {
+
+                return back()
+                    ->withErrors([
+                        'hubungan_keluarga'
+                            => 'Kepala keluarga sudah ada.'
+                    ])
+                    ->withInput();
+            }
+        }
+
         AnggotaKeluarga::create(
             $validated
         );
@@ -114,11 +162,30 @@ class AnggotaKeluargaController extends Controller
         AnggotaKeluarga $anggota
     )
     {
+        $keluarga =
+            $anggota->keluarga;
+
+        $sudahAdaKepalaKeluarga =
+            $keluarga
+                ->anggotaKeluargas()
+                ->where(
+                    'hubungan_keluarga',
+                    1
+                )
+                ->where(
+                    'id',
+                    '!=',
+                    $anggota->id
+                )
+                ->exists();
+
         return view(
             'admin.anggota.edit',
             [
 
                 'anggota' => $anggota,
+
+                'sudahAdaKepalaKeluarga' => $sudahAdaKepalaKeluarga,
 
                 'hubunganKeluarga'
                     => HubunganKeluarga::OPTIONS,
@@ -162,6 +229,36 @@ class AnggotaKeluargaController extends Controller
         $validated =
             $this->validateData($request);
 
+        if (
+            $validated['hubungan_keluarga'] == 1
+        ) {
+
+            $exists =
+                $anggota
+                    ->keluarga
+                    ->anggotaKeluargas()
+                    ->where(
+                        'hubungan_keluarga',
+                        1
+                    )
+                    ->where(
+                        'id',
+                        '!=',
+                        $anggota->id
+                    )
+                    ->exists();
+
+            if ($exists) {
+
+                return back()
+                    ->withErrors([
+                        'hubungan_keluarga'
+                            => 'Kepala keluarga sudah ada.'
+                    ])
+                    ->withInput();
+            }
+        }
+
         $anggota->update(
             $validated
         );
@@ -187,6 +284,18 @@ class AnggotaKeluargaController extends Controller
 
         $anggota->delete();
 
+        $keluarga
+            ->anggotaKeluargas()
+            ->orderBy('nomor_urut')
+            ->get()
+            ->each(function ($item, $index) {
+
+                $item->update([
+                    'nomor_urut' => $index + 1
+                ]);
+
+            });
+
         return redirect()
             ->route(
                 'admin.anggota.index',
@@ -202,7 +311,7 @@ class AnggotaKeluargaController extends Controller
         Request $request
     )
     {
-        return $request->validate([
+        $validated = $request->validate([
 
             'nomor_urut'
                 => 'required|integer|min:1|max:99',
