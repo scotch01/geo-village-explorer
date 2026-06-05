@@ -28,12 +28,12 @@
             },
         
             usaha: {
-                provinsi: '{{ old('provinsi') }}',
-                kabupaten: '{{ old('kabupaten') }}',
-                kecamatan: '{{ old('kecamatan') }}',
-                desa: '{{ old('desa') }}',
-                dusun: '{{ old('dusun') }}',
-                alamat: '{{ old('alamat') }}'
+                provinsi: '{{ old('provinsi', $usaha->provinsi) }}',
+                kabupaten: '{{ old('kabupaten', $usaha->kabupaten) }}',
+                kecamatan: '{{ old('kecamatan', $usaha->kecamatan) }}',
+                desa: '{{ old('desa', $usaha->desa) }}',
+                dusun: '{{ old('dusun', $usaha->dusun) }}',
+                alamat: '{{ old('alamat', $usaha->alamat) }}'
             },
         
             checkInternet() {
@@ -94,7 +94,7 @@
             {{-- BLOK I: Alamat & Nama Usaha --}}
             <div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm space-y-6">
                 <div class="flex items-center gap-4 border-b border-slate-100 pb-4">
-                    <div class="w-1.5 h-6 rounded-full bg-blue-600"></div>
+                    <div class="w-1.5 h-6 rounded-full bg-amber-500"></div>
                     <h2 class="font-black text-lg text-slate-900">
                         I. Alamat & Nama Usaha
                     </h2>
@@ -163,7 +163,7 @@
             {{-- BLOK II: Kontak Usaha --}}
             <div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm space-y-4">
                 <div class="flex items-center gap-4 border-b border-slate-100 pb-4">
-                    <div class="w-1.5 h-6 rounded-full bg-blue-600"></div>
+                    <div class="w-1.5 h-6 rounded-full bg-amber-500"></div>
                     <h2 class="font-black text-lg text-slate-900">
                         II. Kontak Usaha
                     </h2>
@@ -194,7 +194,7 @@
             {{-- BLOK III: Identitas Bangunan & Pemilik --}}
             <div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm space-y-6">
                 <div class="flex items-center gap-4 border-b border-slate-100 pb-4">
-                    <div class="w-1.5 h-6 rounded-full bg-blue-600"></div>
+                    <div class="w-1.5 h-6 rounded-full bg-amber-500"></div>
                     <h2 class="font-black text-lg text-slate-900">
                         III. Karakteristik & Identitas
                         Pemilik
@@ -297,7 +297,7 @@
             {{-- BLOK IV: Aktivitas Operasional & KBLI --}}
             <div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm space-y-4">
                 <div class="flex items-center gap-4 border-b border-slate-100 pb-4">
-                    <div class="w-1.5 h-6 rounded-full bg-blue-600"></div>
+                    <div class="w-1.5 h-6 rounded-full bg-amber-500"></div>
                     <h2 class="font-black text-lg text-slate-900">
                         IV. Aktivitas Operasional &
                         Legalitas
@@ -404,7 +404,7 @@
             {{-- BLOK V: Ketenagakerjaan & Keuangan --}}
             <div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm space-y-4">
                 <div class="flex items-center gap-4 border-b border-slate-100 pb-4">
-                    <div class="w-1.5 h-6 rounded-full bg-blue-600"></div>
+                    <div class="w-1.5 h-6 rounded-full bg-amber-500"></div>
                     <h2 class="font-black text-lg text-slate-900">
                         V. Ketenagakerjaan, Upah, dan
                         Pendapatan
@@ -475,7 +475,7 @@
             {{-- BLOK VI: Pemanfaatan Internet --}}
             <div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm space-y-6">
                 <div class="flex items-center gap-4 border-b border-slate-100 pb-4">
-                    <div class="w-1.5 h-6 rounded-full bg-blue-600"></div>
+                    <div class="w-1.5 h-6 rounded-full bg-amber-500"></div>
                     <h2 class="font-black text-lg text-slate-900">
                         VII. Akses Permodalan & Kendala
                         Usaha
@@ -627,31 +627,19 @@
 
                 {{-- Action Submit --}}
                 <div class="flex items-center justify-end gap-3 border-t-2 border-gray-300 pt-4">
+                    <a href="{{ route('admin.usaha.show', $usaha) }}"
+                        class="px-6 py-2.5 border rounded-xl text-gray-700 hover:bg-gray-50 transition-all active:scale-95 ">
+                        Batal
+                    </a>
                     <button type="submit"
-                        class="px-6 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-semibold text-sm shadow-sm transition">
-                        Simpan Perubahan
-                    </button>
+                            class="px-6 py-3.5 bg-amber-500 hover:bg-amber-600 text-white rounded-xl font-bold transition-all active:scale-95 shadow-md shadow-amber-500/20 text-sm text-center">
+                            Simpan Perubahan
+                        </button>
                 </div>
 
             </div>
 
         </form>
-
-        @if (auth()->user()->isMasterAdmin())
-            <form action="{{ route('admin.usaha.destroy', $tempat) }}" method="POST"
-                onsubmit="return confirm('Hapus data usaha?')">
-
-                @csrf
-                @method('DELETE')
-
-                <button type="submit" class="px-5 py-3 rounded-xl bg-red-600 text-white">
-
-                    Hapus Data Usaha
-
-                </button>
-
-            </form>
-        @endif
     </div>
 
     {{-- Native JavaScript for Exclusive Checkbox Toggles --}}

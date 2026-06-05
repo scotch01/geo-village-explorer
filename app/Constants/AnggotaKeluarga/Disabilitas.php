@@ -13,12 +13,12 @@ class Disabilitas
     public const TIDAK_ADA = 'X';
 
     public const OPTIONS = [
-        self::FISIK => 'Disabilitas Fisik',
-        self::MENTAL => 'Disabilitas Mental',
-        self::INTELEKTUAL => 'Disabilitas Intelektual',
-        self::SENSORIK_NETRA => 'Disabilitas Sensorik - Netra',
-        self::SENSORIK_RUNGU => 'Disabilitas Sensorik - Rungu',
-        self::SENSORIK_WICARA => 'Disabilitas Sensorik - Wicara',
-        self::TIDAK_ADA => 'Tidak Ada',
+        self::FISIK => 'A. Disabilitas Fisik',
+        self::MENTAL => 'B. Disabilitas Mental',
+        self::INTELEKTUAL => 'C. Disabilitas Intelektual',
+        self::SENSORIK_NETRA => 'D. Disabilitas Sensorik - Netra',
+        self::SENSORIK_RUNGU => 'E. Disabilitas Sensorik - Rungu',
+        self::SENSORIK_WICARA => 'F. Disabilitas Sensorik - Wicara',
+        self::TIDAK_ADA => 'X. Tidak Ada',
     ];
 }

@@ -26,12 +26,11 @@
                 dusun: @js($keluarga?->dusun ?? ''),
                 alamat: @js($keluarga?->alamat_detail ?? '')
             },
-        
             usaha: {
-                provinsi: '{{ old('provinsi') }}',
-                kabupaten: '{{ old('kabupaten') }}',
-                kecamatan: '{{ old('kecamatan') }}',
-                desa: '{{ old('desa') }}',
+                provinsi: '{{ old('provinsi', $desa->provinsi) }}',
+                kabupaten: '{{ old('kabupaten', $desa->kabupaten) }}',
+                kecamatan: '{{ old('kecamatan', $desa->kecamatan) }}',
+                desa: '{{ old('desa', $desa->nama_desa) }}',
                 dusun: '{{ old('dusun') }}',
                 alamat: '{{ old('alamat') }}'
             },
@@ -113,6 +112,9 @@
                         <label class="block text-sm font-medium text-gray-700 mb-1.5">1. Provinsi</label>
                         <input type="text" name="provinsi" x-model="sameAddress ? keluarga.provinsi : usaha.provinsi"
                             x-bind:readonly="sameAddress"
+                            :class="{
+                                'bg-gray-50 text-gray-500 cursor-not-allowed': sameAddress
+                            }"
                             class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500 transition text-sm read-only:bg-gray-50 read-only:text-gray-500">
                     </div>
 
@@ -120,6 +122,9 @@
                         <label class="block text-sm font-medium text-gray-700 mb-1.5">2. Kabupaten / Kota</label>
                         <input type="text" name="kabupaten" x-model="sameAddress ? keluarga.kabupaten : usaha.kabupaten"
                             x-bind:readonly="sameAddress"
+                            :class="{
+                                'bg-gray-50 text-gray-500 cursor-not-allowed': sameAddress
+                            }"
                             class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500 transition text-sm read-only:bg-gray-50 read-only:text-gray-500">
                     </div>
 
@@ -127,6 +132,9 @@
                         <label class="block text-sm font-medium text-gray-700 mb-1.5">3. Kecamatan</label>
                         <input type="text" name="kecamatan" x-model="sameAddress ? keluarga.kecamatan : usaha.kecamatan"
                             x-bind:readonly="sameAddress"
+                            :class="{
+                                'bg-gray-50 text-gray-500 cursor-not-allowed': sameAddress
+                            }"
                             class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500 transition text-sm read-only:bg-gray-50 read-only:text-gray-500">
                     </div>
 
@@ -134,6 +142,9 @@
                         <label class="block text-sm font-medium text-gray-700 mb-1.5">4. Desa / Kelurahan</label>
                         <input type="text" name="desa" x-model="sameAddress ? keluarga.desa : usaha.desa"
                             x-bind:readonly="sameAddress"
+                            :class="{
+                                'bg-gray-50 text-gray-500 cursor-not-allowed': sameAddress
+                            }"
                             class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500 transition text-sm read-only:bg-gray-50 read-only:text-gray-500">
                     </div>
 
@@ -141,6 +152,9 @@
                         <label class="block text-sm font-medium text-gray-700 mb-1.5">5. Dusun</label>
                         <input type="text" name="dusun" x-model="sameAddress ? keluarga.dusun : usaha.dusun"
                             x-bind:readonly="sameAddress"
+                            :class="{
+                                'bg-gray-50 text-gray-500 cursor-not-allowed': sameAddress
+                            }"
                             class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500 transition text-sm read-only:bg-gray-50 read-only:text-gray-500">
                     </div>
                 </div>
@@ -149,6 +163,9 @@
                     <label class="block text-sm font-medium text-gray-700 mb-1.5">6. Alamat Detail / Jalan / No.
                         Rumah</label>
                     <textarea name="alamat" x-model="sameAddress ? keluarga.alamat : usaha.alamat" x-bind:readonly="sameAddress"
+                        :class="{
+                            'bg-gray-50 text-gray-500 cursor-not-allowed': sameAddress
+                        }"
                         rows="2"
                         class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500 transition text-sm read-only:bg-gray-50 read-only:text-gray-500"></textarea>
                 </div>
@@ -261,7 +278,8 @@
                             <label class="block text-xs font-medium text-gray-500 mb-1">d. Tanggal Lahir</label>
                             <input type="date" name="tanggal_lahir_pemilik"
                                 value="{{ old('tanggal_lahir_pemilik') }}"
-                                class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500 text-sm" onclick="this.showPicker()">
+                                class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500 text-sm"
+                                onclick="this.showPicker()">
                         </div>
                     </div>
 
@@ -601,8 +619,13 @@
                 </div>
                 {{-- Action Submit --}}
                 <div class="flex items-center justify-end gap-3 border-t-2 border-gray-300 pt-4">
+
+                    <a href="{{ route('admin.usaha.index', $tempat) }}"
+                        class="px-6 py-2.5 border rounded-xl text-gray-700 hover:bg-gray-50 transition-all active:scale-95 ">
+                        Batal
+                    </a>
                     <button type="submit"
-                        class="px-6 py-2.5 rounded-xl bg-green-600 hover:bg-green-700 text-white font-semibold text-sm shadow-sm transition">
+                        class="px-6 py-3.5 rounded-xl bg-green-600 hover:bg-green-700 text-white font-semibold text-sm shadow-sm transition-all active:scale-95">
                         Simpan Data Usaha
                     </button>
                 </div>

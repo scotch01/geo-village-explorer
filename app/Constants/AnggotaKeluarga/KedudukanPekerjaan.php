@@ -13,12 +13,12 @@ class KedudukanPekerjaan
     public const TIDAK_TAHU = 0;
 
     public const OPTIONS = [
-        self::USAHA_SENDIRI => 'Berusaha sendiri',
-        self::USAHA_BURUH => 'Berusaha dibantu buruh',
-        self::BURUH => 'Buruh/karyawan/pegawai swasta',
-        self::ASN => 'ASN/TNI/Polri/BUMN/BUMD/Pejabat Negara/Kades',
-        self::PEKERJA_BEBAS => 'Pekerja Bebas',
-        self::PEKERJA_KELUARGA => 'Pekerja keluarga/tidak dibayar',
-        self::TIDAK_TAHU => 'Tidak Tahu',
+        self::USAHA_SENDIRI => '1. Berusaha sendiri',
+        self::USAHA_BURUH => '2. Berusaha dibantu buruh',
+        self::BURUH => '3. Buruh/karyawan/pegawai swasta',
+        self::ASN => '4. ASN/TNI/Polri/BUMN/BUMD/Pejabat Negara/Kades',
+        self::PEKERJA_BEBAS => '5. Pekerja Bebas',
+        self::PEKERJA_KELUARGA => '6. Pekerja keluarga/tidak dibayar',
+        self::TIDAK_TAHU => '9. Tidak Tahu',
     ];
 }

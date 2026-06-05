@@ -7,7 +7,8 @@
             <h1 class="text-2xl lg:text-3xl font-black text-slate-900 tracking-tight">
                 Perbarui Data BLOK II
             </h1>
-            <p class="text-xs lg:text-sm font-medium text-slate-700 mt-1">Silakan perbarui data kuisioner keluarga dan perumahan di bawah ini secara teliti.</p>
+            <p class="text-xs lg:text-sm font-medium text-slate-700 mt-1">Silakan perbarui data kuisioner keluarga dan
+                perumahan di bawah ini secara teliti.</p>
 
             <hr class="my-4 border-slate-200">
 
@@ -36,8 +37,8 @@
 
                 <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 lg:p-8 transition-all">
 
-                    <div class="flex items-center gap-4 mb-8">
-                        <div class="w-2 h-8 rounded-full bg-blue-600"></div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-2 h-8 rounded-full bg-amber-500"></div>
                         <div>
                             <h2 class="font-black text-xl text-slate-900 tracking-tight">
                                 BLOK II
@@ -46,6 +47,16 @@
                                 KETERANGAN UMUM KELUARGA
                             </p>
                         </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 lg:p-8 transition-all">
+
+                    <div class="flex items-center gap-4 mb-6 border-b border-slate-100 pb-4">
+                        <div class="w-1.5 h-6 rounded-full bg-amber-500"></div>
+                        <h2 class="font-black text-lg text-slate-900 tracking-tight">
+                            I. Identitas Kepala Keluarga
+                        </h2>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -82,12 +93,16 @@
 
                 <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 lg:p-8 transition-all">
 
-                    <div class="flex items-center gap-3 mb-6 border-b border-slate-100 pb-4">
-                        <span
-                            class="flex items-center justify-center w-7 h-7 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">3</span>
-                        <h2 class="text-base font-bold text-slate-800 tracking-tight">
-                            Keterangan Wilayah & Alamat
-                        </h2>
+                    <div class="flex items-center gap-4 mb-6 border-b border-slate-100 pb-4">
+                        <div class="w-1.5 h-6 rounded-full bg-amber-500"></div>
+                        <h2 class="font-black text-lg text-slate-900 tracking-tight">
+                            II. Alamat & Wilayah
+                    </div>
+
+                    <div class="space-y-2 mb-4">
+                        <label class="block text-sm lg:text-base font-bold text-slate-800 tracking-tight">
+                            3. Alamat Detail
+                        </label>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -168,7 +183,7 @@
                     <div class="flex flex-col-reverse md:flex-row md:items-start md:justify-between gap-4">
 
                         <div class="flex items-start gap-3">
-                            <div class="w-1.5 h-6 rounded-full bg-blue-600 shrink-0 mt-0.5"></div>
+                            <div class="w-1.5 h-6 rounded-full bg-amber-500 shrink-0 mt-0.5"></div>
 
                             <div>
                                 <h2 class="font-bold text-blue-900 text-sm md:text-base leading-snug">
@@ -176,7 +191,8 @@
                                 </h2>
 
                                 <p class="text-xs md:text-sm text-blue-700 mt-1.5 leading-relaxed">
-                                    Simpan perubahan terlebih dahulu. Pengelolaan anggota keluarga dapat dilakukan melalui menu <strong>"Anggota Keluarga"</strong>pada halaman detail.
+                                    Simpan perubahan terlebih dahulu. Pengelolaan anggota keluarga dapat dilakukan melalui
+                                    menu <strong>"Anggota Keluarga"</strong>pada halaman detail.
                                 </p>
                             </div>
                         </div>
@@ -190,10 +206,12 @@
 
                 </div>
 
+                <hr class="border-t-2 rounded border-slate-300">
+
                 <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 lg:p-8 transition-all">
 
-                    <div class="flex items-center gap-4 mb-8">
-                        <div class="w-2 h-8 rounded-full bg-blue-600"></div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-2 h-8 rounded-full bg-amber-500"></div>
                         <div>
                             <h2 class="font-black text-xl text-slate-900 tracking-tight">
                                 BLOK II
@@ -202,6 +220,15 @@
                                 KETERANGAN PERUMAHAN
                             </p>
                         </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 lg:p-8 transition-all">
+
+                    <div class="flex items-center gap-4 mb-6 border-b border-slate-100 pb-4">
+                        <div class="w-1.5 h-6 rounded-full bg-amber-500"></div>
+                        <h2 class="font-black text-lg text-slate-900 tracking-tight">
+                            III. Karakteristik Perumahan
                     </div>
 
                     <div class="space-y-6">
@@ -303,6 +330,12 @@
                 </div>
 
                 <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 lg:p-8 transition-all">
+
+                    <div class="flex items-center gap-4 mb-6 border-b border-slate-100 pb-4">
+                        <div class="w-1.5 h-6 rounded-full bg-amber-500"></div>
+                        <h2 class="font-black text-lg text-slate-900 tracking-tight">
+                            IV. Sanitasi & Utilitas
+                    </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
@@ -456,6 +489,13 @@
                 </div>
 
                 <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 lg:p-8 transition-all">
+
+                    <div class="flex items-center gap-4 mb-6 border-b border-slate-100 pb-4">
+                        <div class="w-1.5 h-6 rounded-full bg-amber-500"></div>
+                        <h2 class="font-black text-lg text-slate-900 tracking-tight">
+                            V. Perkreditan Rumah Tangga
+                    </div>
+
                     <div class="space-y-8">
 
                         <div class="space-y-4">
@@ -507,14 +547,19 @@
                         </div>
 
                     </div>
+                    <div class="flex items-center justify-center lg:justify-end gap-3 border-t-2 border-gray-300 pt-4">
+                        <a href="{{ route('admin.keluarga.show', $tempat) }}"
+                            class="px-6 py-2.5 border rounded-xl text-gray-700 hover:bg-gray-50 transition-all active:scale-95 ">
+                            Batal
+                        </a>
+                        <button type="submit"
+                            class="px-6 py-3.5 bg-amber-500 hover:bg-amber-600 text-white rounded-xl font-bold transition-all active:scale-95 shadow-md shadow-amber-500/20 text-sm text-center">
+                            Simpan Perubahan
+                        </button>
+                    </div>
                 </div>
 
-                <div class="flex items-center justify-end border-t border-slate-200/60 pt-6">
-                    <button type="submit" @click="redirectTo = 'survey'"
-                        class="px-8 py-4 bg-amber-500 hover:bg-amber-600 text-white rounded-2xl font-bold transition-all active:scale-95 shadow-md shadow-amber-500/20 text-sm lg:text-base text-center">
-                        Simpan Perubahan
-                    </button>
-                </div>
+
 
             </form>
 

@@ -16,16 +16,11 @@
             @csrf
 
             <div class="bg-white rounded-2xl border p-6 space-y-5 shadow-sm">
-                <div class="flex items-center gap-4 mb-8">
-                    <div class="w-2 h-8 rounded-full bg-blue-600"></div>
-                    <div>
-                        <h2 class="font-black text-xl text-slate-900 tracking-tight">
-                            BLOK II
-                        </h2>
-                        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mt-0.5">
-                            KETERANGAN ANGGOTA KELUARGA
-                        </p>
-                    </div>
+                <div class="flex items-center gap-4 mb-6 border-b border-slate-100 pb-4">
+                    <div class="w-1.5 h-6 rounded-full bg-blue-600"></div>
+                    <h2 class="font-black text-lg text-slate-900 tracking-tight">
+                        I. Identitas Anggota Keluarga
+                    </h2>
                 </div>
 
                 {{-- 5. Nomor Urut --}}
@@ -85,6 +80,15 @@
                     @error('hubungan_keluarga')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl border p-6 space-y-5 shadow-sm">
+                <div class="flex items-center gap-4 mb-6 border-b border-slate-100 pb-4">
+                    <div class="w-1.5 h-6 rounded-full bg-blue-600"></div>
+                    <h2 class="font-black text-lg text-slate-900 tracking-tight">
+                        II. Demografi
+                    </h2>
                 </div>
 
                 {{-- 9. Status Perkawinan --}}
@@ -154,6 +158,12 @@
 
             </div>
             <div class="bg-white rounded-2xl border p-6 space-y-5 shadow-sm">
+                <div class="flex items-center gap-4 mb-6 border-b border-slate-100 pb-4">
+                    <div class="w-1.5 h-6 rounded-full bg-blue-600"></div>
+                    <h2 class="font-black text-lg text-slate-900 tracking-tight">
+                        III. Pendidikan, Pekerjaan & Ekonomi
+                    </h2>
+                </div>
 
                 {{-- 12. Partisipasi Sekolah --}}
                 <div>
@@ -278,6 +288,12 @@
 
             </div>
             <div class="bg-white rounded-2xl border p-6 space-y-5 shadow-sm">
+                <div class="flex items-center gap-4 mb-6 border-b border-slate-100 pb-4">
+                    <div class="w-1.5 h-6 rounded-full bg-blue-600"></div>
+                    <h2 class="font-black text-lg text-slate-900 tracking-tight">
+                        IV. Disabilitas, Penyakit Kronis & Jaminan Kesehatan
+                    </h2>
+                </div>
 
                 {{-- 17. Disabilitas (Checkbox Group) --}}
                 <div>

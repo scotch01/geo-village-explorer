@@ -16,7 +16,7 @@
         <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 lg:p-8">
 
             <div class="flex items-center gap-4 mb-6 border-b border-slate-100 pb-4">
-                <div class="w-1.5 h-6 rounded-full bg-blue-600"></div>
+                <div class="w-1.5 h-6 rounded-full bg-fuchsia-600"></div>
                 <h2 class="font-black text-lg text-slate-900">
                     I. Alamat & Nama Usaha
                 </h2>
@@ -104,7 +104,7 @@
 
         <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 lg:p-8">
             <div class="flex items-center gap-4 mb-6 border-b border-slate-100 pb-4">
-                <div class="w-1.5 h-6 rounded-full bg-blue-600"></div>
+                <div class="w-1.5 h-6 rounded-full bg-fuchsia-600"></div>
                 <h2 class="font-black text-lg text-slate-900">
                     II. Kontak Usaha
                 </h2>
@@ -145,7 +145,7 @@
 
         <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 lg:p-8">
             <div class="flex items-center gap-4 mb-6 border-b border-slate-100 pb-4">
-                <div class="w-1.5 h-6 rounded-full bg-blue-600"></div>
+                <div class="w-1.5 h-6 rounded-full bg-fuchsia-600"></div>
                 <h2 class="font-black text-lg text-slate-900">
                     III. Karakteristik & Identitas Pemilik
                 </h2>
@@ -236,7 +236,7 @@
 
         <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 lg:p-8">
             <div class="flex items-center gap-4 mb-6 border-b border-slate-100 pb-4">
-                <div class="w-1.5 h-6 rounded-full bg-blue-600"></div>
+                <div class="w-1.5 h-6 rounded-full bg-fuchsia-600"></div>
                 <h2 class="font-black text-lg text-slate-900">
                     IV. Aktivitas Operasional & Legalitas
                 </h2>
@@ -316,7 +316,7 @@
 
         <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 lg:p-8">
             <div class="flex items-center gap-4 mb-6 border-b border-slate-100 pb-4">
-                <div class="w-1.5 h-6 rounded-full bg-blue-600"></div>
+                <div class="w-1.5 h-6 rounded-full bg-fuchsia-600"></div>
                 <h2 class="font-black text-lg text-slate-900">
                     V. Ketenagakerjaan, Upah, dan Pendapatan
                 </h2>
@@ -375,7 +375,7 @@
 
         <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 lg:p-8">
             <div class="flex items-center gap-4 mb-6 border-b border-slate-100 pb-4">
-                <div class="w-1.5 h-6 rounded-full bg-blue-600"></div>
+                <div class="w-1.5 h-6 rounded-full bg-fuchsia-600"></div>
                 <h2 class="font-black text-lg text-slate-900">
                     VI. Pemanfaatan Internet Untuk Usaha
                 </h2>
@@ -429,7 +429,7 @@
 
         <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 lg:p-8">
             <div class="flex items-center gap-4 mb-6 border-b border-slate-100 pb-4">
-                <div class="w-1.5 h-6 rounded-full bg-blue-600"></div>
+                <div class="w-1.5 h-6 rounded-full bg-fuchsia-600"></div>
                 <h2 class="font-black text-lg text-slate-900">
                     VII. Akses Permodalan & Kendala
                     Usaha

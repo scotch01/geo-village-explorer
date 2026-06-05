@@ -9,16 +9,31 @@
                 Detail Data BLOK II
             </h1>
             <h3 class="text-sm lg:text-base font-medium text-slate-700 tracking-tight">
-                Keterangan Perumahan, Anggota Keluarga dan Perumahan
+                Keterangan Umum Keluarga, Anggota Keluarga dan Perumahan
             </h3>
+        </div>
+
+        <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 lg:p-8 transition-all">
+
+            <div class="flex items-center gap-4">
+                <div class="w-2 h-8 rounded-full bg-fuchsia-600"></div>
+                <div>
+                    <h2 class="font-black text-xl text-slate-900 tracking-tight">
+                        BLOK II
+                    </h2>
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mt-0.5">
+                        KETERANGAN UMUM KELUARGA
+                    </p>
+                </div>
+            </div>
         </div>
 
         <!-- BLOK II: KETERANGAN UMUM KELUARGA -->
         <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 lg:p-8">
             <div class="flex items-center gap-4 mb-6 border-b border-slate-100 pb-4">
-                <div class="w-1.5 h-6 rounded-full bg-blue-600"></div>
+                <div class="w-1.5 h-6 rounded-full bg-fuchsia-600"></div>
                 <h2 class="font-black text-lg text-slate-900 tracking-tight">
-                    Keterangan Umum Keluarga
+                    I. Identitas Kepala Keluarga
                 </h2>
             </div>
 
@@ -45,15 +60,19 @@
 
         <!-- BLOK ALAMAT WILAYAH -->
         <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 lg:p-8">
-            <div class="flex items-center gap-3 mb-6 border-b border-slate-100 pb-4">
-                <span
-                    class="flex items-center justify-center w-7 h-7 rounded-lg bg-slate-100 text-slate-700 font-black text-sm">3</span>
-                <h2 class="text-base font-bold text-slate-800 tracking-tight">
-                    Keterangan Wilayah & Alamat
-                </h2>
+            <div class="flex items-center gap-4 mb-6 border-b border-slate-100 pb-4">
+                <div class="w-1.5 h-6 rounded-full bg-fuchsia-600"></div>
+                <h2 class="font-black text-lg text-slate-900 tracking-tight">
+                    II. Alamat & Wilayah
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-6">
+            <div class="space-y-2 mb-4">
+                <label class="block text-sm lg:text-base font-bold text-slate-800 tracking-tight">
+                    3. Alamat Detail
+                </label>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-6">
                 <div class="space-y-1">
                     <span class="text-sm font-bold text-slate-500  tracking-wider">a. Provinsi</span>
                     <p class="font-semibold text-slate-800 text-sm">{{ $keluarga->provinsi ?: '-' }}</p>
@@ -74,14 +93,16 @@
                     <span class="text-sm font-bold text-slate-500  tracking-wider">e. Dusun</span>
                     <p class="font-semibold text-slate-800 text-sm">{{ $keluarga->dusun ?: '-' }}</p>
                 </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 border-t border-slate-100 pt-5">
                 <div class="space-y-1">
-                    <span class="text-sm font-bold text-slate-500  tracking-wider">f. Alamat Detail</span>
+                    <span class="text-sm font-bold text-slate-500  tracking-wider">f. Alamat Detail (Jalan/Nomor
+                        Rumah)</span>
                     <p class="font-semibold text-slate-800 text-sm lg:text-base leading-relaxed">
                         {{ $keluarga->alamat_detail ?: '-' }}</p>
                 </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 border-t border-slate-100 pt-5">
+
 
                 <div class="space-y-1">
                     <span class="text-sm font-bold text-slate-500  tracking-wider">4. Apakah alamat tersebut sesuai dengan
@@ -96,7 +117,7 @@
         <div
             class="bg-blue-50/60 border border-blue-100 rounded-3xl p-6 lg:p-8 shadow-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
             <div class="flex items-start gap-4">
-                <div class="w-2 h-10 rounded-full bg-blue-600 shrink-0 mt-0.5"></div>
+                <div class="w-2 h-10 rounded-full bg-fuchsia-600 shrink-0 mt-0.5"></div>
                 <div>
                     <div class="flex items-center gap-3">
                         <h2 class="font-extrabold text-blue-900 text-base lg:text-lg tracking-tight">
@@ -113,18 +134,34 @@
             </div>
 
             <a href="{{ route('admin.anggota.index', $keluarga) }}"
-                class="shrink-0 px-6 py-3.5 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl font-bold text-center transition-all active:scale-95 shadow-sm shadow-blue-600/10 text-sm lg:text-base">
+                class="shrink-0 px-6 py-3.5 bg-slate-600 hover:bg-slate-700 text-white rounded-2xl font-bold text-center transition-all active:scale-95 shadow-sm shadow-blue-600/10 text-sm lg:text-base">
                 Edit atau Kelola
             </a>
         </div>
 
+        <hr class="border-t-2 rounded border-slate-300">
+
+        <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 lg:p-8 transition-all">
+
+            <div class="flex items-center gap-4">
+                <div class="w-2 h-8 rounded-full bg-fuchsia-600"></div>
+                <div>
+                    <h2 class="font-black text-xl text-slate-900 tracking-tight">
+                        BLOK II
+                    </h2>
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mt-0.5">
+                        KETERANGAN PERUMAHAN
+                    </p>
+                </div>
+            </div>
+        </div>
+
         <!-- BLOK III: KETERANGAN PERUMAHAN -->
         <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 lg:p-8 space-y-8">
-            <div class="flex items-center gap-4 border-b border-slate-100 pb-4">
-                <div class="w-1.5 h-6 rounded-full bg-blue-600"></div>
+            <div class="flex items-center gap-4 mb-6 border-b border-slate-100 pb-4">
+                <div class="w-1.5 h-6 rounded-full bg-fuchsia-600"></div>
                 <h2 class="font-black text-lg text-slate-900 tracking-tight">
-                    Keterangan Perumahan, Sanitasi & Utilitas
-                </h2>
+                    III. Karakteristik Perumahan
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -170,7 +207,19 @@
                         {{ $bahanAtap[$keluarga->bahan_atap] ?? '-' }}</p>
                 </div>
 
-                <div class="space-y-1.5 md:col-span-2 lg:col-span-3 border-t border-slate-50 pt-4">
+            </div>
+        </div>
+
+        <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 lg:p-8 space-y-8">
+            <div class="flex items-center gap-4 mb-6 border-b border-slate-100 pb-4">
+                <div class="w-1.5 h-6 rounded-full bg-fuchsia-600"></div>
+                <h2 class="font-black text-lg text-slate-900 tracking-tight">
+                    IV. Sanitasi & Utilitas
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <div class="space-y-1.5 md:col-span-2 lg:col-span-3 border-slate-50">
                     <span class="text-sm font-bold text-slate-500  tracking-wider block leading-tight">26. Apakah memiliki
                         fasilitas tempat buang air besar dan siapa saja yang menggunakan?</span>
                     <p class="font-semibold text-slate-800 text-sm lg:text-base mt-0.5">
@@ -210,7 +259,8 @@
             @if ($keluarga->meterans->count())
                 <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 lg:p-6 space-y-4 mt-4">
                     <div>
-                        <span class="text-sm font-bold text-slate-500  tracking-wider">31a. Jika listrik PLN dengan meteran,
+                        <span class="text-sm font-bold text-slate-500  tracking-wider">31a. Jika listrik PLN dengan
+                            meteran,
                             berapa jumlah meteran listrik yang terpasang di rumah ini?</span>
                         <p class="text-sm font-bold text-slate-800 my-2">Ditemukan {{ $keluarga->meterans->count() }} unit
                             meteran listrik PLN terpasang aktif:</p>
@@ -233,9 +283,17 @@
                     </div>
                 </div>
             @endif
+        </div>
+
+        <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 lg:p-8 space-y-8">
+            <div class="flex items-center gap-4 mb-6 border-b border-slate-100 pb-4">
+                <div class="w-1.5 h-6 rounded-full bg-fuchsia-600"></div>
+                <h2 class="font-black text-lg text-slate-900 tracking-tight">
+                    V. Perkreditan Rumah Tangga
+            </div>
 
             <!-- SEKSI FINANSIAL / KREDIT -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 border-t border-slate-100 pt-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 border-slate-100">
                 <div class="space-y-1.5">
                     <span class="text-sm font-bold text-slate-500  tracking-wider block leading-tight">32. Apakah ada
                         minimal salah satu anggota keluarga ini yang menerima kredit dari lembaga keuangan berikut dalam
@@ -271,21 +329,21 @@
 
             <div class="flex items-center justify-end gap-4">
                 @if (auth()->user()->isMasterAdmin())
-                <form method="POST" action="{{ route('admin.keluarga.destroy', $tempat) }}">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit"
-                        onclick="return confirm('Apakah Anda yakin ingin menghapus permanen data keluarga ini?')"
-                        class="px-6 py-3.5 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-2xl transition-all active:scale-95 text-sm shadow-sm shadow-rose-600/10">
-                        Hapus Data
-                    </button>
-                </form>
-            @endif
+                    <form method="POST" action="{{ route('admin.keluarga.destroy', $tempat) }}">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit"
+                            onclick="return confirm('Apakah Anda yakin ingin menghapus permanen data keluarga ini?')"
+                            class="px-6 py-3.5 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-2xl transition-all active:scale-95 text-sm shadow-sm shadow-rose-600/10">
+                            Hapus Data
+                        </button>
+                    </form>
+                @endif
 
-            <a href="{{ route('admin.keluarga.edit', $tempat) }}"
-                class="px-6 py-3.5 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-2xl transition-all active:scale-95 text-sm shadow-sm shadow-amber-500/10 text-center">
-                Edit Data
-            </a>
+                <a href="{{ route('admin.keluarga.edit', $tempat) }}"
+                    class="px-6 py-3.5 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-2xl transition-all active:scale-95 text-sm shadow-sm shadow-amber-500/10 text-center">
+                    Edit Data
+                </a>
             </div>
 
         </div>

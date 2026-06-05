@@ -45,6 +45,8 @@ class UsahaController extends Controller
         Tempat $tempat
     )
     {
+        $desa = auth()->user()->desa;
+
         return view(
             'admin.usaha.create',
             [
@@ -92,6 +94,12 @@ class UsahaController extends Controller
 
                 'kendalaUsaha'
                     => Kendala::OPTIONS,
+            ],
+            [
+
+                'tempat' => $tempat,
+                'desa'   => $desa,
+
             ]
         );
     }

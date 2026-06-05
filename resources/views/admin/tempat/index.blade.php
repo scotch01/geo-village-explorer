@@ -159,15 +159,15 @@
                     <table class="w-full text-left">
                         <thead>
                             <tr class="text-[11px] uppercase tracking-[0.2em] text-slate-400 font-black">
-                                <th class="px-8 py-5 text-center w-20">No</th>
+                                <th class="px-6 py-5 text-center w-20">No</th>
                                 <th class="px-8 py-5">Detail</th>
-                                <th class="px-8 py-5">Jenis Bangunan</th>
-                                <th class="px-8 py-5">Wilayah</th>
-                                <th class="px-8 py-5">Dusun</th>
+                                <th class="px-4 py-5">Jenis Bangunan</th>
+                                <th class="px-6 py-5">Wilayah Desa</th>
+                                <th class="px-6 py-5">Dusun</th>
                                 <th class="px-8 py-5 text-center">
-                                    Status Pendataan
+                                    Petugas
                                 </th>
-                                <th class="px-8 py-5 text-center">Aksi</th>
+                                <th class="px-6 py-5 text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-50">
@@ -177,18 +177,35 @@
                                         {{ $tempats->firstItem() + $index }}
                                     </td>
                                     <td class="px-8 py-6">
-                                        <div
-                                            class="font-extrabold text-slate-800 group-hover:text-blue-600 transition-colors">
+                                        {{-- BTT --}}
+                                        @if ($tempat->jenis_bangunan === 'btt')
+                                            <div class="font-bold text-slate-800">
+                                                {{ $tempat->keluarga?->nama_kepala_keluarga ?? '-' }}
+                                            </div>
 
-                                            {{ $tempat->display_name ?? '-' }}
+                                            {{-- BKU --}}
+                                        @elseif ($tempat->jenis_bangunan === 'bku')
+                                            @php
+                                                $usaha = $tempat->usahas->first();
+                                            @endphp
 
-                                        </div>
+                                            <div class="font-bold text-slate-800">
+                                                {{ $usaha?->nama_pemilik ?? '-' }}
+                                            </div>
 
-                                        @if ($tempat->display_subtitle)
-                                            <div class="text-xs text-slate-400 mt-1 font-medium">
+                                            <div class="text-xs text-slate-500 mt-1">
+                                                {{ $usaha?->nama_usaha ?? '-' }}
+                                            </div>
 
-                                                {{ $tempat->display_subtitle }}
+                                            {{-- BC --}}
+                                        @elseif ($tempat->jenis_bangunan === 'bc')
+                                            <div class="font-bold text-slate-800">
+                                                {{ $tempat->keluarga?->nama_kepala_keluarga ?? '-' }}
+                                            </div>
 
+                                            <div class="text-xs text-slate-500 mt-1">
+                                                {{ $tempat->usahas->count() }}
+                                                usaha terdaftar
                                             </div>
                                         @endif
                                     </td>
@@ -215,25 +232,8 @@
                                         </span>
 
                                     </td>
-                                    <td class="px-8 py-6 text-center">
-
-                                        @if ($tempat->status_pendataan === 'selesai')
-                                            <span
-                                                class="px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-semibold">
-                                                Selesai
-                                            </span>
-                                        @elseif($tempat->status_pendataan === 'parsial')
-                                            <span
-                                                class="px-3 py-1 rounded-full bg-yellow-100 text-yellow-700 text-xs font-semibold">
-                                                Sebagian
-                                            </span>
-                                        @else
-                                            <span
-                                                class="px-3 py-1 rounded-full bg-gray-100 text-gray-700 text-xs font-semibold">
-                                                Belum
-                                            </span>
-                                        @endif
-
+                                    <td class="px-8 py-6">
+                                        {{ $tempat->creator?->name ?? '-' }}
                                     </td>
                                     <td class="px-8 py-6">
                                         <div class="flex items-center justify-center gap-2">
@@ -267,13 +267,10 @@
                                     d="M9 20l-5.447-2.724A2 2 0 013 15.487V6.513a2 2 0 011.553-1.943L9 2l5.447 2.724A2 2 0 0116 6.513v8.974a2 2 0 01-1.553 1.943L9 20zm0-18v18m0-18l5.447 2.724M9 20l-5.447-2.724" />
                             </svg>
                         </div>
-                        <h2 class="text-2xl font-extrabold text-slate-800 tracking-tight">Belum Ada Data Lokasi</h2>
-                        <p class="text-slate-500 mt-3 max-w-md mx-auto font-medium">
-                            Mulai bangun sistem pemetaan wilayah desa dengan menambahkan entri tempat pertama Anda.
-                        </p>
+                        <h2 class="text-2xl font-extrabold text-slate-800 tracking-tight">Belum Ada Data Bangunan</h2>
                         <a href="{{ route('admin.tempat.create') }}"
                             class="inline-flex mt-8 bg-blue-600 hover:bg-blue-700 text-white px-8 py-3.5 rounded-2xl font-bold transition-all active:scale-95 shadow-xl shadow-blue-100">
-                            Buat Data Pertama
+                            Buat Data Bangunan Pertama
                         </a>
                     </div>
                 </div>

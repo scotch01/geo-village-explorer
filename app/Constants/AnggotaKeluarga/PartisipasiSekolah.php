@@ -9,8 +9,8 @@ class PartisipasiSekolah
     public const TIDAK = 2;
 
     public const OPTIONS = [
-        self::BELUM => 'Tidak/belum pernah sekolah',
-        self::MASIH => 'Masih Sekolah',
-        self::TIDAK => 'Tidak Bersekolah Lagi',
+        self::BELUM => '0. Tidak/belum pernah sekolah',
+        self::MASIH => '1. Masih Sekolah',
+        self::TIDAK => '2. Tidak Bersekolah Lagi',
     ];
 }

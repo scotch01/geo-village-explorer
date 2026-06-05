@@ -10,9 +10,9 @@ class StatusPerkawinan
     public const CERAI_MATI = 4;
 
     public const OPTIONS = [
-        self::BELUM => 'Belum Kawin',
-        self::KAWIN => 'Kawin',
-        self::CERAI_HIDUP => 'Cerai Hidup',
-        self::CERAI_MATI => 'Cerai Mati',
+        self::BELUM => '1. Belum Kawin',
+        self::KAWIN => '2. Kawin',
+        self::CERAI_HIDUP => '3. Cerai Hidup',
+        self::CERAI_MATI => '4. Cerai Mati',
     ];
 }

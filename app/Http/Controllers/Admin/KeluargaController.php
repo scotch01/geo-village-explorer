@@ -137,7 +137,7 @@ class KeluargaController extends Controller
 
         return redirect()
             ->route(
-                'admin.tempat.survey',
+                'admin.keluarga.show',
                 $tempat
             )
             ->with(
@@ -319,7 +319,7 @@ class KeluargaController extends Controller
 
         return redirect()
             ->route(
-                'admin.tempat.show',
+                'admin.keluarga.show',
                 $tempat
             )
             ->with(

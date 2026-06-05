@@ -158,6 +158,49 @@ class AnggotaKeluargaController extends Controller
             );
     }
 
+    public function show(
+        AnggotaKeluarga $anggota
+    )
+    {
+        return view(
+            'admin.anggota.show',
+            [
+
+                'anggota' => $anggota,
+
+                'hubunganKeluarga'
+                    => HubunganKeluarga::OPTIONS,
+
+                'statusPerkawinan'
+                    => StatusPerkawinan::OPTIONS,
+
+                'jenisKelamin'
+                    => JenisKelamin::OPTIONS,
+
+                'partisipasiSekolah'
+                    => PartisipasiSekolah::OPTIONS,
+
+                'pendidikan'
+                    => Pendidikan::OPTIONS,
+
+                'kedudukanPekerjaan'
+                    => KedudukanPekerjaan::OPTIONS,
+
+                'rekeningAktif'
+                    => RekeningAktif::OPTIONS,
+
+                'disabilitas'
+                    => Disabilitas::OPTIONS,
+
+                'penyakitKronis'
+                    => PenyakitKronis::OPTIONS,
+
+                'jaminanKesehatan'
+                    => JaminanKesehatan::OPTIONS,
+            ]
+        );
+    }
+
     public function edit(
         AnggotaKeluarga $anggota
     )

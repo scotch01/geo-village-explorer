@@ -20,11 +20,11 @@
 
                 </div>
 
-                <a href="{{ route('admin.usaha.create', $tempat) }}" class="px-4 py-2 bg-green-600 text-white rounded-xl">
-
-                    Tambah Usaha
-
-                </a>
+                @if ($tempat->jenis_bangunan === 'bc' || $tempat->usahas->count() === 0)
+                    <a href="{{ route('admin.usaha.create', $tempat) }}" class="px-4 py-2 bg-green-600 text-white rounded-xl hover:bg-green-700 transition-all active:scale-95">
+                        Tambah Usaha
+                    </a>
+                @endif
 
             </div>
 
@@ -99,7 +99,7 @@
                                 <td class="px-4 py-3 text-center">
 
                                     <a href="{{ route('admin.usaha.show', $usaha) }}"
-                                        class="px-3 py-1 bg-blue-600 text-white rounded-lg text-sm">
+                                        class="px-3 py-1 bg-blue-600 text-white rounded-lg text-sm transition-all active:scale-95 hover:bg-blue-700">
 
                                         Detail
 

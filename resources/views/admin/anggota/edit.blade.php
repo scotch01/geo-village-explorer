@@ -5,9 +5,9 @@
 
         <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 lg:p-8">
             <h1 class="ttext-2xl lg:text-3xl font-black text-slate-900 tracking-tight">
-                Tambah Data Anggota Keluarga
+                Perbarui Data Anggota Keluarga
             </h1>
-            <p class="text-sm lg:text-base font-medium text-slate-700 mt-1">Silakan lengkapi kuisioner keterangan anggota
+            <p class="text-sm lg:text-base font-medium text-slate-700 mt-1">Silakan perbarui kuisioner keterangan anggota
                 keluarga di bawah ini secara teliti.</p>
         </div>
 
@@ -16,16 +16,11 @@
             @method('PUT')
 
             <div class="bg-white rounded-2xl border p-6 space-y-5 shadow-sm">
-                <div class="flex items-center gap-4 mb-8">
-                    <div class="w-2 h-8 rounded-full bg-blue-600"></div>
-                    <div>
-                        <h2 class="font-black text-xl text-slate-900 tracking-tight">
-                            BLOK II
-                        </h2>
-                        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mt-0.5">
-                            KETERANGAN ANGGOTA KELUARGA
-                        </p>
-                    </div>
+                <div class="flex items-center gap-4 mb-6 border-b border-slate-100 pb-4">
+                    <div class="w-1.5 h-6 rounded-full bg-amber-500"></div>
+                    <h2 class="font-black text-lg text-slate-900 tracking-tight">
+                        I. Identitas Anggota Keluarga
+                    </h2>
                 </div>
 
                 {{-- 5. Nomor Urut --}}
@@ -89,6 +84,16 @@
                     @enderror
                 </div>
 
+            </div>
+
+            <div class="bg-white rounded-2xl border p-6 space-y-5 shadow-sm">
+                <div class="flex items-center gap-4 mb-6 border-b border-slate-100 pb-4">
+                    <div class="w-1.5 h-6 rounded-full bg-amber-500"></div>
+                    <h2 class="font-black text-lg text-slate-900 tracking-tight">
+                        II. Demografi
+                    </h2>
+                </div>
+
                 {{-- 9. Status Perkawinan --}}
                 <div>
                     <label class="block mb-2 font-medium text-gray-700">
@@ -145,7 +150,12 @@
 
             </div>
             <div class="bg-white rounded-2xl border p-6 space-y-5 shadow-sm">
-
+                <div class="flex items-center gap-4 mb-6 border-b border-slate-100 pb-4">
+                    <div class="w-1.5 h-6 rounded-full bg-amber-500"></div>
+                    <h2 class="font-black text-lg text-slate-900 tracking-tight">
+                        III. Pendidikan, Pekerjaan & Ekonomi
+                    </h2>
+                </div>
                 {{-- 12. Partisipasi Sekolah --}}
                 <div>
                     <label class="block mb-2 font-medium text-gray-700">
@@ -255,6 +265,12 @@
             </div>
 
             <div class="bg-white rounded-2xl border p-6 space-y-5 shadow-sm">
+                <div class="flex items-center gap-4 mb-6 border-b border-slate-100 pb-4">
+                    <div class="w-1.5 h-6 rounded-full bg-amber-500"></div>
+                    <h2 class="font-black text-lg text-slate-900 tracking-tight">
+                        IV. Disabilitas, Penyakit Kronis & Jaminan Kesehatan
+                    </h2>
+                </div>
 
                 {{-- 17. Disabilitas (Checkbox Group) --}}
                 <div>
@@ -322,14 +338,14 @@
 
                 {{-- Action Button --}}
                 <div class="flex justify-end gap-3 border-t pt-5">
-                    <a href="{{ route('admin.anggota.index', $anggota) }}"
-                        class="px-6 py-2.5 border rounded-xl text-gray-700 hover:bg-gray-50 transition">
+                    <a href="{{ route('admin.anggota.show', $anggota) }}"
+                        class="px-6 py-2.5 border rounded-xl text-gray-700 hover:bg-gray-50 transition-all active:scale-95 ">
                         Batal
                     </a>
                     <button type="submit"
-                        class="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-xl shadow-sm transition">
-                        Simpan Data
-                    </button>
+                            class="px-6 py-3.5 bg-amber-500 hover:bg-amber-600 text-white rounded-xl font-bold transition-all active:scale-95 shadow-md shadow-amber-500/20 text-sm text-center">
+                            Simpan Perubahan
+                        </button>
                 </div>
             </div>
         </form>

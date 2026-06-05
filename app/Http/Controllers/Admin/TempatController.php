@@ -90,13 +90,15 @@ class TempatController extends Controller
         /**
          * PAGINATION
          */
+        $perPage     = $request->get('per_page', 20);
         $tempats = $query
             ->with([
                 'keluarga',
                 'usahas',
+                'creator',
             ])
             ->latest()
-            ->paginate(10)
+            ->paginate($perPage)
             ->withQueryString();
 
         return view('admin.tempat.index', [

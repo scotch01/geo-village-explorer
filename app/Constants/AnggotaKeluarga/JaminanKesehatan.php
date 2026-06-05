@@ -12,11 +12,11 @@ class JaminanKesehatan
     public const TIDAK_ADA = 'X';
 
     public const OPTIONS = [
-        self::PBI => 'BPJS Kesehatan Penerima Bantuan Iuran (PBI)',
-        self::NON_PBI => 'BPJS Kesehatan Non-PBI/Mandiri',
-        self::JAMKESDA => 'Jamkesda',
-        self::SWASTA => 'Asuransi Swasta',
-        self::KANTOR => 'Perusahaan/Kantor',
-        self::TIDAK_ADA => 'Tidak Ada',
+        self::PBI => 'A. BPJS Kesehatan Penerima Bantuan Iuran (PBI)',
+        self::NON_PBI => 'B. BPJS Kesehatan Non-PBI/Mandiri',
+        self::JAMKESDA => 'C. Jamkesda',
+        self::SWASTA => 'D. Asuransi Swasta',
+        self::KANTOR => 'E. Perusahaan/Kantor',
+        self::TIDAK_ADA => 'X. Tidak Ada',
     ];
 }

@@ -103,6 +103,9 @@ Route::middleware(['auth', 'role:master_admin,admin_desa,pengawas'])
     Route::post('/keluarga/{keluarga}/anggota', [AnggotaKeluargaController::class, 'store'])
         ->name('anggota.store');
 
+    Route::get('/anggota/{anggota}', [AnggotaKeluargaController::class, 'show'])
+        ->name('anggota.show');
+
     Route::get('/anggota/{anggota}/edit', [AnggotaKeluargaController::class, 'edit'])
         ->name('anggota.edit');
 

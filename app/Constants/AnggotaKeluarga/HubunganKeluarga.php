@@ -15,14 +15,14 @@ class HubunganKeluarga
     public const LAINNYA = 9;
 
     public const OPTIONS = [
-        self::KEPALA => 'Kepala keluarga',
-        self::ISTRI_SUAMI => 'Istri/Suami',
-        self::ANAK => 'Anak',
-        self::MENANTU => 'Menantu',
-        self::CUCU => 'Cucu',
-        self::ORANG_TUA => 'Orang Tua',
-        self::MERTUA => 'Mertua',
-        self::FAMILI_LAIN => 'Famili Lain',
-        self::LAINNYA => 'Lainnya',
+        self::KEPALA => '1. Kepala keluarga',
+        self::ISTRI_SUAMI => '2. Istri/Suami',
+        self::ANAK => '3. Anak',
+        self::MENANTU => '4. Menantu',
+        self::CUCU => '5. Cucu',
+        self::ORANG_TUA => '6. Orang Tua',
+        self::MERTUA => '7. Mertua',
+        self::FAMILI_LAIN => '8. Famili Lain',
+        self::LAINNYA => '9. Lainnya',
     ];
 }
