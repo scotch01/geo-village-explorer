@@ -356,7 +356,7 @@ class UsahaController extends Controller
                 => 'nullable|integer',
 
             'tanggal_lahir_pemilik'
-                => 'nullable|date',
+                => 'nullable|date|before_or_equal:today',
 
             'ijazah_pemilik'
                 => 'nullable|integer',
@@ -424,6 +424,9 @@ class UsahaController extends Controller
         [
             'nama_usaha'
                 => '7. Nama Usaha / Perusahaan',   
+            
+            'tanggal_lahir_pemilik'
+                => '14d. Tanggal Lahir Pemilik',
         ]);
     }
 }

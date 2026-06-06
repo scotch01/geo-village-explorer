@@ -135,7 +135,7 @@
                         10. Tanggal Lahir <span class="font-bold" x-text="nama || 'anggota keluarga ini'">
                         </span>
                     </label>
-                    <input type="date" x-model="tanggalLahir" @change="hitungUmur()" name="tanggal_lahir"
+                    <input type="date" x-model="tanggalLahir" @change="hitungUmur()" name="tanggal_lahir" max="{{ now()->format('Y-m-d') }}"
                         value="{{ old('tanggal_lahir') }}"
                         class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500 cursor-pointer"
                         onclick="this.showPicker()">

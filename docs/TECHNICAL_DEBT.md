@@ -157,7 +157,7 @@ Tindakan:
 
 ### 11. Konsistensi Aurora UI
 
-Status: Ditunda
+Status: Sudah
 
 Alasan:
 
@@ -269,7 +269,7 @@ Sedang
 
 ### Status
 
-Belum diimplementasikan.
+Sudah
 
 ### Tujuan
 

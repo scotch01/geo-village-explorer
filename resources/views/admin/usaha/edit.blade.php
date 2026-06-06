@@ -289,7 +289,7 @@
 
                         <div>
                             <label class="block text-xs font-medium text-gray-500 mb-1">d. Tanggal Lahir</label>
-                            <input type="date" name="tanggal_lahir_pemilik"
+                            <input type="date" name="tanggal_lahir_pemilik" max="{{ now()->format('Y-m-d') }}"
                                 value="{{ old('tanggal_lahir_pemilik', $usaha->tanggal_lahir_pemilik) }}"
                                 class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500 text-sm">
                         </div>

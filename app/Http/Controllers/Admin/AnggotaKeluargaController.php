@@ -372,7 +372,7 @@ class AnggotaKeluargaController extends Controller
                 => 'required|integer',
 
             'tanggal_lahir'
-                => 'required|date',
+                => 'required|date|before_or_equal:today',
 
             'jenis_kelamin'
                 => 'required|integer',
@@ -434,7 +434,7 @@ class AnggotaKeluargaController extends Controller
                 => '9. Status Perkawinan',
 
             'tanggal_lahir'
-                => '10. Tanggal Lahir',
+                => '10. Tanggal Lahir harus berisi tanggal yang sama atau sebelum hari ini.',
 
             'jenis_kelamin'
                 => '11. Jenis Kelamin',   
@@ -443,6 +443,15 @@ class AnggotaKeluargaController extends Controller
         $umur = Carbon::parse(
             $request->tanggal_lahir
         )->age;
+
+        if ($umur < 0) {
+
+            throw ValidationException::withMessages([
+                'tanggal_lahir'
+                    => 'Tanggal lahir tidak valid.'
+            ]);
+
+        }
 
         /*
         |--------------------------------------------------------------------------

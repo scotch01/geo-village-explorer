@@ -138,7 +138,7 @@
                     <label class="block mb-2 font-medium text-gray-700">
                         10. Tanggal Lahir
                     </label>
-                    <input type="date" name="tanggal_lahir" value="{{ old('tanggal_lahir', $anggota->tanggal_lahir) }}"
+                    <input type="date" name="tanggal_lahir" max="{{ now()->format('Y-m-d') }}" value="{{ old('tanggal_lahir', $anggota->tanggal_lahir) }}"
                         class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500">
                     @error('tanggal_lahir')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
