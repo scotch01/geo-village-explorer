@@ -6,7 +6,7 @@ Dokumen ini berisi daftar perbaikan yang sengaja ditunda selama fase implementas
 
 ### 1. Hapus Kolom `metadata` pada Tabel Tempat
 
-Status: Ditunda
+Status: Tidak jadi
 
 Alasan:
 
@@ -22,7 +22,7 @@ Tindakan:
 
 ### 2. Hapus Foto Lama Saat Update
 
-Status: Ditunda
+Status: Sudah
 
 Alasan:
 
@@ -68,7 +68,7 @@ Tindakan:
 
 ### 5. Validasi Jenis Bangunan di Database
 
-Status: Ditunda
+Status: Sudah
 
 Alasan:
 
@@ -300,7 +300,7 @@ Sedang
 
 ### Status
 
-Belum diimplementasikan.
+Sudah
 
 ### Tujuan
 
