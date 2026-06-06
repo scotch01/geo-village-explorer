@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Tempat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use App\Constants\Tempat\JenisBangunan;
 
@@ -204,6 +205,14 @@ class TempatController extends Controller
 
         if ($request->hasFile('foto_bangunan')) {
 
+            if ($tempat->foto_bangunan) {
+
+                Storage::disk('public')
+                    ->delete(
+                        $tempat->foto_bangunan
+                    );
+            }
+
             $validated['foto_bangunan'] =
                 $request
                     ->file('foto_bangunan')
@@ -228,6 +237,14 @@ class TempatController extends Controller
         }
 
         $this->authorizeTempatAccess($tempat);
+
+        if ($tempat->foto_bangunan) {
+
+            Storage::disk('public')
+                ->delete(
+                    $tempat->foto_bangunan
+                );
+        }
 
         $tempat->delete();
 
@@ -272,6 +289,14 @@ class TempatController extends Controller
         $data = [];
 
         if ($request->hasFile('foto_bangunan')) {
+
+            if ($tempat->foto_bangunan) {
+
+                Storage::disk('public')
+                    ->delete(
+                        $tempat->foto_bangunan
+                    );
+            }
 
             $data['foto_bangunan']
                 = $request

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Tempat;
 use App\Models\Keluarga;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 use App\Constants\Keluarga\StatusKepemilikanRumah;
 use App\Constants\Keluarga\BahanLantai;
@@ -275,8 +276,10 @@ class KeluargaController extends Controller
             abort(404);
         }
 
-        $validated =
-            $this->validateData($request);
+        $validated = $this->validateData(
+            $request,
+            $keluarga
+        );
 
         /**
          * Simpan data meteran terpisah
@@ -357,18 +360,44 @@ class KeluargaController extends Controller
             );
     }
 
-    private function validateData(Request $request)
+    private function validateData(
+        Request $request, 
+        ?Keluarga $keluarga = null)
     {
         return $request->validate([
 
             'nama_kepala_keluarga'
                 => 'required|string|max:255',
 
-            'nik_kepala_keluarga'
-                => 'required|string|max:16',
+            'nik_kepala_keluarga' => [
 
-            'nomor_kk'
-                => 'required|string|max:16',
+                'required',
+                'string',
+                'size:16',
+
+                Rule::unique(
+                    'keluargas',
+                    'nik_kepala_keluarga'
+                )->ignore(
+                    $keluarga?->id
+                ),
+
+            ],
+
+            'nomor_kk' => [
+
+                'required',
+                'string',
+                'size:16',
+
+                Rule::unique(
+                    'keluargas',
+                    'nomor_kk'
+                )->ignore(
+                    $keluarga?->id
+                ),
+
+            ],
 
             'provinsi'
                 => 'required|string|max:255',

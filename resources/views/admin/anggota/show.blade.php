@@ -187,22 +187,20 @@
             </div>
 
             <div class="flex items-center justify-end gap-4">
-                @if (auth()->user()->isMasterAdmin())
-                <form method="POST" action="{{ route('admin.anggota.destroy', $anggota) }}">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit"
-                        onclick="return confirm('Apakah Anda yakin ingin menghapus permanen data anggota keluarga ini?')"
-                        class="px-6 py-3.5 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-2xl transition-all active:scale-95 text-sm shadow-sm shadow-rose-600/10">
-                        Hapus Data
-                    </button>
-                </form>
-            @endif
+                    <form method="POST" action="{{ route('admin.anggota.destroy', $anggota) }}">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit"
+                            onclick="return confirm('Apakah Anda yakin ingin menghapus permanen data anggota keluarga ini?')"
+                            class="px-6 py-3.5 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-2xl transition-all active:scale-95 text-sm shadow-sm shadow-rose-600/10">
+                            Hapus Data
+                        </button>
+                    </form>
 
-            <a href="{{ route('admin.anggota.edit', $anggota) }}"
-                class="px-6 py-3.5 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-2xl transition-all active:scale-95 text-sm shadow-sm shadow-amber-500/10 text-center">
-                Edit Data
-            </a>
+                <a href="{{ route('admin.anggota.edit', $anggota) }}"
+                    class="px-6 py-3.5 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-2xl transition-all active:scale-95 text-sm shadow-sm shadow-amber-500/10 text-center">
+                    Edit Data
+                </a>
             </div>
 
         </div>

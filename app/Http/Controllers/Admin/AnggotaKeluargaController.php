@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\MasterProfesi;
 use Illuminate\Validation\ValidationException;
+
 use App\Models\Keluarga;
 use App\Models\AnggotaKeluarga;
 use App\Constants\AnggotaKeluarga\HubunganKeluarga;
@@ -110,6 +111,11 @@ class AnggotaKeluargaController extends Controller
     {
         $validated =
             $this->validateData($request);
+
+        $this->validateNik(
+            $validated,
+            $keluarga
+        );
 
         $validated['keluarga_id']
             = $keluarga->id;
@@ -271,6 +277,12 @@ class AnggotaKeluargaController extends Controller
     {
         $validated =
             $this->validateData($request);
+
+        $this->validateNik(
+            $validated,
+            $anggota->keluarga,
+            $anggota
+        );
 
         if (
             $validated['hubungan_keluarga'] == 1
@@ -520,5 +532,75 @@ class AnggotaKeluargaController extends Controller
 
         return $validated;
 
+    }
+
+    private function validateNik(
+        array $validated,
+        Keluarga $keluarga,
+        ?AnggotaKeluarga $anggota = null
+    )
+    {
+        /**
+         * Kepala keluarga
+         */
+        if (
+            $validated['hubungan_keluarga'] == 1
+        ) {
+
+            if (
+                $validated['nik']
+                !== $keluarga->nik_kepala_keluarga
+            ) {
+
+                throw ValidationException::withMessages([
+                    'nik' =>
+                        'NIK kepala keluarga harus sama dengan NIK yang terdaftar pada Data Keluarga.'
+                ]);
+            }
+
+            return;
+        }
+
+        /**
+         * NIK tidak boleh sama dengan kepala keluarga
+         */
+        if (
+            $validated['nik']
+            === $keluarga->nik_kepala_keluarga
+        ) {
+
+            throw ValidationException::withMessages([
+                'nik' =>
+                    'NIK sudah digunakan oleh kepala keluarga.'
+            ]);
+        }
+
+        /**
+         * NIK tidak boleh sama dengan anggota lain
+         */
+        $query =
+            $keluarga
+                ->anggotaKeluargas()
+                ->where(
+                    'nik',
+                    $validated['nik']
+                );
+
+        if ($anggota) {
+
+            $query->where(
+                'id',
+                '!=',
+                $anggota->id
+            );
+        }
+
+        if ($query->exists()) {
+
+            throw ValidationException::withMessages([
+                'nik' =>
+                    'NIK sudah digunakan oleh anggota keluarga lain.'
+            ]);
+        }
     }
 }
