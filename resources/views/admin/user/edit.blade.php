@@ -2,203 +2,187 @@
 
 @section('content')
 
-<div class="max-w-3xl mx-auto space-y-8">
+    <div class="max-w-3xl mx-auto space-y-8">
 
-    <!-- HEADER -->
-    <div>
+        <!-- HEADER -->
+        <div>
 
-        <h1 class="text-3xl font-black tracking-tight text-slate-900">
-            Edit User
-        </h1>
+            <h1 class="text-3xl font-black tracking-tight text-slate-900">
+                Edit User
+            </h1>
 
-        <p class="text-slate-500 mt-2">
-            Perbarui akun dan hak akses pengguna
-        </p>
-
-    </div>
-
-    <!-- VALIDATION -->
-    @if ($errors->any())
-
-        <div class="bg-red-50 border border-red-200 rounded-2xl p-5">
-
-            <ul class="space-y-1 text-sm text-red-600">
-
-                @foreach ($errors->all() as $error)
-                    <li>• {{ $error }}</li>
-                @endforeach
-
-            </ul>
+            <p class="text-slate-500 mt-2">
+                Perbarui akun dan hak akses pengguna
+            </p>
 
         </div>
 
-    @endif
+        @if ($errors->any())
+            <div class="mb-6 rounded-xl border border-red-200 bg-red-50 p-4">
 
-    <!-- FORM -->
-    <form method="POST"
-          action="{{ route('admin.user.update', $user->id) }}"
-          class="bg-white border border-slate-200 rounded-[2rem] shadow-sm overflow-hidden">
+                <div class="font-semibold text-red-700 mb-2">
+                    Terdapat data yang belum lengkap:
+                </div>
 
-        @csrf
-        @method('PUT')
-
-        <div class="p-8 space-y-6">
-
-            <!-- NAMA -->
-            <div>
-
-                <label class="text-sm font-semibold text-slate-700">
-                    Nama
-                </label>
-
-                <input type="text"
-                       name="name"
-                       value="{{ old('name', $user->name) }}"
-                       class="w-full mt-2 rounded-2xl border-slate-200 bg-slate-50"
-                       required>
+                <ul class="list-disc list-inside text-sm text-red-600 space-y-1">
+                    @foreach ($errors->all() as $error)
+                        <li>
+                            {{ $error }}
+                        </li>
+                    @endforeach
+                </ul>
 
             </div>
+        @endif
 
-            <!-- EMAIL -->
-            <div>
+        <!-- FORM -->
+        <form method="POST" action="{{ route('admin.user.update', $user->id) }}"
+            class="bg-white border border-slate-200 rounded-[2rem] shadow-sm overflow-hidden">
 
-                <label class="text-sm font-semibold text-slate-700">
-                    Email
-                </label>
+            @csrf
+            @method('PUT')
 
-                <input type="email"
-                       name="email"
-                       value="{{ old('email', $user->email) }}"
-                       class="w-full mt-2 rounded-2xl border-slate-200 bg-slate-50"
-                       required>
+            <div class="p-8 space-y-6">
 
-            </div>
+                <!-- NAMA -->
+                <div>
 
-            <!-- PASSWORD -->
-            <div>
+                    <label class="text-sm font-semibold text-slate-700">
+                        Nama
+                    </label>
 
-                <label class="text-sm font-semibold text-slate-700">
-                    Password Baru
-                </label>
+                    <input type="text" name="name" value="{{ old('name', $user->name) }}"
+                        class="w-full mt-2 rounded-2xl border-slate-200 bg-slate-50" required>
 
-                <input type="password"
-                       name="password"
-                       class="w-full mt-2 rounded-2xl border-slate-200 bg-slate-50">
+                </div>
 
-                <p class="text-xs text-slate-400 mt-2">
-                    Kosongkan jika tidak ingin mengganti password
-                </p>
+                <!-- EMAIL -->
+                <div>
 
-            </div>
+                    <label class="text-sm font-semibold text-slate-700">
+                        Email
+                    </label>
 
-            <!-- ROLE -->
-            <div>
+                    <input type="email" name="email" value="{{ old('email', $user->email) }}"
+                        class="w-full mt-2 rounded-2xl border-slate-200 bg-slate-50" required>
 
-                <label class="text-sm font-semibold text-slate-700">
-                    Role
-                </label>
+                </div>
 
-                <select name="role"
-                        id="role"
-                        class="w-full mt-2 rounded-2xl border-slate-200 bg-slate-50"
+                <!-- PASSWORD -->
+                <div>
+
+                    <label class="text-sm font-semibold text-slate-700">
+                        Password Baru
+                    </label>
+
+                    <input type="password" name="password" class="w-full mt-2 rounded-2xl border-slate-200 bg-slate-50">
+
+                    <p class="text-xs text-slate-400 mt-2">
+                        Kosongkan jika tidak ingin mengganti password
+                    </p>
+
+                </div>
+
+                <!-- ROLE -->
+                <div>
+
+                    <label class="text-sm font-semibold text-slate-700">
+                        Role
+                    </label>
+
+                    <select name="role" id="role" class="w-full mt-2 rounded-2xl border-slate-200 bg-slate-50"
                         required>
 
-                    <option value="master_admin"
-                        {{ old('role', $user->role) == 'master_admin' ? 'selected' : '' }}>
+                        <option value="master_admin" {{ old('role', $user->role) == 'master_admin' ? 'selected' : '' }}>
 
-                        Master Admin
-
-                    </option>
-
-                    <option value="admin_desa"
-                        {{ old('role', $user->role) == 'admin_desa' ? 'selected' : '' }}>
-
-                        Admin Desa
-
-                    </option>
-
-                </select>
-
-            </div>
-
-            <!-- DESA -->
-            <div id="desa-wrapper">
-
-                <label class="text-sm font-semibold text-slate-700">
-                    Desa
-                </label>
-
-                <select name="id_desa"
-                        class="w-full mt-2 rounded-2xl border-slate-200 bg-slate-50">
-
-                    <option value="">
-                        -- Pilih Desa --
-                    </option>
-
-                    @foreach($desas as $desa)
-
-                        <option value="{{ $desa->id }}"
-                            {{ old('id_desa', $user->id_desa) == $desa->id ? 'selected' : '' }}>
-
-                            {{ $desa->nama_desa }}
+                            Master Admin
 
                         </option>
 
-                    @endforeach
+                        <option value="admin_desa" {{ old('role', $user->role) == 'admin_desa' ? 'selected' : '' }}>
 
-                </select>
+                            Admin Desa
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <!-- DESA -->
+                <div id="desa-wrapper">
+
+                    <label class="text-sm font-semibold text-slate-700">
+                        Desa
+                    </label>
+
+                    <select name="id_desa" class="w-full mt-2 rounded-2xl border-slate-200 bg-slate-50">
+
+                        <option value="">
+                            -- Pilih Desa --
+                        </option>
+
+                        @foreach ($desas as $desa)
+                            <option value="{{ $desa->id }}"
+                                {{ old('id_desa', $user->id_desa) == $desa->id ? 'selected' : '' }}>
+
+                                {{ $desa->nama_desa }}
+
+                            </option>
+                        @endforeach
+
+                    </select>
+
+                </div>
 
             </div>
 
-        </div>
+            <!-- FOOTER -->
+            <div class="border-t border-slate-100 px-8 py-5 bg-slate-50 flex items-center justify-end gap-4">
 
-        <!-- FOOTER -->
-        <div class="border-t border-slate-100 px-8 py-5 bg-slate-50 flex items-center justify-end gap-4">
+                <a href="{{ route('admin.user.index') }}"
+                    class="px-5 py-2.5 rounded-xl text-slate-600 hover:bg-slate-200 transition">
 
-            <a href="{{ route('admin.user.index') }}"
-               class="px-5 py-2.5 rounded-xl text-slate-600 hover:bg-slate-200 transition">
+                    Batal
 
-                Batal
+                </a>
 
-            </a>
+                <button
+                    class="bg-amber-500 hover:bg-amber-600 text-white px-6 py-3 rounded-2xl font-semibold shadow-lg shadow-amber-100 transition">
 
-            <button class="bg-amber-500 hover:bg-amber-600 text-white px-6 py-3 rounded-2xl font-semibold shadow-lg shadow-amber-100 transition">
+                    Update User
 
-                Update User
+                </button>
 
-            </button>
+            </div>
 
-        </div>
+        </form>
 
-    </form>
+    </div>
 
-</div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
 
-<script>
+            const role = document.getElementById('role');
+            const desaWrapper = document.getElementById('desa-wrapper');
 
-document.addEventListener('DOMContentLoaded', function () {
+            function toggleDesa() {
 
-    const role = document.getElementById('role');
-    const desaWrapper = document.getElementById('desa-wrapper');
+                if (role.value === 'master_admin') {
 
-    function toggleDesa() {
+                    desaWrapper.classList.add('hidden');
 
-        if (role.value === 'master_admin') {
+                } else {
 
-            desaWrapper.classList.add('hidden');
+                    desaWrapper.classList.remove('hidden');
+                }
+            }
 
-        } else {
+            role.addEventListener('change', toggleDesa);
 
-            desaWrapper.classList.remove('hidden');
-        }
-    }
+            toggleDesa();
 
-    role.addEventListener('change', toggleDesa);
-
-    toggleDesa();
-
-});
-
-</script>
+        });
+    </script>
 
 @endsection

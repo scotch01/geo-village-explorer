@@ -4,6 +4,10 @@
 
     <div class="space-y-6">
 
+         <x-back-button :href="route('admin.tempat.survey', $tempat)">
+            Kembali
+        </x-back-button>
+
         <div class="bg-white border rounded-2xl p-6">
 
             <div class="flex justify-between items-center">
@@ -29,6 +33,9 @@
             </div>
 
         </div>
+
+         <!-- Flash Message -->
+        <x-alert />
 
         @if ($usahas->isEmpty())
             <div class="bg-white border rounded-2xl p-10 text-center">

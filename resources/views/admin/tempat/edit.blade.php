@@ -5,31 +5,28 @@
     <div class="max-w-5xl mx-auto space-y-10 animate-fade-in px-2 sm:px-0 overflow-hidden">
 
         @if ($errors->any())
-            <div class="bg-rose-50 border border-rose-100 rounded-3xl p-6 shadow-sm">
+            <div class="mb-6 rounded-xl border border-red-200 bg-red-50 p-4">
 
-                <div class="font-extrabold text-rose-800 text-lg tracking-tight mb-3 flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
-                    Terjadi Kesalahan
+                <div class="font-semibold text-red-700 mb-2">
+                    Terdapat data wajib yang belum lengkap:
                 </div>
 
-                <ul class="space-y-1.5 text-sm text-rose-600 font-medium">
-
+                <ul class="list-disc list-inside text-sm text-red-600 space-y-1">
                     @foreach ($errors->all() as $error)
-                        <li class="flex items-center gap-2">
-                            <span class="text-rose-400 text-xs">●</span>
+                        <li>
                             {{ $error }}
                         </li>
                     @endforeach
-
                 </ul>
 
             </div>
         @endif
 
-        <form method="POST" enctype="multipart/form-data" action="{{ route('admin.tempat.store') }}"
+        <form method="POST" enctype="multipart/form-data" action="{{ route('admin.tempat.update', $tempat->id ?? '') }}"
             class="bg-white border border-slate-200 rounded-3xl lg:rounded-[2.5rem] shadow-sm overflow-hidden transition-all">
 
             @csrf
+            @method('PUT')
 
             <div class="p-6 lg:p-10 space-y-12">
 
@@ -37,7 +34,7 @@
 
                     <div class="flex items-center gap-4">
 
-                        <div class="w-2 h-8 rounded-full bg-blue-600"></div>
+                        <div class="w-2 h-8 rounded-full bg-amber-500"></div>
 
                         <div>
                             <h2 class="font-black text-2xl text-slate-900 tracking-tight">
@@ -103,15 +100,14 @@
             <div
                 class="border-t border-slate-100 px-6 py-5 lg:px-10 lg:py-6 bg-slate-50/50 flex items-center justify-end gap-4">
 
-                <a href="{{ route('admin.tempat.index') }}"
-                    class="px-6 py-3.5 rounded-xl font-bold text-slate-600 hover:bg-slate-100 transition-all active:scale-95 text-sm lg:text-base text-center">
-                    Batal
-                </a>
-
-                <button type="submit"
-                    class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3.5 rounded-xl font-bold transition-all active:scale-95 shadow-sm shadow-blue-600/20 text-sm lg:text-base text-center">
-                    Simpan Data
-                </button>
+                <a href="{{ route('admin.tempat.survey', $tempat) }}"
+                        class="px-6 py-2.5 border rounded-xl text-gray-700 hover:bg-gray-50 transition-all active:scale-95">
+                        Batal
+                    </a>
+                    <button type="submit"
+                        class="px-6 py-3.5 bg-amber-500 hover:bg-amber-600 text-white rounded-xl font-bold transition-all active:scale-95 shadow-md shadow-amber-500/20 text-sm text-center">
+                        Simpan Perubahan
+                    </button>
 
             </div>
 

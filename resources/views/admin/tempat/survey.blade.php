@@ -3,15 +3,55 @@
 @section('content')
     <div class="space-y-10 animate-fade-in px-2 sm:px-0 overflow-hidden">
 
+        <x-back-button :href="route('admin.tempat.index')">
+            Kembali
+        </x-back-button>
+
         <div class="bg-white rounded-3xl lg:rounded-[2.5rem] border border-slate-200 p-6 lg:p-8 shadow-sm">
-            <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
-                Pendataan <span class="text-blue-600 block sm:inline">Wilayah</span>
-            </h1>
-            <p class="text-slate-500 mt-2 text-base sm:text-lg font-medium flex items-center gap-2">
-                <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                Petugas: <span class="text-slate-800 font-bold uppercase">{{ $tempat->creator->name ?? '-' }}</span>
-            </p>
+
+            <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
+
+                <div>
+                    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
+                        Pendataan <span class="text-blue-600 block sm:inline">Wilayah</span>
+                    </h1>
+
+                    <p class="text-slate-500 mt-2 text-base sm:text-lg font-medium flex items-center gap-2">
+                        <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                        Petugas:
+                        <span class="text-slate-800 font-bold uppercase">
+                            {{ $tempat->creator->name ?? '-' }}
+                        </span>
+                    </p>
+                </div>
+
+                @if (auth()->user()->isMasterAdmin())
+                    <form action="{{ route('admin.tempat.destroy', $tempat) }}" method="POST"
+                        onsubmit="return confirm(
+                    'PERINGATAN!\n\nSemua data keluarga, anggota keluarga, usaha, dan data terkait bangunan ini akan dihapus permanen.\n\nLanjutkan?'
+                )">
+                        @csrf
+                        @method('DELETE')
+
+                        <button type="submit"
+                            class="inline-flex items-center gap-2 px-5 py-3 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-2xl transition-all active:scale-95 shadow-sm shadow-rose-600/10">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 7L5 7M10 11V17M14 11V17M6 7L7 19C7.1 20.1 7.9 21 9 21H15C16.1 21 16.9 20.1 17 19L18 7M9 7V5C9 3.9 9.9 3 11 3H13C14.1 3 15 3.9 15 5V7" />
+                            </svg>
+
+                            Hapus Bangunan
+                        </button>
+                    </form>
+                @endif
+
+            </div>
+
         </div>
+
+        <!-- Flash Message -->
+        <x-alert />
 
         {{-- MENU SURVEY (BLOK I, II, III) --}}
         @php
@@ -93,7 +133,8 @@
                             </p>
                         </div>
                         @if ($tempat->usahas->count())
-                            <div class="shrink-0 inline-flex items-center justify-center px-4 py-2 rounded-xl bg-slate-50 font-bold shadow-sm shadow-slate-500/20 border">
+                            <div
+                                class="shrink-0 inline-flex items-center justify-center px-4 py-2 rounded-xl bg-slate-50 font-bold shadow-sm shadow-slate-500/20 border">
                                 <p class="text-sm">{{ $tempat->usahas->count() }}
                                     Usaha masuk list</p>
                             </div>

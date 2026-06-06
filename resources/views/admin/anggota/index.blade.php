@@ -3,6 +3,10 @@
 @section('content')
     <div class="max-w-6xl mx-auto space-y-6">
 
+        <x-back-button :href="route('admin.keluarga.show', $keluarga->tempat)">
+            Kembali
+        </x-back-button>
+
         {{-- Header Section --}}
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b pb-4">
             <div>
@@ -29,7 +33,7 @@
 
                 <a href="{{ route('admin.keluarga.edit', $keluarga->tempat) }}"
                     class="inline-flex items-center gap-2 px-4 py-2.5 bg-green-600 hover:bg-green-700 text-white rounded-xl font-bold transition-all active:scale-95 shadow-md shadow-green-600/20 text-sm lg:text-base text-center">
-                    Lanjutkan / Edit Keterangan Perumahan
+                    Lanjut / Edit Keterangan Perumahan
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                     </svg>
@@ -38,16 +42,7 @@
         </div>
 
         {{-- Flash Message Notifikasi --}}
-        @if (session('success'))
-            <div
-                class="p-4 bg-green-50 border border-green-200 text-green-700 rounded-xl flex items-center gap-2 shadow-sm">
-                <svg class="w-5 h-5 text-green-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-                <span class="text-sm font-medium">{{ session('success') }}</span>
-            </div>
-        @endif
+        <x-alert />
 
         {{-- Table Card --}}
         <div class="bg-white border rounded-2xl overflow-hidden shadow-sm">

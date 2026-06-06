@@ -11,6 +11,24 @@
                 keluarga di bawah ini secara teliti.</p>
         </div>
 
+        @if ($errors->any())
+            <div class="mb-6 rounded-xl border border-red-200 bg-red-50 p-4">
+
+                <div class="font-semibold text-red-700 mb-2">
+                    Terdapat data wajib yang belum lengkap:
+                </div>
+
+                <ul class="list-disc list-inside text-sm text-red-600 space-y-1">
+                    @foreach ($errors->all() as $error)
+                        <li>
+                            {{ $error }}
+                        </li>
+                    @endforeach
+                </ul>
+
+            </div>
+        @endif
+
         <form x-data="anggotaForm()" x-init="init()" @profesi-selected.window="checkProfesi($event.detail.kode)"
             method="POST" action="{{ route('admin.anggota.store', $keluarga) }}" class="space-y-6">
             @csrf
@@ -365,11 +383,11 @@
                 {{-- Action Button --}}
                 <div class="flex justify-end gap-3 border-t pt-5">
                     <a href="{{ route('admin.anggota.index', $keluarga) }}"
-                        class="px-6 py-2.5 border rounded-xl text-gray-700 hover:bg-gray-50 transition">
+                        class="px-6 py-2.5 border rounded-xl text-gray-700 hover:bg-gray-50 transition-all active:scale-95">
                         Batal
                     </a>
                     <button type="submit"
-                        class="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-xl shadow-sm transition">
+                        class="px-6 py-3.5 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl font-bold transition-all active:scale-95 shadow-md shadow-blue-600/20 text-sm text-center">
                         Simpan Data
                     </button>
                 </div>

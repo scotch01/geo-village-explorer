@@ -25,6 +25,24 @@
             </div>
         </div>
 
+        @if ($errors->any())
+            <div class="mb-6 rounded-xl border border-red-200 bg-red-50 p-4">
+
+                <div class="font-semibold text-red-700 mb-2">
+                    Terdapat data wajib yang belum lengkap:
+                </div>
+
+                <ul class="list-disc list-inside text-sm text-red-600 space-y-1">
+                    @foreach ($errors->all() as $error)
+                        <li>
+                            {{ $error }}
+                        </li>
+                    @endforeach
+                </ul>
+
+            </div>
+        @endif
+
         <div x-data="keluargaForm()">
 
             <form method="POST" x-ref="keluargaForm" action="{{ route('admin.keluarga.update', $tempat) }}"

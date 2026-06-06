@@ -12,6 +12,24 @@
                 bawah ini secara teliti.</p>
         </div>
 
+        @if ($errors->any())
+            <div class="mb-6 rounded-xl border border-red-200 bg-red-50 p-4">
+
+                <div class="font-semibold text-red-700 mb-2">
+                    Terdapat data wajib yang belum lengkap:
+                </div>
+
+                <ul class="list-disc list-inside text-sm text-red-600 space-y-1">
+                    @foreach ($errors->all() as $error)
+                        <li>
+                            {{ $error }}
+                        </li>
+                    @endforeach
+                </ul>
+
+            </div>
+        @endif
+
         {{-- Form Main --}}
         <form x-data="{
             sameAddress: {{ $tempat->jenis_bangunan === 'bc' ? 'true' : 'false' }},
@@ -27,10 +45,10 @@
                 alamat: @js($keluarga?->alamat_detail ?? '')
             },
             usaha: {
-                provinsi: '{{ old('provinsi', $desa->provinsi) }}',
-                kabupaten: '{{ old('kabupaten', $desa->kabupaten) }}',
-                kecamatan: '{{ old('kecamatan', $desa->kecamatan) }}',
-                desa: '{{ old('desa', $desa->nama_desa) }}',
+                provinsi: '{{ old('provinsi', $desa?->provinsi) }}',
+                kabupaten: '{{ old('kabupaten', $desa?->kabupaten) }}',
+                kecamatan: '{{ old('kecamatan', $desa?->kecamatan) }}',
+                desa: '{{ old('desa', $desa?->nama_desa) }}',
                 dusun: '{{ old('dusun') }}',
                 alamat: '{{ old('alamat') }}'
             },

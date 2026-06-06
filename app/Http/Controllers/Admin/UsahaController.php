@@ -271,7 +271,7 @@ class UsahaController extends Controller
                 $tempat
             )
             ->with(
-                'success',
+                'warning',
                 'Data usaha berhasil diperbarui'
             );
     }
@@ -296,11 +296,11 @@ class UsahaController extends Controller
 
         return redirect()
             ->route(
-                'admin.index.usaha',
+                'admin.usaha.index',
                 $tempat
             )
             ->with(
-                'success',
+                'danger',
                 'Data usaha berhasil dihapus'
             );
     }
@@ -417,6 +417,13 @@ class UsahaController extends Controller
 
             'tidak_menerima_kredit'
                 => 'nullable|integer',
+        ],
+        
+        [],
+        
+        [
+            'nama_usaha'
+                => '7. Nama Usaha / Perusahaan',   
         ]);
     }
 }

@@ -154,7 +154,7 @@ class AnggotaKeluargaController extends Controller
             )
             ->with(
                 'success',
-                'Anggota keluarga berhasil ditambahkan.'
+                'Data anggota keluarga berhasil ditambahkan.'
             );
     }
 
@@ -312,8 +312,8 @@ class AnggotaKeluargaController extends Controller
                 $anggota->keluarga
             )
             ->with(
-                'success',
-                'Data anggota berhasil diperbarui'
+                'warning',
+                'Data anggota keluarga berhasil diperbarui'
             );
     }
 
@@ -345,8 +345,8 @@ class AnggotaKeluargaController extends Controller
                 $keluarga
             )
             ->with(
-                'success',
-                'Data anggota berhasil dihapus'
+                'danger',
+                'Data anggota keluarga berhasil dihapus'
             );
     }
 
@@ -413,6 +413,31 @@ class AnggotaKeluargaController extends Controller
             'jaminan_kesehatan.*'
                 => 'string',
 
+        ],
+        
+        [],
+        
+        [
+            'nomor_urut'
+                => '5. Nomor Urut Anggota Keluarga',
+
+            'nama'
+                => '6. Nama Anggota Keluarga',
+
+            'nik'
+                => '7. Nomor Induk Kependudukan (NIK)',
+
+            'hubungan_keluarga'
+                => '8. Hubungan dengan Kepala Keluarga',
+
+            'status_perkawinan'
+                => '9. Status Perkawinan',
+
+            'tanggal_lahir'
+                => '10. Tanggal Lahir',
+
+            'jenis_kelamin'
+                => '11. Jenis Kelamin',   
         ]);
 
         $umur = Carbon::parse(

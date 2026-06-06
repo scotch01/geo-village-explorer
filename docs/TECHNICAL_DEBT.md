@@ -330,7 +330,7 @@ Sedang
 
 ### Status
 
-Belum diimplementasikan.
+Sudah
 
 ### Tujuan
 

@@ -24,14 +24,8 @@
 
     </div>
 
-    <!-- SUCCESS -->
-    @if(session('success'))
-
-        <div class="bg-green-50 border border-green-200 rounded-2xl p-4 text-green-700 text-sm">
-            {{ session('success') }}
-        </div>
-
-    @endif
+    <!-- Flash Message -->
+    <x-alert />
 
     <!-- TABLE -->
     <div class="bg-white border border-slate-200 rounded-[2rem] shadow-sm overflow-hidden">

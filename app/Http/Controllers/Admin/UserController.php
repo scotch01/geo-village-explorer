@@ -82,7 +82,7 @@ class UserController extends Controller
 
         return redirect()
             ->route('admin.user.index')
-            ->with('success', 'User berhasil diperbarui');
+            ->with('warning', 'User berhasil diperbarui');
     }
 
     public function destroy(User $user)
@@ -97,6 +97,6 @@ class UserController extends Controller
 
         return redirect()
             ->route('admin.user.index')
-            ->with('success', 'User berhasil dihapus');
+            ->with('danger', 'User berhasil dihapus');
     }
 }

@@ -27,19 +27,8 @@
             </div>
         </div>
 
-        <!-- NOTIFICATION (Aurora Style) -->
-        @if (session('success'))
-            <div
-                class="relative overflow-hidden bg-emerald-50 border border-emerald-100 text-emerald-700 px-6 py-4 rounded-2xl text-sm font-bold flex items-center gap-3 shadow-sm">
-                <div class="absolute right-0 top-0 w-24 h-full bg-emerald-400/10 blur-2xl"></div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-emerald-500 shrink-0" fill="none"
-                    viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                {{ session('success') }}
-            </div>
-        @endif
+        <!-- Flash Message -->
+        <x-alert />
 
         <!-- FILTER CARD -->
         <div class="bg-white border border-slate-200 rounded-[2.5rem] p-8 shadow-sm relative overflow-hidden">

@@ -5,22 +5,18 @@
     <div class="max-w-5xl mx-auto space-y-10 animate-fade-in px-2 sm:px-0 overflow-hidden">
 
         @if ($errors->any())
-            <div class="bg-rose-50 border border-rose-100 rounded-3xl p-6 shadow-sm">
+            <div class="mb-6 rounded-xl border border-red-200 bg-red-50 p-4">
 
-                <div class="font-extrabold text-rose-800 text-lg tracking-tight mb-3 flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
-                    Terjadi Kesalahan
+                <div class="font-semibold text-red-700 mb-2">
+                    Terdapat data wajib yang belum lengkap:
                 </div>
 
-                <ul class="space-y-1.5 text-sm text-rose-600 font-medium">
-
+                <ul class="list-disc list-inside text-sm text-red-600 space-y-1">
                     @foreach ($errors->all() as $error)
-                        <li class="flex items-center gap-2">
-                            <span class="text-rose-400 text-xs">●</span> 
+                        <li>
                             {{ $error }}
                         </li>
                     @endforeach
-
                 </ul>
 
             </div>
@@ -42,7 +38,7 @@
                         <div>
                             <h2 class="font-black text-2xl text-slate-900 tracking-tight">
                                 BLOK I
-                            </h2> 
+                            </h2>
 
                             <p class="text-xs font-bold text-slate-400 mt-0.5 uppercase tracking-widest">
                                 IDENTIFIKASI BANGUNAN
@@ -77,15 +73,19 @@
                                     @endforeach
 
                                 </select>
-                                
-                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
-                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+
+                                <div
+                                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
+                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20">
+                                        <path
+                                            d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                                     </svg>
                                 </div>
                             </div>
 
-                            <div id="jenis-helper" class="mt-4 hidden rounded-2xl bg-blue-50 text-blue-700 text-xs font-bold uppercase tracking-wider p-4 border border-blue-100/50 shadow-sm">
+                            <div id="jenis-helper"
+                                class="mt-4 hidden rounded-2xl bg-blue-50 text-blue-700 text-xs font-bold uppercase tracking-wider p-4 border border-blue-100/50 shadow-sm">
 
                             </div>
 
@@ -97,7 +97,8 @@
 
             </div>
 
-            <div class="border-t border-slate-100 px-6 py-5 lg:px-10 lg:py-6 bg-slate-50/50 flex items-center justify-end gap-4">
+            <div
+                class="border-t border-slate-100 px-6 py-5 lg:px-10 lg:py-6 bg-slate-50/50 flex items-center justify-end gap-4">
 
                 <a href="{{ route('admin.tempat.index') }}"
                     class="px-6 py-3.5 rounded-xl font-bold text-slate-600 hover:bg-slate-100 transition-all active:scale-95 text-sm lg:text-base text-center">

@@ -3,6 +3,10 @@
 @section('content')
     <div class="max-w-5xl bg mx-auto space-y-8 animate-fade-in px-2 sm:px-0">
 
+        <x-back-button :href="route('admin.usaha.index', $tempat)">
+            Kembali
+        </x-back-button>
+
         <!-- HEADER HALAMAN -->
         <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 lg:p-8">
             <h1 class="text-2xl lg:text-3xl font-black text-slate-900 tracking-tight">

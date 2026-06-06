@@ -8,9 +8,28 @@
             <h1 class="text-2xl lg:text-3xl font-black text-slate-900 tracking-tight">
                 Perbarui Data BLOK III
             </h1>
-            <p class="text-sm lg:text-base font-medium text-slate-700 mt-1">Silakan perbarui data kuisioner usaha/perusahaan di
+            <p class="text-sm lg:text-base font-medium text-slate-700 mt-1">Silakan perbarui data kuisioner usaha/perusahaan
+                di
                 bawah ini secara teliti.</p>
         </div>
+
+        @if ($errors->any())
+            <div class="mb-6 rounded-xl border border-red-200 bg-red-50 p-4">
+
+                <div class="font-semibold text-red-700 mb-2">
+                    Terdapat data wajib yang belum lengkap:
+                </div>
+
+                <ul class="list-disc list-inside text-sm text-red-600 space-y-1">
+                    @foreach ($errors->all() as $error)
+                        <li>
+                            {{ $error }}
+                        </li>
+                    @endforeach
+                </ul>
+
+            </div>
+        @endif
 
         {{-- Form Main --}}
         <form x-data="{
@@ -632,9 +651,9 @@
                         Batal
                     </a>
                     <button type="submit"
-                            class="px-6 py-3.5 bg-amber-500 hover:bg-amber-600 text-white rounded-xl font-bold transition-all active:scale-95 shadow-md shadow-amber-500/20 text-sm text-center">
-                            Simpan Perubahan
-                        </button>
+                        class="px-6 py-3.5 bg-amber-500 hover:bg-amber-600 text-white rounded-xl font-bold transition-all active:scale-95 shadow-md shadow-amber-500/20 text-sm text-center">
+                        Simpan Perubahan
+                    </button>
                 </div>
 
             </div>

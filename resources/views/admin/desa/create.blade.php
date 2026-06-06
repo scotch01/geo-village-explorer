@@ -17,16 +17,19 @@
 
         </div>
 
-        <!-- VALIDATION -->
         @if ($errors->any())
-            <div class="bg-red-50 border border-red-200 rounded-2xl p-5">
+            <div class="mb-6 rounded-xl border border-red-200 bg-red-50 p-4">
 
-                <ul class="space-y-1 text-sm text-red-600">
+                <div class="font-semibold text-red-700 mb-2">
+                    Terdapat data wajib yang belum lengkap:
+                </div>
 
+                <ul class="list-disc list-inside text-sm text-red-600 space-y-1">
                     @foreach ($errors->all() as $error)
-                        <li>• {{ $error }}</li>
+                        <li>
+                            {{ $error }}
+                        </li>
                     @endforeach
-
                 </ul>
 
             </div>

@@ -34,7 +34,7 @@ class DesaController extends Controller
 
         return redirect()
             ->route('admin.desa.index')
-            ->with('success', 'Desa berhasil ditambahkan');
+            ->with('success', 'Data Desa berhasil ditambahkan');
     }
 
     public function edit(Desa $desa)
@@ -56,7 +56,7 @@ class DesaController extends Controller
 
         return redirect()
             ->route('admin.desa.index')
-            ->with('success', 'Desa berhasil diperbarui');
+            ->with('warning', 'Data Desa berhasil diperbarui');
     }
 
     public function destroy(Desa $desa)
@@ -65,6 +65,6 @@ class DesaController extends Controller
 
         return redirect()
             ->route('admin.desa.index')
-            ->with('success', 'Desa berhasil dihapus');
+            ->with('danger', 'Data Desa berhasil dihapus');
     }
 }

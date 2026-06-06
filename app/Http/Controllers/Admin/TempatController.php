@@ -156,7 +156,7 @@ class TempatController extends Controller
 
         return redirect()
             ->route('admin.tempat.survey', $tempat)
-            ->with('success', 'Data berhasil ditambahkan');
+            ->with('success', 'Data bangunan berhasil ditambahkan');
     }
 
     /**
@@ -187,8 +187,6 @@ class TempatController extends Controller
         $this->authorizeTempatAccess($tempat);
 
         $validated = $request->validate([
-            'nama_tempat' => 'required|string|max:255',
-
             'jenis_bangunan' => [
                 'required',
                 Rule::in(
@@ -198,11 +196,11 @@ class TempatController extends Controller
                 )
             ],
 
-            'alamat' => 'required|string',
-
-            'latitude' => 'nullable|numeric|between:-90,90',
-            'longitude' => 'nullable|numeric|between:-180,180',
         ]);
+
+        $validated['nama_tempat'] = '-';
+
+        $validated['alamat'] = '-';
 
         if ($request->hasFile('foto_bangunan')) {
 
@@ -215,8 +213,8 @@ class TempatController extends Controller
         $tempat->update($validated);
 
         return redirect()
-            ->route('admin.tempat.index')
-            ->with('success', 'Data berhasil diperbarui');
+            ->route('admin.tempat.survey', $tempat)
+            ->with('warning', 'Data bangunan berhasil diperbarui');
     }
 
     /**
@@ -235,7 +233,7 @@ class TempatController extends Controller
 
         return redirect()
             ->route('admin.tempat.index')
-            ->with('success', 'Data berhasil dihapus');
+            ->with('danger', 'Data bangunan berhasil dihapus');
     }
 
     private function authorizeTempatAccess(Tempat $tempat)

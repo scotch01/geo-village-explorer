@@ -323,7 +323,7 @@ class KeluargaController extends Controller
                 $tempat
             )
             ->with(
-                'success',
+                'warning',
                 'Data keluarga berhasil diperbarui'
             );
     }
@@ -352,7 +352,7 @@ class KeluargaController extends Controller
                 $tempat
             )
             ->with(
-                'success',
+                'danger',
                 'Data keluarga berhasil dihapus'
             );
     }
@@ -441,6 +441,78 @@ class KeluargaController extends Controller
 
             'kredit_tujuan.*'
                 => 'string',
+        ],
+        
+        [],
+
+        [
+
+            'nama_kepala_keluarga'
+                => '2a. Nama Kepala Keluarga',
+
+            'nik_kepala_keluarga'
+                => '2b. NIK Kepala Keluarga',
+
+            'nomor_kk'
+                => '2c. Nomor Kartu Keluarga (KK)',
+
+            'provinsi'
+                => '3a. Provinsi',
+
+            'kabupaten'
+                => '3b. Kabupaten/Kota',
+
+            'kecamatan'
+                => '3c. Kecamatan',
+
+            'desa'
+                => '3d. Desa/Kelurahan',
+
+            'dusun'
+                => '3e. Dusun',
+
+            'alamat_detail'
+                => '3f. Alamat Detail',
+
+            'alamat_sesuai_kk'
+                => '4. Kesesuaian Alamat dengan KK',
+
+            'jumlah_keluarga_dalam_rumah'
+                => '20. Jumlah Keluarga dalam Rumah',
+
+            'status_kepemilikan_rumah'
+                => '21. Status Kepemilikan Rumah',
+
+            'luas_lantai'
+                => '22. Luas Lantai',
+
+            'bahan_lantai'
+                => '23. Bahan Lantai',
+
+            'bahan_dinding'
+                => '24. Bahan Dinding',
+
+            'bahan_atap'
+                => '25. Bahan Atap',
+
+            'fasilitas_bab'
+                => '26. Fasilitas BAB',
+
+            'jenis_kloset'
+                => '27. Jenis Kloset',
+
+            'pembuangan_tinja'
+                => '28. Pembuangan Akhir Tinja',
+
+            'sumber_air_minum'
+                => '29. Sumber Air Minum',
+
+            'sumber_penerangan'
+                => '30. Sumber Penerangan',
+
+            'meterans.*.daya_listrik'
+                => '31b. Daya Listrik Meteran',
+
         ]);
     }
 }
