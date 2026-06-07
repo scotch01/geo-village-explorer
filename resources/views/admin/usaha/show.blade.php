@@ -502,6 +502,37 @@
             </div>
         </div>
 
+        <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 lg:p-8">
+
+            <div class="flex items-center gap-4 mb-6 border-b border-slate-100 pb-4">
+                <div class="w-1.5 h-6 rounded-full bg-fuchsia-600"></div>
+
+                <h2 class="font-black text-lg text-slate-900">
+                    VIII. Lokasi Usaha
+                </h2>
+            </div>
+
+            @if ($usaha->lokasi_sama_dengan_keluarga)
+                <div
+                    class="mb-6 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-50 border border-blue-200 text-blue-800 text-sm font-medium">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+
+                    </svg>
+
+                    Lokasi usaha mengikuti lokasi keluarga
+
+                </div>
+            @endif
+
+            <x-geo-location latitude-field="latitude_usaha" longitude-field="longitude_usaha"
+                accuracy-field="akurasi_usaha" :latitude-value="$usaha->latitude_usaha" :longitude-value="$usaha->longitude_usaha" :accuracy-value="$usaha->akurasi_usaha" readonly />
+
+        </div>
+
         <div class="grid grid-cols-2 gap-10 bg-white justify-end rounded-3xl border border-slate-200 shadow-sm p-6 lg:p-8">
 
             <div class="flex items-center gap-4">

@@ -545,16 +545,32 @@
                         </div>
 
                     </div>
-                    {{-- Action Submit --}}
-                    <div class="flex items-center justify-end gap-3 border-t-2 border-gray-300 pt-4">
-                        <a href="{{ route('admin.tempat.survey', $tempat) }}"
-                            class="px-6 py-2.5 border rounded-xl text-gray-700 hover:bg-gray-50 transition-all active:scale-95">
-                            Batal
-                        </a>
-                        <button type="submit" @click="redirectTo = 'survey'"
-                            class="px-6 py-3.5 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl font-bold transition-all active:scale-95 shadow-md shadow-blue-600/20 text-sm text-center">
-                            Simpan Data Keluarga
-                        </button>
+
+                </div>
+                <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 lg:p-8 transition-all">
+
+                    <div class="flex items-center gap-4 mb-6 border-b border-slate-100 pb-4">
+                        <div class="w-1.5 h-6 rounded-full bg-blue-600"></div>
+                        <h2 class="font-black text-lg text-slate-900 tracking-tight">
+                            VI. Tagging Lokasi
+                    </div>
+
+                    <div class="space-y-8">
+                        <x-geo-location latitude-field="latitude_rumah" longitude-field="longitude_rumah"
+                            accuracy-field="akurasi_rumah" />
+
+
+                        {{-- Action Submit --}}
+                        <div class="flex items-center justify-end gap-3 border-t-2 border-gray-300 pt-4">
+                            <a href="{{ route('admin.tempat.survey', $tempat) }}"
+                                class="px-6 py-2.5 border rounded-xl text-gray-700 hover:bg-gray-50 transition-all active:scale-95">
+                                Batal
+                            </a>
+                            <button type="submit" @click="redirectTo = 'survey'"
+                                class="px-6 py-3.5 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl font-bold transition-all active:scale-95 shadow-md shadow-blue-600/20 text-sm text-center">
+                                Simpan Data Keluarga
+                            </button>
+                        </div>
                     </div>
                 </div>
             </form>

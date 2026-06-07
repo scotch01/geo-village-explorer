@@ -326,6 +326,54 @@
             </div>
         </div>
 
+        <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 lg:p-8">
+
+            <div class="flex items-center gap-4 mb-6 border-b border-slate-100 pb-4">
+                <div class="w-1.5 h-6 rounded-full bg-fuchsia-600"></div>
+
+                <h2 class="font-black text-lg text-slate-900 tracking-tight">
+                    VI. Tagging Lokasi Rumah
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 mb-6">
+
+                <div>
+                    <p class="text-sm font-bold text-slate-500">
+                        Latitude
+                    </p>
+
+                    <p class="font-semibold text-slate-900">
+                        {{ $keluarga->latitude_rumah ?? '-' }}
+                    </p>
+                </div>
+
+                <div>
+                    <p class="text-sm font-bold text-slate-500">
+                        Longitude
+                    </p>
+
+                    <p class="font-semibold text-slate-900">
+                        {{ $keluarga->longitude_rumah ?? '-' }}
+                    </p>
+                </div>
+
+                <div>
+                    <p class="text-sm font-bold text-slate-500">
+                        Akurasi GPS
+                    </p>
+
+                    <p class="font-semibold text-slate-900">
+                        {{ $keluarga->akurasi_rumah ? number_format($keluarga->akurasi_rumah, 0) . ' meter' : '-' }}
+                    </p>
+                </div>
+
+            </div>
+
+            <div id="map-show-rumah" class="h-[400px] rounded-2xl border border-slate-200"></div>
+
+        </div>
+
         <!-- BOTTOM ACTIONS BAR -->
 
         <div class="grid grid-cols-2 gap-10 bg-white justify-end rounded-3xl border border-slate-200 shadow-sm p-6 lg:p-8">
@@ -356,4 +404,50 @@
         </div>
 
     </div>
+    @push('scripts')
+        <script>
+            document.addEventListener(
+                'DOMContentLoaded',
+                function() {
+
+                    const lat =
+                        {{ $keluarga->latitude_rumah ?: 'null' }};
+
+                    const lng =
+                        {{ $keluarga->longitude_rumah ?: 'null' }};
+
+                    if (
+                        lat === null ||
+                        lng === null
+                    ) {
+                        return;
+                    }
+
+                    const map =
+                        L.map(
+                            'map-show-rumah'
+                        ).setView(
+                            [lat, lng],
+                            18
+                        );
+
+                    L.tileLayer(
+                        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            maxZoom: 22,
+                            attribution: '&copy; OpenStreetMap'
+                        }
+                    ).addTo(map);
+
+                    L.marker(
+                            [lat, lng]
+                        )
+                        .addTo(map)
+                        .bindPopup(`
+                            <strong>Rumah {{ $keluarga->nama_kepala_keluarga }}</strong>
+                        `);
+
+                }
+            );
+        </script>
+    @endpush
 @endsection

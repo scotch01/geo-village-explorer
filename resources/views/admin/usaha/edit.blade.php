@@ -34,6 +34,7 @@
         {{-- Form Main --}}
         <form x-data="{
             sameAddress: {{ $tempat->jenis_bangunan === 'bc' ? 'true' : 'false' }},
+            sameLocation: {{ old('lokasi_sama_dengan_keluarga', $usaha->lokasi_sama_dengan_keluarga) ? 'true' : 'false' }},
             internetTidakDigunakan: false,
             pinjamanTidakDiterima: false,
         
@@ -44,6 +45,12 @@
                 desa: @js($keluarga?->desa ?? ''),
                 dusun: @js($keluarga?->dusun ?? ''),
                 alamat: @js($keluarga?->alamat_detail ?? '')
+            },
+        
+            familyLocation: {
+                latitude: @js($keluarga?->latitude_rumah),
+                longitude: @js($keluarga?->longitude_rumah),
+                accuracy: @js($keluarga?->akurasi_rumah),
             },
         
             usaha: {
@@ -102,13 +109,34 @@
                         alasanSelect.value = '';
                     }
                 }
-            }
+            },
+        
+            toggleLocation() {
+        
+                window.dispatchEvent(
+                    new CustomEvent(
+                        'toggle-family-location', {
+                            detail: {
+                                enabled: this.sameLocation,
+                                latitude: this.familyLocation.latitude,
+                                longitude: this.familyLocation.longitude,
+                                accuracy: this.familyLocation.accuracy,
+                            }
+                        }
+                    )
+                );
+            },
         }" x-init="checkInternet();
-        checkPinjaman();" action="{{ route('admin.usaha.update', $usaha) }}" method="POST"
+        checkPinjaman();
+        if (sameLocation) {
+            toggleLocation();
+        }" action="{{ route('admin.usaha.update', $usaha) }}" method="POST"
             class="space-y-6">
 
             @csrf
             @method('PUT')
+
+            <input type="hidden" name="lokasi_sama_dengan_keluarga" :value="sameLocation ? 1 : 0">
 
             {{-- BLOK I: Alamat & Nama Usaha --}}
             <div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm space-y-6">
@@ -643,6 +671,38 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm space-y-6">
+
+                <div class="flex items-center gap-4 border-b border-slate-100 pb-4">
+                    <div class="w-1.5 h-6 rounded-full bg-amber-500"></div>
+
+                    <h2 class="font-black text-lg text-slate-900">
+                        VIII. Tagging Lokasi Usaha
+                    </h2>
+                </div>
+
+                @if ($tempat->jenis_bangunan === 'bc')
+                    <label
+                        class="inline-flex items-center gap-2.5 px-4 py-3 bg-blue-50 border border-blue-100 rounded-xl cursor-pointer">
+
+                        <input type="checkbox" x-model="sameLocation" @change="toggleLocation()"
+                            class="rounded text-blue-600">
+
+                        <span class="text-sm font-medium text-blue-800">
+                            Lokasi usaha sama dengan lokasi keluarga
+                        </span>
+
+                    </label>
+                @endif
+
+                <x-geo-location latitude-field="latitude_usaha" longitude-field="longitude_usaha"
+                    accuracy-field="akurasi_usaha" :latitude-value="$usaha->latitude_usaha" :longitude-value="$usaha->longitude_usaha" :accuracy-value="$usaha->akurasi_usaha" />
+
+            </div>
+
+            <div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm space-y-6">
 
                 {{-- Action Submit --}}
                 <div class="flex items-center justify-end gap-3 border-t-2 border-gray-300 pt-4">

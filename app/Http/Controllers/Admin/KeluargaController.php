@@ -470,6 +470,15 @@ class KeluargaController extends Controller
 
             'kredit_tujuan.*'
                 => 'string',
+
+            'latitude_rumah'
+                => 'nullable|numeric|between:-90,90',
+
+            'longitude_rumah'
+                => 'nullable|numeric|between:-180,180',
+
+            'akurasi_rumah'
+                => 'nullable|numeric|min:0',
         ],
         
         [],

@@ -25,6 +25,8 @@ class Usaha extends Model
         'tidak_menerima_kredit' => 'integer',
 
         'kendala_usaha' => 'array',
+
+        'lokasi_sama_dengan_keluarga' => 'boolean',
     ];
 
     public function tempat()

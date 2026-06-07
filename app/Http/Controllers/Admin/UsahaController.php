@@ -112,6 +112,28 @@ class UsahaController extends Controller
         $validated =
             $this->validateData($request);
 
+        $validated['lokasi_sama_dengan_keluarga']
+            = $request->boolean(
+                'lokasi_sama_dengan_keluarga'
+            );
+
+        if (
+            $tempat->jenis_bangunan === 'bc'
+            && $request->boolean('same_location')
+        ) {
+
+            $keluarga = $tempat->keluarga;
+
+            $validated['latitude_usaha']
+                = $keluarga?->latitude_rumah;
+
+            $validated['longitude_usaha']
+                = $keluarga?->longitude_rumah;
+
+            $validated['akurasi_usaha']
+                = $keluarga?->akurasi_rumah;
+        }
+
         $validated['tempat_id']
             = $tempat->id;
 
@@ -260,6 +282,28 @@ class UsahaController extends Controller
 
         $validated =
             $this->validateData($request);
+
+        $validated['lokasi_sama_dengan_keluarga']
+            = $request->boolean(
+                'lokasi_sama_dengan_keluarga'
+            );
+
+        if (
+            $tempat->jenis_bangunan === 'bc'
+            && $request->boolean('same_location')
+        ) {
+
+            $keluarga = $tempat->keluarga;
+
+            $validated['latitude_usaha']
+                = $keluarga?->latitude_rumah;
+
+            $validated['longitude_usaha']
+                = $keluarga?->longitude_rumah;
+
+            $validated['akurasi_usaha']
+                = $keluarga?->akurasi_rumah;
+        }
 
         $usaha->update(
             $validated
@@ -417,6 +461,18 @@ class UsahaController extends Controller
 
             'tidak_menerima_kredit'
                 => 'nullable|integer',
+
+            'latitude_usaha'
+                => 'nullable|numeric|between:-90,90',
+
+            'longitude_usaha'
+                => 'nullable|numeric|between:-180,180',
+
+            'akurasi_usaha'
+                => 'nullable|numeric|min:0',
+
+            'lokasi_sama_dengan_keluarga'
+                => 'nullable|boolean',
         ],
         
         [],

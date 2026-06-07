@@ -33,6 +33,30 @@
         {{-- Form Main --}}
         <form x-data="{
             sameAddress: {{ $tempat->jenis_bangunan === 'bc' ? 'true' : 'false' }},
+            sameLocation: false,
+        
+            familyLocation: {
+                latitude: @js($keluarga?->latitude_rumah),
+                longitude: @js($keluarga?->longitude_rumah),
+                accuracy: @js($keluarga?->akurasi_rumah),
+            },
+        
+            toggleLocation() {
+        
+                window.dispatchEvent(
+                    new CustomEvent(
+                        'toggle-family-location', {
+                            detail: {
+                                enabled: this.sameLocation,
+                                latitude: this.familyLocation.latitude,
+                                longitude: this.familyLocation.longitude,
+                                accuracy: this.familyLocation.accuracy,
+                            }
+                        }
+                    )
+                );
+            },
+        
             internetTidakDigunakan: false,
             pinjamanTidakDiterima: false,
         
@@ -42,7 +66,11 @@
                 kecamatan: @js($keluarga?->kecamatan ?? ''),
                 desa: @js($keluarga?->desa ?? ''),
                 dusun: @js($keluarga?->dusun ?? ''),
-                alamat: @js($keluarga?->alamat_detail ?? '')
+                alamat: @js($keluarga?->alamat_detail ?? ''),
+        
+                latitude: @js($keluarga?->latitude_rumah),
+                longitude: @js($keluarga?->longitude_rumah),
+                accuracy: @js($keluarga?->akurasi_rumah),
             },
             usaha: {
                 provinsi: '{{ old('provinsi', $desa?->provinsi) }}',
@@ -106,6 +134,8 @@
             class="space-y-6">
 
             @csrf
+
+            <input type="hidden" name="lokasi_sama_dengan_keluarga" :value="sameLocation ? 1 : 0">
 
             {{-- BLOK I: Alamat & Nama Usaha --}}
             <div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm space-y-6">
@@ -635,6 +665,44 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+            {{-- BLOK VIII: Tagging Lokasi Usaha --}}
+            <div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm space-y-6">
+
+                <div class="flex items-center gap-4 border-b border-slate-100 pb-4">
+                    <div class="w-1.5 h-6 rounded-full bg-blue-600"></div>
+
+                    <h2 class="font-black text-lg text-slate-900">
+                        VIII. Tagging Lokasi Usaha
+                    </h2>
+                </div>
+
+                @if ($tempat->jenis_bangunan === 'bc')
+                    <label
+                        class="inline-flex items-center gap-2.5 px-4 py-3 bg-blue-50/50 border border-blue-100 rounded-xl cursor-pointer">
+
+                        <input type="checkbox" x-model="sameLocation" @change="toggleLocation()"
+                            class="rounded text-blue-600">
+
+                        <span class="text-sm font-medium text-blue-800">
+                            Lokasi usaha sama dengan lokasi keluarga
+                        </span>
+
+                    </label>
+
+                    <p x-show="sameLocation" class="text-sm text-blue-600 font-medium mt-2">
+                        Lokasi usaha mengikuti lokasi keluarga.
+                    </p>
+                @endif
+
+                <x-geo-location latitude-field="latitude_usaha" longitude-field="longitude_usaha"
+                    accuracy-field="akurasi_usaha" />
+
+            </div>
+
+            <div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm space-y-6">
+
                 {{-- Action Submit --}}
                 <div class="flex items-center justify-end gap-3 border-t-2 border-gray-300 pt-4">
 
