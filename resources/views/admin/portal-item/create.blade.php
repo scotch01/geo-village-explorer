@@ -7,11 +7,11 @@
         <div>
 
             <h1 class="text-3xl font-black tracking-tight text-slate-900">
-                Perbarui Kategori Portal
+                Tambah Item
             </h1>
 
             <p class="text-slate-500 mt-2">
-                Perbarui kategori baru untuk portal publik
+                Tambahkan data item untuk diakses oleh publik
             </p>
 
         </div>
@@ -36,11 +36,10 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('admin.portal-category.update', $category) }}"
+        <form method="POST" action="{{ route('admin.portal-item.store') }}"
             class="bg-white border border-slate-200 rounded-[2rem] shadow-sm overflow-hidden">
 
             @csrf
-            @method('PUT')
 
             <div class="p-8 space-y-6">
 
@@ -48,19 +47,19 @@
 
                     <label class="text-sm font-semibold text-slate-700">
 
-                        Tipe Portal
+                        Ketegori
 
                     </label>
 
-                    <select name="type" class="w-full mt-2 rounded-2xl border-slate-200 bg-slate-50" required>
+                    <select name="portal_category_id" class="w-full mt-2 rounded-2xl border-slate-200 bg-slate-50" required>
 
                         <option value="">
-                            Pilih Tipe
+                            Pilih Kategori
                         </option>
 
-                        @foreach ($types as $value => $label)
-                            <option value="{{ $label }}" @selected(old('type', $category->type) == $label)>
-                                {{ $label }}
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}">
+                                {{ $category->name }}
                             </option>
                         @endforeach
 
@@ -72,11 +71,11 @@
 
                     <label class="text-sm font-semibold text-slate-700">
 
-                        Nama Kategori
+                        Judul
 
                     </label>
 
-                    <input type="text" name="name" value="{{ old('name', $category->name) }}"
+                    <input type="text" name="title" value="{{ old('title') }}"
                         class="w-full mt-2 rounded-2xl border-slate-200 bg-slate-50" required>
 
                 </div>
@@ -87,11 +86,58 @@
 
                         <label class="text-sm font-semibold text-slate-700">
 
-                            Urutan Tampil
+                            Deskripsi
 
                         </label>
 
-                        <input type="number" name="sort_order" value="{{ old('sort_order', $category->sort_order) }}"
+                        <textarea name="description" rows="4" class="w-full mt-2 rounded-2xl border-slate-200 bg-slate-50">{{ old('description') }}</textarea>
+
+                    </div>
+
+                    <div>
+
+                        <label class="text-sm font-semibold text-slate-700">
+
+                            Jenis File
+
+                        </label>
+
+                        <select name="file_type" class="w-full mt-2 rounded-2xl border-slate-200 bg-slate-50" required>
+
+                            @foreach ($fileTypes as $value => $label)
+                                <option value="{{ $value }}">
+
+                                    {{ $label }}
+
+                                </option>
+                            @endforeach
+
+                        </select>
+
+                    </div>
+
+                    <div>
+
+                        <label class="text-sm font-semibold text-slate-700">
+
+                            Link / URL
+
+                        </label>
+
+                        <input type="url" name="url" value="{{ old('url') }}"
+                            class="w-full mt-2 rounded-2xl border-slate-200 bg-slate-50" required>
+
+                    </div>
+
+                    <div>
+
+                        <label class="text-sm font-semibold text-slate-700">
+
+                            Urutan
+
+                        </label>
+
+                        <input type="number" name="sort_order" value="{{ old('sort_order', 0) }}"
                             class="w-full mt-2 rounded-2xl border-slate-200 bg-slate-50">
 
                     </div>
@@ -105,15 +151,13 @@
                         </label>
 
                         <select name="is_active" class="w-full mt-2 rounded-2xl border-slate-200 bg-slate-50">
-
-                            <option value="1" @selected(old('is_active', $category->is_active) == 1)>
+                            <option value="1">
                                 Aktif
                             </option>
 
-                            <option value="0" @selected(old('is_active', $category->is_active) == 0)>
+                            <option value="0">
                                 Nonaktif
                             </option>
-
                         </select>
 
                     </div>
@@ -132,9 +176,9 @@
                 </a>
 
                 <button
-                    class="bg-amber-500 hover:bg-amber-600 text-white px-6 py-3 rounded-2xl font-semibold shadow-lg shadow-amber-100 transition">
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-2xl font-semibold shadow-lg shadow-blue-100 transition">
 
-                    Simpan Perubahan
+                    Simpan Item
 
                 </button>
 

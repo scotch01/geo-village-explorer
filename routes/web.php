@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\KeluargaController;
 use App\Http\Controllers\Admin\AnggotaKeluargaController;
 use App\Http\Controllers\Admin\UsahaController;
 use App\Http\Controllers\Admin\PortalCategoryController;
+use App\Http\Controllers\Admin\PortalItemController;
 
 Route::get('/', function () {
     return redirect('/peta');
@@ -40,6 +41,8 @@ Route::middleware(['auth', 'role:master_admin'])
     Route::resource('user', UserController::class);
 
     Route::resource('portal-category', PortalCategoryController::class);
+
+    Route::resource('portal-item', PortalItemController::class);
 });
 
 Route::middleware(['auth', 'role:master_admin,admin_desa,pengawas'])
