@@ -17,7 +17,7 @@ Route::get('/', function () {
 });
 
 Route::get('/peta', [PublicMapController::class, 'index'])
-    ->name('public.peta');
+    ->name('public.spectra');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
