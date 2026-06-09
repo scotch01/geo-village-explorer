@@ -10,8 +10,6 @@ class PortalCategory extends Model
 {
     protected $fillable = [
 
-        'type',
-
         'name',
 
         'slug',
@@ -47,7 +45,7 @@ class PortalCategory extends Model
     {
         return $this->hasMany(
             PortalItem::class
-        );
+        )->orderBy('sort_order');
     }
 
     public function scopeActive($query)

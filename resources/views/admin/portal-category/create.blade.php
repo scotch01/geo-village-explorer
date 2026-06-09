@@ -53,37 +53,6 @@
 
                 <label class="text-sm font-semibold text-slate-700">
 
-                    Tipe Portal
-
-                </label>
-
-                <select
-                    name="type"
-                    class="w-full mt-2 rounded-2xl border-slate-200 bg-slate-50"
-                    required>
-
-                    <option value="">
-                        Pilih Tipe
-                    </option>
-
-                    @foreach($types as $value => $label)
-
-                        <option value="{{ $value }}">
-
-                            {{ $label }}
-
-                        </option>
-
-                    @endforeach
-
-                </select>
-
-            </div>
-
-            <div>
-
-                <label class="text-sm font-semibold text-slate-700">
-
                     Nama Kategori
 
                 </label>
@@ -98,22 +67,6 @@
             </div>
 
             <div class="grid md:grid-cols-2 gap-6">
-
-                <div>
-
-                    <label class="text-sm font-semibold text-slate-700">
-
-                        Urutan Tampil
-
-                    </label>
-
-                    <input
-                        type="number"
-                        name="sort_order"
-                        value="{{ old('sort_order', 0) }}"
-                        class="w-full mt-2 rounded-2xl border-slate-200 bg-slate-50">
-
-                </div>
 
                 <div>
 
@@ -147,14 +100,14 @@
 
             <a
                 href="{{ route('admin.portal-category.index') }}"
-                class="px-5 py-2.5 rounded-xl text-slate-600 hover:bg-slate-200 transition">
+                class="px-5 py-2.5 rounded-xl text-slate-600 hover:bg-slate-200 transition-all active:scale-95">
 
                 Batal
 
             </a>
 
             <button
-                class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-2xl font-semibold shadow-lg shadow-blue-100 transition">
+                class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-2xl font-semibold shadow-lg shadow-blue-100 transition-all active:scale-95">
 
                 Simpan Kategori
 

@@ -3,12 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Desa;
 
 class PortalItem extends Model
 {
     protected $fillable = [
 
         'portal_category_id',
+
+        'desa_id',
 
         'title',
 
@@ -37,6 +40,13 @@ class PortalItem extends Model
         return $query->where(
             'is_active',
             true
+        );
+    }
+
+    public function desa()
+    {
+        return $this->belongsTo(
+            Desa::class
         );
     }
 

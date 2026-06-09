@@ -13,17 +13,15 @@ use App\Http\Controllers\Admin\AnggotaKeluargaController;
 use App\Http\Controllers\Admin\UsahaController;
 use App\Http\Controllers\Admin\PortalCategoryController;
 use App\Http\Controllers\Admin\PortalItemController;
+use App\Http\Controllers\PortalPublicController;
 
-Route::get('/', function () {
-    return redirect('/peta');
-});
+// Public Page
 
-Route::get('/peta', [PublicMapController::class, 'index'])
+Route::get('/', [PublicMapController::class, 'index'])
     ->name('public.spectra');
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/portal-data', [PortalPublicController::class, 'publication'])
+    ->name('public.publication');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -12,12 +12,8 @@ class PortalCategoryController extends Controller
     {
         $categories =
             PortalCategory::orderBy(
-                'type'
-            )
-            ->orderBy(
                 'sort_order'
-            )
-            ->get();
+            )->get();
 
         return view(
             'admin.portal-category.index',
@@ -31,14 +27,9 @@ class PortalCategoryController extends Controller
     {
         return view(
             'admin.portal-category.create',
-            [
-                'types'
-                    => config(
-                        'portal.types'
-                    ),
-            ]
         );
     }
+
 
 
     public function store(
@@ -49,6 +40,11 @@ class PortalCategoryController extends Controller
             $this->validateData(
                 $request
             );
+
+        $validated['sort_order'] =
+            PortalCategory::max(
+                'sort_order'
+            ) + 1;
 
         PortalCategory::create(
             $validated
@@ -73,11 +69,6 @@ class PortalCategoryController extends Controller
             [
                 'category'
                     => $portalCategory,
-
-                'types'
-                    => config(
-                        'portal.types'
-                    ),
             ]
         );
     }
@@ -142,14 +133,8 @@ class PortalCategoryController extends Controller
     {
         return $request->validate([
 
-            'type'
-                => 'required|string',
-
             'name'
                 => 'required|string|max:255',
-
-            'sort_order'
-                => 'nullable|integer|min:0',
 
             'is_active'
                 => 'nullable|boolean',

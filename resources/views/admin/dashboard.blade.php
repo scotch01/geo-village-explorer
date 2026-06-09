@@ -14,7 +14,7 @@
             </div>
 
             <div class="flex items-center">
-                <a href="{{ route('public.peta') }}" target="_blank"
+                <a href="{{ route('public.spectra') }}" target="_blank"
                     class="w-full sm:w-auto text-center flex items-center justify-center gap-2 bg-white border border-slate-200 hover:border-blue-200 hover:bg-blue-50/30 px-6 py-3.5 rounded-2xl font-bold text-slate-700 transition-all active:scale-95 shadow-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-500" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">

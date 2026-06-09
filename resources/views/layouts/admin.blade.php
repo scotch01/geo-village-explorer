@@ -94,6 +94,10 @@
                     </a>
 
                     @if (auth()->user()->isMasterAdmin())
+                        <a href="{{ route('admin.portal-item.index') }}"
+                            class="px-4 py-2 rounded-xl text-sm font-medium transition-all {{ request()->routeIs('admin.user.*') ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-600 hover:text-slate-900' }}">
+                            Portal Data
+                        </a>
                         <a href="{{ route('admin.desa.index') }}"
                             class="px-4 py-2 rounded-xl text-sm font-medium transition-all {{ request()->routeIs('admin.desa.*') ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-600 hover:text-slate-900' }}">
                             Desa
@@ -176,6 +180,10 @@
                     </a>
 
                     @if (auth()->user()->isMasterAdmin())
+                        <a href="{{ route('admin.portal-item.index') }}"
+                            class="block px-4 py-3 rounded-xl text-base font-medium transition-all {{ request()->routeIs('admin.portal-item.*') ? 'bg-blue-50 text-blue-600 font-semibold' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }}">
+                            Portal Data
+                        </a>
                         <a href="{{ route('admin.desa.index') }}"
                             class="block px-4 py-3 rounded-xl text-base font-medium transition-all {{ request()->routeIs('admin.desa.*') ? 'bg-blue-50 text-blue-600 font-semibold' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }}">
                             Desa
