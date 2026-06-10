@@ -28,7 +28,8 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full">
 
-            <div class="lg:col-span-8 bg-white rounded-3xl lg:rounded-[2.5rem] border border-slate-200 p-5 lg:p-8 shadow-sm min-w-0 overflow-hidden">
+            <div
+                class="lg:col-span-8 bg-white rounded-3xl lg:rounded-[2.5rem] border border-slate-200 p-5 lg:p-8 shadow-sm min-w-0 overflow-hidden">
                 <div class="flex items-center justify-between mb-6 lg:mb-8">
                     <div>
                         <h2 class="text-xl lg:text-2xl font-extrabold text-slate-900 tracking-tight">
@@ -41,11 +42,35 @@
                 </div>
 
                 <div class="w-full relative">
-                    <div id="chart-jenis-bangunan" class="w-full min-h-[350px]"></div>
+
+                    @if (count($chartJenisBangunan))
+                        <div id="chart-jenis-bangunan" class="w-full min-h-[350px]"></div>
+                    @else
+                        <div class=" min-h-[350px] flex flex-col items-center justify-center text-center">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-14 h-14 text-slate-300" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M9 17v-6m3 6V7m3 10v-4m4 8H5a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v14a2 2 0 01-2 2z" />
+                            </svg>
+
+                            <h3 class="mt-4 text-lg font-bold text-slate-700">
+                                Belum Ada Data
+                            </h3>
+
+                            <p class=" mt-2 text-sm text-slate-500 max-w-sm">
+                                Grafik distribusi jenis bangunan akan muncul setelah data
+                                pendataan mulai diinput.
+                            </p>
+
+                        </div>
+                    @endif
+
                 </div>
             </div>
 
-            <div class="lg:col-span-4 bg-slate-900 rounded-3xl lg:rounded-[2.5rem] p-5 lg:p-8 shadow-2xl relative overflow-hidden group">
+            <div
+                class="lg:col-span-4 bg-slate-900 rounded-3xl lg:rounded-[2.5rem] p-5 lg:p-8 shadow-2xl relative overflow-hidden group">
                 <div class="absolute top-0 right-0 w-32 h-32 bg-blue-600/20 blur-[80px]"></div>
 
                 <h2 class="text-xl lg:text-2xl font-extrabold tracking-tight text-white relative z-10">
@@ -55,19 +80,22 @@
 
                 <div class="mt-6 lg:mt-10 space-y-4 relative z-10">
                     @forelse($topDesa as $item)
-                        <div class="flex items-center justify-between bg-white/5 hover:bg-white/10 p-4 lg:p-5 rounded-2xl lg:rounded-3xl transition-all border border-white/5">
+                        <div
+                            class="flex items-center justify-between bg-white/5 hover:bg-white/10 p-4 lg:p-5 rounded-2xl lg:rounded-3xl transition-all border border-white/5">
                             <div class="flex items-center gap-4">
-                                <div class="w-10 h-10 rounded-xl lg:rounded-2xl bg-gradient-to-tr from-blue-500 to-indigo-600 flex items-center justify-center font-black text-white text-sm shadow-lg shrink-0">
+                                <div
+                                    class="w-10 h-10 rounded-xl lg:rounded-2xl bg-gradient-to-tr from-blue-500 to-indigo-600 flex items-center justify-center font-black text-white text-sm shadow-lg shrink-0">
                                     {{ $loop->iteration }}
                                 </div>
                                 <div class="min-w-0">
-                                    <div class="font-bold text-slate-100 truncate text-sm lg:text-base">{{ $item->desa->nama_desa ?? '-' }}</div>
+                                    <div class="font-bold text-slate-100 truncate text-sm lg:text-base">
+                                        {{ $item->desa->nama_desa ?? '-' }}</div>
                                     <div class="text-xs text-slate-400">{{ $item->total }} Data</div>
                                 </div>
                             </div>
                             <svg xmlns="http://www.w3.org/2000/svg"
-                                class="h-4 w-4 text-slate-500 group-hover:text-blue-400 transition-colors shrink-0" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
+                                class="h-4 w-4 text-slate-500 group-hover:text-blue-400 transition-colors shrink-0"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                             </svg>
@@ -80,7 +108,8 @@
         </div>
 
         <div class="bg-white rounded-3xl lg:rounded-[2.5rem] border border-slate-200 shadow-sm overflow-hidden">
-            <div class="px-6 py-5 lg:px-8 lg:py-7 border-b border-slate-100 flex items-center justify-between bg-slate-50/30">
+            <div
+                class="px-6 py-5 lg:px-8 lg:py-7 border-b border-slate-100 flex items-center justify-between bg-slate-50/30">
                 <div>
                     <h2 class="text-xl lg:text-2xl font-extrabold text-slate-900 tracking-tight">Aktivitas Terbaru</h2>
                     <p class="text-slate-500 font-medium mt-1 uppercase text-[10px] tracking-widest">Live Updates</p>
@@ -118,7 +147,8 @@
                                     @endif
                                 </td>
                                 <td class="px-6 py-5 lg:px-8 lg:py-6">
-                                    <span class="px-3 py-1 rounded-lg bg-blue-50 text-blue-700 text-[10px] font-black uppercase tracking-widest border border-blue-100">
+                                    <span
+                                        class="px-3 py-1 rounded-lg bg-blue-50 text-blue-700 text-[10px] font-black uppercase tracking-widest border border-blue-100">
                                         @php
                                             $jenisBangunan = [
                                                 'btt' => 'BTT',
@@ -134,16 +164,19 @@
                                 </td>
                                 <td class="px-6 py-5 lg:px-8 lg:py-6">
                                     <div class="flex items-center gap-2">
-                                        <div class="w-7 h-7 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-[10px] font-bold text-slate-500 uppercase shrink-0">
+                                        <div
+                                            class="w-7 h-7 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-[10px] font-bold text-slate-500 uppercase shrink-0">
                                             {{ substr($tempat->creator->name ?? 'A', 0, 1) }}
                                         </div>
-                                        <span class="text-sm font-bold text-slate-700 uppercase tracking-tighter truncate max-w-[120px]">{{ $tempat->creator->name ?? '-' }}</span>
+                                        <span
+                                            class="text-sm font-bold text-slate-700 uppercase tracking-tighter truncate max-w-[120px]">{{ $tempat->creator->name ?? '-' }}</span>
                                     </div>
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="4" class="px-6 py-12 lg:px-8 lg:py-16 text-center text-slate-400 font-medium">
+                                <td colspan="4"
+                                    class="px-6 py-12 lg:px-8 lg:py-16 text-center text-slate-400 font-medium">
                                     Tidak ada data terbaru.
                                 </td>
                             </tr>
