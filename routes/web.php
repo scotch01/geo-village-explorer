@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\UsahaController;
 use App\Http\Controllers\Admin\PortalCategoryController;
 use App\Http\Controllers\Admin\PortalItemController;
 use App\Http\Controllers\PortalPublicController;
+use App\Http\Controllers\Admin\ExportController;
 
 // Public Page
 
@@ -41,6 +42,12 @@ Route::middleware(['auth', 'role:master_admin'])
     Route::resource('portal-category', PortalCategoryController::class);
 
     Route::resource('portal-item', PortalItemController::class);
+
+    Route::get('/export', [ExportController::class, 'index'])
+        ->name('export.index');
+
+    Route::get('/export/download', [ExportController::class, 'download'])
+        ->name('export.download');
 });
 
 Route::middleware(['auth', 'role:master_admin,admin_desa,pengawas'])
