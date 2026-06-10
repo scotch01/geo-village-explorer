@@ -7,6 +7,7 @@ use App\Models\Desa;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -33,21 +34,45 @@ class UserController extends Controller
 
             'email' => 'required|email|unique:users,email',
 
-            'password' => 'required|min:6',
-
             'role' => 'required|in:master_admin,pengawas,admin_desa',
 
             'id_desa' => 'nullable|exists:desas,id',
         ]);
 
-        $validated['password'] =
-            Hash::make($validated['password']);
+        User::create([
 
-        User::create($validated);
+            'name'
+                => $validated['name'],
+
+            'email'
+                => $validated['email'],
+
+            'password'
+                => Hash::make(
+                    $tempPassword
+                ),
+
+            'role'
+                => $validated['role'],
+
+            'id_desa'
+                => $validated['id_desa'] ?? null,
+
+            'must_change_password'
+                => true,
+
+        ]);
 
         return redirect()
             ->route('admin.user.index')
-            ->with('success', 'User berhasil ditambahkan');
+            ->with(
+                'generated_password',
+                $tempPassword
+            )
+            ->with(
+                'success',
+                'User berhasil ditambahkan'
+            );
     }
 
     public function edit(User $user)
@@ -72,17 +97,56 @@ class UserController extends Controller
             'id_desa' => 'nullable|exists:desas,id',
         ]);
 
-        if ($request->filled('password')) {
-
-            $validated['password'] =
-                Hash::make($request->password);
-        }
-
         $user->update($validated);
 
         return redirect()
             ->route('admin.user.index')
             ->with('warning', 'User berhasil diperbarui');
+    }
+
+    public function resetPassword(
+        User $user
+    )
+    {
+        if (
+            $user->id === auth()->id()
+        ) {
+
+            return back()
+                ->with(
+                    'danger',
+                    'Tidak dapat mereset akun sendiri'
+                );
+
+        }
+
+        $tempPassword =
+            Str::random(10);
+
+        $user->update([
+
+            'password'
+                => Hash::make(
+                    $tempPassword
+                ),
+
+            'must_change_password'
+                => true,
+
+        ]);
+
+        return redirect()
+            ->route(
+                'admin.user.index'
+            )
+            ->with(
+                'generated_password',
+                $tempPassword
+            )
+            ->with(
+                'warning',
+                'Password berhasil direset'
+            );
     }
 
     public function destroy(User $user)

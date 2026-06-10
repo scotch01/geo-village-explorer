@@ -68,21 +68,6 @@
 
                 </div>
 
-                <!-- PASSWORD -->
-                <div>
-
-                    <label class="text-sm font-semibold text-slate-700">
-                        Password Baru
-                    </label>
-
-                    <input type="password" name="password" class="w-full mt-2 rounded-2xl border-slate-200 bg-slate-50">
-
-                    <p class="text-xs text-slate-400 mt-2">
-                        Kosongkan jika tidak ingin mengganti password
-                    </p>
-
-                </div>
-
                 <!-- ROLE -->
                 <div>
 

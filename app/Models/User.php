@@ -25,6 +25,7 @@ class User extends Authenticatable
 
         'role',
         'id_desa',
+        'must_change_password',
     ];
 
     /**
@@ -49,6 +50,13 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    protected $casts = [
+
+        'must_change_password'
+            => 'boolean',
+
+    ];
 
     public function desa()
     {

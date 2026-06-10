@@ -31,6 +31,43 @@
         <!-- Flash Message -->
         <x-alert />
 
+        @if (session('generated_password'))
+            <div
+                class="
+        mb-6
+        rounded-2xl
+        border
+        border-yellow-200
+        bg-yellow-50
+        p-4
+    ">
+
+                <div class="
+            font-bold
+            text-yellow-900
+        ">
+                    Password Sementara
+                </div>
+
+                <div class="
+            mt-2
+            font-mono
+            text-lg
+        ">
+                    {{ session('generated_password') }}
+                </div>
+
+                <div class="
+            mt-2
+            text-sm
+            text-yellow-700
+        ">
+                    Simpan password ini karena hanya ditampilkan sekali.
+                </div>
+
+            </div>
+        @endif
+
         <!-- TABLE -->
         <div class="bg-white border border-slate-200 rounded-[2rem] shadow-sm overflow-hidden">
 
@@ -39,7 +76,8 @@
 
                     <table class="w-full text-sm">
 
-                        <thead class="bg-slate-50 border-b border-slate-100 uppercase text-xs text-slate-500 tracking-wider">
+                        <thead
+                            class="bg-slate-50 border-b border-slate-100 uppercase text-xs text-slate-500 tracking-wider">
 
                             <tr>
                                 <th class="px-6 py-5 text-left">Nama</th>
@@ -121,6 +159,21 @@
 
                                                 </form>
                                             @endif
+
+                                            <form method="POST"
+                                                action="{{ route('admin.user.reset-password', $user) }}"
+                                                onsubmit="
+        return confirm(
+            'Reset password user ini?'
+        )
+    ">
+                                                @csrf
+
+                                                <button type="submit" class="...">
+                                                    Reset Password
+                                                </button>
+
+                                            </form>
 
                                         </div>
 

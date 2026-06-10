@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\PortalCategoryController;
 use App\Http\Controllers\Admin\PortalItemController;
 use App\Http\Controllers\PortalPublicController;
 use App\Http\Controllers\Admin\ExportController;
+use App\Http\Controllers\Auth\ForcePasswordController;
 
 // Public Page
 
@@ -30,7 +31,17 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['auth', 'role:master_admin'])
+Route::middleware('auth')->group(function () {
+
+    Route::get('/force-change-password', [ForcePasswordController::class, 'show'])
+        ->name('password.force.change');
+
+    Route::post('/force-change-password', [ForcePasswordController::class, 'update'])
+        ->name('password.force.update');
+
+});
+
+Route::middleware(['auth', 'force.password', 'role:master_admin'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
@@ -38,6 +49,9 @@ Route::middleware(['auth', 'role:master_admin'])
     Route::resource('desa', DesaController::class);
 
     Route::resource('user', UserController::class);
+
+    Route::post('/user/{user}/reset-password', [UserController::class, 'resetPassword'])
+        ->name('user.reset-password');
 
     Route::resource('portal-category', PortalCategoryController::class);
 
@@ -50,7 +64,7 @@ Route::middleware(['auth', 'role:master_admin'])
         ->name('export.download');
 });
 
-Route::middleware(['auth', 'role:master_admin,admin_desa,pengawas'])
+Route::middleware(['auth', 'force.password', 'role:master_admin,admin_desa,pengawas'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {

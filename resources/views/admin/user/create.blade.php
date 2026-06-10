@@ -67,18 +67,6 @@
 
                 </div>
 
-                <!-- PASSWORD -->
-                <div>
-
-                    <label class="text-sm font-semibold text-slate-700">
-                        Password
-                    </label>
-
-                    <input type="password" name="password" class="w-full mt-2 rounded-2xl border-slate-200 bg-slate-50"
-                        required>
-
-                </div>
-
                 <!-- ROLE -->
                 <div>
 
