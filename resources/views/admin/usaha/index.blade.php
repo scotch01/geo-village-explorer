@@ -40,24 +40,24 @@
                 </p>
             </div>
         @else
-            <div class="bg-white border rounded-2xl shadow-sm overflow-hidden">
-                <div class="overflow-x-auto w-full block whitespace-nowrap min-w-full inline-block align-middle">
-                    <table class="w-full min-w-[600px] divide-y divide-gray-100">
+            <div class="bg-white border rounded-2xl overflow-hidden shadow-sm">
+                <div class="overflow-x-auto">
+                    <table class="w-full whitespace-nowrap">
                         <thead>
-                            <tr class="bg-gray-50/70">
-                                <th class="px-6 py-4.5 text-left text-xs font-bold text-gray-500 uppercase tracking-wider w-16">
+                            <tr class="bg-slate-50 border-b border-gray-100">
+                                <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-16">
                                     No
                                 </th>
-                                <th class="px-6 py-4.5 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
+                                <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-16">
                                     Nama Usaha
                                 </th>
-                                <th class="px-6 py-4.5 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
+                                <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-16">
                                     Nama Pemilik
                                 </th>
-                                <th class="px-6 py-4.5 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
+                                <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-16">
                                     Kategori Usaha
                                 </th>
-                                <th class="px-6 py-4.5 text-center text-xs font-bold text-gray-500 uppercase tracking-wider w-28">
+                                <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-16">
                                     Aksi
                                 </th>
                             </tr>
