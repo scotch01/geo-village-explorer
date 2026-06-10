@@ -123,20 +123,22 @@
                 <div
                     class="bg-white rounded-3xl lg:rounded-[2.5rem] border border-slate-200 p-6 lg:p-8 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between min-w-0">
 
-                    <div class="flex items-start justify-between gap-4">
-                        <div>
+                    <div class="flex items-start justify-between gap-2 sm:gap-4">
+                        <div class="min-w-0 flex-1">
                             <h3 class="font-black text-2xl text-slate-900 tracking-tight">
                                 BLOK III
                             </h3>
-                            <p class="text-xs font-bold text-slate-400 mt-1 uppercase tracking-widest leading-relaxed">
+                            <p
+                                class="text-xs font-bold text-slate-400 mt-1 uppercase tracking-widest leading-relaxed break-words">
                                 KETERANGAN USAHA/PERUSAHAAN
                             </p>
                         </div>
                         @if ($tempat->usahas->count())
                             <div
-                                class="shrink-0 inline-flex items-center justify-center px-4 py-2 rounded-xl bg-slate-50 font-bold shadow-sm shadow-slate-500/20 border">
-                                <p class="text-sm">{{ $tempat->usahas->count() }}
-                                    Usaha masuk list</p>
+                                class="shrink-0 inline-flex items-center justify-center px-2 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-slate-50 font-bold shadow-sm shadow-slate-500/20 border-slate-200 border">
+                                <p class="text-xs sm:text-sm whitespace-nowrap">
+                                    {{ $tempat->usahas->count() }} Usaha masuk list
+                                </p>
                             </div>
                         @endif
                     </div>

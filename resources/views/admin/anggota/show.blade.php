@@ -180,25 +180,25 @@
 
         <!-- BOTTOM ACTIONS BAR -->
 
-        <div class="grid grid-cols-2 gap-10 bg-white justify-end rounded-3xl border border-slate-200 shadow-sm p-6 lg:p-8">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 bg-white rounded-3xl border border-slate-200 shadow-sm p-6 lg:p-8">
 
-            <div class="flex items-center gap-4">
-                <p class="text-xl font-bold">Lakukan Perubahan?</p>
+            <div class="text-center md:text-left">
+                <p class="text-lg md:text-xl font-bold text-slate-800">Lakukan Perubahan?</p>
             </div>
 
-            <div class="flex items-center justify-end gap-4">
-                    <form method="POST" action="{{ route('admin.anggota.destroy', $anggota) }}">
+            <div class="flex flex-col sm:flex-row items-center justify-end gap-3 w-full md:w-auto">
+                    <form method="POST" action="{{ route('admin.anggota.destroy', $anggota) }}" class="w-full sm:w-auto">
                         @csrf
                         @method('DELETE')
                         <button type="submit"
                             onclick="return confirm('Apakah Anda yakin ingin menghapus permanen data anggota keluarga ini?')"
-                            class="px-6 py-3.5 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-2xl transition-all active:scale-95 text-sm shadow-sm shadow-rose-600/10">
+                            class="w-full sm:w-auto px-6 py-3.5 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-2xl transition-all active:scale-95 text-sm shadow-sm shadow-rose-600/10 text-center">
                             Hapus Data
                         </button>
                     </form>
 
                 <a href="{{ route('admin.anggota.edit', $anggota) }}"
-                    class="px-6 py-3.5 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-2xl transition-all active:scale-95 text-sm shadow-sm shadow-amber-500/10 text-center">
+                    class="w-full sm:w-auto px-6 py-3.5 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-2xl transition-all active:scale-95 text-sm shadow-sm shadow-amber-500/10 text-center">
                     Edit Data
                 </a>
             </div>

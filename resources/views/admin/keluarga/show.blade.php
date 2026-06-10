@@ -124,17 +124,18 @@
         <div
             class="bg-blue-50/60 border border-blue-100 rounded-3xl p-6 lg:p-8 shadow-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
             <div class="flex items-start gap-4">
-                <div class="w-2 h-10 rounded-full bg-fuchsia-600 shrink-0 mt-0.5"></div>
-                <div>
-                    <div class="flex items-center gap-3">
+                <div class="w-2 h-10 rounded-full bg-fuchsia-600 shrink-0 mt-0.5 self-stretch"></div>
+                <div class="min-w-0 flex-1">
+                    <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
                         <h2 class="font-extrabold text-blue-900 text-base lg:text-lg tracking-tight">
                             ANGGOTA KELUARGA
                         </h2>
-                        <span class="px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-sm font-bold tracking-wide">
+                        <span
+                            class="self-start sm:self-auto px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs sm:text-sm font-bold tracking-wide whitespace-nowrap">
                             {{ $keluarga->anggotaKeluargas()->count() }} Orang
                         </span>
                     </div>
-                    <p class="text-sm font-medium text-blue-700/90 mt-0.5">
+                    <p class="text-sm font-medium text-blue-700/90 mt-2 sm:mt-0.5">
                         Manajemen rincian karakteristik dan instrumen individu untuk setiap anggota keluarga terdaftar.
                     </p>
                 </div>
@@ -142,7 +143,7 @@
 
             <a href="{{ route('admin.anggota.index', $keluarga) }}"
                 class="shrink-0 px-6 py-3.5 bg-slate-600 hover:bg-slate-700 text-white rounded-2xl font-bold text-center transition-all active:scale-95 shadow-sm shadow-blue-600/10 text-sm lg:text-base">
-                Edit atau Kelola
+                Kelola Data
             </a>
         </div>
 
@@ -376,27 +377,29 @@
 
         <!-- BOTTOM ACTIONS BAR -->
 
-        <div class="grid grid-cols-2 gap-10 bg-white justify-end rounded-3xl border border-slate-200 shadow-sm p-6 lg:p-8">
+        <div
+            class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 bg-white rounded-3xl border border-slate-200 shadow-sm p-6 lg:p-8">
 
-            <div class="flex items-center gap-4">
-                <p class="text-xl font-bold">Lakukan Perubahan?</p>
+            <div class="text-center md:text-left">
+                <p class="text-lg md:text-xl font-bold text-slate-800">Lakukan Perubahan?</p>
             </div>
 
-            <div class="flex items-center justify-end gap-4">
+            <div class="flex flex-col sm:flex-row items-center justify-end gap-3 w-full md:w-auto">
                 @if (auth()->user()->isMasterAdmin())
-                    <form method="POST" action="{{ route('admin.keluarga.destroy', $tempat) }}">
+                    <form method="POST" action="{{ route('admin.keluarga.destroy', $tempat) }}"
+                        class="w-full sm:w-auto">
                         @csrf
                         @method('DELETE')
                         <button type="submit"
                             onclick="return confirm('Apakah Anda yakin ingin menghapus permanen data keluarga ini?')"
-                            class="px-6 py-3.5 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-2xl transition-all active:scale-95 text-sm shadow-sm shadow-rose-600/10">
+                            class="w-full sm:w-auto px-6 py-3.5 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-2xl transition-all active:scale-95 text-sm shadow-sm shadow-rose-600/10 text-center">
                             Hapus Data
                         </button>
                     </form>
                 @endif
 
                 <a href="{{ route('admin.keluarga.edit', $tempat) }}"
-                    class="px-6 py-3.5 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-2xl transition-all active:scale-95 text-sm shadow-sm shadow-amber-500/10 text-center">
+                    class="w-full sm:w-auto px-6 py-3.5 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-2xl transition-all active:scale-95 text-sm shadow-sm shadow-amber-500/10 text-center">
                     Edit Data
                 </a>
             </div>

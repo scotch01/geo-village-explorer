@@ -51,8 +51,6 @@
                 @csrf
                 @method('PUT')
 
-                <input type="hidden" name="redirect_to" x-model="redirectTo">
-
                 <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 lg:p-8 transition-all">
 
                     <div class="flex items-center gap-4">
@@ -565,35 +563,32 @@
                         </div>
 
                     </div>
-
-                    <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 lg:p-8 transition-all">
-
-                        <div class="flex items-center gap-4 mb-6 border-b border-slate-100 pb-4">
-                            <div class="w-1.5 h-6 rounded-full bg-amber-500"></div>
-
-                            <h2 class="font-black text-lg text-slate-900 tracking-tight">
-                                VI. Tagging Lokasi
-                            </h2>
-                        </div>
-
-                        <x-geo-location latitude-field="latitude_rumah" longitude-field="longitude_rumah"
-                            accuracy-field="akurasi_rumah" :latitude-value="$keluarga->latitude_rumah" :longitude-value="$keluarga->longitude_rumah" :accuracy-value="$keluarga->akurasi_rumah" />
-                    </div>
-
-                    <div class="flex items-center justify-center lg:justify-end gap-3 border-t-2 border-gray-300 pt-4">
-                        <a href="{{ route('admin.keluarga.show', $tempat) }}"
-                            class="px-6 py-2.5 border rounded-xl text-gray-700 hover:bg-gray-50 transition-all active:scale-95 ">
-                            Batal
-                        </a>
-                        <button type="submit"
-                            class="px-6 py-3.5 bg-amber-500 hover:bg-amber-600 text-white rounded-xl font-bold transition-all active:scale-95 shadow-md shadow-amber-500/20 text-sm text-center">
-                            Simpan Perubahan
-                        </button>
-                    </div>
                 </div>
 
+                <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 lg:p-8 transition-all">
 
+                    <div class="flex items-center gap-4 mb-6 border-b border-slate-100 pb-4">
+                        <div class="w-1.5 h-6 rounded-full bg-amber-500"></div>
 
+                        <h2 class="font-black text-lg text-slate-900 tracking-tight">
+                            VI. Tagging Lokasi
+                        </h2>
+                    </div>
+
+                    <x-geo-location latitude-field="latitude_rumah" longitude-field="longitude_rumah"
+                        accuracy-field="akurasi_rumah" :latitude-value="$keluarga->latitude_rumah" :longitude-value="$keluarga->longitude_rumah" :accuracy-value="$keluarga->akurasi_rumah" />
+                </div>
+
+                <div class="flex items-center justify-center lg:justify-end gap-3 border-t-2 border-gray-300 pt-4">
+                    <a href="{{ route('admin.keluarga.show', $tempat) }}"
+                        class="px-6 py-2.5 border rounded-xl text-gray-700 hover:bg-gray-50 transition-all active:scale-95 ">
+                        Batal
+                    </a>
+                    <button type="submit"
+                        class="px-6 py-3.5 bg-amber-500 hover:bg-amber-600 text-white rounded-xl font-bold transition-all active:scale-95 shadow-md shadow-amber-500/20 text-sm text-center">
+                        Simpan Perubahan
+                    </button>
+                </div>
             </form>
 
         </div>
