@@ -20,7 +20,7 @@
             </div>
 
             <a href="{{ route('admin.user.create') }}"
-                class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-2xl font-semibold shadow-lg shadow-blue-100 transition">
+                class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-2xl font-semibold shadow-lg shadow-blue-100 transition-all active:scale-95">
 
                 + Tambah User
 
@@ -137,7 +137,7 @@
                                         <div class="flex items-center justify-center gap-2">
 
                                             <a href="{{ route('admin.user.edit', $user->id) }}"
-                                                class="px-4 py-2 rounded-xl bg-amber-100 text-amber-700 hover:bg-amber-200 font-semibold text-xs transition">
+                                                class="px-4 py-2 rounded-xl bg-amber-100 text-amber-700 hover:bg-amber-200 font-semibold text-xs transition-all active:scale-95">
 
                                                 Edit
 
@@ -151,7 +151,7 @@
                                                     @method('DELETE')
 
                                                     <button
-                                                        class="px-4 py-2 rounded-xl bg-red-100 text-red-700 hover:bg-red-200 font-semibold text-xs transition">
+                                                        class="px-4 py-2 rounded-xl bg-red-100 text-red-700 hover:bg-red-200 font-semibold text-xs transition-all active:scale-95">
 
                                                         Hapus
 
@@ -160,20 +160,22 @@
                                                 </form>
                                             @endif
 
-                                            <form method="POST"
-                                                action="{{ route('admin.user.reset-password', $user) }}"
-                                                onsubmit="
-        return confirm(
-            'Reset password user ini?'
-        )
-    ">
-                                                @csrf
+                                            @if ($user->id !== auth()->id())
+                                                <form method="POST"
+                                                    action="{{ route('admin.user.reset-password', $user) }}"
+                                                    onsubmit="
+                                                    return confirm(
+                                                        'Reset password user ini?'
+                                                    )
+                                                ">
+                                                    @csrf
 
-                                                <button type="submit" class="...">
-                                                    Reset Password
-                                                </button>
+                                                    <button type="submit" class="px-4 py-2 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200 font-semibold text-xs transition-all active:scale-95">
+                                                        Reset Password
+                                                    </button>
 
-                                            </form>
+                                                </form>
+                                            @endif
 
                                         </div>
 

@@ -207,7 +207,7 @@
                 }
             },
             labels: jenisBangunanData.map(item => item.label),
-            series: jenisBangunanData.map(item => item.total),
+            series: jenisBangunanData.map(item => Number(item.total)),
             colors: ['#2563eb', '#10b981', '#f59e0b'],
             legend: {
                 position: 'bottom',

@@ -39,6 +39,9 @@ class UserController extends Controller
             'id_desa' => 'nullable|exists:desas,id',
         ]);
 
+        $tempPassword =
+            Str::random(10);
+
         User::create([
 
             'name'

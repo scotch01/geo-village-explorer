@@ -43,6 +43,7 @@ class TempatController extends Controller
 
             $query->where(function ($q) use ($search) {
 
+                // Kepala keluarga
                 $q->whereHas('keluarga', function ($query) use ($search) {
 
                     $query->where(
@@ -52,10 +53,30 @@ class TempatController extends Controller
                     );
                 })
 
+                // Anggota keluarga
+                ->orWhereHas(
+                    'keluarga.anggotaKeluargas',
+                    function ($query) use ($search) {
+
+                        $query->where(
+                            'nama',
+                            'like',
+                            "%{$search}%"
+                        );
+                    }
+                )
+
+                // Usaha
                 ->orWhereHas('usahas', function ($query) use ($search) {
 
                     $query->where(
                         'nama_usaha',
+                        'like',
+                        "%{$search}%"
+                    )
+
+                    ->orWhere(
+                        'nama_pemilik',
                         'like',
                         "%{$search}%"
                     );
@@ -89,6 +110,17 @@ class TempatController extends Controller
         }
 
         /**
+         * FILTER PETUGAS
+         */
+        if ($request->filled('creator')) {
+
+            $query->where(
+                'created_by',
+                $request->creator
+            );
+        }
+
+        /**
          * PAGINATION
          */
         $perPage     = $request->get('per_page', 20);
@@ -106,6 +138,11 @@ class TempatController extends Controller
             'tempats' => $tempats,
             'desas' => \App\Models\Desa::orderBy('nama_desa')->get(),
             'jenisBangunan' => \App\Constants\Tempat\JenisBangunan::OPTIONS,
+
+            'creators' => \App\Models\User::query()
+                ->where('role', 'admin_desa')
+                ->orderBy('name')
+                ->get(),
         ]);
     }
 
@@ -311,6 +348,16 @@ class TempatController extends Controller
 
             $data['catatan']
                 = $request->catatan;
+        }
+
+        if (
+            !$request->hasFile('foto_bangunan')
+            && !$request->filled('catatan')
+        ) {
+            return back()->with(
+                'danger',
+                'Tidak ada data yang disimpan'
+            );
         }
 
         $tempat->update($data);

@@ -66,7 +66,7 @@ class DashboardController extends Controller
                         default => '-',
                     },
 
-                    'total' => $item->total,
+                    'total' => (int) $item->total,
                 ];
             });
 

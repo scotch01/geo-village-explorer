@@ -84,6 +84,10 @@
 
                         </option>
 
+                         <option value="pengawas" {{ old('role', $user->role) == 'pengawas' ? 'selected' : '' }}>
+                            Pengawas
+                        </option>
+
                         <option value="admin_desa" {{ old('role', $user->role) == 'admin_desa' ? 'selected' : '' }}>
 
                             Admin Desa
@@ -126,14 +130,14 @@
             <div class="border-t border-slate-100 px-8 py-5 bg-slate-50 flex items-center justify-end gap-4">
 
                 <a href="{{ route('admin.user.index') }}"
-                    class="px-5 py-2.5 rounded-xl text-slate-600 hover:bg-slate-200 transition">
+                    class="px-5 py-2.5 rounded-xl text-slate-600 hover:bg-slate-200 transition-all active:scale-95">
 
                     Batal
 
                 </a>
 
                 <button
-                    class="bg-amber-500 hover:bg-amber-600 text-white px-6 py-3 rounded-2xl font-semibold shadow-lg shadow-amber-100 transition">
+                    class="bg-amber-500 hover:bg-amber-600 text-white px-6 py-3 rounded-2xl font-semibold shadow-lg shadow-amber-100 transition-all active:scale-95">
 
                     Update User
 

@@ -7,6 +7,9 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+    {{-- Production :
+    @include('components.assets') --}}
+
     <link rel="icon" href="{{ asset('bps.ico') }}" sizes="any">
 
     {{-- ALPINEJS --}}
@@ -95,7 +98,7 @@
 
                     @if (auth()->user()->isMasterAdmin())
                         <a href="{{ route('admin.portal-item.index') }}"
-                            class="px-4 py-2 rounded-xl text-sm font-medium transition-all {{ request()->routeIs('admin.user.*') ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-600 hover:text-slate-900' }}">
+                            class="px-4 py-2 rounded-xl text-sm font-medium transition-all {{ request()->routeIs('admin.portal-item.*') ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-600 hover:text-slate-900' }}">
                             Portal Data
                         </a>
                         <a href="{{ route('admin.export.index') }}" class="px-4 py-2 rounded-xl text-sm font-medium transition-all {{ request()->routeIs('admin.export.*') ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-600 hover:text-slate-900' }}">

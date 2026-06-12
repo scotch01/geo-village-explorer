@@ -100,6 +100,28 @@
                         </div>
                     @endif
 
+                    @if (auth()->user()->isMasterAdmin() || auth()->user()->isPengawas())
+                        <div class="space-y-2">
+                            <label class="text-[11px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">
+                                Agen Statistik
+                            </label>
+
+                            <select name="creator" class="w-full px-4 py-3 bg-slate-50 border-transparent rounded-2xl focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all font-medium text-slate-700 appearance-none">
+
+                                <option value="">
+                                    Semua Agen Statistik
+                                </option>
+
+                                @foreach ($creators as $creator)
+                                    <option value="{{ $creator->id }}" @selected(request('creator') == $creator->id)>
+                                        {{ $creator->name }}
+                                    </option>
+                                @endforeach
+
+                            </select>
+                        </div>
+                    @endif
+
                     <!-- ACTIONS -->
                     <div class="flex items-end gap-3">
                         <button
