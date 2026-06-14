@@ -186,9 +186,23 @@
 
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1.5">5. Dusun</label>
-                        <input type="text" name="dusun" x-model="sameAddress ? keluarga.dusun : usaha.dusun"
-                            x-bind:readonly="sameAddress"
-                            class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500 transition text-sm read-only:bg-gray-50 read-only:text-gray-500">
+                        <select name="dusun" x-model="sameAddress ? keluarga.dusun : usaha.dusun"
+                            class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500 transition text-sm"
+                            :class="{
+                                'bg-gray-50 text-gray-500 pointer-events-none': sameAddress
+                            }">
+
+                            <option value="">
+                                Pilih Dusun
+                            </option>
+
+                            @foreach ($dusuns as $dusun)
+                                <option value="{{ $dusun }}">
+                                    {{ $dusun }}
+                                </option>
+                            @endforeach
+
+                        </select>
                     </div>
                 </div>
 

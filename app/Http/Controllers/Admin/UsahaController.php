@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Tempat;
 use App\Models\Usaha;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 use App\Constants\Usaha\LokasiUsaha;
 use App\Constants\Usaha\StatusKepemilikanBangunanUsaha;
@@ -20,6 +21,7 @@ use App\Constants\Shared\KreditSumber;
 use App\Constants\Usaha\TujuanKreditUsaha;
 use App\Constants\Usaha\TidakMenerimaKredit;
 use App\Constants\Usaha\Kendala;
+use App\Constants\Desa\Dusun;
 
 class UsahaController extends Controller
 {
@@ -52,6 +54,8 @@ class UsahaController extends Controller
             [
 
                 'tempat' => $tempat,
+
+                'desa'   => $desa,
 
                 'keluarga'
                 => $tempat->keluarga,
@@ -94,12 +98,9 @@ class UsahaController extends Controller
 
                 'kendalaUsaha'
                     => Kendala::OPTIONS,
-            ],
-            [
 
-                'tempat' => $tempat,
-                'desa'   => $desa,
-
+                'dusuns'
+                    => Dusun::OPTIONS[$tempat->id_desa] ?? [],
             ]
         );
     }
@@ -110,7 +111,10 @@ class UsahaController extends Controller
     )
     {
         $validated =
-            $this->validateData($request);
+            $this->validateData(
+                $request,
+                $tempat
+            );
 
         $validated['lokasi_sama_dengan_keluarga']
             = $request->boolean(
@@ -264,9 +268,13 @@ class UsahaController extends Controller
 
                 'kendalaUsaha'
                     => Kendala::OPTIONS,
+
+                'dusuns'
+                    => Dusun::OPTIONS[$tempat->id_desa] ?? [],
             ]
         );
     }
+
 
     public function update(
         Request $request,
@@ -281,7 +289,10 @@ class UsahaController extends Controller
         }
 
         $validated =
-            $this->validateData($request);
+            $this->validateData(
+                $request,
+                $tempat
+            );
 
         $validated['lokasi_sama_dengan_keluarga']
             = $request->boolean(
@@ -350,8 +361,13 @@ class UsahaController extends Controller
     }
 
 
-    private function validateData(Request $request)
+    private function validateData(
+        Request $request,
+        Tempat $tempat)
     {
+        $dusuns =
+            Dusun::OPTIONS[$tempat->id_desa] ?? [];
+
         return $request->validate([
 
             'provinsi'
@@ -364,9 +380,6 @@ class UsahaController extends Controller
                 => 'nullable|string|max:255',
 
             'desa'
-                => 'nullable|string|max:255',
-
-            'dusun'
                 => 'nullable|string|max:255',
 
             'alamat'
@@ -473,6 +486,12 @@ class UsahaController extends Controller
 
             'lokasi_sama_dengan_keluarga'
                 => 'nullable|boolean',
+
+            'dusun'
+                => [
+                'required',
+                Rule::in($dusuns),
+            ],
         ],
         
         [],

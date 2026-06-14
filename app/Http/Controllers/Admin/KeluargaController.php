@@ -21,6 +21,7 @@ use App\Constants\Keluarga\DayaListrik;
 use App\Constants\Shared\KreditSumber;
 use App\Constants\Keluarga\KreditTujuan;
 use App\Constants\Shared\YaTidak;
+use App\Constants\Desa\Dusun;
 
 class KeluargaController extends Controller
 {
@@ -32,6 +33,7 @@ class KeluargaController extends Controller
             'admin.keluarga.create',
             [
                 'tempat' => $tempat,
+                'desa'   => $desa,
 
                 'yaTidak' => YaTidak::OPTIONS,
 
@@ -71,11 +73,8 @@ class KeluargaController extends Controller
                 'kreditTujuan'
                     => KreditTujuan::OPTIONS,
 
-            ],
-            [
-
-                'tempat' => $tempat,
-                'desa'   => $desa,
+                'dusuns'
+                    => Dusun::OPTIONS[$tempat->id_desa] ?? [],
 
             ]
         );
@@ -99,7 +98,10 @@ class KeluargaController extends Controller
                 );
         }
 
-        $validated = $this->validateData($request);
+        $validated = $this->validateData(
+            $request,
+            $tempat
+        );
 
         $meterans = $validated['meterans'] ?? [];
 
@@ -260,6 +262,9 @@ class KeluargaController extends Controller
 
                 'kreditTujuan'
                     => KreditTujuan::OPTIONS,
+
+                'dusuns'
+                    => Dusun::OPTIONS[$tempat->id_desa] ?? [],
             ]
         );
     }
@@ -278,6 +283,7 @@ class KeluargaController extends Controller
 
         $validated = $this->validateData(
             $request,
+            $tempat,
             $keluarga
         );
 
@@ -361,9 +367,13 @@ class KeluargaController extends Controller
     }
 
     private function validateData(
-        Request $request, 
-        ?Keluarga $keluarga = null)
+        Request $request,
+        Tempat $tempat,
+        ?Keluarga $keluarga = null
+    )
     {
+        $dusuns =
+            Dusun::OPTIONS[$tempat->id_desa] ?? [];
         return $request->validate([
 
             'nama_kepala_keluarga'
@@ -411,8 +421,10 @@ class KeluargaController extends Controller
             'desa'
                 => 'required|string|max:255',
             
-            'dusun'
-                => 'nullable|string|max:255',
+            'dusun' => [
+                'required',
+                Rule::in($dusuns),
+            ],
 
             'alamat_detail'
                 => 'required|string',

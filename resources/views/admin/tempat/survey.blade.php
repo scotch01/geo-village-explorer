@@ -129,7 +129,7 @@
                                 BLOK III
                             </h3>
                             <p
-                                class="text-xs font-bold text-slate-400 mt-1 uppercase tracking-widest leading-relaxed break-words">
+                                class="text-xs font-bold text-slate-400 mt-1 uppercase tracking-widest leading-relaxed">
                                 KETERANGAN USAHA/PERUSAHAAN
                             </p>
                         </div>

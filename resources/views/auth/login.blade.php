@@ -11,23 +11,18 @@
         Login - SPECTRA
     </title>
 
+    <link rel="icon" href="{{ asset('bps.ico') }}" sizes="any">
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    {{-- ALPINEJS --}}
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 </head>
 
 <body class="min-h-screen bg-slate-100 flex items-center justify-center px-4">
 
     <div class="w-full max-w-md bg-white border border-slate-200 rounded-[2rem] shadow-sm p-8">
-
-        {{-- Logo --}}
-        <div class="flex justify-center">
-
-            <div
-                class="w-14 h-14 rounded-2xl bg-blue-600 text-white flex items-center justify-center font-black text-xl">
-                S
-            </div>
-
-        </div>
 
         {{-- Heading --}}
         <div class="text-center mt-5">
@@ -71,7 +66,7 @@
         @endif
 
         {{-- Form --}}
-        <form method="POST" action="{{ route('login') }}" class="space-y-5 mt-6">
+        <form method="POST" action="{{ route('login') }}" class="space-y-5 mt-6" x-data="{ showPassword: false }">
 
             @csrf
 
@@ -91,15 +86,27 @@
             {{-- Password --}}
             <div>
 
-                <label class="lock text-sm font-semibold text-slate-700 mb-2">
+                <label class="block text-sm font-semibold text-slate-700 mb-2">
                     Password
                 </label>
 
-                <input type="password" name="password" required autocomplete="current-password"
+                <input :type="showPassword ? 'text' : 'password'" name="password" required
+                    autocomplete="current-password"
                     class="w-full rounded-2xl border-slate-200
-                        focus:border-blue-500 focus:ring-blue-500">
+            focus:border-blue-500 focus:ring-blue-500">
 
             </div>
+
+            <label class="flex items-center gap-3 text-sm text-slate-600">
+
+                <input type="checkbox" x-model="showPassword"
+                    class="rounded border-slate-300 text-blue-600 focus:ring-blue-500">
+
+                <span>
+                    Tampilkan Password
+                </span>
+
+            </label>
 
             {{-- Help --}}
             <div class="rounded-2xl bg-blue-50 border border-blue-100 p-4">

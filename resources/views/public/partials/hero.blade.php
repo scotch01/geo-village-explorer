@@ -17,7 +17,7 @@
                 </h1>
 
                 <h2 class="mt-4 text-lg md:text-xl font-semibold text-slate-600">
-                    Sistem Pemetaan Terpadu Potensi Ekonomi dan Sosial Masyarakat Desa
+                    Sistem Pemetaan Citra Terpadu Potensi Ekonomi dan Sosial Masyarakat Desa
                 </h2>
 
                 <p class="mt-6 text-xl md:text-2xl font-semibold text-slate-800 leading-relaxed">

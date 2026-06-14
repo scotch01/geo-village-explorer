@@ -143,8 +143,20 @@
                             <label class="block text-sm font-bold text-slate-700 tracking-tight">
                                 e. Dusun
                             </label>
-                            <input type="text" name="dusun" value="{{ old('dusun') }}"
-                                class="w-full rounded-2xl border-slate-200 bg-slate-50/50 p-3.5 font-semibold text-slate-800 transition-all focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 text-sm lg:text-base">
+                            <select name="dusun"
+                                class="w-full rounded-2xl border-slate-200 bg-slate-50/50 p-3.5 font-semibold text-slate-800">
+
+                                <option value="">
+                                    Pilih Dusun
+                                </option>
+
+                                @foreach ($dusuns as $dusun)
+                                    <option value="{{ $dusun }}" @selected(old('dusun') == $dusun)>
+                                        {{ $dusun }}
+                                    </option>
+                                @endforeach
+
+                            </select>
                         </div>
 
                         <div class="md:col-span-2 space-y-2">
