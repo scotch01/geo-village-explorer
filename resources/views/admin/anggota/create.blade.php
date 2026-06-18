@@ -401,7 +401,7 @@
 
                 return {
 
-                    nama: '',
+                    nama: @js(old('nama')),
 
                     tanggalLahir: @js(old('tanggal_lahir')),
 
