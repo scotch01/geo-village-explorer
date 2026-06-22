@@ -29,6 +29,14 @@ class UsahaController extends Controller
         Tempat $tempat
     )
     {
+        if (
+            !auth()->user()->canViewTempat(
+                $tempat
+            )
+        ) {
+            abort(403);
+        }
+
         $usahas = $tempat
             ->usahas()
             ->latest()
@@ -47,6 +55,15 @@ class UsahaController extends Controller
         Tempat $tempat
     )
     {
+
+        if (
+            !auth()->user()->canEditTempat(
+                $tempat
+            )
+        ) {
+            abort(403);
+        }
+
         $desa = auth()->user()->desa;
 
         return view(
@@ -110,6 +127,15 @@ class UsahaController extends Controller
         Tempat $tempat
     )
     {
+
+        if (
+            !auth()->user()->canEditTempat(
+                $tempat
+            )
+        ) {
+            abort(403);
+        }
+
         $validated =
             $this->validateData(
                 $request,
@@ -160,6 +186,14 @@ class UsahaController extends Controller
         Usaha $usaha
     )
     {
+        if (
+            !auth()->user()->canViewTempat(
+                $usaha->tempat
+            )
+        ) {
+            abort(403);
+        }
+
         return view(
             'admin.usaha.show',
             [
@@ -212,6 +246,14 @@ class UsahaController extends Controller
         Usaha $usaha
     )
     {
+        if (
+            !auth()->user()->canEditTempat(
+                $usaha->tempat
+            )
+        ) {
+            abort(403);
+        }
+
         $tempat =
             $usaha->tempat;
 
@@ -283,6 +325,14 @@ class UsahaController extends Controller
     {
         $tempat =
             $usaha->tempat;
+
+        if (
+            !auth()->user()->canEditTempat(
+                $usaha->tempat
+            )
+        ) {
+            abort(403);
+        }
 
         if (!$usaha) {
             abort(404);

@@ -1,7 +1,6 @@
 @extends('layouts.admin')
 
 @section('content')
-
     <div class="space-y-6">
 
         <x-back-button :href="route('admin.tempat.survey', $tempat)">
@@ -19,11 +18,18 @@
                     </p>
                 </div>
 
-                @if ($tempat->jenis_bangunan === 'bc' || $tempat->usahas->count() === 0)
-                    <a href="{{ route('admin.usaha.create', $tempat) }}" 
-                       class="w-full sm:w-auto text-center px-4 py-2.5 bg-green-600 text-white font-semibold rounded-xl hover:bg-green-700 transition-all active:scale-95 text-sm shadow-sm">
+                @if (auth()->user()->canEditTempat($tempat))
+                    @if ($tempat->jenis_bangunan === 'bc' || $tempat->usahas->count() === 0)
+                        <a href="{{ route('admin.usaha.create', $tempat) }}"
+                            class="w-full sm:w-auto px-4 py-2.5 bg-green-600 text-white font-semibold rounded-xl hover:bg-green-700 transition-all active:scale-95">
+                            Tambah Usaha
+                        </a>
+                    @endif
+                @else
+                    <button disabled
+                        class="w-full sm:w-auto px-4 py-2.5 bg-gray-200 text-gray-500 font-semibold rounded-xl cursor-not-allowed">
                         Tambah Usaha
-                    </a>
+                    </button>
                 @endif
             </div>
         </div>
@@ -45,19 +51,24 @@
                     <table class="w-full whitespace-nowrap">
                         <thead>
                             <tr class="bg-slate-50 border-b border-gray-100">
-                                <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-16">
+                                <th
+                                    class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-16">
                                     No
                                 </th>
-                                <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-16">
+                                <th
+                                    class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-16">
                                     Nama Usaha
                                 </th>
-                                <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-16">
+                                <th
+                                    class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-16">
                                     Nama Pemilik
                                 </th>
-                                <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-16">
+                                <th
+                                    class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-16">
                                     Kategori Usaha
                                 </th>
-                                <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-16">
+                                <th
+                                    class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-16">
                                     Aksi
                                 </th>
                             </tr>
@@ -80,7 +91,7 @@
                                     </td>
                                     <td class="px-6 py-4 text-center">
                                         <a href="{{ route('admin.usaha.show', $usaha) }}"
-                                           class="inline-flex items-center justify-center px-4 py-1.5 bg-blue-600 text-white rounded-lg text-xs font-bold transition-all active:scale-95 hover:bg-blue-700 shadow-sm shadow-blue-600/10">
+                                            class="inline-flex items-center justify-center px-4 py-1.5 bg-blue-600 text-white rounded-lg text-xs font-bold transition-all active:scale-95 hover:bg-blue-700 shadow-sm shadow-blue-600/10">
                                             Detail
                                         </a>
                                     </td>

@@ -7,6 +7,8 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Tempat;
+use App\Models\PmlPclAssignment;
 
 class User extends Authenticatable
 {
@@ -80,5 +82,70 @@ class User extends Authenticatable
     public function isAdminDesa()
     {
         return $this->role === self::ROLE_ADMIN_DESA;
+    }
+
+    public function assignedPcls()
+    {
+        return $this->belongsToMany(
+            User::class,
+            'pml_pcl_assignments',
+            'pml_id',
+            'pcl_id'
+        );
+    }
+
+    public function assignedPmls()
+    {
+        return $this->belongsToMany(
+            User::class,
+            'pml_pcl_assignments',
+            'pcl_id',
+            'pml_id'
+        );
+    }
+
+    public function canEditTempat(
+        Tempat $tempat
+    ): bool
+    {
+        if ($this->isMasterAdmin()) {
+            return true;
+        }
+
+        if ($this->isAdminDesa()) {
+
+            return
+                $tempat->created_by
+                ==
+                $this->id;
+        }
+
+        if ($this->isPengawas()) {
+
+            return
+                PmlPclAssignment::query()
+                    ->where(
+                        'pml_id',
+                        $this->id
+                    )
+                    ->where(
+                        'pcl_id',
+                        $tempat->created_by
+                    )
+                    ->exists();
+        }
+
+        return false;
+    }
+
+    public function canViewTempat(
+        Tempat $tempat
+    ): bool
+    {
+        if ($this->isMasterAdmin()) {
+            return true;
+        }
+
+        return $tempat->id_desa === $this->id_desa;
     }
 }

@@ -27,6 +27,10 @@ class KeluargaController extends Controller
 {
     public function create(Tempat $tempat)
     {
+        if (!auth()->user()->canEditTempat($tempat)) {
+            abort(403);
+        }
+
         $desa = auth()->user()->desa;
 
         return view(
@@ -85,6 +89,10 @@ class KeluargaController extends Controller
         Tempat $tempat
     )
     {
+        if (!auth()->user()->canEditTempat($tempat)) {
+            abort(403);
+        }
+
         if ($tempat->keluarga) {
 
             return redirect()
@@ -151,6 +159,10 @@ class KeluargaController extends Controller
 
     public function show(Tempat $tempat)
     {
+        if (!auth()->user()->canViewTempat($tempat)) {
+            abort(403);
+        }
+
         $tempat->load([
             'keluarga',
             'keluarga.anggotaKeluargas',
@@ -210,6 +222,10 @@ class KeluargaController extends Controller
         Tempat $tempat
     )
     {
+        if (!auth()->user()->canEditTempat($tempat)) {
+            abort(403);
+        }
+
         $keluarga = $tempat
             ->keluarga()
             ->with('meterans')
@@ -274,6 +290,10 @@ class KeluargaController extends Controller
         Tempat $tempat
     )
     {
+        if (!auth()->user()->canEditTempat($tempat)) {
+            abort(403);
+        }
+
         $keluarga =
             $tempat->keluarga;
 

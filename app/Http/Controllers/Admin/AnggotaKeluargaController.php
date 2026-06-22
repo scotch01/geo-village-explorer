@@ -27,6 +27,14 @@ class AnggotaKeluargaController extends Controller
         Keluarga $keluarga
     )
     {
+        if (
+        !auth()->user()->canViewTempat(
+                $keluarga->tempat
+            )
+        ) {
+            abort(403);
+        }
+
         $anggotas = $keluarga
             ->anggotaKeluargas()
             ->orderBy('nomor_urut')
@@ -45,6 +53,14 @@ class AnggotaKeluargaController extends Controller
         Keluarga $keluarga
     )
     {
+        if (
+        !auth()->user()->canEditTempat(
+                $keluarga->tempat
+            )
+        ) {
+            abort(403);
+        }
+
         $nextNomorUrut = 
             $keluarga
                 ->anggotaKeluargas()
@@ -109,6 +125,14 @@ class AnggotaKeluargaController extends Controller
         Keluarga $keluarga
     )
     {
+        if (
+        !auth()->user()->canEditTempat(
+                $keluarga->tempat
+            )
+        ) {
+            abort(403);
+        }
+
         $validated =
             $this->validateData($request);
 
@@ -168,6 +192,16 @@ class AnggotaKeluargaController extends Controller
         AnggotaKeluarga $anggota
     )
     {
+        if (
+            !auth()->user()->canViewTempat(
+                $anggota
+                    ->keluarga
+                    ->tempat
+            )
+        ) {
+            abort(403);
+        }
+
         return view(
             'admin.anggota.show',
             [
@@ -211,6 +245,16 @@ class AnggotaKeluargaController extends Controller
         AnggotaKeluarga $anggota
     )
     {
+        if (
+            !auth()->user()->canEditTempat(
+                $anggota
+                    ->keluarga
+                    ->tempat
+            )
+        ) {
+            abort(403);
+        }
+
         $keluarga =
             $anggota->keluarga;
 
@@ -275,6 +319,15 @@ class AnggotaKeluargaController extends Controller
         AnggotaKeluarga $anggota
     )
     {
+        if (
+            !auth()->user()->canEditTempat(
+                $anggota
+                    ->keluarga
+                    ->tempat
+            )
+        ) {
+            abort(403);
+        }
         $validated =
             $this->validateData($request);
 
@@ -333,6 +386,27 @@ class AnggotaKeluargaController extends Controller
         AnggotaKeluarga $anggota
     )
     {
+
+        $tempat =
+            $anggota
+                ->keluarga
+                ->tempat;
+
+        $user = auth()->user();
+
+        if (
+            !$user->isMasterAdmin()
+            &&
+            !$user->canEditTempat(
+                $anggota->keluarga->tempat
+            )
+        ) {
+            abort(403);
+        }
+
+        if ($user->isPengawas()) {
+            abort(403);
+        }
 
         $keluarga =
             $anggota->keluarga;

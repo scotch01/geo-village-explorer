@@ -398,10 +398,21 @@
                     </form>
                 @endif
 
-                <a href="{{ route('admin.keluarga.edit', $tempat) }}"
-                    class="w-full sm:w-auto px-6 py-3.5 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-2xl transition-all active:scale-95 text-sm shadow-sm shadow-amber-500/10 text-center">
-                    Edit Data
-                </a>
+                @if (auth()->user()->canEditTempat($tempat))
+                    <a href="{{ route('admin.keluarga.edit', $tempat) }}"
+                        class="w-full sm:w-auto px-6 py-3.5 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-2xl transition-all active:scale-95 text-sm shadow-sm shadow-amber-500/10 text-center">
+
+                        Edit Data
+
+                    </a>
+                @else
+                    <span
+                        class="w-full sm:w-auto px-6 py-3.5 bg-slate-200 text-slate-500 font-bold rounded-2xl text-sm text-center cursor-not-allowed">
+
+                        Edit Data
+
+                    </span>
+                @endif
             </div>
 
         </div>

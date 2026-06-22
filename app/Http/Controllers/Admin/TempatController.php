@@ -134,15 +134,32 @@ class TempatController extends Controller
             ->paginate($perPage)
             ->withQueryString();
 
+        $creatorQuery = \App\Models\User::query()
+            ->where('role', 'admin_desa');
+
+        if (
+            auth()->user()->isAdminDesa()
+            || auth()->user()->isPengawas()
+        ) {
+            $creatorQuery->where(
+                'id_desa',
+                auth()->user()->id_desa
+            );
+        }
+
+        $creators = $creatorQuery
+            ->orderBy('name')
+            ->get();
+
         return view('admin.tempat.index', [
             'tempats' => $tempats,
-            'desas' => \App\Models\Desa::orderBy('nama_desa')->get(),
-            'jenisBangunan' => \App\Constants\Tempat\JenisBangunan::OPTIONS,
 
-            'creators' => \App\Models\User::query()
-                ->where('role', 'admin_desa')
-                ->orderBy('name')
-                ->get(),
+            'desas' => \App\Models\Desa::orderBy('nama_desa')->get(),
+
+            'jenisBangunan'
+                => \App\Constants\Tempat\JenisBangunan::OPTIONS,
+
+            'creators' => $creators,
         ]);
     }
 
@@ -202,7 +219,9 @@ class TempatController extends Controller
      */
     public function show(Tempat $tempat)
     {
-        $this->authorizeTempatAccess($tempat);
+        if (!auth()->user()->canViewTempat($tempat)) {
+            abort(403);
+        }
 
         return view('admin.tempat.show', compact('tempat'));
     }
@@ -212,7 +231,9 @@ class TempatController extends Controller
      */
     public function edit(Tempat $tempat)
     {
-        $this->authorizeTempatAccess($tempat);
+        if (!auth()->user()->canEditTempat($tempat)) {
+            abort(403);
+        }
 
         return view('admin.tempat.edit', compact('tempat'));
     }
@@ -222,7 +243,9 @@ class TempatController extends Controller
      */
     public function update(Request $request, Tempat $tempat)
     {
-        $this->authorizeTempatAccess($tempat);
+        if (!auth()->user()->canEditTempat($tempat)) {
+            abort(403);
+        }
 
         $validated = $request->validate([
             'jenis_bangunan' => [
@@ -273,8 +296,6 @@ class TempatController extends Controller
             abort(403);
         }
 
-        $this->authorizeTempatAccess($tempat);
-
         if ($tempat->foto_bangunan) {
 
             Storage::disk('public')
@@ -290,22 +311,11 @@ class TempatController extends Controller
             ->with('danger', 'Data bangunan berhasil dihapus');
     }
 
-    private function authorizeTempatAccess(Tempat $tempat)
-    {
-        $user = auth()->user();
-
-        if ($user->isMasterAdmin()) {
-            return;
-        }
-
-        if ($tempat->id_desa !== $user->id_desa) {
-            abort(403, 'Unauthorized');
-        }
-    }
-
     public function survey(Tempat $tempat)
     {
-        $this->authorizeTempatAccess($tempat);
+        if (!auth()->user()->canViewTempat($tempat)) {
+            abort(403);
+        }
 
         $tempat->load([
             'keluarga.anggotaKeluargas',
@@ -323,6 +333,10 @@ class TempatController extends Controller
         Tempat $tempat
     )
     {
+        if (!auth()->user()->canEditTempat($tempat)) {
+            abort(403);
+        }
+
         $data = [];
 
         if ($request->hasFile('foto_bangunan')) {

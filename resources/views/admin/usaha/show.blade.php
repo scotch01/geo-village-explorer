@@ -277,7 +277,7 @@
 
                 <div class="space-y-1">
                     <span class="text-sm font-bold text-slate-500">
-                        18. Kode KBLI 2020
+                        18. Kode KBLI 2025
                     </span>
                     <p class="font-semibold text-slate-800">
                         {{ $usaha->kbli ?: '-' }}
@@ -533,7 +533,8 @@
 
         </div>
 
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 bg-white rounded-3xl border border-slate-200 shadow-sm p-6 lg:p-8">
+        <div
+            class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 bg-white rounded-3xl border border-slate-200 shadow-sm p-6 lg:p-8">
 
             <div class="text-center md:text-left">
                 <p class="text-lg md:text-xl font-bold text-slate-800">Lakukan Perubahan?</p>
@@ -541,7 +542,7 @@
 
             <div class="flex flex-col sm:flex-row items-center justify-end gap-3 w-full md:w-auto">
 
-                @if (auth()->user()->isMasterAdmin())
+                @if (auth()->user()->isMasterAdmin() || auth()->user()->canEditTempat($usaha->tempat))
                     <form method="POST" action="{{ route('admin.usaha.destroy', $usaha) }}" class="w-full sm:w-auto">
                         @csrf
                         @method('DELETE')
@@ -552,12 +553,24 @@
                             Hapus Data
                         </button>
                     </form>
+                @else
+                    <button disabled
+                        class="px-6 py-3.5 bg-gray-200 text-gray-500 font-bold rounded-2xl cursor-not-allowed">
+                        Hapus Data
+                    </button>
                 @endif
 
-                <a href="{{ route('admin.usaha.edit', $usaha) }}"
-                    class="w-full sm:w-auto px-6 py-3.5 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-2xl transition-all active:scale-95 text-sm shadow-sm shadow-amber-500/10 text-center">
-                    Edit Data
-                </a>
+                @if (auth()->user()->canEditTempat($usaha->tempat))
+                    <a href="{{ route('admin.usaha.edit', $usaha) }}"
+                        class="w-full sm:w-auto px-6 py-3.5 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-2xl transition-all active:scale-95 text-sm shadow-sm shadow-amber-500/10 text-center">
+                        Edit Data
+                    </a>
+                @else
+                    <button disabled
+                        class="px-6 py-3.5 bg-gray-200 text-gray-500 font-bold rounded-2xl cursor-not-allowed">
+                        Edit Data
+                    </button>
+                @endif
 
             </div>
 

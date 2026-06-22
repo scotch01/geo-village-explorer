@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\PortalItemController;
 use App\Http\Controllers\PortalPublicController;
 use App\Http\Controllers\Admin\ExportController;
 use App\Http\Controllers\Auth\ForcePasswordController;
+use App\Http\Controllers\Admin\PengawasAssignmentController;
 
 // Public Page
 
@@ -52,6 +53,12 @@ Route::middleware(['auth', 'force.password', 'role:master_admin'])
 
     Route::post('/user/{user}/reset-password', [UserController::class, 'resetPassword'])
         ->name('user.reset-password');
+
+    Route::get('/pengawas-assignment', [PengawasAssignmentController::class, 'index'])
+        ->name('pengawas-assignment.index');
+
+    Route::post('/pengawas-assignment', [PengawasAssignmentController::class, 'store'])
+        ->name('pengawas-assignment.store');
 
     Route::resource('portal-category', PortalCategoryController::class);
 

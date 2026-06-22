@@ -19,12 +19,22 @@
 
             </div>
 
+            <div class="grid grid-cols-2 gap-4">
+                <a href="{{ route('admin.pengawas-assignment.index') }}"
+                class="bg-green-600 hover:bg-green-700 text-white px-5 py-3 rounded-2xl font-semibold shadow-lg shadow-green-100 transition-all active:scale-95 text-center">
+
+                PML - PCL
+
+            </a>
+
             <a href="{{ route('admin.user.create') }}"
                 class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-2xl font-semibold shadow-lg shadow-blue-100 transition-all active:scale-95">
 
                 + Tambah User
 
             </a>
+            </div>
+            
 
         </div>
 

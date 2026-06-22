@@ -391,7 +391,7 @@
                                 <input type="text" name="kategori_lapangan_usaha"
                                     value="{{ old('kategori_lapangan_usaha', $usaha->kategori_lapangan_usaha) }}"
                                     placeholder="Oleh Pengawas BPS"
-                                    class="w-full rounded-lg border-gray-200 bg-gray-100 text-gray-500 text-xs font-medium cursor-not-allowed lg:placeholder:text-xs placeholder:text-[10px]">
+                                    class="w-full rounded-lg border-gray-200 bg-gray-100 text-gray-500 text-xs font-medium lg:placeholder:text-xs placeholder:text-[10px]">
                             @else
                                 <input type="text" name="kategori_lapangan_usaha"
                                     value="{{ old('kategori_lapangan_usaha', $usaha->kategori_lapangan_usaha) }}"
@@ -402,13 +402,13 @@
 
                         <div class="flex flex-col">
                             <label class="text-xs font-semibold text-gray-500 h-8 flex items-end mb-1">
-                                18. Kode KBLI 2020
+                                18. Kode KBLI 2025
                             </label>
 
                             @if (auth()->user()->isMasterAdmin() || auth()->user()->isPengawas())
                                 <input type="text" name="kbli" value="{{ old('kbli') }}"
                                     placeholder="Oleh Pengawas BPS"
-                                    class="w-full rounded-lg border-gray-200 bg-gray-100 text-gray-500 text-xs font-medium cursor-not-allowed lg:placeholder:text-xs placeholder:text-[10px]">
+                                    class="w-full rounded-lg border-gray-200 bg-gray-100 text-gray-500 text-xs font-medium lg:placeholder:text-xs placeholder:text-[10px]">
                             @else
                                 <input type="text" name="kbli" value="{{ old('kbli') }}" readonly
                                     placeholder="Oleh Pengawas BPS"

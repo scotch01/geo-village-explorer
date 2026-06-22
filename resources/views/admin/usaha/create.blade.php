@@ -398,7 +398,7 @@
 
                         <div class="flex flex-col">
                             <label class="text-xs font-semibold text-gray-500 h-8 flex items-end mb-1">
-                                18. Kode KBLI 2020
+                                18. Kode KBLI 2025
                             </label>
 
                             <input type="text" name="kbli" value="{{ old('kbli') }}" readonly

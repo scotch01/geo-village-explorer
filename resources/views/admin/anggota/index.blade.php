@@ -23,21 +23,38 @@
             </div>
 
             <div class="flex flex-wrap items-center gap-3">
-                <a href="{{ route('admin.anggota.create', $keluarga) }}"
-                    class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold transition-all active:scale-95 shadow-md shadow-blue-600/20 text-sm lg:text-base text-center">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                    </svg>
-                    Tambah Anggota
-                </a>
+                @if (auth()->user()->canEditTempat($keluarga->tempat))
+                    <a href="{{ route('admin.anggota.create', $keluarga) }}"
+                        class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold transition-all active:scale-95 shadow-md shadow-blue-600/20 text-sm lg:text-base text-center">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                        </svg>
+                        Tambah Anggota
+                    </a>
+                @else
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-200 text-slate-500 font-bold transition-all cursor-not-allowed text-sm lg:text-base text-center">
+                        Tambah Anggota
+                    </div>
+                @endif
 
-                <a href="{{ route('admin.keluarga.edit', $keluarga->tempat) }}"
-                    class="inline-flex items-center gap-2 px-4 py-2.5 bg-green-600 hover:bg-green-700 text-white rounded-xl font-bold transition-all active:scale-95 shadow-md shadow-green-600/20 text-sm lg:text-base text-center">
-                    Lanjut / Edit Keterangan Perumahan
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                    </svg>
-                </a>
+                @if (auth()->user()->canEditTempat($keluarga->tempat))
+                    <a href="{{ route('admin.keluarga.edit', $keluarga->tempat) }}"
+                        class="inline-flex items-center gap-2 px-4 py-2.5 bg-green-600 hover:bg-green-700 text-white rounded-xl font-bold transition-all active:scale-95 shadow-md shadow-green-600/20 text-sm lg:text-base text-center">
+                        Lanjut / Edit Keterangan Perumahan
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                @else
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-200 text-slate-500 font-bold transition-all cursor-not-allowed text-sm lg:text-base text-center">
+                        Lanjut / Edit Keterangan Perumahan
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </div>
+                @endif
             </div>
         </div>
 

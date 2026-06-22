@@ -73,10 +73,19 @@
                             </p>
                         </div>
 
-                        <a href="{{ route('admin.tempat.edit', $tempat) }}"
-                            class="shrink-0 inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 font-bold text-white text-sm transition-all active:scale-95 shadow-sm shadow-amber-500/20">
-                            Edit
-                        </a>
+                        @if (auth()->user()->canEditTempat($tempat))
+                            <a href="{{ route('admin.tempat.edit', $tempat) }}"
+                                class="shrink-0 inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 font-bold text-white text-sm transition-all active:scale-95 shadow-sm shadow-amber-500/20">
+                                Edit
+                            </a>
+                        @else
+                            <span
+                                class="shrink-0 inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-slate-200 text-slate-500 font-bold text-sm cursor-not-allowed">
+
+                                Tidak Diizinkan
+
+                            </span>
+                        @endif
                     </div>
 
                     <div class="mt-8 pt-6 border-t border-slate-100">
@@ -105,14 +114,27 @@
 
                     <div class="mt-8 pt-6 border-t border-slate-100">
                         @if (!$tempat->keluarga)
-                            <a href="{{ route('admin.keluarga.create', $tempat) }}"
-                                class="w-full sm:w-auto text-center inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 font-bold text-white text-sm transition-all active:scale-95 shadow-sm shadow-blue-600/10">
-                                Isi Data Keluarga
-                            </a>
+                            @if (auth()->user()->canEditTempat($tempat))
+                                <a href="{{ route('admin.keluarga.create', $tempat) }}"
+                                    class="w-full sm:w-auto text-center inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 font-bold text-white text-sm transition-all active:scale-95 shadow-sm shadow-blue-600/10">
+
+                                    Isi Data Keluarga
+
+                                </a>
+                            @else
+                                <button type="button" disabled
+                                    class="w-full sm:w-auto text-center inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-slate-200 text-slate-500 font-bold text-sm cursor-not-allowed">
+
+                                    Tidak Diizinkan
+
+                                </button>
+                            @endif
                         @else
                             <a href="{{ route('admin.keluarga.show', $tempat) }}"
-                                class="w-full sm:w-auto text-center inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 font-bold text-white text-sm transition-all active:scale-95 shadow-sm shadow-slate-900/10">
+                                class="w-full sm:w-auto text-center inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 font-bold text-white text-sm transition-all active:scale-95">
+
                                 Lihat Data Keluarga
+
                             </a>
                         @endif
                     </div>
@@ -128,8 +150,7 @@
                             <h3 class="font-black text-2xl text-slate-900 tracking-tight">
                                 BLOK III
                             </h3>
-                            <p
-                                class="text-xs font-bold text-slate-400 mt-1 uppercase tracking-widest leading-relaxed">
+                            <p class="text-xs font-bold text-slate-400 mt-1 uppercase tracking-widest leading-relaxed">
                                 KETERANGAN USAHA/PERUSAHAAN
                             </p>
                         </div>
@@ -162,72 +183,134 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
 
             {{-- BLOK IV: FOTO BANGUNAN --}}
-            <div class="bg-white rounded-3xl lg:rounded-[2.5rem] border border-slate-200 p-6 lg:p-8 shadow-sm min-w-0">
-                <div class="mb-6">
-                    <h3 class="font-black text-2xl text-slate-900 tracking-tight">
-                        BLOK IV
-                    </h3>
-                    <p class="text-xs font-bold text-slate-400 mt-1 uppercase tracking-widest">
-                        FOTO BANGUNAN
-                    </p>
-                </div>
-
-                <form action="{{ route('admin.tempat.updateSurvey', $tempat) }}" method="POST"
-                    enctype="multipart/form-data" class="space-y-5">
-                    @csrf
-                    @method('PUT')
-
-                    <div class="relative group">
-                        <input type="file" id="foto_bangunan" name="foto_bangunan" accept="image/*"
-                            class="block w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-bold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 file:transition-colors cursor-pointer border border-slate-200 rounded-xl p-2 bg-slate-50/50">
+            @if (auth()->user()->canEditTempat($tempat))
+                <div class="bg-white rounded-3xl lg:rounded-[2.5rem] border border-slate-200 p-6 lg:p-8 shadow-sm min-w-0">
+                    <div class="mb-6">
+                        <h3 class="font-black text-2xl text-slate-900 tracking-tight">
+                            BLOK IV
+                        </h3>
+                        <p class="text-xs font-bold text-slate-400 mt-1 uppercase tracking-widest">
+                            FOTO BANGUNAN
+                        </p>
                     </div>
 
-                    @if ($tempat->foto_bangunan)
-                        <div class="relative rounded-2xl overflow-hidden border border-slate-200 shadow-inner group">
-                            <img id="foto-server" src="{{ Storage::url($tempat->foto_bangunan) }}"
-                                class="max-h-72 w-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <form action="{{ route('admin.tempat.updateSurvey', $tempat) }}" method="POST"
+                        enctype="multipart/form-data" class="space-y-5">
+                        @csrf
+                        @method('PUT')
+
+                        <div class="relative group">
+                            <input type="file" id="foto_bangunan" name="foto_bangunan" accept="image/*"
+                                class="block w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-bold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 file:transition-colors cursor-pointer border border-slate-200 rounded-xl p-2 bg-slate-50/50">
                         </div>
-                    @endif
 
-                    <div class="relative rounded-2xl overflow-hidden border border-slate-200 shadow-inner group">
-                        <img id="preview-foto"
-                            class="hidden max-h-72 w-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        @if ($tempat->foto_bangunan)
+                            <div class="relative rounded-2xl overflow-hidden border border-slate-200 shadow-inner group">
+                                <img id="foto-server" src="{{ Storage::url($tempat->foto_bangunan) }}"
+                                    class="max-h-72 w-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            </div>
+                        @endif
+
+                        <div class="relative rounded-2xl overflow-hidden border border-slate-200 shadow-inner group">
+                            <img id="preview-foto"
+                                class="hidden max-h-72 w-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+
+                        <button
+                            class="w-full sm:w-auto flex items-center justify-center px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 font-bold text-white text-sm transition-all active:scale-95 shadow-sm shadow-blue-600/20">
+                            Simpan Foto
+                        </button>
+                    </form>
+                </div>
+            @else
+                <div class="bg-white rounded-3xl lg:rounded-[2.5rem] border border-slate-200 p-6 lg:p-8 shadow-sm min-w-0">
+
+                    <div class="mb-6">
+                        <h3 class="font-black text-2xl text-slate-900 tracking-tight">
+                            BLOK IV
+                        </h3>
+                        <p class="text-xs font-bold text-slate-400 mt-1 uppercase tracking-widest">
+                            FOTO BANGUNAN
+                        </p>
                     </div>
 
-                    <button
-                        class="w-full sm:w-auto flex items-center justify-center px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 font-bold text-white text-sm transition-all active:scale-95 shadow-sm shadow-blue-600/20">
-                        Simpan Foto
-                    </button>
-                </form>
-            </div>
+                    <div class="space-y-5">
+
+                        <div class="relative group">
+                            <input disabled type="file" id="foto_bangunan" name="foto_bangunan" accept="image/*"
+                                class="block w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-bold file:bg-slate-50 file:text-slate-700 hover:file:bg-slate-100 file:transition-colors cursor-not-allowed border border-slate-200 rounded-xl p-2 bg-slate-50/50 file:cursor-not-allowed">
+                        </div>
+
+                        @if ($tempat->foto_bangunan)
+                            <div class="relative rounded-2xl overflow-hidden border border-slate-200 shadow-inner group">
+                                <img id="foto-server" src="{{ Storage::url($tempat->foto_bangunan) }}"
+                                    class="max-h-72 w-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            </div>
+                        @endif
+
+                        <button disabled
+                            class="w-full sm:w-auto flex items-center justify-center px-6 py-3.5 rounded-xl bg-slate-200 text-slate-500 font-bold cursor-not-allowed">
+                            Simpan Foto
+                        </button>
+                    </div>
+
+                </div>
+            @endif
 
             {{-- BLOK V: CATATAN --}}
-            <div class="bg-white rounded-3xl lg:rounded-[2.5rem] border border-slate-200 p-6 lg:p-8 shadow-sm min-w-0">
-                <div class="mb-6">
-                    <h3 class="font-black text-2xl text-slate-900 tracking-tight">
-                        BLOK V
-                    </h3>
-                    <p class="text-xs font-bold text-slate-400 mt-1 uppercase tracking-widest">
-                        CATATAN
-                    </p>
-                </div>
-
-                <form action="{{ route('admin.tempat.updateSurvey', $tempat) }}" method="POST" class="space-y-5">
-                    @csrf
-                    @method('PUT')
-
-                    <div>
-                        <textarea name="catatan" rows="5"
-                            class="w-full rounded-2xl border-slate-200 bg-slate-50/50 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 p-4 font-medium text-slate-700 transition-all placeholder:text-slate-400 text-sm lg:text-base"
-                            placeholder="Tambahkan catatan observasi lapangan di sini...">{{ old('catatan', $tempat->catatan) }}</textarea>
+            @if (auth()->user()->canEditTempat($tempat))
+                <div class="bg-white rounded-3xl lg:rounded-[2.5rem] border border-slate-200 p-6 lg:p-8 shadow-sm min-w-0">
+                    <div class="mb-6">
+                        <h3 class="font-black text-2xl text-slate-900 tracking-tight">
+                            BLOK V
+                        </h3>
+                        <p class="text-xs font-bold text-slate-400 mt-1 uppercase tracking-widest">
+                            CATATAN
+                        </p>
                     </div>
 
-                    <button
-                        class="w-full sm:w-auto flex items-center justify-center px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 font-bold text-white text-sm transition-all active:scale-95 shadow-sm shadow-blue-600/20">
-                        Simpan Catatan
-                    </button>
-                </form>
-            </div>
+                    <form action="{{ route('admin.tempat.updateSurvey', $tempat) }}" method="POST" class="space-y-5">
+                        @csrf
+                        @method('PUT')
+
+                        <div>
+                            <textarea name="catatan" rows="5"
+                                class="w-full rounded-2xl border-slate-200 bg-slate-50/50 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 p-4 font-medium text-slate-700 transition-all placeholder:text-slate-400 text-sm lg:text-base"
+                                placeholder="Tambahkan catatan observasi lapangan di sini...">{{ old('catatan', $tempat->catatan) }}</textarea>
+                        </div>
+
+                        <button
+                            class="w-full sm:w-auto flex items-center justify-center px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 font-bold text-white text-sm transition-all active:scale-95 shadow-sm shadow-blue-600/20">
+                            Simpan Catatan
+                        </button>
+                    </form>
+                </div>
+            @else
+                <div class="bg-white rounded-3xl lg:rounded-[2.5rem] border border-slate-200 p-6 lg:p-8 shadow-sm min-w-0">
+                    <div class="mb-6">
+                        <h3 class="font-black text-2xl text-slate-900 tracking-tight">
+                            BLOK V
+                        </h3>
+                        <p class="text-xs font-bold text-slate-400 mt-1 uppercase tracking-widest">
+                            CATATAN
+                        </p>
+                    </div>
+
+                    <div class="space-y-5">
+
+                        <div>
+                            <textarea disabled name="catatan" rows="5"
+                                class="w-full rounded-2xl border-slate-200 bg-slate-50/50 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 p-4 font-medium text-slate-700 cursor-not-allowed transition-all placeholder:text-slate-400 text-sm lg:text-base"
+                                placeholder="Tambahkan catatan observasi lapangan di sini..."></textarea>
+                        </div>
+
+                        <button disabled
+                            class="w-full sm:w-auto flex items-center justify-center px-6 py-3.5 rounded-xl bg-slate-200 text-slate-500 font-bold cursor-not-allowed">
+                            Simpan Catatan
+                        </button>
+                    </div>
+                </div>
+            @endif
 
         </div>
 
