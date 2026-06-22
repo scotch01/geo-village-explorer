@@ -1,7 +1,9 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="space-y-6 max-w-7xl mx-auto px-2 sm:px-0 animate-fade-in">
+    <div x-data="{
+        showConflictModal: {{ session()->has('assignment_conflicts') ? 'true' : 'false' }}
+    }" class="space-y-6 max-w-7xl mx-auto px-2 sm:px-0 animate-fade-in">
 
         <x-back-button :href="route('admin.user.index')">
             Kembali
@@ -25,6 +27,105 @@
         </div>
 
         <x-alert />
+
+        @if (session('assignment_conflicts'))
+            <div x-show="showConflictModal" class="fixed inset-0 z-[99999] flex items-center justify-center"
+                style="display:none;" x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 scale-95 translate-y-3"
+                x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+                x-transition:leave="transition ease-in duration-200"
+                x-transition:leave-start="opacity-100 scale-100 translate-y-0"
+                x-transition:leave-end="opacity-0 scale-95 translate-y-3">
+
+                {{-- BACKDROP --}}
+                <div class="fixed inset-0 z-[99999] bg-black/50 backdrop-blur-sm" @click="showConflictModal = false"></div>
+
+                {{-- MODAL --}}
+                <div @click.away="showConflictModal = false"
+                    class="relative z-[99999] bg-white w-full max-w-2xl rounded-[2rem] shadow-2xl overflow-hidden">
+
+                    {{-- HEADER --}}
+                    <div class="px-8 py-6 border-b border-slate-100">
+
+                        <h2 class="text-xl font-black text-slate-900">
+                            Assignment Sudah Digunakan
+                        </h2>
+
+                        <p class="text-sm text-slate-500 mt-1">
+                            Beberapa PCL sudah berada di bawah pengawas lain.
+                        </p>
+
+                    </div>
+
+                    {{-- BODY --}}
+                    <div class="p-8">
+
+                        <div class="space-y-4">
+
+                            @foreach (session('assignment_conflicts') as $conflict)
+                                <div class="border border-amber-200 bg-amber-50 rounded-2xl p-4">
+
+                                    <div class="font-bold text-slate-900">
+                                        {{ $conflict->pcl->name }}
+                                    </div>
+
+                                    <div class="text-sm text-slate-600 mt-1">
+                                        Saat ini ditugaskan ke:
+                                        <span class="font-semibold">
+                                            {{ $conflict->pml->name }}
+                                        </span>
+                                    </div>
+
+                                </div>
+                            @endforeach
+
+                        </div>
+
+                        <div class="mt-6 rounded-2xl bg-slate-50 border border-slate-200 p-4">
+
+                            <p class="text-sm text-slate-700 leading-relaxed">
+
+                                Jika dilanjutkan, assignment lama akan dihapus dan seluruh
+                                PCL di atas akan dipindahkan ke pengawas yang sedang dipilih.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    {{-- FOOTER --}}
+                    <div class="px-8 py-5 bg-slate-50 border-t border-slate-100 flex justify-end gap-3">
+
+                        <button type="button" @click="showConflictModal = false"
+                            class="px-5 py-2.5 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold transition-all active:scale-95">
+                            Batal
+                        </button>
+
+                        <form method="POST" action="{{ route('admin.pengawas-assignment.store') }}">
+                            @csrf
+
+                            <input type="hidden" name="pml_id" value="{{ session('pending_assignment.pml_id') }}">
+
+                            @foreach (session('pending_assignment.pcl_ids', []) as $pclId)
+                                <input type="hidden" name="pcl_ids[]" value="{{ $pclId }}">
+                            @endforeach
+
+                            <input type="hidden" name="force_update" value="1">
+
+                            <button type="submit"
+                                class="px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold transition-all active:scale-95">
+                                Ya, Pindahkan Assignment
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+        @endif
 
         <form id="assignment-form" method="POST" action="{{ route('admin.pengawas-assignment.store') }}">
             @csrf
@@ -130,3 +231,5 @@
         </form>
     </div>
 @endsection
+@push('modals')
+@endpush

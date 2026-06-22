@@ -47,6 +47,75 @@ class PengawasAssignmentController extends Controller
             'pcl_ids' => ['array']
         ]);
 
+        if (empty($request->pcl_ids)) {
+
+            return back()->with(
+                'warning',
+                'Pilih minimal satu PCL terlebih dahulu'
+            );
+        }
+
+        /**
+         * CEK CONFLICT
+         */
+        if (!$request->boolean('force_update')) {
+
+            $conflicts =
+                PmlPclAssignment::query()
+                    ->with([
+                        'pml',
+                        'pcl'
+                    ])
+                    ->whereIn(
+                        'pcl_id',
+                        $request->pcl_ids ?? []
+                    )
+                    ->where(
+                        'pml_id',
+                        '!=',
+                        $request->pml_id
+                    )
+                    ->get();
+
+            if ($conflicts->isNotEmpty()) {
+
+                return back()
+                    ->withInput()
+                    ->with(
+                        'assignment_conflicts',
+                        $conflicts
+                    )
+                    ->with(
+                        'pending_assignment',
+                        [
+                            'pml_id' => $request->pml_id,
+                            'pcl_ids' => $request->pcl_ids ?? [],
+                        ]
+                    );
+            }
+        }
+
+        /**
+         * HAPUS ASSIGNMENT LAMA
+         * UNTUK PCL YANG DIPILIH
+         */
+        foreach (
+            $request->pcl_ids ?? []
+            as $pclId
+        ) {
+
+            PmlPclAssignment::query()
+                ->where(
+                    'pcl_id',
+                    $pclId
+                )
+                ->delete();
+        }
+
+        /**
+         * HAPUS ASSIGNMENT
+         * PML SAAT INI
+         */
         PmlPclAssignment::query()
             ->where(
                 'pml_id',
@@ -54,6 +123,9 @@ class PengawasAssignmentController extends Controller
             )
             ->delete();
 
+        /**
+         * SIMPAN BARU
+         */
         foreach (
             $request->pcl_ids ?? []
             as $pclId
