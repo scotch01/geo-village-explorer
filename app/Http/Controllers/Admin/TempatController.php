@@ -37,6 +37,36 @@ class TempatController extends Controller
         }
 
         /**
+         * VALIDASI FILTER PERIODE
+         */
+        if (
+            $request->filled('tanggal_awal')
+            &&
+            $request->filled('tanggal_akhir')
+        ) {
+
+            if (
+                $request->tanggal_akhir
+                <
+                $request->tanggal_awal
+            ) {
+
+                return redirect()
+                    ->route(
+                        'admin.tempat.index',
+                        $request->except([
+                            'tanggal_awal',
+                            'tanggal_akhir'
+                        ])
+                    )
+                    ->with(
+                        'danger',
+                        'Tanggal periode akhir tidak boleh lebih kecil dari tanggal periode awal.'
+                    );
+            }
+        }
+
+        /**
          * SEARCH
          */
         if ($request->filled('search')) {
@@ -123,9 +153,41 @@ class TempatController extends Controller
         }
 
         /**
+         * FILTER PERIODE
+         */
+        if (
+            $request->filled('tanggal_awal')
+            &&
+            $request->filled('tanggal_akhir')
+        ) {
+
+            $query->whereBetween(
+                'created_at',
+                [
+                    $request->tanggal_awal . ' 00:00:00',
+                    $request->tanggal_akhir . ' 23:59:59',
+                ]
+            );
+        } elseif ($request->filled('tanggal_awal')) {
+
+            $query->whereDate(
+                'created_at',
+                '>=',
+                $request->tanggal_awal
+            );
+        } elseif ($request->filled('tanggal_akhir')) {
+
+            $query->whereDate(
+                'created_at',
+                '<=',
+                $request->tanggal_akhir
+            );
+        }
+
+        /**
          * PAGINATION
          */
-        $perPage     = $request->get('per_page', 20);
+        $perPage     = $request->get('per_page', 25);
         $tempats = $query
             ->with([
                 'keluarga',

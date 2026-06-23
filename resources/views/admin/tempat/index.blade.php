@@ -35,108 +35,153 @@
             <div class="absolute -right-10 -top-10 w-40 h-40 bg-slate-50 rounded-full blur-3xl opacity-50"></div>
 
             <form method="GET" class="relative z-10">
-                <div class="grid lg:grid-cols-4 gap-6">
-                    <!-- SEARCH -->
-                    <div class="space-y-2">
-                        <label class="text-[11px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">
-                            Pencarian
-                        </label>
-                        <div class="relative group">
-                            <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                </svg>
-                            </span>
-                            <input type="text" name="search" value="{{ request('search') }}"
-                                placeholder="Cari nama lokasi..."
-                                class="w-full pl-11 pr-4 py-3 bg-slate-50 border-transparent rounded-2xl focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all font-medium text-slate-700">
-                        </div>
-                    </div>
-
-                    <!-- Jenis Bangunan -->
-                    <div class="space-y-2">
-
-                        <label class="text-[11px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">
-
-                            Jenis Bangunan
-
-                        </label>
-
-                        <select name="jenis_bangunan"
-                            class="w-full px-4 py-3 bg-slate-50 border-transparent rounded-2xl focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all font-medium text-slate-700 appearance-none">
-
-                            <option value="">
-                                Semua Jenis
-                            </option>
-
-                            @foreach ($jenisBangunan as $key => $label)
-                                <option value="{{ $key }}" @selected(request('jenis_bangunan') == $key)>
-
-                                    {{ $label }}
-
-                                </option>
-                            @endforeach
-
-                        </select>
-
-                    </div>
-
-                    <!-- DESA -->
-                    @if (auth()->user()->isMasterAdmin())
+                <div class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+                        <!-- SEARCH -->
                         <div class="space-y-2">
                             <label class="text-[11px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">
-                                Wilayah Desa
+                                Pencarian
                             </label>
-                            <select name="desa"
-                                class="w-full px-4 py-3 bg-slate-50 border-transparent rounded-2xl focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all font-medium text-slate-700 appearance-none">
-                                <option value="">Semua Desa</option>
-                                @foreach ($desas as $desa)
-                                    <option value="{{ $desa->id }}" @selected(request('desa') == $desa->id)>{{ $desa->nama_desa }}
-                                    </option>
-                                @endforeach
-                            </select>
+                            <div class="relative group">
+                                <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                    </svg>
+                                </span>
+                                <input type="text" name="search" value="{{ request('search') }}"
+                                    placeholder="Cari nama lokasi..."
+                                    class="w-full pl-11 pr-4 py-3 bg-slate-50 border-transparent rounded-2xl focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all font-medium text-slate-700">
+                            </div>
                         </div>
-                    @endif
 
-                    @if (auth()->user()->isMasterAdmin() || auth()->user()->isPengawas() || auth()->user()->isAdminDesa())
+                        <!-- Jenis Bangunan -->
                         <div class="space-y-2">
+
                             <label class="text-[11px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">
-                                Agen Statistik
+
+                                Jenis Bangunan
+
                             </label>
 
-                            <select name="creator"
+                            <select name="jenis_bangunan"
                                 class="w-full px-4 py-3 bg-slate-50 border-transparent rounded-2xl focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all font-medium text-slate-700 appearance-none">
 
                                 <option value="">
-                                    Semua Agen Statistik
+                                    Semua Jenis
                                 </option>
 
-                                @foreach ($creators as $creator)
-                                    <option value="{{ $creator->id }}" @selected(request('creator') == $creator->id)>
-                                        {{ $creator->name }}
+                                @foreach ($jenisBangunan as $key => $label)
+                                    <option value="{{ $key }}" @selected(request('jenis_bangunan') == $key)>
+
+                                        {{ $label }}
+
                                     </option>
                                 @endforeach
 
                             </select>
-                        </div>
-                    @endif
 
-                    <!-- ACTIONS -->
-                    <div class="flex items-end gap-3">
-                        <button
-                            class="flex-1 bg-slate-900 hover:bg-slate-800 text-white rounded-2xl font-bold py-3 transition-all active:scale-95 shadow-lg shadow-slate-200">
-                            Filter
-                        </button>
-                        <a href="{{ route('admin.tempat.index') }}"
-                            class="px-5 py-3 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition-all active:scale-95">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                            </svg>
-                        </a>
+                        </div>
+
+                        <!-- DESA -->
+                        @if (auth()->user()->isMasterAdmin())
+                            <div class="space-y-2">
+                                <label class="text-[11px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">
+                                    Wilayah Desa
+                                </label>
+                                <select name="desa"
+                                    class="w-full px-4 py-3 bg-slate-50 border-transparent rounded-2xl focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all font-medium text-slate-700 appearance-none">
+                                    <option value="">Semua Desa</option>
+                                    @foreach ($desas as $desa)
+                                        <option value="{{ $desa->id }}" @selected(request('desa') == $desa->id)>
+                                            {{ $desa->nama_desa }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        @endif
+
+                        @if (auth()->user()->isMasterAdmin() || auth()->user()->isPengawas() || auth()->user()->isAdminDesa())
+                            <div class="space-y-2">
+                                <label class="text-[11px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">
+                                    Agen Statistik
+                                </label>
+
+                                <select name="creator"
+                                    class="w-full px-4 py-3 bg-slate-50 border-transparent rounded-2xl focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all font-medium text-slate-700 appearance-none">
+
+                                    <option value="">
+                                        Semua Agen Statistik
+                                    </option>
+
+                                    @foreach ($creators as $creator)
+                                        <option value="{{ $creator->id }}" @selected(request('creator') == $creator->id)>
+                                            {{ $creator->name }}
+                                        </option>
+                                    @endforeach
+
+                                </select>
+                            </div>
+                        @endif
+
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+                        {{-- TANGGAL AWAL --}}
+                        <div class="space-y-2">
+
+                            <label class="text-[11px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">
+                                Periode Pendataan (Dari)
+                            </label>
+
+                            <input type="date" name="tanggal_awal" value="{{ request('tanggal_awal') }}" onclick="this.showPicker()"
+                                class="w-full px-4 py-3 bg-slate-50 border-transparent rounded-2xl focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all font-medium text-slate-700">
+
+                        </div>
+
+                        {{-- TANGGAL AKHIR --}}
+                        <div class="space-y-2">
+
+                            <label class="text-[11px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">
+                                Periode Pendataan (Sampai)
+                            </label>
+
+                            <input type="date" name="tanggal_akhir" value="{{ request('tanggal_akhir') }}" onclick="this.showPicker()"
+                                class="w-full px-4 py-3 bg-slate-50 border-transparent rounded-2xl focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all font-medium text-slate-700">
+                        </div>
+
+                        <!-- ACTIONS -->
+                        <div class="flex items-end">
+
+                            <button
+                                class="w-full bg-slate-900 hover:bg-slate-800 text-white rounded-2xl font-bold py-3 transition-all active:scale-95 shadow-lg shadow-slate-200">
+
+                                Filter
+
+                            </button>
+
+                        </div>
+
+                        {{-- RESET --}}
+                        <div class="flex items-end">
+
+                            <a href="{{ route('admin.tempat.index') }}"
+                                class="w-full flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition-all active:scale-95 font-semibold">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+
+                                </svg>
+
+                                Reset
+
+                            </a>
+
+                        </div>
                     </div>
                 </div>
             </form>
@@ -159,8 +204,8 @@
                         <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Rows:</span>
                         <select name="per_page" onchange="this.form.submit()"
                             class="pl-3 pr-8 py-1.5 text-xs bg-white border border-slate-200 rounded-xl focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 font-bold text-slate-700 cursor-pointer">
-                            @foreach ([10, 25, 50, 100] as $v)
-                                <option value="{{ $v }}" {{ request('per_page', 10) == $v ? 'selected' : '' }}>
+                            @foreach ([25, 50, 100] as $v)
+                                <option value="{{ $v }}" {{ request('per_page', 25) == $v ? 'selected' : '' }}>
                                     {{ $v }}</option>
                             @endforeach
                         </select>
@@ -172,12 +217,15 @@
                         <thead>
                             <tr class="text-[11px] uppercase tracking-[0.2em] text-slate-400 font-black">
                                 <th class="px-6 py-5 text-center w-20">No</th>
-                                <th class="px-8 py-5">Detail</th>
-                                <th class="px-4 py-5">Jenis Bangunan</th>
-                                <th class="px-6 py-5">Wilayah Desa</th>
-                                <th class="px-6 py-5">Dusun</th>
+                                <th class="px-8 py-5 text-center">Detail</th>
+                                <th class="px-4 py-5 text-center">Jenis Bangunan</th>
+                                <th class="px-6 py-5 text-center">Wilayah Desa</th>
+                                <th class="px-6 py-5 text-center">Dusun</th>
                                 <th class="px-8 py-5 text-center">
                                     Petugas
+                                </th>
+                                <th class="px-8 py-5 text-center">
+                                    Tanggal Input
                                 </th>
                                 <th class="px-6 py-5 text-center">Aksi</th>
                             </tr>
@@ -246,6 +294,17 @@
                                     </td>
                                     <td class="px-8 py-6">
                                         {{ $tempat->creator?->name ?? '-' }}
+                                    </td>
+                                    <td class="px-8 py-6 text-center">
+
+                                        <div class="font-semibold text-slate-700 text-sm">
+                                            {{ $tempat->created_at->format('d/m/Y') }}
+                                        </div>
+
+                                        <div class="text-xs text-slate-400 mt-1">
+                                            {{ $tempat->created_at->format('H:i:s') }}
+                                        </div>
+
                                     </td>
                                     <td class="px-8 py-6">
                                         <div class="flex items-center justify-center gap-2">
