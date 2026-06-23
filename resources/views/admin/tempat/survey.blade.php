@@ -183,79 +183,181 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
 
             {{-- BLOK IV: FOTO BANGUNAN --}}
-            @if (auth()->user()->canEditTempat($tempat))
-                <div class="bg-white rounded-3xl lg:rounded-[2.5rem] border border-slate-200 p-6 lg:p-8 shadow-sm min-w-0">
-                    <div class="mb-6">
-                        <h3 class="font-black text-2xl text-slate-900 tracking-tight">
-                            BLOK IV
-                        </h3>
-                        <p class="text-xs font-bold text-slate-400 mt-1 uppercase tracking-widest">
-                            FOTO BANGUNAN
-                        </p>
-                    </div>
+            <div x-data="{
+                showImageModal: false,
+                imageUrl: ''
+            }">
 
-                    <form action="{{ route('admin.tempat.updateSurvey', $tempat) }}" method="POST"
-                        enctype="multipart/form-data" class="space-y-5">
-                        @csrf
-                        @method('PUT')
+                @if (auth()->user()->canEditTempat($tempat))
+                    <div
+                        class="bg-white rounded-3xl lg:rounded-[2.5rem] border border-slate-200 p-6 lg:p-8 shadow-sm min-w-0">
 
-                        <div class="relative group">
-                            <input type="file" id="foto_bangunan" name="foto_bangunan" accept="image/*"
-                                class="block w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-bold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 file:transition-colors cursor-pointer border border-slate-200 rounded-xl p-2 bg-slate-50/50">
+                        <div class="mb-6">
+                            <h3 class="font-black text-2xl text-slate-900 tracking-tight">
+                                BLOK IV
+                            </h3>
+
+                            <p class="text-xs font-bold text-slate-400 mt-1 uppercase tracking-widest">
+                                FOTO BANGUNAN
+                            </p>
                         </div>
 
-                        @if ($tempat->foto_bangunan)
-                            <div class="relative rounded-2xl overflow-hidden border border-slate-200 shadow-inner group">
-                                <img id="foto-server" src="{{ Storage::url($tempat->foto_bangunan) }}"
-                                    class="max-h-72 w-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <form action="{{ route('admin.tempat.updateSurvey', $tempat) }}" method="POST"
+                            enctype="multipart/form-data" class="space-y-5">
+
+                            @csrf
+                            @method('PUT')
+
+                            <div>
+                                <input type="file" id="foto_bangunan" name="foto_bangunan" accept="image/*"
+                                    class="block w-full text-sm text-slate-500
+                        file:mr-4 file:py-2.5 file:px-4
+                        file:rounded-xl file:border-0
+                        file:text-sm file:font-bold
+                        file:bg-blue-50 file:text-blue-700
+                        hover:file:bg-blue-100
+                        cursor-pointer border border-slate-200
+                        rounded-xl p-2 bg-slate-50/50">
                             </div>
-                        @endif
 
-                        <div class="relative rounded-2xl overflow-hidden border border-slate-200 shadow-inner group">
-                            <img id="preview-foto"
-                                class="hidden max-h-72 w-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        </div>
+                            @if ($tempat->foto_bangunan)
+                                <div @click="
+                            imageUrl='{{ Storage::url($tempat->foto_bangunan) }}';
+                            showImageModal=true
+                        "
+                                    class="relative rounded-2xl overflow-hidden border border-slate-200 shadow-inner group cursor-pointer">
 
-                        <button
-                            class="w-full sm:w-auto flex items-center justify-center px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 font-bold text-white text-sm transition-all active:scale-95 shadow-sm shadow-blue-600/20">
-                            Simpan Foto
-                        </button>
-                    </form>
-                </div>
-            @else
-                <div class="bg-white rounded-3xl lg:rounded-[2.5rem] border border-slate-200 p-6 lg:p-8 shadow-sm min-w-0">
+                                    <img id="foto-server" src="{{ Storage::url($tempat->foto_bangunan) }}"
+                                        class="cursor-zoom-in max-h-72 w-full object-cover transition-transform duration-500 group-hover:scale-105">
 
-                    <div class="mb-6">
-                        <h3 class="font-black text-2xl text-slate-900 tracking-tight">
-                            BLOK IV
-                        </h3>
-                        <p class="text-xs font-bold text-slate-400 mt-1 uppercase tracking-widest">
-                            FOTO BANGUNAN
-                        </p>
-                    </div>
+                                    <div
+                                        class="pointer-events-none absolute inset-0 bg-black/0 group-hover:bg-black/20 transition flex items-center justify-center">
 
-                    <div class="space-y-5">
+                                        <div
+                                            class="pointer-events-none opacity-0 group-hover:opacity-100 transition bg-white/90 rounded-full p-3 shadow-lg">
 
-                        <div class="relative group">
-                            <input disabled type="file" id="foto_bangunan" name="foto_bangunan" accept="image/*"
-                                class="block w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-bold file:bg-slate-50 file:text-slate-700 hover:file:bg-slate-100 file:transition-colors cursor-not-allowed border border-slate-200 rounded-xl p-2 bg-slate-50/50 file:cursor-not-allowed">
-                        </div>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-slate-700"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
 
-                        @if ($tempat->foto_bangunan)
-                            <div class="relative rounded-2xl overflow-hidden border border-slate-200 shadow-inner group">
-                                <img id="foto-server" src="{{ Storage::url($tempat->foto_bangunan) }}"
-                                    class="max-h-72 w-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M15 3h6m0 0v6m0-6L14 10M9 21H3m0 0v-6m0 6l7-7" />
+                                            </svg>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            @endif
+
+                            <div class="relative rounded-2xl overflow-hidden border border-slate-200 shadow-inner">
+
+                                <img id="preview-foto" class="hidden max-h-72 w-full object-cover">
                             </div>
-                        @endif
 
-                        <button disabled
-                            class="w-full sm:w-auto flex items-center justify-center px-6 py-3.5 rounded-xl bg-slate-200 text-slate-500 font-bold cursor-not-allowed">
-                            Simpan Foto
-                        </button>
+                            <button
+                                class="w-full sm:w-auto flex items-center justify-center px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 font-bold text-white text-sm transition-all active:scale-95 shadow-sm shadow-blue-600/20">
+
+                                Simpan Foto
+
+                            </button>
+
+                        </form>
+
+                    </div>
+                @else
+                    <div
+                        class="bg-white rounded-3xl lg:rounded-[2.5rem] border border-slate-200 p-6 lg:p-8 shadow-sm min-w-0">
+
+                        <div class="mb-6">
+                            <h3 class="font-black text-2xl text-slate-900 tracking-tight">
+                                BLOK IV
+                            </h3>
+
+                            <p class="text-xs font-bold text-slate-400 mt-1 uppercase tracking-widest">
+                                FOTO BANGUNAN
+                            </p>
+                        </div>
+
+                        <div class="space-y-5">
+
+                            <input disabled type="file"
+                                class="block w-full text-sm border border-slate-200 rounded-xl p-2 bg-slate-50 cursor-not-allowed">
+
+                            @if ($tempat->foto_bangunan)
+                                <div @click="
+                            imageUrl='{{ Storage::url($tempat->foto_bangunan) }}';
+                            showImageModal=true
+                        "
+                                    class="relative rounded-2xl overflow-hidden border border-slate-200 shadow-inner group cursor-pointer">
+
+                                    <img src="{{ Storage::url($tempat->foto_bangunan) }}"
+                                        class="cursor-zoom-in max-h-72 w-full object-cover transition-transform duration-500 group-hover:scale-105">
+
+                                    <div
+                                        class="pointer-events-none absolute inset-0 bg-black/0 group-hover:bg-black/20 transition flex items-center justify-center">
+
+                                        <div
+                                            class="pointer-events-none opacity-0 group-hover:opacity-100 transition bg-white/90 rounded-full p-3 shadow-lg">
+
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-slate-700"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M15 3h6m0 0v6m0-6L14 10M9 21H3m0 0v-6m0 6l7-7" />
+                                            </svg>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            @endif
+
+                            <button disabled
+                                class="w-full sm:w-auto flex items-center justify-center px-6 py-3.5 rounded-xl bg-slate-200 text-slate-500 font-bold cursor-not-allowed">
+
+                                Simpan Foto
+
+                            </button>
+
+                        </div>
+
+                    </div>
+                @endif
+
+                {{-- IMAGE MODAL --}}
+                <div x-show="showImageModal" x-cloak @keydown.escape.window="showImageModal=false"
+                    class="fixed inset-0 z-[99999]" style="display:none;">
+
+                    <div @click="showImageModal=false" class="absolute inset-0 bg-black/80 backdrop-blur-md">
+                    </div>
+
+                    <div class="absolute inset-0 flex items-center justify-center p-4" @click.self="showImageModal=false">
+
+                        <div x-show="showImageModal" x-transition:enter="transition ease-out duration-300"
+                            x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+                            x-transition:leave="transition ease-in duration-200"
+                            x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
+                            class="relative">
+
+                            <img :src="imageUrl"
+                                class="max-h-[90vh] max-w-[90vw] object-contain rounded-3xl shadow-2xl">
+
+                            <button @click="showImageModal=false" type="button"
+                                class="absolute -top-4 -right-4 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center font-bold">
+
+                                ✕
+
+                            </button>
+
+                        </div>
+
                     </div>
 
                 </div>
-            @endif
+
+            </div>
 
             {{-- BLOK V: CATATAN --}}
             @if (auth()->user()->canEditTempat($tempat))

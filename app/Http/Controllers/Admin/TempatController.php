@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use App\Constants\Tempat\JenisBangunan;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class TempatController extends Controller
 {
@@ -349,13 +351,10 @@ class TempatController extends Controller
                     );
             }
 
-            $data['foto_bangunan']
-                = $request
-                    ->file('foto_bangunan')
-                    ->store(
-                        'bangunan',
-                        'public'
-                    );
+            $data['foto_bangunan'] =
+                $this->storeAsWebp(
+                    $request->file('foto_bangunan')
+                );
         }
 
         if ($request->has('catatan')) {
@@ -380,5 +379,41 @@ class TempatController extends Controller
             'success',
             'Data berhasil disimpan'
         );
+    }
+
+    private function storeAsWebp($file): string
+    {
+        $manager = new ImageManager(
+            new Driver()
+        );
+
+        $image = $manager->read(
+            $file->getRealPath()
+        );
+
+        $filename =
+            uniqid('bangunan_')
+            . '.webp';
+
+        $path =
+            storage_path(
+                'app/public/bangunan/' . $filename
+            );
+
+        if (!file_exists(dirname($path))) {
+
+            mkdir(
+                dirname($path),
+                0755,
+                true
+            );
+        }
+
+        $image
+            ->scaleDown(width: 1600)
+            ->toWebp(75)
+            ->save($path);
+
+        return 'bangunan/' . $filename;
     }
 }
