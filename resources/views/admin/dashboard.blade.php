@@ -21,7 +21,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M9 20l-5.447-2.724A2 2 0 013 15.487V6.513a2 2 0 011.553-1.943L9 2l5.447 2.724A2 2 0 0116 6.513v8.974a2 2 0 01-1.553 1.943L9 20zm0-18v18m0-18l5.447 2.724M9 20l-5.447-2.724" />
                     </svg>
-                    Buka Peta
+                    Buka Halaman Publik
                 </a>
             </div>
         </div>
@@ -130,19 +130,42 @@
                             <th class="px-6 py-4 lg:px-8 lg:py-5">Detail</th>
                             <th class="px-6 py-4 lg:px-8 lg:py-5">Jenis Bangunan</th>
                             <th class="px-6 py-4 lg:px-8 lg:py-5">Desa</th>
-                            <th class="px-6 py-4 lg:px-8 lg:py-5">Kontributor</th>
+                            <th class="px-6 py-4 lg:px-8 lg:py-5">Petugas</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-50">
                         @forelse($recentTempats as $tempat)
                             <tr class="group hover:bg-slate-50/50 transition-all">
                                 <td class="px-6 py-5 lg:px-8 lg:py-6">
-                                    <div class="font-extrabold text-slate-800 group-hover:text-blue-600 transition-colors">
-                                        {{ $tempat->display_name ?? '-' }}
-                                    </div>
-                                    @if ($tempat->display_subtitle)
-                                        <div class="text-xs text-slate-400 mt-1 font-medium">
-                                            {{ $tempat->display_subtitle }}
+                                    {{-- BTT --}}
+                                    @if ($tempat->jenis_bangunan === 'btt')
+                                        <div class="font-bold text-slate-800">
+                                            {{ $tempat->keluarga?->nama_kepala_keluarga ?? '-' }}
+                                        </div>
+
+                                        {{-- BKU --}}
+                                    @elseif ($tempat->jenis_bangunan === 'bku')
+                                        @php
+                                            $usaha = $tempat->usahas->first();
+                                        @endphp
+
+                                        <div class="font-bold text-slate-800">
+                                            {{ $usaha?->nama_pemilik ?? '-' }}
+                                        </div>
+
+                                        <div class="text-xs text-slate-500 mt-1">
+                                            {{ $usaha?->nama_usaha ?? '-' }}
+                                        </div>
+
+                                        {{-- BC --}}
+                                    @elseif ($tempat->jenis_bangunan === 'bc')
+                                        <div class="font-bold text-slate-800">
+                                            {{ $tempat->keluarga?->nama_kepala_keluarga ?? '-' }}
+                                        </div>
+
+                                        <div class="text-xs text-slate-500 mt-1">
+                                            {{ $tempat->usahas->count() }}
+                                            usaha terdaftar
                                         </div>
                                     @endif
                                 </td>

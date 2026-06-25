@@ -10,9 +10,9 @@
         {{-- Header Section --}}
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b pb-4">
             <div>
-                <h1 class="text-2xl font-bold text-gray-900">
-                    Kelola Anggota Keluarga
-                </h1>
+                <h1 class="text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
+                        Data <span class="text-blue-600">Anggota Keluarga</span>
+                    </h1>
                 <p class="text-gray-500 mt-1 flex items-center gap-1.5 text-sm">
                     <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

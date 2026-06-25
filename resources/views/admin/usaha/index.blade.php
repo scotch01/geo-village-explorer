@@ -10,10 +10,10 @@
         <div class="bg-white border rounded-2xl p-6 shadow-sm">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <div class="min-w-0">
-                    <h1 class="text-2xl font-bold text-slate-900 tracking-tight">
-                        Data Usaha
+                    <h1 class="text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
+                        Data <span class="text-blue-600">Usaha</span>
                     </h1>
-                    <p class="text-sm text-gray-500 mt-1">
+                    <p class="text-slate-500 mt-2 font-medium">
                         Kelola data usaha/perusahaan pada bangunan ini
                     </p>
                 </div>

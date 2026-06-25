@@ -4,16 +4,14 @@
     <div class="space-y-6">
 
         {{-- HEADER --}}
+
         <div>
-
-            <h1 class="text-3xl font-black text-slate-900">
-                Export Data
+            <h1 class="text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
+                Export <span class="text-blue-600">Data</span>
             </h1>
-
-            <p class="mt-2 text-slate-500">
+            <p class="text-slate-500 mt-2 font-medium">
                 Ekspor hasil pendataan ke dalam format CSV.
             </p>
-
         </div>
 
         {{-- FILTER --}}

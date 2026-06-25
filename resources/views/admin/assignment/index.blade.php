@@ -12,10 +12,10 @@
         <div
             class="flex items-center justify-between flex-wrap gap-4 bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
             <div>
-                <h1 class="text-2xl lg:text-3xl font-black tracking-tight text-slate-900">
-                    Assignment PML - PCL
+                <h1 class="text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
+                    Assignment <span class="text-blue-600">PML - PCL</span>
                 </h1>
-                <p class="text-sm text-slate-500 mt-1">
+                <p class="text-slate-500 mt-2 font-medium">
                     Kelola hubungan pemetaan pengawas (PML) dengan petugas lapangan (PCL) secara terpusat.
                 </p>
             </div>

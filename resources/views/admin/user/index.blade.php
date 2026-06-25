@@ -8,33 +8,30 @@
         <div class="flex items-center justify-between flex-wrap gap-4">
 
             <div>
-
-                <h1 class="text-3xl font-black tracking-tight text-slate-900">
-                    Manajemen User
+                <h1 class="text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
+                    Manajemen <span class="text-blue-600">User</span>
                 </h1>
-
-                <p class="text-slate-500 mt-2">
+                <p class="text-slate-500 mt-2 font-medium">
                     Kelola akun admin desa dan hak akses sistem
                 </p>
-
             </div>
 
             <div class="grid grid-cols-2 gap-4">
                 <a href="{{ route('admin.pengawas-assignment.index') }}"
-                class="bg-green-600 hover:bg-green-700 text-white px-5 py-3 rounded-2xl font-semibold shadow-lg shadow-green-100 transition-all active:scale-95 text-center">
+                    class="bg-green-600 hover:bg-green-700 text-white px-5 py-3 rounded-2xl font-semibold shadow-lg shadow-green-100 transition-all active:scale-95 text-center">
 
-                PML - PCL
+                    PML - PCL
 
-            </a>
+                </a>
 
-            <a href="{{ route('admin.user.create') }}"
-                class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-2xl font-semibold shadow-lg shadow-blue-100 transition-all active:scale-95">
+                <a href="{{ route('admin.user.create') }}"
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-2xl font-semibold shadow-lg shadow-blue-100 transition-all active:scale-95">
 
-                + Tambah User
+                    + Tambah User
 
-            </a>
+                </a>
             </div>
-            
+
 
         </div>
 
@@ -180,7 +177,8 @@
                                                 ">
                                                     @csrf
 
-                                                    <button type="submit" class="px-4 py-2 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200 font-semibold text-xs transition-all active:scale-95">
+                                                    <button type="submit"
+                                                        class="px-4 py-2 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200 font-semibold text-xs transition-all active:scale-95">
                                                         Reset Password
                                                     </button>
 

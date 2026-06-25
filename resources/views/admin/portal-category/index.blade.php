@@ -11,15 +11,12 @@
         <div class="flex items-center justify-between flex-wrap gap-4">
 
             <div>
-
-                <h1 class="text-3xl font-black tracking-tight text-slate-900">
-                    Kategori Portal
+                <h1 class="text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
+                    Kategori <span class="text-blue-600">Portal</span>
                 </h1>
-
-                <p class="text-slate-500 mt-2">
+                <p class="text-slate-500 mt-2 font-medium">
                     Kelola kategori publikasi, data desa, metadata, dan informasi lainnya
                 </p>
-
             </div>
 
             <a href="{{ route('admin.portal-category.create') }}"

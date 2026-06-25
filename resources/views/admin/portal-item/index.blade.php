@@ -7,15 +7,12 @@
         <div class="flex items-center justify-between flex-wrap gap-4">
 
             <div>
-
-                <h1 class="text-3xl font-black tracking-tight text-slate-900">
-                    Portal Items
+                <h1 class="text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
+                    Portal <span class="text-blue-600">Items</span>
                 </h1>
-
-                <p class="text-slate-500 mt-2">
+                <p class="text-slate-500 mt-2 font-medium">
                     Kelola item publikasi, data desa, metadata, dan informasi lainnya
                 </p>
-
             </div>
 
             <div class="grid grid-cols-2 gap-4">

@@ -135,9 +135,14 @@
                                 Periode Pendataan (Dari)
                             </label>
 
-                            <input type="date" name="tanggal_awal" value="{{ request('tanggal_awal') }}" onclick="this.showPicker()"
-                                class="w-full px-4 py-3 bg-slate-50 border-transparent rounded-2xl focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all font-medium text-slate-700">
-
+                            <div class="relative">
+                                <input type="date" name="tanggal_awal" value="{{ request('tanggal_awal') }}"
+                                    onclick="this.showPicker()"
+                                    class="w-full px-4 py-3 bg-slate-50 border-transparent rounded-2xl focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all font-medium text-slate-700">
+                                <p class="text-xs text-slate-400 ml-1 mt-2">
+                                    Pilih tanggal awal periode pendataan
+                                </p>
+                            </div>
                         </div>
 
                         {{-- TANGGAL AKHIR --}}
@@ -147,12 +152,18 @@
                                 Periode Pendataan (Sampai)
                             </label>
 
-                            <input type="date" name="tanggal_akhir" value="{{ request('tanggal_akhir') }}" onclick="this.showPicker()"
-                                class="w-full px-4 py-3 bg-slate-50 border-transparent rounded-2xl focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all font-medium text-slate-700">
+                            <div class="relative">
+                                <input type="date" name="tanggal_akhir" value="{{ request('tanggal_akhir') }}"
+                                    onclick="this.showPicker()"
+                                    class="w-full px-4 py-3 bg-slate-50 border-transparent rounded-2xl focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all font-medium text-slate-700">
+                                <p class="text-xs text-slate-400 ml-1 mt-2">
+                                    Pilih tanggal akhir periode pendataan
+                                </p>
+                            </div>
                         </div>
 
                         <!-- ACTIONS -->
-                        <div class="flex items-end">
+                        <div class="flex flex-col justify-end">
 
                             <button
                                 class="w-full bg-slate-900 hover:bg-slate-800 text-white rounded-2xl font-bold py-3 transition-all active:scale-95 shadow-lg shadow-slate-200">
@@ -161,10 +172,12 @@
 
                             </button>
 
+                            <div class="h-[25px]"></div>
+
                         </div>
 
                         {{-- RESET --}}
-                        <div class="flex items-end">
+                         <div class="flex flex-col justify-end">
 
                             <a href="{{ route('admin.tempat.index') }}"
                                 class="w-full flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition-all active:scale-95 font-semibold">
@@ -180,6 +193,8 @@
                                 Reset
 
                             </a>
+
+                            <div class="h-[25px]"></div>
 
                         </div>
                     </div>
