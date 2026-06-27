@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Desa;
 use App\Models\Tempat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PublicMapController extends Controller
 {
@@ -113,6 +114,11 @@ class PublicMapController extends Controller
                             ->desa
                             ?->nama_desa,
 
+                    'foto'
+                        => $tempat->foto_bangunan
+                            ? Storage::url($tempat->foto_bangunan)
+                            : null,
+
                     'nama_kepala_keluarga'
                         => $tempat
                             ->keluarga
@@ -160,6 +166,11 @@ class PublicMapController extends Controller
                                 ->desa
                                 ?->nama_desa,
 
+                        'foto'
+                            => $tempat->foto_bangunan
+                                ? Storage::url($tempat->foto_bangunan)
+                                : null,
+
                         'nama_usaha'
                             => $usaha->nama_usaha,
 
@@ -203,6 +214,11 @@ class PublicMapController extends Controller
                         => $tempat
                             ->desa
                             ?->nama_desa,
+
+                    'foto'
+                        => $tempat->foto_bangunan
+                            ? Storage::url($tempat->foto_bangunan)
+                            : null,
 
                     'nama_kepala_keluarga'
                         => $tempat
