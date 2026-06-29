@@ -24,7 +24,7 @@
             <button type="button" @click="getLocation" :disabled="disabled" {{ $readonly ? 'disabled' : '' }}
                 class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2
            bg-blue-600 hover:bg-blue-700
-           text-white font-semibold rounded-xl transition"
+           text-white font-semibold rounded-xl transition-all active:scale-95"
                 :class="{
                     'opacity-50 cursor-not-allowed bg-slate-400 hover:bg-slate-400': disabled
                 }">
@@ -192,33 +192,47 @@
             },
 
             getLocation() {
-                this.status =
-                    'Mengambil lokasi...';
+
+                this.status = 'Mengambil lokasi...';
 
                 navigator.geolocation.getCurrentPosition(
 
                     (position) => {
 
-                        this.latitude =
-                            position.coords.latitude;
+                        const accuracy = Math.round(position.coords.accuracy);
 
-                        this.longitude =
-                            position.coords.longitude;
+                        /**
+                         * Validasi akurasi maksimal 80 meter
+                         */
+                        if (accuracy > 80) {
 
-                        this.accuracy =
-                            Math.round(
-                                position.coords.accuracy
+                            this.status = '';
+
+                            alert(
+                                'Tagging lokasi gagal.\n\n' +
+                                'Akurasi GPS terlalu rendah (' + accuracy + ' meter).\n\n' +
+                                'Silakan lakukan tagging ulang di area terbuka dan pastikan jaringan internet aktif.'
                             );
 
-                        this.status =
-                            'Lokasi berhasil diperoleh';
+                            return;
+                        }
+
+                        this.latitude = position.coords.latitude;
+                        this.longitude = position.coords.longitude;
+                        this.accuracy = accuracy;
+
+                        this.status = 'Lokasi berhasil diperoleh';
 
                     },
 
                     () => {
 
-                        this.status =
-                            'Gagal memperoleh lokasi';
+                        this.status = 'Gagal memperoleh lokasi';
+
+                        alert(
+                            'Lokasi tidak dapat diperoleh.\n\n' +
+                            'Pastikan GPS telah diaktifkan dan browser memiliki izin mengakses lokasi.'
+                        );
 
                     },
 
