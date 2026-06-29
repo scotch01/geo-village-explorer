@@ -8,11 +8,11 @@ return [
 
         'excel' => 'Excel',
 
-        'link' => 'Link',
-
         'drive' => 'Google Drive',
 
         'spreadsheet' => 'Spreadsheet',
+
+        'image' => 'Image',
 
     ],
 

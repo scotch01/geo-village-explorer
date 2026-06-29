@@ -36,8 +36,11 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('admin.portal-item.update', $item) }}"
-            class="bg-white border border-slate-200 rounded-[2rem] shadow-sm overflow-hidden">
+        <form method="POST" action="{{ route('admin.portal-item.update', $item) }}" enctype="multipart/form-data"
+            x-data="{
+                fileType: '{{ old('file_type', $item->file_type) }}',
+                preview: '{{ $item->image_url }}'
+            }" class="bg-white border border-slate-200 rounded-[2rem] shadow-sm overflow-hidden">
 
             @csrf
             @method('PUT')
@@ -107,27 +110,26 @@
 
                 <div class="grid md:grid-cols-2 gap-6">
 
+                    {{-- Deskripsi --}}
                     <div>
 
                         <label class="text-sm font-semibold text-slate-700">
-
                             Deskripsi
-
                         </label>
 
                         <textarea name="description" rows="4" class="w-full mt-2 rounded-2xl border-slate-200 bg-slate-50">{{ old('description', $item->description) }}</textarea>
 
                     </div>
 
+                    {{-- Jenis File --}}
                     <div>
 
                         <label class="text-sm font-semibold text-slate-700">
-
                             Jenis File
-
                         </label>
 
-                        <select name="file_type" class="w-full mt-2 rounded-2xl border-slate-200 bg-slate-50" required>
+                        <select name="file_type" x-model="fileType"
+                            class="w-full mt-2 rounded-2xl border-slate-200 bg-slate-50" required>
 
                             @foreach ($fileTypes as $value => $label)
                                 <option value="{{ $value }}" @selected(old('file_type', $item->file_type) == $value)>
@@ -141,7 +143,8 @@
 
                     </div>
 
-                    <div>
+                    {{-- URL --}}
+                    <div x-show="fileType !== 'image'" x-transition>
 
                         <label class="text-sm font-semibold text-slate-700">
 
@@ -150,10 +153,73 @@
                         </label>
 
                         <input type="url" name="url" value="{{ old('url', $item->url) }}"
-                            class="w-full mt-2 rounded-2xl border-slate-200 bg-slate-50" required>
+                            class="w-full mt-2 rounded-2xl border-slate-200 bg-slate-50">
 
                     </div>
 
+                    {{-- Upload Image --}}
+                    <div x-show="fileType === 'image'" x-transition class="space-y-4">
+
+                        <div>
+
+                            <label class="text-sm font-semibold text-slate-700">
+
+                                Upload Gambar
+
+                            </label>
+
+                            <input type="file" name="image" accept="image/*"
+                                class="
+                    block w-full mt-2
+                text-sm text-slate-500
+                file:mr-3
+                file:py-2.5
+                file:px-4
+                file:rounded-2xl
+                file:border-0
+                file:text-sm
+                file:font-bold
+                file:bg-blue-50
+                file:text-blue-700
+                hover:file:bg-blue-100
+                file:transition-colors
+                cursor-pointer
+                border
+                border-slate-200
+                rounded-2xl
+                bg-slate-50
+                "
+                                @change="
+                    const file = $event.target.files[0];
+
+                    if(file){
+
+                        preview = URL.createObjectURL(file);
+
+                    }
+                ">
+
+                            <p class="mt-2 text-xs text-slate-500">
+
+                                Kosongkan jika tidak ingin mengganti gambar.
+
+                            </p>
+
+                        </div>
+
+                        <template x-if="preview">
+
+                            <div class="rounded-2xl overflow-hidden border border-slate-200 bg-slate-50">
+
+                                <img :src="preview" class="w-full max-h-72 object-contain">
+
+                            </div>
+
+                        </template>
+
+                    </div>
+
+                    {{-- Status --}}
                     <div>
 
                         <label class="text-sm font-semibold text-slate-700">
@@ -163,6 +229,7 @@
                         </label>
 
                         <select name="is_active" class="w-full mt-2 rounded-2xl border-slate-200 bg-slate-50">
+
                             <option value="1" @selected(old('is_active', $item->is_active) == 1)>
                                 Aktif
                             </option>
@@ -170,6 +237,7 @@
                             <option value="0" @selected(old('is_active', $item->is_active) == 0)>
                                 Nonaktif
                             </option>
+
                         </select>
 
                     </div>

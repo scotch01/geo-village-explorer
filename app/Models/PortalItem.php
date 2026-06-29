@@ -21,6 +21,8 @@ class PortalItem extends Model
 
         'url',
 
+        'image_path',
+
         'sort_order',
 
         'is_active',
@@ -48,6 +50,13 @@ class PortalItem extends Model
         return $this->belongsTo(
             Desa::class
         );
+    }
+
+    public function getImageUrlAttribute()
+    {
+        return $this->image_path
+            ? asset('storage/' . $this->image_path)
+            : null;
     }
 
     public function getFileTypeLabelAttribute()

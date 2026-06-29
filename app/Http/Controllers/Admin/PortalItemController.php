@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\PortalItem;
 use App\Models\PortalCategory;
 use App\Models\Desa;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class PortalItemController extends Controller
 {
@@ -92,28 +95,50 @@ class PortalItemController extends Controller
         );
     }
 
-    public function store(
-        Request $request
-    )
+    public function store(Request $request)
     {
-        $validated =
-            $this->validateData(
-                $request
+        $validated = $this->validateData($request);
+
+        /**
+         * Default URL untuk image
+         */
+        if ($request->file_type === 'image') {
+
+            $validated['url'] = '-';
+
+        }
+
+        /**
+         * Upload Image
+         */
+        if (
+            $request->file_type === 'image' &&
+            $request->hasFile('image')
+        ) {
+
+            $manager = new ImageManager(new Driver());
+
+            $image = $manager
+                ->read($request->file('image'))
+                ->toWebp(80);
+
+            $filename = uniqid() . '.webp';
+
+            Storage::disk('public')->put(
+                "portal/{$filename}",
+                $image
             );
 
-        $validated['sort_order'] =
-            PortalItem::max(
-                'sort_order'
-            ) + 1;
+            $validated['image_path'] = "portal/{$filename}";
+        }
 
-        PortalItem::create(
-            $validated
-        );
+        $validated['sort_order'] =
+            PortalItem::max('sort_order') + 1;
+
+        PortalItem::create($validated);
 
         return redirect()
-            ->route(
-                'admin.portal-item.index'
-            )
+            ->route('admin.portal-item.index')
             ->with(
                 'success',
                 'Item portal berhasil ditambahkan'
@@ -150,19 +175,56 @@ class PortalItemController extends Controller
         PortalItem $portalItem
     )
     {
-        $validated =
-            $this->validateData(
-                $request
+        $validated = $this->validateData($request);
+
+        /**
+         * Default URL untuk image
+         */
+        if ($request->file_type === 'image') {
+
+            $validated['url'] = '-';
+
+        }
+
+        /**
+         * Upload image baru
+         */
+        if (
+            $request->file_type === 'image' &&
+            $request->hasFile('image')
+        ) {
+
+            if (
+                $portalItem->image_path &&
+                Storage::disk('public')->exists($portalItem->image_path)
+            ) {
+
+                Storage::disk('public')->delete(
+                    $portalItem->image_path
+                );
+
+            }
+
+            $manager = new ImageManager(new Driver());
+
+            $image = $manager
+                ->read($request->file('image'))
+                ->toWebp(80);
+
+            $filename = uniqid() . '.webp';
+
+            Storage::disk('public')->put(
+                "portal/{$filename}",
+                $image
             );
 
-        $portalItem->update(
-            $validated
-        );
+            $validated['image_path'] = "portal/{$filename}";
+        }
+
+        $portalItem->update($validated);
 
         return redirect()
-            ->route(
-                'admin.portal-item.index'
-            )
+            ->route('admin.portal-item.index')
             ->with(
                 'warning',
                 'Item portal berhasil diperbarui'
@@ -173,21 +235,30 @@ class PortalItemController extends Controller
         PortalItem $portalItem
     )
     {
+        if (
+            $portalItem->image_path &&
+            Storage::disk('public')->exists(
+                $portalItem->image_path
+            )
+        ) {
+
+            Storage::disk('public')->delete(
+                $portalItem->image_path
+            );
+
+        }
+
         $portalItem->delete();
 
         return redirect()
-            ->route(
-                'admin.portal-item.index'
-            )
+            ->route('admin.portal-item.index')
             ->with(
                 'danger',
                 'Item portal berhasil dihapus'
             );
     }
 
-    private function validateData(
-        Request $request
-    )
+    private function validateData(Request $request)
     {
         return $request->validate([
 
@@ -207,7 +278,10 @@ class PortalItemController extends Controller
                 => 'required|string',
 
             'url'
-                => 'required|url',
+                => 'nullable|url|required_unless:file_type,image',
+
+            'image'
+                => 'required_if:file_type,image|nullable|image|max:5120',
 
             'is_active'
                 => 'nullable|boolean',
