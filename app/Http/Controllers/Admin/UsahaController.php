@@ -418,6 +418,22 @@ class UsahaController extends Controller
         $dusuns =
             Dusun::OPTIONS[$tempat->id_desa] ?? [];
 
+        /**
+         * Validasi akurasi GPS maksimal 80 meter
+         */
+        if (
+            $request->filled('akurasi_usaha') &&
+            $request->akurasi_rumah > 80
+        ) {
+            return back()
+                ->withInput()
+                ->with(
+                    'danger',
+                    'Tagging lokasi gagal. Akurasi GPS melebihi 80 meter. Silakan lakukan tagging ulang di area terbuka dan pastikan jaringan internet aktif.'
+                )
+                ->throwResponse();
+        }
+
         return $request->validate([
 
             'provinsi'
