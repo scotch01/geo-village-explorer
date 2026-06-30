@@ -15,11 +15,12 @@ class PortalItemController extends Controller
 {
     public function index(Request $request)
     {
-        $items = PortalItem::with([
-                'category',
-                'desa',
-            ])
+        $query = PortalItem::with([
+            'category',
+            'desa',
+        ]);
 
+        $query
             ->when(
                 $request->filled('desa_id'),
                 fn ($query) =>
@@ -49,6 +50,13 @@ class PortalItemController extends Controller
 
             ->orderBy('sort_order')
             ->get();
+
+        $perPage = $request->get('per_page', 25);
+
+        $items = $query
+            ->orderBy('sort_order')
+            ->paginate($perPage)
+            ->withQueryString();
 
         return view(
             'admin.portal-item.index',

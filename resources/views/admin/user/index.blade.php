@@ -39,36 +39,17 @@
         <x-alert />
 
         @if (session('generated_password'))
-            <div
-                class="
-        mb-6
-        rounded-2xl
-        border
-        border-yellow-200
-        bg-yellow-50
-        p-4
-    ">
+            <div class="mb-6 rounded-2xl border border-yellow-200 bg-yellow-50 p-4">
 
-                <div class="
-            font-bold
-            text-yellow-900
-        ">
+                <div class="font-bold text-yellow-900">
                     Password Sementara
                 </div>
 
-                <div class="
-            mt-2
-            font-mono
-            text-lg
-        ">
+                <div class="mt-2 font-mono text-lg">
                     {{ session('generated_password') }}
                 </div>
 
-                <div class="
-            mt-2
-            text-sm
-            text-yellow-700
-        ">
+                <div class="mt-2 text-sm text-yellow-700">
                     Simpan password ini karena hanya ditampilkan sekali.
                 </div>
 
@@ -79,6 +60,45 @@
         <div class="bg-white border border-slate-200 rounded-[2rem] shadow-sm overflow-hidden">
 
             @if ($users->count())
+                <div
+                    class="px-8 py-6 border-b border-slate-50 bg-slate-50/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+
+                    <h3 class="font-bold text-slate-800 flex items-center gap-2">
+
+                        <span class="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xs">
+
+                            {{ $users->total() }}
+
+                        </span>
+
+                        User Ditemukan
+
+                    </h3>
+
+                    <form method="GET" class="flex items-center gap-3">
+
+                        <span class="text-[10px] font-black uppercase tracking-widest text-slate-400">
+
+                            Rows:
+
+                        </span>
+
+                        <select name="per_page" onchange="this.form.submit()"
+                            class="pl-3 pr-8 py-1.5 rounded-xl border border-slate-200 bg-white text-xs font-bold text-slate-700">
+
+                            @foreach ([25, 50, 100] as $v)
+                                <option value="{{ $v }}" @selected(request('per_page', 25) == $v)>
+
+                                    {{ $v }}
+
+                                </option>
+                            @endforeach
+
+                        </select>
+
+                    </form>
+
+                </div>
                 <div class="overflow-x-auto">
 
                     <table class="w-full text-sm">
@@ -87,6 +107,7 @@
                             class="bg-slate-50 border-b border-slate-100 uppercase text-xs text-slate-500 tracking-wider">
 
                             <tr>
+                                <th class="px-6 py-5 text-center w-20">No</th>
                                 <th class="px-6 py-5 text-left">Nama</th>
                                 <th class="px-6 py-5 text-left">Email</th>
                                 <th class="px-6 py-5 text-left">Role</th>
@@ -98,8 +119,12 @@
 
                         <tbody class="divide-y divide-slate-100">
 
-                            @foreach ($users as $user)
+                            @foreach ($users as $index => $user)
                                 <tr class="hover:bg-slate-50 transition">
+
+                                    <td class="px-6 py-5 text-center font-bold text-slate-400">
+                                        {{ $users->firstItem() + $index }}
+                                    </td>
 
                                     <!-- NAMA -->
                                     <td class="px-6 py-5 font-semibold text-slate-800">
@@ -197,6 +222,12 @@
                     </table>
 
                 </div>
+
+                @if ($users->hasPages())
+                    <div class="px-8 py-6 border-t border-slate-50 bg-slate-50/20">
+                        {{ $users->links() }}
+                    </div>
+                @endif
             @else
                 <div class="py-24 text-center">
 

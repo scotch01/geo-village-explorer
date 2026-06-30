@@ -11,13 +11,19 @@ use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $perPage = $request->get('per_page', 25);
+
         $users = User::with('desa')
             ->latest()
-            ->get();
+            ->paginate($perPage)
+            ->withQueryString();
 
-        return view('admin.user.index', compact('users'));
+        return view(
+            'admin.user.index',
+            compact('users')
+        );
     }
 
     public function create()

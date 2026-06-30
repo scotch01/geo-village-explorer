@@ -139,6 +139,75 @@
         <div class="bg-white border border-slate-200 rounded-[2rem] shadow-sm overflow-hidden">
 
             @if ($items->count())
+                <div
+                    class="px-8 py-6 border-b border-slate-50
+    flex flex-col sm:flex-row
+    sm:items-center
+    justify-between
+    gap-4
+    bg-slate-50/30">
+
+                    <h3 class="font-bold
+        text-slate-800
+        flex
+        items-center
+        gap-2">
+
+                        <span
+                            class="
+            w-8
+            h-8
+            rounded-xl
+            bg-blue-50
+            text-blue-600
+            flex
+            items-center
+            justify-center
+            text-xs">
+
+                            {{ $items->total() }}
+
+                        </span>
+
+                        Item Ditemukan
+
+                    </h3>
+
+                    <form method="GET" class="flex items-center gap-3">
+
+                        @foreach (request()->except('per_page', 'page') as $key => $value)
+                            @if (is_array($value))
+                                @foreach ($value as $v)
+                                    <input type="hidden" name="{{ $key }}[]" value="{{ $v }}">
+                                @endforeach
+                            @else
+                                <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                            @endif
+                        @endforeach
+
+                        <span
+                            class="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+
+                            Rows:
+
+                        </span>
+
+                        <select name="per_page" onchange="this.form.submit()"
+                            class="pl-3 pr-8 py-1.5 text-xs bg-white border border-slate-200 rounded-xl focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 font-bold text-slate-700 cursor-pointer">
+
+                            @foreach ([25, 50, 100] as $v)
+                                <option value="{{ $v }}" @selected(request('per_page', 25) == $v)>
+
+                                    {{ $v }}
+
+                                </option>
+                            @endforeach
+
+                        </select>
+
+                    </form>
+
+                </div>
                 <div class="overflow-x-auto">
 
                     <table class="w-full text-sm">
@@ -147,6 +216,9 @@
                             class="bg-slate-50 border-b border-slate-100 uppercase text-xs text-slate-500 tracking-wider">
 
                             <tr>
+                                <th class="px-6 py-5 text-center w-20">
+                                    No
+                                </th>
 
                                 <th class="px-6 py-5 text-left">
                                     Judul
@@ -178,8 +250,13 @@
 
                         <tbody class="divide-y divide-slate-100">
 
-                            @foreach ($items as $item)
+                            @foreach ($items as $index => $item)
                                 <tr class="hover:bg-slate-50 transition">
+                                    <td class="px-6 py-5 text-center font-bold text-slate-400">
+
+                                        {{ $items->firstItem() + $index }}
+
+                                    </td>
 
                                     <td class="px-6 py-5">
 
@@ -271,6 +348,11 @@
                     </table>
 
                 </div>
+                @if ($items->hasPages())
+                    <div class="px-8 py-6 border-t border-slate-50 bg-slate-50/20">
+                        {{ $items->appends(request()->query())->links() }}
+                    </div>
+                @endif
             @else
                 <div class="py-24 text-center">
 
