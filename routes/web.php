@@ -17,6 +17,7 @@ use App\Http\Controllers\PortalPublicController;
 use App\Http\Controllers\Admin\ExportController;
 use App\Http\Controllers\Auth\ForcePasswordController;
 use App\Http\Controllers\Admin\PengawasAssignmentController;
+use App\Http\Controllers\Admin\ManagementController;
 
 // Public Page
 
@@ -50,6 +51,9 @@ Route::middleware(['auth', 'force.password', 'role:master_admin'])
     Route::resource('desa', DesaController::class);
 
     Route::resource('user', UserController::class);
+
+    Route::get('/management', [ManagementController::class, 'index'])
+        ->name('management.index');
 
     Route::post('/user/{user}/reset-password', [UserController::class, 'resetPassword'])
         ->name('user.reset-password');

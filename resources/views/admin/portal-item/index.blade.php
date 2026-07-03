@@ -4,6 +4,10 @@
 
     <div class="space-y-6">
 
+        <x-back-button :href="route('admin.management.index')">
+            Kembali
+        </x-back-button>
+
         <div class="flex items-center justify-between flex-wrap gap-4">
 
             <div>

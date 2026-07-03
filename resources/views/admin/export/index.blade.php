@@ -5,6 +5,10 @@
 
         {{-- HEADER --}}
 
+        <x-back-button :href="route('admin.management.index')">
+            Kembali
+        </x-back-button>
+
         <div>
             <h1 class="text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
                 Export <span class="text-blue-600">Data</span>
