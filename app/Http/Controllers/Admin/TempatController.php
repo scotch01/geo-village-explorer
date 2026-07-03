@@ -82,6 +82,18 @@ class TempatController extends Controller
                         'nama_kepala_keluarga',
                         'like',
                         "%{$search}%"
+                    )
+
+                    ->orWhere(
+                        'nik_kepala_keluarga',
+                        'like',
+                        "%{$search}%"
+                    )
+
+                    ->orWhere(
+                        'nomor_kk',
+                        'like',
+                        "%{$search}%"
                     );
                 })
 
@@ -92,6 +104,12 @@ class TempatController extends Controller
 
                         $query->where(
                             'nama',
+                            'like',
+                            "%{$search}%"
+                        )
+
+                        ->orWhere(
+                            'nik',
                             'like',
                             "%{$search}%"
                         );
@@ -109,6 +127,12 @@ class TempatController extends Controller
 
                     ->orWhere(
                         'nama_pemilik',
+                        'like',
+                        "%{$search}%"
+                    )
+
+                    ->orWhere(
+                        'nik_pemilik',
                         'like',
                         "%{$search}%"
                     );

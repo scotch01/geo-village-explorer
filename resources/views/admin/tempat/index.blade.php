@@ -51,7 +51,7 @@
                                     </svg>
                                 </span>
                                 <input type="text" name="search" value="{{ request('search') }}"
-                                    placeholder="Cari nama lokasi..."
+                                    placeholder="Pencarian ....."
                                     class="w-full pl-11 pr-4 py-3 bg-slate-50 border-transparent rounded-2xl focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all font-medium text-slate-700">
                             </div>
                         </div>
