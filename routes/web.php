@@ -18,6 +18,8 @@ use App\Http\Controllers\Admin\ExportController;
 use App\Http\Controllers\Auth\ForcePasswordController;
 use App\Http\Controllers\Admin\PengawasAssignmentController;
 use App\Http\Controllers\Admin\ManagementController;
+use App\Http\Controllers\Admin\ServiceSettingController;
+use App\Http\Controllers\ServicePublicController;
 
 // Public Page
 
@@ -26,6 +28,9 @@ Route::get('/', [PublicMapController::class, 'index'])
 
 Route::get('/portal-data', [PortalPublicController::class, 'publication'])
     ->name('public.publication');
+
+Route::get('/layanan', [ServicePublicController::class, 'index'])
+    ->name('public.service');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -73,6 +78,8 @@ Route::middleware(['auth', 'force.password', 'role:master_admin'])
 
     Route::get('/export/download', [ExportController::class, 'download'])
         ->name('export.download');
+
+    Route::resource('service-setting', ServiceSettingController::class);    
 });
 
 Route::middleware(['auth', 'force.password', 'role:master_admin,admin_desa,pengawas'])

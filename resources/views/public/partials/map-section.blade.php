@@ -3,31 +3,26 @@
     showImageModal: false,
     imageUrl: ''
 }">
-    <section id="peta" class="py-24 bg-gradient-to-bl from-purple-100 via-white to-blue-50">
+    <section id="peta" class="py-24 bg-gradient-to-bl from-purple-100 via-white to-blue-100">
 
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
 
             <div class="text-center mb-12">
 
                 <span
-                    class="inline-flex items-center
-                px-4 py-2 rounded-full
-                bg-blue-100 text-blue-700
-                text-sm font-semibold">
+                    class="inline-flex items-center px-4 py-2 rounded-full bg-blue-100 text-blue-700 text-sm font-semibold">
 
                     Peta Interaktif
 
                 </span>
 
-                <h2 class="mt-6 text-4xl lg:text-5xl
-                font-black text-slate-900">
+                <h2 class="mt-6 text-4xl lg:text-5xl font-black text-slate-900">
 
                     Pemetaan Potensi Desa
 
                 </h2>
 
-                <p class="mt-4 text-lg text-slate-600
-                max-w-3xl mx-auto">
+                <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">
 
                     Jelajahi persebaran keluarga
                     dan usaha masyarakat secara
@@ -123,17 +118,7 @@
 
                         {{-- RESET --}}
                         <a href="{{ route('public.spectra') }}#peta" title="Reset Filter"
-                            class="
-                    h-[50px]
-                    w-[50px]
-                    shrink-0
-                    rounded-2xl
-                    border border-slate-300
-                    flex items-center justify-center
-                    text-slate-600
-                    hover:bg-slate-50
-                    transition
-                ">
+                            class="h-[50px] w-[50px] shrink-0 rounded-2xl border border-slate-300 flex items-center justify-center text-slate-600 hover:bg-slate-50 transition-all active:scale-95">
 
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
@@ -147,19 +132,7 @@
 
                         {{-- SUBMIT --}}
                         <button type="submit"
-                            class="
-                    flex-1
-                    rounded-2xl
-                    bg-blue-600
-                    hover:bg-blue-700
-                    text-white
-                    font-semibold
-                    py-3
-                    transition
-                    flex items-center
-                    justify-center
-                    gap-2
-                ">
+                            class="flex-1 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 transition-all active:scale-95 flex items-center justify-center gap-2">
 
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">

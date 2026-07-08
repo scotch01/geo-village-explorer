@@ -1,4 +1,4 @@
-<section id="hero" class="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-100">
+<section id="hero" class="relative overflow-hidden bg-gradient-to-br from-blue-100 via-white to-purple-100">
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
 
@@ -35,12 +35,12 @@
                 <div class="mt-8 flex flex-wrap gap-4">
 
                     <a href="#peta"
-                        class="px-6 py-3 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition">
+                        class="px-6 py-3 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-all active:scale-95">
                         Jelajahi Peta
                     </a>
 
                     <a href="#tentang"
-                        class="px-6 py-3 rounded-xl border border-slate-300 font-semibold text-slate-700 hover:bg-slate-50 transition">
+                        class="px-6 py-3 rounded-xl border border-slate-300 font-semibold text-slate-700 hover:bg-slate-50 transition-all active:scale-95">
                         Pelajari Lebih Lanjut
                     </a>
 

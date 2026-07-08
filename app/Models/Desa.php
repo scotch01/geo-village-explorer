@@ -29,4 +29,11 @@ class Desa extends Model
     {
         return $this->hasMany(Tempat::class, 'id_desa');
     }
+
+    public function serviceSetting()
+    {
+        return $this->hasOne(
+            ServiceSetting::class
+        );
+    }
 }

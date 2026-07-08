@@ -1,6 +1,6 @@
 <section
     id="desa-cantik"
-    class="py-24 bg-gradient-to-bl from-purple-100 via-white to-blue-50""
+    class="py-24 bg-gradient-to-bl from-purple-100 via-white to-blue-100""
 >
 
     <div

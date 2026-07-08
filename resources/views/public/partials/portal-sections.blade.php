@@ -5,48 +5,21 @@
 
     <section id="{{ $category->slug }}" class="mb-6 scroll-mt-28" x-data="{ openCategory: false }">
 
-        <div
-            class="
-                bg-white
-                border
-                border-slate-200
-                rounded-3xl
-                overflow-hidden
-                shadow-sm
-            ">
+        <div class="bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-sm">
 
             {{-- HEADER --}}
             <button @click="openCategory=!openCategory"
-                class="
-                    w-full
-                    px-8
-                    py-6
-                    flex
-                    items-center
-                    justify-between
-                    hover:bg-slate-50
-                    transition
-                ">
+                class="w-full px-8 py-6 flex items-center justify-between hover:bg-slate-50 transition">
 
                 <div class="text-left">
 
-                    <h2
-                        class="
-                            text-2xl
-                            font-black
-                            text-slate-900
-                        ">
+                    <h2 class="text-2xl font-black text-slate-900">
 
                         {{ $category->name }}
 
                     </h2>
 
-                    <div
-                        class="
-                            mt-2
-                            text-sm
-                            text-slate-500
-                        ">
+                    <div class="mt-2 text-sm text-slate-500">
 
                         {{ $category->items->groupBy('desa_id')->count() }}
                         Desa
@@ -77,28 +50,11 @@
                         $fileGroups = $items->groupBy('file_type');
                     @endphp
 
-                    <div x-data="{ openVillage: false }"
-                        class="
-                            border
-                            border-slate-200
-                            rounded-2xl
-                            overflow-hidden
-                            mb-5
-                        ">
+                    <div x-data="{ openVillage: false }" class="border border-slate-200 rounded-2xl overflow-hidden mb-5">
 
                         {{-- HEADER DESA --}}
                         <button @click="openVillage=!openVillage"
-                            class="
-                                w-full
-                                px-6
-                                py-5
-                                flex
-                                justify-between
-                                items-center
-                                bg-slate-50
-                                hover:bg-slate-100
-                                transition
-                            ">
+                            class="w-full px-6 py-5 flex justify-between items-center bg-slate-50 hover:bg-slate-100 transition">
 
                             <span
                                 class="
@@ -130,57 +86,26 @@
                                     {{-- IMAGE --}}
                                     {{-- ================================================= --}}
                                     @if ($fileType === 'image')
-                                        <div
-                                            class="
-                        grid
-                        grid-cols-1
-                        sm:grid-cols-2
-                        xl:grid-cols-3
-                        gap-6
-                    ">
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
 
                                             @foreach ($documents as $item)
-                                                <div
-                                                    class="
-                                group
-                            ">
+                                                <div class="group">
 
-                                                    <h4
-                                                        class="
-                                    text-center
-                                    font-bold
-                                    text-slate-800
-                                    text-base
-                                    mb-3
-                                ">
+                                                    <h4 class="text-center font-bold text-slate-800 text-base mb-3">
 
                                                         {{ $item->title }}
 
                                                     </h4>
 
-                                                    <a href="{{ asset('storage/' . $item->image_path) }}" target="_blank"
-                                                        class="block">
+                                                    <a href="{{ asset('storage/' . $item->image_path) }}"
+                                                        target="_blank" class="block">
 
                                                         <div
-                                                            class="
-                                        overflow-hidden
-                                        rounded-2xl
-                                        border
-                                        border-slate-200
-                                        bg-slate-100
-                                        shadow-sm
-                                    ">
+                                                            class="overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 shadow-sm">
 
                                                             <img src="{{ asset('storage/' . $item->image_path) }}"
                                                                 alt="{{ $item->title }}"
-                                                                class="
-                                            w-full
-                                            h-auto
-                                            object-cover
-                                            transition
-                                            duration-300
-                                            group-hover:scale-105
-                                        ">
+                                                                class="w-full h-auto object-cover transition duration-300 group-hover:scale-105">
 
                                                         </div>
 
@@ -195,15 +120,7 @@
                                         {{-- PDF / EXCEL / DRIVE / LINK --}}
                                         {{-- ================================================= --}}
 
-                                        <div
-                                            class="
-                        text-xs
-                        font-bold
-                        uppercase
-                        tracking-[0.15em]
-                        text-blue-700
-                        mb-3
-                    ">
+                                        <div class="text-xs font-bold uppercase tracking-[0.15em] text-blue-700 mb-3">
 
                                             {{ $documents->first()->file_type_label }}
 
@@ -213,14 +130,7 @@
 
                                             @foreach ($documents as $item)
                                                 <a href="{{ $item->url }}" target="_blank"
-                                                    class="
-                                flex
-                                items-start
-                                gap-2
-                                text-slate-700
-                                hover:text-blue-600
-                                transition
-                            ">
+                                                    class="flex items-start gap-2 text-slate-700 hover:text-blue-600 transition">
 
                                                     <span>•</span>
 

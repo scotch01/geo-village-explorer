@@ -1,4 +1,4 @@
-<section id="tentang" class="py-24 bg-gradient-to-br from-blue-50 via-white to-purple-100">
+<section id="tentang" class="py-24 bg-gradient-to-br from-blue-100 via-white to-purple-100">
 
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
 

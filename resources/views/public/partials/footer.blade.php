@@ -10,10 +10,7 @@
                 <div class="flex items-center gap-3">
 
                     <div
-                        class="w-12 h-12 rounded-2xl
-                        bg-blue-600
-                        flex items-center justify-center
-                        font-bold text-lg">
+                        class="w-12 h-12 rounded-2xl bg-blue-600 flex items-center justify-center font-bold text-lg ">
 
                         S
 
@@ -59,27 +56,39 @@
 
                 <div class="space-y-3">
 
-                    <a href="#beranda" class="block text-slate-400 hover:text-white transition">
+                    <a href="{{ route('public.spectra') }}#hero" class="block text-slate-400 hover:text-white transition">
 
                         Beranda
 
                     </a>
 
-                    <a href="#desa-cantik" class="block text-slate-400 hover:text-white transition">
+                    <a href="{{ route('public.spectra') }}#desa-cantik" class="block text-slate-400 hover:text-white transition">
 
                         Desa Cantik
 
                     </a>
 
-                    <a href="#tentang" class="block text-slate-400 hover:text-white transition">
+                    <a href="{{ route('public.spectra') }}#tentang" class="block text-slate-400 hover:text-white transition">
 
                         Tentang
 
                     </a>
 
-                    <a href="#peta" class="block text-slate-400 hover:text-white transition">
+                    <a href="{{ route('public.spectra') }}#peta" class="block text-slate-400 hover:text-white transition">
 
                         Peta
+
+                    </a>
+
+                    <a href="{{ route('public.publication') }}" class="block text-slate-400 hover:text-white transition">
+
+                        Publikasi
+
+                    </a>
+
+                    <a href="{{ route('public.service') }}" class="block text-slate-400 hover:text-white transition">
+
+                        Layanan
 
                     </a>
 
@@ -132,12 +141,7 @@
         </div>
 
         <div
-            class="mt-12 pt-8
-            border-t border-slate-800
-            flex flex-col md:flex-row
-            gap-3
-            justify-between
-            items-center">
+            class="mt-12 pt-8 border-t border-slate-800 flex flex-col md:flex-row gap-3 justify-between items-center">
 
             <p class="text-slate-500 text-sm">
 
@@ -149,9 +153,7 @@
 
             </p>
 
-            <p class="text-sm
-                text-blue-400
-                font-medium">
+            <p class="text-sm text-blue-400 font-medium">
 
                 Powered by BPS Kota Pariaman
 
