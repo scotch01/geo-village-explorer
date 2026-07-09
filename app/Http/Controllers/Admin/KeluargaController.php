@@ -397,11 +397,18 @@ class KeluargaController extends Controller
 
         /**
          * Validasi akurasi GPS maksimal 80 meter
+         * Hanya dilakukan jika pengguna melakukan tagging ulang.
          */
+        $gpsChanged =
+            (float) $request->latitude_rumah !== (float) $keluarga->latitude_rumah ||
+            (float) $request->longitude_rumah !== (float) $keluarga->longitude_rumah;
+
         if (
+            $gpsChanged &&
             $request->filled('akurasi_rumah') &&
             $request->akurasi_rumah > 80
         ) {
+
             return back()
                 ->withInput()
                 ->with(
@@ -409,6 +416,7 @@ class KeluargaController extends Controller
                     'Tagging lokasi gagal. Akurasi GPS melebihi 80 meter. Silakan lakukan tagging ulang di area terbuka dan pastikan jaringan internet aktif.'
                 )
                 ->throwResponse();
+
         }
 
         return $request->validate([

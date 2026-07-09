@@ -341,7 +341,8 @@ class UsahaController extends Controller
         $validated =
             $this->validateData(
                 $request,
-                $tempat
+                $tempat,
+                $usaha
             );
 
         $validated['lokasi_sama_dengan_keluarga']
@@ -413,18 +414,30 @@ class UsahaController extends Controller
 
     private function validateData(
         Request $request,
-        Tempat $tempat)
+        Tempat $tempat,
+        ?Usaha $usaha = null
+    )
     {
         $dusuns =
             Dusun::OPTIONS[$tempat->id_desa] ?? [];
 
         /**
-         * Validasi akurasi GPS maksimal 80 meter
+         * Validasi akurasi GPS maksimal 80 meter.
+         * Pada proses edit hanya divalidasi apabila lokasi usaha ditag ulang.
          */
+        $gpsChanged = $usaha
+            ? (
+                (float) $request->latitude_usaha !== (float) $usaha->latitude_usaha ||
+                (float) $request->longitude_usaha !== (float) $usaha->longitude_usaha
+            )
+            : true;
+
         if (
+            $gpsChanged &&
             $request->filled('akurasi_usaha') &&
-            $request->akurasi_rumah > 80
+            $request->akurasi_usaha > 80
         ) {
+
             return back()
                 ->withInput()
                 ->with(
@@ -432,6 +445,7 @@ class UsahaController extends Controller
                     'Tagging lokasi gagal. Akurasi GPS melebihi 80 meter. Silakan lakukan tagging ulang di area terbuka dan pastikan jaringan internet aktif.'
                 )
                 ->throwResponse();
+
         }
 
         return $request->validate([
