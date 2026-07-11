@@ -55,7 +55,13 @@
 
         {{-- MENU SURVEY (BLOK I, II, III) --}}
         @php
-            $topGridCols = $tempat->jenis_bangunan === 'bc' ? 'md:grid-cols-3' : 'md:grid-cols-2';
+            $topGridCols = match ($tempat->jenis_bangunan) {
+                'bc' => 'md:grid-cols-3',
+
+                'bl' => 'md:grid-cols-2',
+
+                default => 'md:grid-cols-2',
+            };
         @endphp
 
         <div class="grid grid-cols-1 {{ $topGridCols }} gap-8 w-full">
@@ -175,6 +181,60 @@
 
                     </div>
                 </div>
+            @endif
+
+            @if ($tempat->jenis_bangunan === 'bl')
+
+                <div
+                    class="bg-white rounded-3xl lg:rounded-[2.5rem] border border-slate-200 p-6 lg:p-8 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between min-w-0">
+
+                    <div>
+
+                        <h3 class="font-black text-2xl text-slate-900 tracking-tight">
+
+                            BLOK TAMBAHAN
+
+                        </h3>
+
+                        <p class="text-xs font-bold text-slate-400 mt-1 uppercase tracking-widest leading-relaxed">
+
+                            KETERANGAN BANGUNAN LAINNYA
+
+                        </p>
+
+                    </div>
+
+                    <div class="mt-8 pt-6 border-t border-slate-100">
+
+                        @if (!$tempat->bangunanLainnya)
+                            @if (auth()->user()->canEditTempat($tempat))
+                                <a href="{{ route('admin.bangunan-lainnya.create', $tempat) }}"
+                                    class="w-full sm:w-auto text-center inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 font-bold text-white text-sm transition-all active:scale-95 shadow-sm shadow-blue-600/10">
+
+                                    Isi Data Bangunan
+
+                                </a>
+                            @else
+                                <button type="button" disabled
+                                    class="w-full sm:w-auto text-center inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-slate-200 text-slate-500 font-bold text-sm cursor-not-allowed">
+
+                                    Tidak Diizinkan
+
+                                </button>
+                            @endif
+                        @else
+                            <a href="{{ route('admin.bangunan-lainnya.show', $tempat) }}"
+                                class="w-full sm:w-auto text-center inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 font-bold text-white text-sm transition-all active:scale-95">
+
+                                Lihat Data Bangunan
+
+                            </a>
+                        @endif
+
+                    </div>
+
+                </div>
+
             @endif
 
         </div>

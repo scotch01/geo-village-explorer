@@ -57,6 +57,12 @@
                                 Usaha
                             </option>
 
+                            <option value="bangunan_lainnya" @selected($dataset === 'bangunan_lainnya')>
+
+                                Infrastruktur
+
+                            </option>
+
                         </select>
 
                     </div>
@@ -111,6 +117,12 @@
                                 BC
                             </option>
 
+                            <option value="bl" @selected(request('jenis_bangunan') == 'bl')>
+
+                                BL
+
+                            </option>
+
                         </select>
 
                     </div>
@@ -152,6 +164,11 @@
                     @case('usaha')
                         {{ number_format($summary['usaha']) }} Usaha
                     @break
+
+                    @case('bangunan_lainnya')
+                        {{ number_format($summary['bangunan_lainnya']) }}
+                        Infrastruktur
+                    @break
                 @endswitch
 
             </div>
@@ -159,7 +176,7 @@
         </div>
 
         {{-- RINGKASAN --}}
-        <div class="grid md:grid-cols-4 gap-4">
+        <div class="grid md:grid-cols-5 gap-4">
 
             <div class="bg-white rounded-3xl border border-slate-200 p-6">
                 <div class="text-sm text-slate-500">
@@ -201,6 +218,22 @@
                 </div>
             </div>
 
+            <div class="bg-white rounded-3xl border border-slate-200 p-6">
+
+                <div class="text-sm text-slate-500">
+
+                    Infrastruktur
+
+                </div>
+
+                <div class="text-3xl font-black mt-2">
+
+                    {{ number_format($summary['bangunan_lainnya']) }}
+
+                </div>
+
+            </div>
+
         </div>
 
         {{-- RELASI --}}
@@ -218,10 +251,9 @@
 
             <pre class="mt-4 text-sm text-blue-800 whitespace-pre-wrap">Tempat (tempat_id)
 ├── Keluarga (tempat_id)
+│   └── Anggota (keluarga_id)
 ├── Usaha (tempat_id)
-
-Keluarga (keluarga_id)
-└── Anggota (keluarga_id)</pre>
+└── Bangunan Lainnya / Infrastruktur (tempat_id)</pre>
 
         </div>
 

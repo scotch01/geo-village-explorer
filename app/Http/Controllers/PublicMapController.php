@@ -6,6 +6,7 @@ use App\Models\Desa;
 use App\Models\Tempat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Constants\BangunanLainnya\Kategori;
 
 class PublicMapController extends Controller
 {
@@ -18,6 +19,8 @@ class PublicMapController extends Controller
                 'keluarga.anggotaKeluargas',
 
                 'usahas',
+
+                'bangunanLainnya',
             ]);
 
         /**
@@ -69,6 +72,18 @@ class PublicMapController extends Controller
 
                         $usaha->where(
                             'nama_usaha',
+                            'like',
+                            "%{$search}%"
+                        );
+                    }
+                )
+
+                ->orWhereHas(
+                    'bangunanLainnya',
+                    function ($bangunanLainnya) use ($search) {
+
+                        $bangunanLainnya->where(
+                            'nama_infrastruktur',
                             'like',
                             "%{$search}%"
                         );
@@ -253,6 +268,67 @@ class PublicMapController extends Controller
                             })
                             ->values()
                             ->toArray(),
+                ];
+            }
+
+            /**
+             * BL
+             */
+            if (
+                $tempat->jenis_bangunan === 'bl'
+                && $tempat->bangunanLainnya
+                && $tempat->bangunanLainnya->latitude
+                && $tempat->bangunanLainnya->longitude
+            ) {
+
+                $mapData[] = [
+
+                    'type' => 'bl',
+
+                    'lat'
+                        => $tempat
+                            ->bangunanLainnya
+                            ->latitude,
+
+                    'lng'
+                        => $tempat
+                            ->bangunanLainnya
+                            ->longitude,
+
+                    'desa'
+                        => $tempat
+                            ->desa
+                            ?->nama_desa,
+
+                    'foto'
+                        => $tempat->foto_bangunan
+                            ? Storage::url($tempat->foto_bangunan)
+                            : null,
+
+                    'nama_infrastruktur'
+                        => $tempat
+                            ->bangunanLainnya
+                            ->nama_infrastruktur,
+
+                    'kategori'
+                        => Kategori::OPTIONS[
+                            $tempat->bangunanLainnya->kategori
+                        ] ?? '-',
+
+                    'alamat'
+                        => $tempat
+                            ->bangunanLainnya
+                            ->alamat,
+                            
+                    'email'
+                        => $tempat
+                            ->bangunanLainnya
+                            ->email,
+
+                    'website'
+                        => $tempat
+                            ->bangunanLainnya
+                            ->website,
                 ];
             }
         }

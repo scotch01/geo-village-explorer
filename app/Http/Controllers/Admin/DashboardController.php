@@ -48,6 +48,7 @@ class DashboardController extends Controller
                         'btt' => 'BTT',
                         'bku' => 'BKU',
                         'bc'  => 'BC',
+                        'bl'  => 'BL',
 
                         default => '-',
                     },
@@ -62,6 +63,9 @@ class DashboardController extends Controller
 
                         'bc'
                             => 'Bangunan Campuran',
+                        
+                        'bl'
+                            => 'Bangunan Lainnya / Infrastruktur',
 
                         default => '-',
                     },

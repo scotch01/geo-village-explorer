@@ -177,7 +177,7 @@
                         </div>
 
                         {{-- RESET --}}
-                         <div class="flex flex-col justify-end">
+                        <div class="flex flex-col justify-end">
 
                             <a href="{{ route('admin.tempat.index') }}"
                                 class="w-full flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition-all active:scale-95 font-semibold">
@@ -220,7 +220,8 @@
                         <select name="per_page" onchange="this.form.submit()"
                             class="pl-3 pr-8 py-1.5 text-xs bg-white border border-slate-200 rounded-xl focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 font-bold text-slate-700 cursor-pointer">
                             @foreach ([25, 50, 100] as $v)
-                                <option value="{{ $v }}" {{ request('per_page', 25) == $v ? 'selected' : '' }}>
+                                <option value="{{ $v }}"
+                                    {{ request('per_page', 25) == $v ? 'selected' : '' }}>
                                     {{ $v }}</option>
                             @endforeach
                         </select>
@@ -282,6 +283,10 @@
                                                 {{ $tempat->usahas->count() }}
                                                 usaha terdaftar
                                             </div>
+                                        @elseif ($tempat->jenis_bangunan === 'bl')
+                                            <div class="font-bold text-slate-800">
+                                                {{ $tempat->bangunanLainnya?->nama_infrastruktur ?? '-' }}
+                                            </div>
                                         @endif
                                     </td>
                                     <td class="px-8 py-6">
@@ -302,7 +307,7 @@
 
                                         <span class="text-slate-600 font-medium">
 
-                                            {{ $tempat->keluarga?->dusun ?? ($tempat->usahas->first()?->dusun ?? '-') }}
+                                            {{ $tempat->keluarga?->dusun ?? ($tempat->bangunanLainnya?->dusun ?? ($tempat->usahas->first()?->dusun ?? '-')) }}
 
                                         </span>
 

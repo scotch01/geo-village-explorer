@@ -710,10 +710,6 @@
                 <x-geo-location latitude-field="latitude_usaha" longitude-field="longitude_usaha"
                     accuracy-field="akurasi_usaha" />
 
-            </div>
-
-            <div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm space-y-6">
-
                 {{-- Action Submit --}}
                 <div class="flex items-center justify-end gap-3 border-t-2 border-gray-300 pt-4">
 
@@ -723,9 +719,10 @@
                     </a>
                     <button type="submit"
                         class="px-6 py-3.5 rounded-xl bg-green-600 hover:bg-green-700 text-white font-semibold text-sm shadow-sm transition-all active:scale-95">
-                        Simpan Data Usaha
+                        Simpan Data
                     </button>
                 </div>
+
             </div>
 
         </form>

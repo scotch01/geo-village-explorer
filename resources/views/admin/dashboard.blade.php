@@ -167,9 +167,16 @@
                                             {{ $tempat->usahas->count() }}
                                             usaha terdaftar
                                         </div>
+
+                                        {{-- BL --}}
+                                    @elseif ($tempat->jenis_bangunan === 'bl')
+                                        <div class="font-bold text-slate-800">
+                                            {{ $tempat->bangunanLainnya?->nama_infrastruktur ?? '-' }}
+                                        </div>
                                     @endif
                                 </td>
                                 <td class="px-6 py-5 lg:px-8 lg:py-6">
+
                                     <span
                                         class="px-3 py-1 rounded-lg bg-blue-50 text-blue-700 text-[10px] font-black uppercase tracking-widest border border-blue-100">
                                         @php
@@ -177,6 +184,7 @@
                                                 'btt' => 'BTT',
                                                 'bku' => 'BKU',
                                                 'bc' => 'BC',
+                                                'bl' => 'BL',
                                             ];
                                         @endphp
                                         {{ $jenisBangunan[$tempat->jenis_bangunan] ?? '-' }}
@@ -231,7 +239,12 @@
             },
             labels: jenisBangunanData.map(item => item.label),
             series: jenisBangunanData.map(item => Number(item.total)),
-            colors: ['#2563eb', '#10b981', '#f59e0b'],
+            colors: [
+                '#10b981',               
+                '#ef4444',
+                '#8b5cf6',
+                '#2563eb',
+            ],
             legend: {
                 position: 'bottom',
                 fontSize: '14px',

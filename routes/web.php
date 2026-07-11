@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\PengawasAssignmentController;
 use App\Http\Controllers\Admin\ManagementController;
 use App\Http\Controllers\Admin\ServiceSettingController;
 use App\Http\Controllers\ServicePublicController;
+use App\Http\Controllers\Admin\BangunanLainnyaController;
 
 // Public Page
 
@@ -135,6 +136,25 @@ Route::middleware(['auth', 'force.password', 'role:master_admin,admin_desa,penga
 
     Route::delete('/tempat/{tempat}/keluarga', [KeluargaController::class, 'destroy'])
         ->name('keluarga.destroy');
+
+    // Data Bangunan Lainnya
+    Route::get('/tempat/{tempat}/bangunan-lainnya/create', [BangunanLainnyaController::class, 'create'])
+        ->name('bangunan-lainnya.create');
+
+    Route::post('/tempat/{tempat}/bangunan-lainnya', [BangunanLainnyaController::class, 'store'])
+        ->name('bangunan-lainnya.store');
+
+    Route::get('/tempat/{tempat}/bangunan-lainnya', [BangunanLainnyaController::class, 'show'])
+        ->name('bangunan-lainnya.show');
+
+    Route::get('/tempat/{tempat}/bangunan-lainnya/edit', [BangunanLainnyaController::class, 'edit'])
+        ->name('bangunan-lainnya.edit');
+
+    Route::put('/tempat/{tempat}/bangunan-lainnya', [BangunanLainnyaController::class, 'update'])
+        ->name('bangunan-lainnya.update');
+
+    Route::delete('/tempat/{tempat}/bangunan-lainnya', [BangunanLainnyaController::class, 'destroy'])
+        ->name('bangunan-lainnya.destroy');
 
     // Data Anggota Keluarga
     Route::get('/keluarga/{keluarga}/anggota', [AnggotaKeluargaController::class, 'index'])

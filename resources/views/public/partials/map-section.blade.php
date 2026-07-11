@@ -24,9 +24,9 @@
 
                 <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">
 
-                    Jelajahi persebaran keluarga
-                    dan usaha masyarakat secara
-                    langsung melalui peta interaktif.
+                    Jelajahi persebaran keluarga,
+                    usaha, dan infrastruktur desa
+                    melalui peta interaktif.
 
                 </p>
 
@@ -46,7 +46,7 @@
                         </label>
 
                         <input type="text" name="search" value="{{ request('search') }}"
-                            placeholder="Cari nama kepala keluarga atau nama usaha..."
+                            placeholder="Cari kepala keluarga, usaha, atau infrastruktur..."
                             class="w-full rounded-2xl border-slate-300 focus:border-blue-500 focus:ring-blue-500">
 
                     </div>
@@ -106,6 +106,12 @@
                             <option value="bc" @selected(request('jenis_bangunan') == 'bc')>
 
                                 BC
+
+                            </option>
+
+                            <option value="bl" @selected(request('jenis_bangunan') == 'bl')>
+
+                                BL
 
                             </option>
 
@@ -495,6 +501,111 @@
 
                                 </template>
 
+                                <template x-if="selected?.type === 'bl'">
+
+                                    <div class="space-y-4">
+
+                                        <div>
+
+                                            <div class="text-xs text-slate-500">
+
+                                                Jenis Bangunan
+
+                                            </div>
+
+                                            <div class="font-semibold text-slate-900">
+
+                                                BL
+
+                                            </div>
+
+                                        </div>
+
+                                        <div>
+
+                                            <div class="text-xs text-slate-500">
+
+                                                Nama Infrastruktur
+
+                                            </div>
+
+                                            <div class="font-medium" x-text="selected.nama_infrastruktur">
+                                            </div>
+
+                                        </div>
+
+                                        <div>
+
+                                            <div class="text-xs text-slate-500">
+
+                                                Kategori
+
+                                            </div>
+
+                                            <div class="font-medium" x-text="selected.kategori">
+                                            </div>
+
+                                        </div>
+
+                                        <div>
+
+                                            <div class="text-xs text-slate-500">
+
+                                                Alamat
+
+                                            </div>
+
+                                            <div class="font-medium" x-text="selected.alamat || '-'">
+                                            </div>
+
+                                        </div>
+
+                                        <div>
+
+                                            <div class="text-xs text-slate-500">
+
+                                                Email
+
+                                            </div>
+
+                                            <div class="font-medium" x-text="selected.email || '-'">
+                                            </div>
+
+                                        </div>
+
+                                        <div>
+
+                                            <div class="text-xs text-slate-500">
+
+                                                Website
+
+                                            </div>
+
+                                            <template x-if="selected.website">
+
+                                                <a :href="selected.website" target="_blank"
+                                                    class="font-medium text-blue-600 hover:underline"
+                                                    x-text="selected.website">
+                                                </a>
+
+                                            </template>
+
+                                            <template x-if="!selected.website">
+
+                                                <div class="font-medium">
+
+                                                    -
+
+                                                </div>
+
+                                            </template>
+
+                                        </div>
+
+                                    </div>
+
+                                </template>
+
                             </div>
 
                             <template x-if="selected">
@@ -617,6 +728,10 @@
 
                         case 'btt':
                             color = 'blue';
+                            break;
+
+                        case 'bl':
+                            color = 'purple';
                             break;
                     }
 

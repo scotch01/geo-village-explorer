@@ -580,7 +580,7 @@
                             </a>
                             <button type="submit" @click="redirectTo = 'survey'"
                                 class="px-6 py-3.5 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl font-bold transition-all active:scale-95 shadow-md shadow-blue-600/20 text-sm text-center">
-                                Simpan Data Keluarga
+                                Simpan Data
                             </button>
                         </div>
                     </div>

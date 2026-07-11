@@ -8,6 +8,7 @@ use App\Models\Tempat;
 use App\Models\Keluarga;
 use App\Models\AnggotaKeluarga;
 use App\Models\Usaha;
+use App\Models\BangunanLainnya;
 use Illuminate\Http\Request;
 
 use App\Services\Export\ExportService;
@@ -159,6 +160,41 @@ class ExportController extends Controller
                     }
                 );
 
+        /*
+        |--------------------------------------------------------------------------
+        | BANGUNAN LAINNYA
+        |--------------------------------------------------------------------------
+        */
+
+        $bangunanLainnyaQuery =
+            BangunanLainnya::query()
+                ->whereHas(
+                    'tempat',
+                    function ($query)
+                    use (
+                        $desaId,
+                        $jenisBangunan
+                    ) {
+
+                        if ($desaId) {
+
+                            $query->where(
+                                'id_desa',
+                                $desaId
+                            );
+                        }
+
+                        if ($jenisBangunan) {
+
+                            $query->where(
+                                'jenis_bangunan',
+                                $jenisBangunan
+                            );
+                        }
+
+                    }
+                );
+
         $summary = [
 
             'tempat'
@@ -172,6 +208,9 @@ class ExportController extends Controller
 
             'usaha'
                 => $usahaQuery->count(),
+
+            'bangunan_lainnya'
+                => $bangunanLainnyaQuery->count(),
 
         ];
 

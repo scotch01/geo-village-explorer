@@ -48,6 +48,13 @@ class Tempat extends Model
         return $this->hasMany(Usaha::class);
     }
 
+    public function bangunanLainnya()
+    {
+        return $this->hasOne(
+            BangunanLainnya::class
+        );
+    }
+
     public function anggotaKeluargas()
     {
         return $this->hasManyThrough(

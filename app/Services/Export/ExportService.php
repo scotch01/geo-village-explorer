@@ -7,6 +7,7 @@ use App\Services\Export\TempatExport;
 use App\Services\Export\KeluargaExport;
 use App\Services\Export\AnggotaExport;
 use App\Services\Export\UsahaExport;
+use App\Services\Export\BangunanLainnyaExport;
 
 class ExportService
 {
@@ -37,6 +38,9 @@ class ExportService
                 => app(
                     UsahaExport::class
                 )->download($request),
+
+            'bangunan_lainnya'
+                => app(BangunanLainnyaExport::class)->download($request),
 
             default
                 => abort(404),
