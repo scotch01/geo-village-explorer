@@ -6,11 +6,13 @@ class Kategori
 {
     public const OPTIONS = [
 
-        1 => 'Pendidikan',
+        1 => '1. Infra Pendidikan',
 
-        2 => 'Kesehatan',
+        2 => '2. Infra Kesehatan',
 
-        3 => 'Perbankan',
+        3 => '3. Tempat Ibadah',
+
+        4 => '4. Kantor Desa',
 
     ];
 }
