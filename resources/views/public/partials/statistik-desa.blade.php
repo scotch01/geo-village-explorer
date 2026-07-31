@@ -1,4 +1,4 @@
-<section id="statistik-desa" class="py-24 bg-white">
+<section id="statistik-desa" class="py-24 bg-gradient-to-br from-purple-50 via-white to-blue-50">
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 

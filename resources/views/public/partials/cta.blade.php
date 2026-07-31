@@ -1,4 +1,4 @@
-<section id="layanan-portal" class="py-24 bg-white">
+<section id="layanan-portal" class="py-24 bg-gradient-to-b from-blue-50 via-white to-slate-100">
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 lg:space-y-8">
 
