@@ -14,6 +14,7 @@ return new class extends Migration
              * Hapus field hardcoded
              * karena nanti pertanyaan akan dinamis
              */
+            $table->dropIndex(['skala_usaha']);
             $table->dropColumn('skala_usaha');
 
             /**

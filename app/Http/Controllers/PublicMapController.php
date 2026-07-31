@@ -359,6 +359,9 @@ class PublicMapController extends Controller
                                 ->usahas
                                 ->count()
                     ),
+
+            'statistikDesa'
+                => (new StatistikDesaController)->summary(),
         ]);
     }
 }

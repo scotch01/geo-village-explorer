@@ -10,7 +10,11 @@
 
     @include('public.partials.about-spectra')
 
+    @include('public.partials.statistik-desa')
+
     @include('public.partials.map-section')
+
+    @include('public.partials.cta')
 
     @include('public.partials.footer')
 

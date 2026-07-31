@@ -45,7 +45,7 @@
                 <div class="relative" @mouseenter="homeMenu=true" @mouseleave="homeMenu=false">
 
                     <button
-                        class="flex items-center gap-2 text-sm font-semibold text-slate-700 hover:text-blue-600 transition">
+                        class="flex items-center gap-2 text-sm font-semibold text-slate-700 hover:text-blue-600 transition border-b-2 border-transparent pb-1">
 
                         Beranda
 
