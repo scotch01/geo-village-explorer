@@ -14,8 +14,8 @@
                     <button @click="active={{ $item->id }}"
                         class="px-5 py-2.5 rounded-full text-sm font-semibold transition"
                         :class="active === {{ $item->id }} ?
-                            'bg-cyan-600 text-white shadow' :
-                            'bg-slate-100 text-slate-700 hover:bg-cyan-100 hover:text-cyan-700'">
+                            'bg-navy-700 text-white shadow' :
+                            'bg-slate-100 text-slate-700 hover:bg-navy-100 hover:text-navy-700'">
 
                         {{ $item->desa->nama_desa }}
 
@@ -80,7 +80,7 @@
 
                                 @if ($service->whatsapp)
                                     <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $service->whatsapp) }}"
-                                        target="_blank" class="font-semibold text-cyan-700 hover:underline">
+                                        target="_blank" class="font-semibold text-navy-700 hover:underline">
 
                                         {{ $service->whatsapp }}
 
@@ -105,7 +105,7 @@
 
                                 @if ($service->email)
                                     <a href="mailto:{{ $service->email }}"
-                                        class="font-semibold text-cyan-700 hover:underline">
+                                        class="font-semibold text-navy-700 hover:underline">
 
                                         {{ $service->email }}
 
@@ -130,7 +130,7 @@
 
                                 @if ($service->sop_url)
                                     <a href="{{ $service->sop_url }}" target="_blank"
-                                        class="inline-flex items-center gap-2 px-5 py-1 rounded-xl bg-cyan-600 hover:bg-cyan-700 text-white font-semibold transition-all active:scale-95">
+                                        class="inline-flex items-center gap-2 px-5 py-1 rounded-xl bg-descan-500 hover:bg-descan-600 text-white font-semibold transition-all active:scale-95">
 
                                         Lihat SOP
 

@@ -14,6 +14,26 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                'orange': '#FF9F10',
+                'descan': {
+                    50:  '#FFF8EB',
+                    100: '#FFEFC6',
+                    200: '#FFD96B',
+                    300: '#FFC637',
+                    400: '#FFB310',
+                    500: '#FF9F10',
+                    600: '#E88A00',
+                    700: '#CC7400',
+                },
+                'navy': {
+                    500: '#274568ff',
+                    600: '#1E4068',
+                    700: '#1B3A5C',
+                    800: '#152E4A',
+                    900: '#0F2240',
+                },
+            },
         },
     },
 

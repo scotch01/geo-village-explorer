@@ -8,6 +8,8 @@
 
     @include('public.partials.desa-cantik')
 
+    @include('public.partials.video-section')
+
     @include('public.partials.about-spectra')
 
     @include('public.partials.statistik-desa')

@@ -1,14 +1,14 @@
-<section id="tentang" class="py-24 bg-gradient-to-br from-blue-100 via-white to-purple-100">
+<section id="tentang" class="py-24 bg-gradient-to-br from-blue-300 via-white to-descan-700">
 
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
 
         <div class="text-center max-w-3xl mx-auto">
 
-            <span
+            {{-- <span
                 class="inline-flex items-center px-4 py-2 rounded-full
                 bg-blue-100 text-blue-700 text-sm font-semibold">
                 Tentang Aplikasi
-            </span>
+            </span> --}}
 
             <h2
                 class="mt-6 text-4xl lg:text-5xl font-black text-slate-900">
@@ -30,7 +30,7 @@
             class="mt-16 grid lg:grid-cols-3 gap-8">
 
             <div
-                class="bg-slate-50 rounded-3xl p-8 border border-slate-200">
+                class="bg-slate-50 rounded-3xl shadow-lg p-8 border border-slate-200">
 
                 <div
                     class="w-14 h-14 rounded-2xl bg-blue-100
@@ -65,7 +65,7 @@
             </div>
 
             <div
-                class="bg-slate-50 rounded-3xl p-8 border border-slate-200">
+                class="bg-slate-50 rounded-3xl shadow-lg p-8 border border-slate-200">
 
                 <div
                     class="w-14 h-14 rounded-2xl bg-green-100
@@ -100,7 +100,7 @@
             </div>
 
             <div
-                class="bg-slate-50 rounded-3xl p-8 border border-slate-200">
+                class="bg-slate-50 rounded-3xl shadow-lg p-8 border border-slate-200">
 
                 <div
                     class="w-14 h-14 rounded-2xl bg-purple-100

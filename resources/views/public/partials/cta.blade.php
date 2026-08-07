@@ -1,4 +1,4 @@
-<section id="layanan-portal" class="py-24 bg-gradient-to-b from-blue-100 via-white to-slate-200">
+<section id="layanan-portal" class="py-24 bg-gradient-to-bl from-descan-700 via-white to-blue-300">
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 lg:space-y-8">
 
@@ -6,7 +6,7 @@
         <div class="relative rounded-2xl lg:rounded-3xl overflow-hidden shadow-xl shadow-blue-950/10 grid md:grid-cols-[1.1fr_1.3fr_1fr]">
 
             {{-- Illustration panel --}}
-            <div class="relative bg-gradient-to-br from-blue-800 to-blue-700 p-8 flex flex-col justify-center overflow-hidden min-h-[200px]">
+            <div class="relative bg-gradient-to-br from-navy-800 to-navy-700 p-8 flex flex-col justify-center overflow-hidden min-h-[200px]">
 
                 <div class="pointer-events-none absolute -bottom-8 -left-8 w-40 h-40 rounded-full bg-white/10 blur-2xl">
                 </div>
@@ -82,12 +82,12 @@
                             d="M12 9v3.75m0 3.75h.008v.008H12v-.008zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <span>
-                        Hubungi admin desa jika belum memiliki akses layanan.
+                        Hubungi admin desa jika membutuhkan layanan administrasi.
                     </span>
                 </div>
 
                 <a href="{{ route('public.service') }}"
-                    class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-700 text-white font-bold shadow-lg shadow-blue-950/20 hover:bg-blue-600 transition">
+                    class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-navy-700 text-white font-bold shadow-lg shadow-blue-950/20 hover:bg-navy-600 transition">
                     Buka Layanan
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
@@ -103,7 +103,7 @@
         <div class="relative rounded-2xl lg:rounded-3xl overflow-hidden shadow-xl shadow-slate-900/10 grid md:grid-cols-[1.1fr_1.3fr_1fr]">
 
             {{-- Illustration panel --}}
-            <div class="relative bg-gradient-to-br from-amber-500 to-amber-400 p-8 flex flex-col justify-center overflow-hidden min-h-[200px]">
+            <div class="relative bg-gradient-to-br from-descan-500 to-descan-400 p-8 flex flex-col justify-center overflow-hidden min-h-[200px]">
 
                 <div class="pointer-events-none absolute -bottom-8 -right-8 w-40 h-40 rounded-full bg-white/10 blur-2xl">
                 </div>
@@ -134,7 +134,7 @@
             <div class="relative flex flex-col items-center justify-center text-center gap-2 p-8 bg-gradient-to-br from-slate-800 to-slate-900">
 
                 <div class="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center ring-1 ring-white/10">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-amber-300" fill="none"
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-descan-300" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                             d="M4 7a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V7z" />
@@ -167,7 +167,7 @@
                 </div>
 
                 <a href="{{ route('public.publication') }}"
-                    class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-amber-400 text-slate-900 font-bold shadow-lg hover:bg-amber-300 transition">
+                    class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-descan-400 text-slate-900 font-bold shadow-lg hover:bg-descan-300 transition">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />

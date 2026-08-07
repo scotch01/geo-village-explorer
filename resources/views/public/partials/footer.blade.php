@@ -1,4 +1,4 @@
-<footer class="bg-slate-900 text-white">
+<footer class="bg-navy-900 text-white">
 
     <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16">
 
@@ -10,7 +10,7 @@
                 <div class="flex items-center gap-3">
 
                     <div
-                        class="w-12 h-12 rounded-2xl bg-blue-600 flex items-center justify-center font-bold text-lg ">
+                        class="w-12 h-12 rounded-2xl bg-navy-700 flex items-center justify-center font-bold text-lg ">
 
                         S
 

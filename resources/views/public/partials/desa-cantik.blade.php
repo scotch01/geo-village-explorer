@@ -1,17 +1,17 @@
-<section id="desa-cantik" class="py-24 bg-gradient-to-bl from-purple-100 via-white to-blue-50">
+<section id="desa-cantik" class="py-24 bg-gradient-to-bl from-descan-700 via-white to-blue-300">
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {{-- Header --}}
         <div class="max-w-3xl">
 
-            <span
+            {{-- <span
                 class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-blue-100 text-blue-700 text-sm font-bold">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M10 2l1.7 4.6L16 8l-4.3 1.4L10 14l-1.7-4.6L4 8l4.3-1.4L10 2z" />
                 </svg>
                 Kerja Sama Pemko Pariaman &amp; BPS Kota Pariaman
-            </span>
+            </span> --}}
 
             <h2 class="mt-6 text-3xl lg:text-4xl font-black text-slate-900">
                 Apa itu Program Desa Cantik?
@@ -87,11 +87,11 @@
         <div class="mt-6 flex flex-wrap gap-3">
 
             <span class="inline-flex items-center px-4 py-2 rounded-full bg-white border border-slate-200 text-sm font-semibold text-slate-700">
-                Desa Sunuah
+                Desa Pasir Sunur
             </span>
 
             <span class="inline-flex items-center px-4 py-2 rounded-full bg-white border border-slate-200 text-sm font-semibold text-slate-700">
-                Desa Kampuang Apa
+                Desa Kampung Apar
             </span>
 
             <span class="inline-flex items-center px-4 py-2 rounded-full bg-white border border-slate-200 text-sm font-semibold text-slate-700">
@@ -101,7 +101,7 @@
         </div>
 
         {{-- Quote --}}
-        <div class="mt-14 relative rounded-3xl bg-blue-800 px-8 py-10 sm:px-12 overflow-hidden">
+        <div class="mt-14 relative rounded-3xl bg-navy-800 px-8 py-10 sm:px-12 overflow-hidden">
 
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                 class="pointer-events-none absolute -top-4 -left-2 w-28 h-28 text-white/10">
@@ -140,8 +140,8 @@
             <div class="mt-10 grid sm:grid-cols-2 gap-6">
 
                 <div class="rounded-2xl bg-white border border-slate-200 shadow-sm p-6">
-                    <div class="w-11 h-11 rounded-xl bg-amber-100 flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-amber-600" fill="none"
+                    <div class="w-11 h-11 rounded-xl bg-descan-100 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-descan-600" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                 d="M9 19v-6a2 2 0 012-2h2a2 2 0 012 2v6m-9 0h10a2 2 0 002-2V9.5a1 1 0 00-.4-.8l-5-3.75a1 1 0 00-1.2 0l-5 3.75a1 1 0 00-.4.8V17a2 2 0 002 2z" />
@@ -157,8 +157,8 @@
                 </div>
 
                 <div class="rounded-2xl bg-white border border-slate-200 shadow-sm p-6">
-                    <div class="w-11 h-11 rounded-xl bg-amber-100 flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-amber-600" fill="none"
+                    <div class="w-11 h-11 rounded-xl bg-descan-100 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-descan-600" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                 d="M9 17v-2a4 4 0 014-4h3m0 0l-3-3m3 3l-3 3M4 7a3 3 0 013-3h1a3 3 0 013 3v1a3 3 0 01-3 3H7a3 3 0 01-3-3V7z" />
@@ -174,8 +174,8 @@
                 </div>
 
                 <div class="rounded-2xl bg-white border border-slate-200 shadow-sm p-6">
-                    <div class="w-11 h-11 rounded-xl bg-amber-100 flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-amber-600" fill="none"
+                    <div class="w-11 h-11 rounded-xl bg-descan-100 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-descan-600" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                 d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -190,8 +190,8 @@
                 </div>
 
                 <div class="rounded-2xl bg-white border border-slate-200 shadow-sm p-6">
-                    <div class="w-11 h-11 rounded-xl bg-amber-100 flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-amber-600" fill="none"
+                    <div class="w-11 h-11 rounded-xl bg-descan-100 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-descan-600" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                 d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -211,7 +211,7 @@
 
         {{-- Logo --}}
         <div class="mt-16 flex justify-center">
-            <img src="{{ asset('images/descan_logo.png') }}" alt="Logo Desa Cantik" class="w-40 opacity-80">
+            <img src="{{ asset('images/descan_logo.png') }}" alt="Logo Desa Cantik" class="w-60 opacity-90">
         </div>
 
     </div>

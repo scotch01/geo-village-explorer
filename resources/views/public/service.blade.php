@@ -4,19 +4,12 @@
 
     @include('public.partials.navbar')
 
-    <section class="lg:py-24 py-16 bg-gradient-to-br from-blue-100 via-white to-purple-100">
+    <section class="lg:py-24 py-16 bg-gradient-to-br from-blue-300 via-white to-descan-200">
 
         <div class="max-w-7xl mx-auto px-6">
 
             {{-- HERO --}}
             <div class="max-w-3xl items-center mx-auto text-center">
-
-                <span
-                    class="inline-flex items-center px-4 py-2 rounded-full bg-cyan-100 text-cyan-700 text-sm font-bold">
-
-                    Layanan Statistik
-
-                </span>
 
                 <h1
                     class="mt-6 text-4xl md:text-5xl font-black text-slate-900">

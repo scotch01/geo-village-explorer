@@ -1,258 +1,243 @@
 @php
-    // TODO: Ganti masing-masing URL dummy di bawah ini dengan link foto asli dokumentasi desa.
-    // (Sementara memakai foto contoh dari picsum.photos agar terlihat bagaimana tampilannya dengan foto asli.)
-    $heroSlideshowImages = [
-        'https://picsum.photos/seed/spectra-desa-1/1200/700', // TODO: ganti dengan foto asli 1
-        'https://picsum.photos/seed/spectra-desa-2/1200/700', // TODO: ganti dengan foto asli 2
-        'https://picsum.photos/seed/spectra-desa-3/1200/700', // TODO: ganti dengan foto asli 3
-        'https://picsum.photos/seed/spectra-desa-4/1200/700', // TODO: ganti dengan foto asli 4
-        'https://picsum.photos/seed/spectra-desa-5/1200/700', // TODO: ganti dengan foto asli 5
-        'https://picsum.photos/seed/spectra-desa-6/1200/700', // TODO: ganti dengan foto asli 6
-        'https://picsum.photos/seed/spectra-desa-7/1200/700', // TODO: ganti dengan foto asli 7
-        'https://picsum.photos/seed/spectra-desa-8/1200/700', // TODO: ganti dengan foto asli 8
-        'https://picsum.photos/seed/spectra-desa-9/1200/700', // TODO: ganti dengan foto asli 9
-        'https://picsum.photos/seed/spectra-desa-10/1200/700', // TODO: ganti dengan foto asli 10
-    ];
+    // TODO: Ganti URL ini dengan link gambar peta bersih (tanpa teks) yang sudah diupload ke Cloudinary
+    // Sementara kita menggunakan gambar referensi yang kamu berikan sebagai placeholder background
+    $mapBackgroundImage = 'https://res.cloudinary.com/dxkbjmmoo/image/upload/v1785651055/WhatsApp_Image_2026-08-02_at_11.53.36_hztinc.jpg'; 
 @endphp
 
-<section id="hero" class="relative overflow-hidden bg-white">
-
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16 lg:pt-10 lg:pb-24"
-        x-data='{
-            slide: 0,
-            images: @json($heroSlideshowImages),
-            timer: null,
-            init() {
-                this.timer = setInterval(() => {
-                    this.slide = (this.slide + 1) % this.images.length;
-                }, 3500);
-            }
-        }'>
-
-        {{-- ============ DESKTOP: single overlapping composition ============ --}}
-        <div class="relative hidden lg:block pt-8 pb-8">
-
-        <div class="relative rounded-[2.5rem] overflow-hidden shadow-2xl shadow-blue-950/20 ring-1 ring-black/5 min-h-[560px] xl:min-h-[600px]">
-
-            {{-- Photo slideshow (full bleed background) --}}
-            <template x-for="(img, index) in images" :key="index">
-                <img :src="img" x-show="slide === index"
-                    x-transition:enter="transition ease-out duration-700"
-                    x-transition:enter-start="opacity-0"
-                    x-transition:enter-end="opacity-100"
-                    x-transition:leave="transition ease-in duration-500"
-                    x-transition:leave-start="opacity-100"
-                    x-transition:leave-end="opacity-0"
-                    class="absolute inset-0 w-full h-full object-cover" alt="Dokumentasi kegiatan desa">
-            </template>
-
-            {{-- Subtle bottom gradient so the photo grounds into the card --}}
-            <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/25 to-transparent"></div>
-
-            {{-- Gallery caption chip --}}
-            <div class="absolute top-6 left-[59%] z-10 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/30 backdrop-blur text-white text-xs font-semibold">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M12 17a4 4 0 100-8 4 4 0 000 8z" />
-                </svg>
-                Galeri Kegiatan Desa
-            </div>
-
-            {{-- Back layer for depth --}}
-            <div class="absolute inset-y-0 left-0 w-[58%] translate-x-2 translate-y-2 bg-blue-950/30"
-                style="clip-path: polygon(0 0, 88% 0, 66% 100%, 0 100%);"></div>
-
-            {{-- Diagonal ribbon panel: stretches to the card's full height so the blue always reaches the bottom, never hangs short --}}
-            <div class="absolute inset-y-0 left-0 w-[58%] bg-gradient-to-br from-indigo-950 via-blue-800 to-sky-600 flex flex-col justify-center px-14 xl:px-16 py-10 overflow-hidden"
-                style="clip-path: polygon(0 0, 88% 0, 66% 100%, 0 100%);">
-
-                {{-- Ambient highlight + watermark texture --}}
-                <div class="pointer-events-none absolute -top-16 -left-10 w-72 h-72 rounded-full bg-white/10 blur-3xl"></div>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                    class="pointer-events-none absolute -bottom-10 -left-8 w-56 h-56 text-white/5 rotate-12">
-                    <path
-                        d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1112 6.5a2.5 2.5 0 010 5z" />
-                </svg>
-
-                <span
-                    class="relative self-start inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white/15 text-white text-sm font-bold ring-1 ring-white/20 backdrop-blur">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-amber-300" fill="currentColor"
-                        viewBox="0 0 20 20">
-                        <path
-                            d="M10 2l1.7 4.6L16 8l-4.3 1.4L10 14l-1.7-4.6L4 8l4.3-1.4L10 2z" />
-                    </svg>
-                    Program Desa Cantik
-                </span>
-
-                <h1 class="relative mt-6 text-4xl xl:text-5xl font-black text-white leading-tight tracking-tight">
-                    SPECTRA
-                </h1>
-                <div class="relative mt-2 h-1 w-16 rounded-full bg-amber-400"></div>
-
-                <h2 class="relative mt-4 max-w-md text-base xl:text-lg font-semibold text-blue-100">
-                    Sistem Pemetaan Citra Terpadu Potensi Ekonomi dan Sosial Masyarakat Desa
-                </h2>
-
-                <div
-                    class="relative mt-6 self-start flex items-center gap-2 pl-4 pr-5 py-2.5 rounded-xl border-l-4 border-amber-400 bg-white/10 backdrop-blur">
-                    <span class="font-bold text-amber-300">
-                        Satu Data, Satu Peta,
-                    </span>
-                    <span class="font-bold text-white">
-                        Satu Arah Pembangunan
-                    </span>
-                </div>
-
-                <p class="relative mt-6 max-w-sm text-sm xl:text-base text-blue-100 leading-relaxed">
-                    Pemetaan potensi sosial ekonomi desa yang akurat dan berkelanjutan melalui pemanfaatan data
-                    statistik yang berkualitas.
-                </p>
-
-                <div class="relative mt-8 flex flex-wrap gap-4">
-
-                    <a href="#peta"
-                        class="group inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-blue-700 font-semibold shadow-lg shadow-blue-950/20 hover:bg-blue-50 hover:shadow-xl transition">
-                        Jelajahi Peta
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition group-hover:translate-x-0.5"
-                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
-                    </a>
-
-                    <a href="#tentang"
-                        class="px-6 py-3 rounded-xl border border-white/40 font-semibold text-white hover:bg-white/10 transition">
-                        Pelajari Lebih Lanjut
-                    </a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-            {{-- Floating badge, straddling the photo's bottom edge (outside the overflow-hidden box so it isn't clipped) --}}
-            <div class="absolute bottom-8 right-10 translate-y-1/2 z-10">
-                <div
-                    class="w-64 rounded-2xl bg-gradient-to-r from-blue-700 to-sky-600 text-white text-center font-bold py-3 shadow-lg shadow-blue-900/30">
-                    DESA CERDAS
-                </div>
-            </div>
-
-            {{-- Decorative diagonal accents, straddling the photo's top edge --}}
-            <div class="pointer-events-none absolute top-8 right-10 -translate-y-1/2 flex items-start gap-2.5 z-10">
-                <div class="w-3.5 h-24 rounded-full bg-blue-700/90 -skew-x-12"></div>
-                <div class="w-3.5 h-24 rounded-full bg-sky-400/70 -skew-x-12"></div>
-                <div class="w-3.5 h-24 rounded-full bg-amber-300/70 -skew-x-12"></div>
-            </div>
-
-        </div>
-
-        {{-- ============ MOBILE / TABLET: stacked layout ============ --}}
-        <div class="lg:hidden space-y-6">
-
-            {{-- Content panel --}}
-            <div class="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-indigo-950 via-blue-800 to-sky-600 px-6 py-10 sm:px-10 shadow-xl shadow-blue-950/20">
-
-                <div class="pointer-events-none absolute -top-16 -left-10 w-64 h-64 rounded-full bg-white/10 blur-3xl"></div>
-
-                <span
-                    class="relative inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white/15 text-white text-sm font-bold ring-1 ring-white/20 backdrop-blur">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-amber-300" fill="currentColor"
-                        viewBox="0 0 20 20">
-                        <path d="M10 2l1.7 4.6L16 8l-4.3 1.4L10 14l-1.7-4.6L4 8l4.3-1.4L10 2z" />
-                    </svg>
-                    Program Desa Cantik
-                </span>
-
-                <h1 class="relative mt-6 text-4xl sm:text-5xl font-black text-white leading-tight tracking-tight">
-                    SPECTRA
-                </h1>
-                <div class="relative mt-2 h-1 w-16 rounded-full bg-amber-400"></div>
-
-                <h2 class="relative mt-4 text-base sm:text-lg font-semibold text-blue-100">
-                    Sistem Pemetaan Citra Terpadu Potensi Ekonomi dan Sosial Masyarakat Desa
-                </h2>
-
-                <div
-                    class="relative mt-6 inline-flex flex-wrap items-center gap-2 pl-4 pr-5 py-2.5 rounded-xl border-l-4 border-amber-400 bg-white/10 backdrop-blur">
-                    <span class="font-bold text-amber-300">
-                        Satu Data, Satu Peta,
-                    </span>
-                    <span class="font-bold text-white">
-                        Satu Arah Pembangunan
-                    </span>
-                </div>
-
-                <p class="relative mt-6 max-w-xl text-sm sm:text-base text-blue-100 leading-relaxed">
-                    Pemetaan potensi sosial ekonomi desa yang akurat dan berkelanjutan melalui pemanfaatan data
-                    statistik yang berkualitas.
-                </p>
-
-                <div class="relative mt-8 flex flex-wrap gap-4">
-
-                    <a href="#peta"
-                        class="group inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-blue-700 font-semibold shadow-lg shadow-blue-950/20 hover:bg-blue-50 transition">
-                        Jelajahi Peta
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition group-hover:translate-x-0.5"
-                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
-                    </a>
-
-                    <a href="#tentang"
-                        class="px-6 py-3 rounded-xl border border-white/40 font-semibold text-white hover:bg-white/10 transition">
-                        Pelajari Lebih Lanjut
-                    </a>
-
-                </div>
-
-            </div>
-
-            {{-- Photo slideshow --}}
-            <div class="relative">
-
-                <div class="rounded-3xl overflow-hidden shadow-xl shadow-blue-950/20 aspect-video relative bg-slate-100">
-
-                    <template x-for="(img, index) in images" :key="index">
-                        <img :src="img" x-show="slide === index"
-                            x-transition:enter="transition ease-out duration-700"
-                            x-transition:enter-start="opacity-0"
-                            x-transition:enter-end="opacity-100"
-                            x-transition:leave="transition ease-in duration-500"
-                            x-transition:leave-start="opacity-100"
-                            x-transition:leave-end="opacity-0"
-                            class="absolute inset-0 w-full h-full object-cover" alt="Dokumentasi kegiatan desa">
-                    </template>
-
-                    <div class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/25 to-transparent"></div>
-
-                    <div class="absolute top-4 left-4 z-10 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/30 backdrop-blur text-white text-xs font-semibold">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 17a4 4 0 100-8 4 4 0 000 8z" />
-                        </svg>
-                        Galeri Kegiatan Desa
-                    </div>
-
-                </div>
-
-                <div class="absolute bottom-0 inset-x-0 flex justify-center translate-y-1/2">
-                    <div
-                        class="w-11/12 rounded-2xl bg-gradient-to-r from-blue-700 to-sky-600 text-white text-center font-bold py-3 shadow-lg shadow-blue-900/30">
-                        DESA CERDAS
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
+<section id="hero" class="relative w-full min-h-screen lg:min-h-[550px] xl:min-h-[650px] overflow-hidden bg-slate-900 flex items-center flex-col justify-center lg:flex-row">
+    
+    {{-- 1. Background Map Layer --}}
+    <div class="absolute inset-0 w-full h-full">
+        <img src="{{ $mapBackgroundImage }}" class="w-full h-full object-cover object-right opacity-30 lg:opacity-100" alt="Peta Kota Pariaman">
     </div>
+
+    {{-- 2. Blue Shape Layer (Desktop Only) --}}
+    <div class="absolute inset-y-0 left-0 w-[65%] xl:w-[60%] bg-gradient-to-br from-navy-700 via-navy-500 to-navy-600 hidden lg:block shadow-[20px_0_50px_rgba(0,0,0,0.5)] z-10"
+         style="clip-path: polygon(0 0, 90% 0, 75% 100%, 0 900%);">
+        
+        {{-- Ambient highlight inside the blue panel --}}
+        <div class="pointer-events-none absolute top-0 -left-20 w-96 h-96 rounded-full bg-white/5 blur-3xl"></div>
+        <div class="pointer-events-none absolute bottom-0 left-20 w-72 h-72 rounded-full bg-blue-500/10 blur-3xl"></div>
+        
+        {{-- Subtle grid pattern --}}
+        <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(white 1px, transparent 1px); background-size: 24px 24px;"></div>
+    </div>
+
+    {{-- Mobile Dark Gradient (To make text readable on mobile) --}}
+    <div class="absolute inset-0 bg-gradient-to-b from-navy-900/95 via-navy-900/80 to-slate-900/95 lg:hidden z-0"></div>
+
+    {{-- 3. Map Overlays (HTML pins and cards) - Desktop Only --}}
+    <div class="absolute inset-0 hidden lg:block z-10 pointer-events-none">
+        
+        {{-- Title Peta di Kanan Atas --}}
+        <div class="absolute top-[8%] right-[5%] xl:right-[8%] text-white text-right">
+            <h3 class="text-3xl font-black tracking-tight drop-shadow-lg">PETA KOTA PARIAMAN</h3>
+            <p class="text-sm font-semibold text-slate-200 drop-shadow-md">Tiga Desa Target Program Desa Cantik 2026</p>
+        </div>
+
+        {{-- Desa Pasir Sunur (Yellow) - Top Right --}}
+        <!-- <div class="absolute top-[22%] right-[5%] xl:right-[10%] flex items-center gap-4">
+            <div class="bg-white/95 backdrop-blur rounded-2xl p-4 shadow-xl border-l-4 border-descan-400 min-w-[240px] pointer-events-auto hover:-translate-y-1 transition-transform cursor-default">
+                <h4 class="font-bold text-descan-600 mb-2 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+                    Desa Pasir Sunur
+                </h4>
+                <div class="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-xs text-slate-600">
+                    <span>Luas Wilayah</span> <span class="font-bold text-slate-800 text-right">265,45 ha</span>
+                    <span>Penduduk</span> <span class="font-bold text-slate-800 text-right">1.124 jiwa</span>
+                </div>
+                <div class="mt-2 pt-2 border-t border-slate-200 text-xs">
+                    <span class="text-slate-500 block mb-1">Potensi Unggulan</span>
+                    <span class="font-semibold text-slate-800 flex items-center gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-descan-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                        UMKM Kerupuk
+                    </span>
+                </div>
+            </div>
+            <div class="relative w-10 h-10 bg-descan-400 rounded-full flex items-center justify-center shadow-lg ring-4 ring-white/30 shrink-0 pointer-events-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" /></svg>
+                <span class="absolute -bottom-1 w-1 h-1 bg-white rounded-full"></span>
+            </div>
+        </div> -->
+
+        {{-- Desa Kampung Apar (Blue) - Middle Center --}}
+        <!-- <div class="absolute top-[50%] right-[22%] xl:right-[26%] flex items-center gap-4 flex-row-reverse">
+            <div class="bg-white/95 backdrop-blur rounded-2xl p-4 shadow-xl border-l-4 border-blue-500 min-w-[240px] pointer-events-auto hover:-translate-y-1 transition-transform cursor-default">
+                <h4 class="font-bold text-blue-700 mb-2 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+                    Desa Kampung Apar
+                </h4>
+                <div class="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-xs text-slate-600">
+                    <span>Luas Wilayah</span> <span class="font-bold text-slate-800 text-right">189,12 ha</span>
+                    <span>Penduduk</span> <span class="font-bold text-slate-800 text-right">1.837 jiwa</span>
+                </div>
+                <div class="mt-2 pt-2 border-t border-slate-200 text-xs">
+                    <span class="text-slate-500 block mb-1">Potensi Unggulan</span>
+                    <span class="font-semibold text-slate-800 flex items-center gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                        Perikanan & UMKM
+                    </span>
+                </div>
+            </div>
+            <div class="relative w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center shadow-lg ring-4 ring-white/30 shrink-0 pointer-events-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" /></svg>
+                <span class="absolute -bottom-1 w-1 h-1 bg-white rounded-full"></span>
+            </div>
+        </div> -->
+
+        {{-- Desa Sungai Kasai (Green) - Bottom --}}
+        <!-- <div class="absolute bottom-[10%] right-[10%] xl:right-[15%] flex items-center gap-4">
+            <div class="bg-white/95 backdrop-blur rounded-2xl p-4 shadow-xl border-l-4 border-green-500 min-w-[240px] pointer-events-auto hover:-translate-y-1 transition-transform cursor-default">
+                <h4 class="font-bold text-green-700 mb-2 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+                    Desa Sungai Kasai
+                </h4>
+                <div class="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-xs text-slate-600">
+                    <span>Luas Wilayah</span> <span class="font-bold text-slate-800 text-right">223,67 ha</span>
+                    <span>Penduduk</span> <span class="font-bold text-slate-800 text-right">2.315 jiwa</span>
+                </div>
+                <div class="mt-2 pt-2 border-t border-slate-200 text-xs">
+                    <span class="text-slate-500 block mb-1">Potensi Unggulan</span>
+                    <span class="font-semibold text-slate-800 flex items-center gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
+                        Kelapa & Wisata
+                    </span>
+                </div>
+            </div>
+            <div class="relative w-10 h-10 bg-green-500 rounded-full flex items-center justify-center shadow-lg ring-4 ring-white/30 shrink-0 pointer-events-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" /></svg>
+                <span class="absolute -bottom-1 w-1 h-1 bg-white rounded-full"></span>
+            </div>
+        </div> -->
+
+        {{-- Legend --}}
+        <!-- <div class="absolute bottom-6 right-6 bg-slate-900/80 backdrop-blur rounded-xl p-3 border border-white/20 text-xs text-white pointer-events-auto">
+            <div class="flex items-center gap-2 mb-2">
+                <div class="w-4 h-3 bg-white/20 border border-white/50 rounded-sm"></div>
+                <span>Wilayah Kota Pariaman</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" /></svg>
+                <span>Desa Target Desa Cantik 2026</span>
+            </div>
+        </div> -->
+    </div>
+
+    {{-- 4. Content Container (Text & CTA) --}}
+    <div class="relative z-20 w-full max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-0 pt-32 lg:pt-0">
+        <div class="w-full lg:w-[50%] xl:w-[45%]">
+            
+            <h1 class="text-4xl xl:text-5xl font-black text-white leading-tight tracking-tight">
+                SPECTRA
+            </h1>
+            <div class="mt-2 h-1 w-16 rounded-full bg-descan-500"></div>
+
+            <h2 class="mt-4 text-base xl:text-lg font-semibold text-blue-100 lg:max-w-md">
+                Sistem Pemetaan Terpadu Potensi Ekonomi dan Sosial Masyarakat Desa
+            </h2>
+
+            <div class="mt-6 self-start inline-flex items-center gap-2 pl-4 pr-5 py-2.5 rounded-xl border-l-4 border-descan-500 bg-white/10 backdrop-blur">
+                <span class="font-bold text-descan-400">Satu Data, Satu Peta,</span>
+                <span class="font-bold text-white">Satu Arah Pembangunan</span>
+            </div>
+
+            <div class="mt-8 flex flex-wrap gap-4">
+                <a href="#peta" class="group inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-navy-700 font-semibold shadow-lg hover:bg-blue-50 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 transition group-hover:scale-110 text-descan-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                    Jelajahi Peta
+                </a>
+                <a href="#tentang" class="px-6 py-3 rounded-xl border border-white/40 font-semibold text-white hover:bg-white/10 transition">
+                    Pelajari Lebih Lanjut
+                </a>
+            </div>
+
+            {{-- Stats Grid (4 items) --}}
+            <div class="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-1 -p-2 rounded-2xl border border-white/10 bg-white/5 backdrop-blur ring-1 ring-black/5 shadow-xl shadow-navy-900/50">
+                {{-- Stat 1 --}}
+                <div class="flex flex-col items-center text-center p-2">
+                    <div class="w-5 h-5 rounded-full bg-descan-500/20 text-descan-400 flex items-center justify-center mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                    </div>
+                    <span class="font-bold text-white text-lg leading-none">3</span>
+                    <span class="text-[11px] text-slate-300 mt-1 leading-tight">Desa Target</span>
+                </div>
+                {{-- Stat 2 --}}
+                <div class="flex flex-col items-center text-center p-2 border-l sm:border-white/10 border-transparent sm:pl-2">
+                    <div class="w-5 h-5 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
+                    </div>
+                    <span class="font-bold text-white text-lg leading-none">2026</span>
+                    <span class="text-[11px] text-slate-300 mt-1 leading-tight">Tahun<br>Pencanangan</span>
+                </div>
+                {{-- Stat 3 --}}
+                <div class="flex flex-col items-center text-center p-2 sm:border-l border-white/10 sm:pl-2">
+                    <div class="w-5 h-5 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" /></svg>
+                    </div>
+                    <span class="font-bold text-white text-lg leading-none">1 Peta</span>
+                    <span class="text-[11px] text-slate-300 mt-1 leading-tight">Kota<br>Pariaman</span>
+                </div>
+                {{-- Stat 4 --}}
+                <div class="flex flex-col items-center text-center p-2 border-l border-white/10 pl-2">
+                    <div class="w-5 h-5 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" /></svg>
+                    </div>
+                    <span class="font-bold text-white text-lg leading-none">Satu Data</span>
+                    <span class="text-[11px] text-slate-300 mt-1 leading-tight">Indonesia</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    {{-- Mobile Village List (Below text content, only visible on mobile) --}}
+    <!-- <div class="relative z-20 w-full px-6 lg:hidden pb-16 space-y-4 mt-8">
+        <h3 class="text-xl font-bold text-white border-b border-white/10 pb-2 mb-4">Desa Target Desa Cantik</h3>
+        
+        {{-- Mobile Card Pasir Sunur --}}
+        <div class="bg-white/10 backdrop-blur rounded-2xl p-4 border-l-4 border-descan-400">
+            <h4 class="font-bold text-descan-400 mb-2 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+                Desa Pasir Sunur
+            </h4>
+            <div class="grid grid-cols-[auto_1fr] gap-x-2 text-sm text-slate-300">
+                <span>Luas:</span> <span class="font-semibold text-white">265,45 ha</span>
+                <span>Penduduk:</span> <span class="font-semibold text-white">1.124 jiwa</span>
+            </div>
+            <div class="mt-2 text-sm text-slate-300 border-t border-white/10 pt-2">
+                Potensi: <span class="font-semibold text-white">UMKM Kerupuk</span>
+            </div>
+        </div>
+
+        {{-- Mobile Card Kampung Apar --}}
+        <div class="bg-white/10 backdrop-blur rounded-2xl p-4 border-l-4 border-blue-500">
+            <h4 class="font-bold text-blue-400 mb-2 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+                Desa Kampung Apar
+            </h4>
+            <div class="grid grid-cols-[auto_1fr] gap-x-2 text-sm text-slate-300">
+                <span>Luas:</span> <span class="font-semibold text-white">189,12 ha</span>
+                <span>Penduduk:</span> <span class="font-semibold text-white">1.837 jiwa</span>
+            </div>
+            <div class="mt-2 text-sm text-slate-300 border-t border-white/10 pt-2">
+                Potensi: <span class="font-semibold text-white">Perikanan & UMKM</span>
+            </div>
+        </div>
+
+        {{-- Mobile Card Sungai Kasai --}}
+        <div class="bg-white/10 backdrop-blur rounded-2xl p-4 border-l-4 border-green-500">
+            <h4 class="font-bold text-green-400 mb-2 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+                Desa Sungai Kasai
+            </h4>
+            <div class="grid grid-cols-[auto_1fr] gap-x-2 text-sm text-slate-300">
+                <span>Luas:</span> <span class="font-semibold text-white">223,67 ha</span>
+                <span>Penduduk:</span> <span class="font-semibold text-white">2.315 jiwa</span>
+            </div>
+            <div class="mt-2 text-sm text-slate-300 border-t border-white/10 pt-2">
+                Potensi: <span class="font-semibold text-white">Kelapa & Wisata</span>
+            </div>
+        </div>
+    </div> -->
 
 </section>

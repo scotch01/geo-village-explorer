@@ -1,8 +1,8 @@
-<section id="statistik-desa" class="py-24 bg-gradient-to-br from-purple-100 via-white to-blue-100">
+<section id="statistik-desa" class="py-24 bg-gradient-to-bl from-descan-700 via-white to-blue-300">
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        <div class="relative bg-gradient-to-br from-slate-50 to-white rounded-3xl lg:rounded-[2.5rem] border border-slate-200 shadow-sm pt-10 lg:pt-12 pb-10 lg:pb-12 px-6 lg:px-10">
+        <div class="relative bg-gradient-to-br from-slate-50 to-white rounded-3xl lg:rounded-[2.5rem] border border-slate-200 shadow-lg pt-10 lg:pt-12 pb-10 lg:pb-12 px-6 lg:px-10">
 
             {{-- Ribbon title banner --}}
             <div class="absolute -top-4 left-1/2 -translate-x-1/2 z-10">

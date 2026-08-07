@@ -12,7 +12,7 @@
             <a href="{{ route('public.spectra') }}" class="flex items-center gap-3">
 
                 <div
-                    class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-black text-lg">
+                    class="w-10 h-10 rounded-xl bg-navy-700 text-white flex items-center justify-center font-black text-lg">
 
                     S
 

@@ -120,7 +120,7 @@
                                         {{-- PDF / EXCEL / DRIVE / LINK --}}
                                         {{-- ================================================= --}}
 
-                                        <div class="text-xs font-bold uppercase tracking-[0.15em] text-blue-700 mb-3">
+                                        <div class="text-xs font-bold uppercase tracking-[0.15em] text-navy-700 mb-3">
 
                                             {{ $documents->first()->file_type_label }}
 
@@ -130,7 +130,7 @@
 
                                             @foreach ($documents as $item)
                                                 <a href="{{ $item->url }}" target="_blank"
-                                                    class="flex items-start gap-2 text-slate-700 hover:text-blue-600 transition">
+                                                    class="flex items-start gap-2 text-slate-700 hover:text-navy-600 transition">
 
                                                     <span>•</span>
 
