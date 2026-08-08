@@ -1,6 +1,6 @@
 @php
-    $mapBackgroundImagePath = public_path('images/hero-peta-pariaman.png');
-    $mapBackgroundImage = asset('images/hero-peta-pariaman.png') . '?v=' . (file_exists($mapBackgroundImagePath) ? filemtime($mapBackgroundImagePath) : time());
+    $mapBackgroundImagePath = public_path('images/hero-peta-pariaman.webp');
+    $mapBackgroundImage = asset('images/hero-peta-pariaman.webp') . '?v=' . (file_exists($mapBackgroundImagePath) ? filemtime($mapBackgroundImagePath) : time());
 @endphp
 
 <section id="hero" class="relative w-full min-h-screen lg:min-h-[550px] xl:min-h-[650px] overflow-hidden bg-slate-900 flex items-center flex-col justify-center lg:flex-row">
