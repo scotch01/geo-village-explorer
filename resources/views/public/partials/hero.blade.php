@@ -7,7 +7,7 @@
 
     {{-- 1. Background Map Layer (Desktop Only) --}}
     <div class="absolute inset-0 w-full h-full z-0 hidden lg:block bg-gradient-to-br from-navy-700 via-navy-500 to-navy-600">
-        <img src="{{ $mapBackgroundImage }}" class="w-full h-full object-contain object-right" alt="Peta Kota Pariaman">
+        <img src="{{ $mapBackgroundImage }}" class="w-full h-full object-contain object-right translate-x-[10%]" alt="Peta Kota Pariaman">
     </div>
 
     {{-- 2. Blue Shape Layer (Desktop Only) --}}
