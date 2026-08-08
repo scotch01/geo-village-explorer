@@ -1,19 +1,18 @@
 @php
-    // TODO: Ganti URL ini dengan link gambar peta bersih (tanpa teks) yang sudah diupload ke Cloudinary
-    // Sementara kita menggunakan gambar referensi yang kamu berikan sebagai placeholder background
-    $mapBackgroundImage = 'https://res.cloudinary.com/dxkbjmmoo/image/upload/v1785651055/WhatsApp_Image_2026-08-02_at_11.53.36_hztinc.jpg'; 
+    $mapBackgroundImagePath = public_path('images/hero-peta-pariaman.png');
+    $mapBackgroundImage = asset('images/hero-peta-pariaman.png') . '?v=' . (file_exists($mapBackgroundImagePath) ? filemtime($mapBackgroundImagePath) : time());
 @endphp
 
 <section id="hero" class="relative w-full min-h-screen lg:min-h-[550px] xl:min-h-[650px] overflow-hidden bg-slate-900 flex items-center flex-col justify-center lg:flex-row">
-    
-    {{-- 1. Background Map Layer --}}
-    <div class="absolute inset-0 w-full h-full">
-        <img src="{{ $mapBackgroundImage }}" class="w-full h-full object-cover object-right opacity-30 lg:opacity-100" alt="Peta Kota Pariaman">
+
+    {{-- 1. Background Map Layer (Desktop Only) --}}
+    <div class="absolute inset-0 w-full h-full z-0 hidden lg:block bg-gradient-to-br from-navy-700 via-navy-500 to-navy-600">
+        <img src="{{ $mapBackgroundImage }}" class="w-full h-full object-contain object-right" alt="Peta Kota Pariaman">
     </div>
 
     {{-- 2. Blue Shape Layer (Desktop Only) --}}
-    <div class="absolute inset-y-0 left-0 w-[65%] xl:w-[60%] bg-gradient-to-br from-navy-700 via-navy-500 to-navy-600 hidden lg:block shadow-[20px_0_50px_rgba(0,0,0,0.5)] z-10"
-         style="clip-path: polygon(0 0, 90% 0, 75% 100%, 0 900%);">
+    <div class="absolute inset-y-0 left-0 w-full bg-gradient-to-br from-navy-700 via-navy-500 to-navy-600 hidden lg:block shadow-[20px_0_50px_rgba(0,0,0,0.5)] z-10"
+         style="clip-path: polygon(0 0, 58.5% 0, 48.75% 100%, 0 900%);">
         
         {{-- Ambient highlight inside the blue panel --}}
         <div class="pointer-events-none absolute top-0 -left-20 w-96 h-96 rounded-full bg-white/5 blur-3xl"></div>
@@ -23,8 +22,6 @@
         <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(white 1px, transparent 1px); background-size: 24px 24px;"></div>
     </div>
 
-    {{-- Mobile Dark Gradient (To make text readable on mobile) --}}
-    <div class="absolute inset-0 bg-gradient-to-b from-navy-900/95 via-navy-900/80 to-slate-900/95 lg:hidden z-0"></div>
 
     {{-- 3. Map Overlays (HTML pins and cards) - Desktop Only --}}
     <div class="absolute inset-0 hidden lg:block z-10 pointer-events-none">
@@ -125,8 +122,8 @@
 
     {{-- 4. Content Container (Text & CTA) --}}
     <div class="relative z-20 w-full max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-0 pt-32 lg:pt-0">
-        <div class="w-full lg:w-[50%] xl:w-[45%]">
-            
+        <div class="w-full lg:w-[42%] xl:w-[38%] flex flex-col items-center text-center">
+
             <h1 class="text-4xl xl:text-5xl font-black text-white leading-tight tracking-tight">
                 SPECTRA
             </h1>
@@ -136,23 +133,23 @@
                 Sistem Pemetaan Terpadu Potensi Ekonomi dan Sosial Masyarakat Desa
             </h2>
 
-            <div class="mt-6 self-start inline-flex items-center gap-2 pl-4 pr-5 py-2.5 rounded-xl border-l-4 border-descan-500 bg-white/10 backdrop-blur">
-                <span class="font-bold text-descan-400">Satu Data, Satu Peta,</span>
-                <span class="font-bold text-white">Satu Arah Pembangunan</span>
+            <div class="mt-6 inline-flex items-center gap-2 pl-4 pr-5 py-2.5 rounded-xl border-l-4 border-descan-500 bg-white/10 backdrop-blur whitespace-nowrap max-w-full overflow-x-auto">
+                <span class="font-bold text-descan-400 text-sm sm:text-base">Satu Data, Satu Peta,</span>
+                <span class="font-bold text-white text-sm sm:text-base">Satu Arah Pembangunan</span>
             </div>
 
-            <div class="mt-8 flex flex-wrap gap-4">
-                <a href="#peta" class="group inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-navy-700 font-semibold shadow-lg hover:bg-blue-50 transition">
+            <div class="mt-8 w-full flex flex-col sm:flex-row sm:justify-center flex-wrap gap-4">
+                <a href="#peta" class="group inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 rounded-xl bg-white text-navy-700 font-semibold shadow-lg hover:bg-blue-50 transition">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 transition group-hover:scale-110 text-descan-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                     Jelajahi Peta
                 </a>
-                <a href="#tentang" class="px-6 py-3 rounded-xl border border-white/40 font-semibold text-white hover:bg-white/10 transition">
+                <a href="#tentang" class="inline-flex items-center justify-center w-full sm:w-auto px-6 py-3 rounded-xl border border-white/40 font-semibold text-white hover:bg-white/10 transition">
                     Pelajari Lebih Lanjut
                 </a>
             </div>
 
             {{-- Stats Grid (4 items) --}}
-            <div class="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-1 -p-2 rounded-2xl border border-white/10 bg-white/5 backdrop-blur ring-1 ring-black/5 shadow-xl shadow-navy-900/50">
+            <div class="mt-12 w-full grid grid-cols-2 sm:grid-cols-4 gap-1 -p-2 rounded-2xl border border-white/10 bg-white/5 backdrop-blur ring-1 ring-black/5 shadow-xl shadow-navy-900/50">
                 {{-- Stat 1 --}}
                 <div class="flex flex-col items-center text-center p-2">
                     <div class="w-5 h-5 rounded-full bg-descan-500/20 text-descan-400 flex items-center justify-center mb-2">
@@ -178,13 +175,18 @@
                     <span class="text-[11px] text-slate-300 mt-1 leading-tight">Kota<br>Pariaman</span>
                 </div>
                 {{-- Stat 4 --}}
-                <div class="flex flex-col items-center text-center p-2 border-l border-white/10 pl-2">
+                <div class="flex flex-col items-center text-center p-2 border-transparent sm:border-l sm:border-white/10 sm:pl-2">
                     <div class="w-5 h-5 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center mb-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" /></svg>
                     </div>
                     <span class="font-bold text-white text-lg leading-none">Satu Data</span>
                     <span class="text-[11px] text-slate-300 mt-1 leading-tight">Indonesia</span>
                 </div>
+            </div>
+
+            {{-- Map Image (Mobile/Tablet Only) --}}
+            <div class="mt-10 lg:hidden rounded-2xl overflow-hidden border border-white/10 shadow-xl">
+                <img src="{{ $mapBackgroundImage }}" class="w-full h-auto" alt="Peta Kota Pariaman">
             </div>
 
         </div>

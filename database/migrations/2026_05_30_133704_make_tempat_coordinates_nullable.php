@@ -1,33 +1,24 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
     public function up(): void
     {
-        DB::statement("
-            ALTER TABLE tempats
-            MODIFY latitude DECIMAL(10,7) NULL
-        ");
-
-        DB::statement("
-            ALTER TABLE tempats
-            MODIFY longitude DECIMAL(10,7) NULL
-        ");
+        Schema::table('tempats', function (Blueprint $table) {
+            $table->decimal('latitude', 10, 7)->nullable()->change();
+            $table->decimal('longitude', 10, 7)->nullable()->change();
+        });
     }
 
     public function down(): void
     {
-        DB::statement("
-            ALTER TABLE tempats
-            MODIFY latitude DECIMAL(10,7) NOT NULL
-        ");
-
-        DB::statement("
-            ALTER TABLE tempats
-            MODIFY longitude DECIMAL(10,7) NOT NULL
-        ");
+        Schema::table('tempats', function (Blueprint $table) {
+            $table->decimal('latitude', 10, 7)->nullable(false)->change();
+            $table->decimal('longitude', 10, 7)->nullable(false)->change();
+        });
     }
 };
